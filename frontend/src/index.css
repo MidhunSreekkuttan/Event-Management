@@ -9,15 +9,13 @@ a.active hr {
 }
 
 @layer base {
-
-    body {
-        @apply bg-gray-950 text-white antialiased;
-    }
-
+  body {
+    @apply bg-gray-950 text-white antialiased;
+  }
 
   :root {
-    --bg-start: #020617;   /* near black */
-    --bg-mid: #1e1b4b;     /* indigo */
+    --bg-start: #020617; /* near black */
+    --bg-mid: #1e1b4b; /* indigo */
     --bg-end: #020617;
 
     --glow-purple: 139 92 246; /* rgb for purple-500 */
@@ -43,13 +41,27 @@ a.active hr {
     inset: 0;
     z-index: -1;
 
-    background:
-      radial-gradient(
-        600px 600px at 15% 10%,
-        rgba(var(--glow-purple), 0.35),
-        transparent 60%
-      );
+    background: radial-gradient(
+      600px 600px at 15% 10%,
+      rgba(var(--glow-purple), 0.35),
+      transparent 60%
+    );
 
     filter: blur(120px);
   }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 16s linear infinite;
 }
