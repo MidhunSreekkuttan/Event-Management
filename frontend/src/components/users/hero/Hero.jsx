@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { heroImages, logo } from '../../../assets/assets'
 import HeroSlide from './HeroSlide'
+import bg_video from '../../../assets/projectVideo.mp4'
 
 const Hero = () => {
 
@@ -39,6 +40,15 @@ const Hero = () => {
         <div className='max-w-6xl mx-auto px-4 min-h-screen max-md:w-screen max-md:overflow-hidden pt-32 md:pt-26 flex items-center justify-center'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center'>
             <div className='text-left'>
+
+              <motion.div className='absolute inset-0 -z-10'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 2 }}
+              >
+                <video className='opacity-50 w-full h-full object-cover' src={bg_video} autoPlay muted loop />
+
+              </motion.div>
 
               <motion.h1 className='relative top-30 text-4xl md:text-5xl font-bold leading-tight mb-6 max-w-xl'
                 initial={{ y: 60, opacity: 0 }}
