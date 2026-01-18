@@ -19,7 +19,6 @@ const App = () => {
       <div>
         {/*//..............................Routes for Users.........................................................*/}
 
-        <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/eventList' element={<EventList />} />
