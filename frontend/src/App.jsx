@@ -16,31 +16,31 @@ const App = () => {
     <>
       {!loginpage && <Navbar />}
 
-    <div>
-      {/*//..............................Routes for Users.........................................................*/}
-
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/eventList' element={<EventList />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contactUs' element={<ContactUs />} />
-        <Route path='/login' element={<Login />} />
-      </Routes>
-
-      {/*//....................................................................................................................//*/}
-
-      {/*//..............................Routes for Workers.........................................................*/}
-
       <div>
-        <Routes>
-          <Route path='/workers/home' element={<HomePage />} />
-        </Routes>
-      </div>
+        {/*//..............................Routes for Users.........................................................*/}
 
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/eventList' element={<EventList />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contactUs' element={<ContactUs />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+
+        {/*//....................................................................................................................//*/}
+
+        {/*//..............................Routes for Workers.........................................................*/}
+
+        <div>
+          <Routes>
+            <Route path='/workers/home' element={<HomePage />} />
+          </Routes>
+        </div>
+
+        {/*//....................................................................................................................//*/}
+      </div>
     </>
-      {/*//....................................................................................................................//*/}
-    </div>
   )
 }
 
