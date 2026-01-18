@@ -1,17 +1,31 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/users/Home'
 import Navbar from './components/users/Navbar'
 import HomePage from './pages/workers/HomePage'
+import EventList from './pages/users/EventList'
+import About from './pages/users/About'
+import ContactUs from './pages/users/ContactUs'
+import Login from './pages/users/Login'
 
 const App = () => {
+
+  const loginpage = useLocation().pathname.startsWith('/login')
+
   return (
+    <>
+      {!loginpage && <Navbar />}
+
     <div>
       {/*//..............................Routes for Users.........................................................*/}
 
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/eventList' element={<EventList />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contactUs' element={<ContactUs />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
 
       {/*//....................................................................................................................//*/}
@@ -24,6 +38,7 @@ const App = () => {
         </Routes>
       </div>
 
+    </>
       {/*//....................................................................................................................//*/}
     </div>
   )
