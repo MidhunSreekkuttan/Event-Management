@@ -12,9 +12,11 @@ const App = () => {
 
   const loginpage = useLocation().pathname.startsWith('/login')
 
+  const WorkersPage = useLocation().pathname.startsWith('/workers')
+
   return (
     <>
-      {!loginpage && <Navbar />}
+      {!loginpage && !WorkersPage && <Navbar />}
 
       <div>
         {/*//..............................Routes for Users.........................................................*/}
