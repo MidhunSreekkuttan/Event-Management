@@ -8,6 +8,10 @@ import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
 import Login from './pages/users/Login'
 
+{/*...............................................Importing Workers things................................................*/}
+
+{/*.......................................................................................................................*/}
+
 const App = () => {
 
   const loginpage = useLocation().pathname.startsWith('/login')
