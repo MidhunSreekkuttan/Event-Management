@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   CheckCircle2,
@@ -13,7 +15,7 @@ const documentTypes = [
   { type: "resume", label: "Upload Resume" },
 ];
 
-const WorkerRegistration = () => {
+export default function WorkerRegistration() {
   const [form, setForm] = useState({
     fullName: "",
     mobileNumber: "",
@@ -32,7 +34,7 @@ const WorkerRegistration = () => {
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
   };
 
-  const verifyEmail = async () => {
+  const verifyEmail = () => {
     if (!form.email) return;
     setVerifying(true);
     setTimeout(() => {
@@ -45,10 +47,10 @@ const WorkerRegistration = () => {
     setUploads({ ...uploads, [type]: file });
   };
 
-  const submitForm = async (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
     if (!emailVerified) {
-      alert("Verify email first");
+      alert("Please verify your email");
       return;
     }
 
@@ -56,111 +58,131 @@ const WorkerRegistration = () => {
     setTimeout(() => {
       setSubmitting(false);
       alert("Application Submitted");
-      setForm({
-        fullName: "",
-        mobileNumber: "",
-        email: "",
-        role: "",
-        robot: false,
-      });
-      setUploads({});
-      setEmailVerified(false);
     }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-semibold mb-2">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B1026] to-[#0F1738] p-6">
+      <div className="max-w-3xl mx-auto bg-[#121833] border border-white/10 rounded-2xl p-8">
+
+        {/* HEADER */}
+        <h1 className="text-2xl font-semibold text-white mb-1">
           Worker Registration
         </h1>
-        <p className="text-gray-500 mb-6">
-          Register yourself as an event staff member
+        <p className="text-gray-400 mb-8">
+          Join our team as an event staff member by registering your details below.
         </p>
 
         <form onSubmit={submitForm} className="space-y-6">
+
           {/* NAME & MOBILE */}
           <div className="grid md:grid-cols-2 gap-4">
-            <input
-              name="fullName"
-              value={form.fullName}
-              onChange={handleChange}
-              placeholder="Full Name"
-              className="border rounded-md p-2 w-full"
-              required
-            />
-            <input
-              name="mobileNumber"
-              value={form.mobileNumber}
-              onChange={handleChange}
-              placeholder="Mobile Number"
-              className="border rounded-md p-2 w-full"
-              required
-            />
+            <div>
+              <label className="text-sm text-white mb-1 block">
+                Full Name *
+              </label>
+              <input
+                name="fullName"
+                value={form.fullName}
+                onChange={handleChange}
+                placeholder="John Thomas"
+                required
+                className="w-full rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm text-white mb-1 block">
+                Mobile Number *
+              </label>
+              <input
+                name="mobileNumber"
+                value={form.mobileNumber}
+                onChange={handleChange}
+                placeholder="+91 9876543210"
+                required
+                className="w-full rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
+              />
+            </div>
           </div>
 
           {/* EMAIL */}
-          <div className="flex gap-2">
-            <input
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Email Address"
-              disabled={emailVerified}
-              className="border rounded-md p-2 flex-1"
-              required
-            />
-            <button
-              type="button"
-              onClick={verifyEmail}
-              disabled={emailVerified || verifying}
-              className={`px-3 py-2 rounded-md text-sm text-white ${
-                emailVerified
-                  ? "bg-green-500"
-                  : "bg-blue-600 hover:bg-blue-700"
-              }`}
-            >
-              {verifying ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : emailVerified ? (
-                <CheckCircle2 className="h-4 w-4" />
-              ) : (
-                "Verify"
-              )}
-            </button>
+          <div>
+            <label className="text-sm text-white mb-1 block">
+              Email Address *
+            </label>
+
+            <div className="flex gap-3">
+              <input
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="john.thomas@email.com"
+                disabled={emailVerified}
+                required
+                className="flex-1 rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
+              />
+
+              <button
+                type="button"
+                onClick={verifyEmail}
+                disabled={emailVerified || verifying}
+                className={`px-4 rounded-lg text-sm font-medium text-white flex items-center justify-center ${
+                  emailVerified
+                    ? "bg-green-500"
+                    : "bg-blue-500 hover:bg-blue-600"
+                }`}
+              >
+                {verifying ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : emailVerified ? (
+                  <CheckCircle2 className="h-4 w-4" />
+                ) : (
+                  "Verify Email"
+                )}
+              </button>
+            </div>
           </div>
 
           {/* ROLE */}
-          <select
-            name="role"
-            value={form.role}
-            onChange={handleChange}
-            className="border rounded-md p-2 w-full"
-            required
-          >
-            <option value="">Select Job Role</option>
-            <option value="coordinator">Event Coordinator</option>
-            <option value="staff">Event Staff</option>
-            <option value="manager">Event Manager</option>
-            <option value="catering">Catering</option>
-            <option value="technical">Technical Support</option>
-          </select>
+          <div>
+            <label className="text-sm text-white mb-1 block">
+              Job Role *
+            </label>
+            <select
+              name="role"
+              value={form.role}
+              onChange={handleChange}
+              required
+              className="w-full rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300"
+            >
+              <option value="">Select a role</option>
+              <option>Event Coordinator</option>
+              <option>Event Staff</option>
+              <option>Event Manager</option>
+              <option>Catering Service</option>
+              <option>Technical Support</option>
+            </select>
+          </div>
 
           {/* DOCUMENTS */}
           <div>
-            <p className="font-medium mb-2">
-              Upload Documents
-            </p>
+            <label className="text-sm text-white mb-3 block">
+              Upload Documents (PDF, JPG, PNG)
+            </label>
 
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 gap-4">
               {documentTypes.map((doc) => (
                 <label
                   key={doc.type}
-                  className="border rounded-lg p-3 flex items-center gap-2 cursor-pointer hover:bg-gray-50"
+                  className="flex items-center gap-3 bg-[#0B1026] border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-white/20"
                 >
-                  <Upload className="h-4 w-4" />
-                  <span className="text-sm">{doc.label}</span>
+                  <Upload className="h-4 w-4 text-gray-400" />
+                  <span className="text-sm text-gray-300">
+                    {doc.label}
+                  </span>
+
                   <input
                     type="file"
                     className="hidden"
@@ -168,21 +190,22 @@ const WorkerRegistration = () => {
                       uploadFile(doc.type, e.target.files[0])
                     }
                   />
+
                   {uploads[doc.type] && (
-                    <CheckCircle2 className="h-4 w-4 text-green-600 ml-auto" />
+                    <CheckCircle2 className="h-4 w-4 text-green-500 ml-auto" />
                   )}
                 </label>
               ))}
             </div>
 
-            <div className="flex items-center gap-2 mt-3 text-xs text-gray-500">
+            <div className="flex items-center gap-2 mt-3 text-xs text-gray-400">
               <AlertCircle className="h-4 w-4" />
-              Max file size 5MB · PDF / JPG / PNG
+              Maximum file size 5MB
             </div>
           </div>
 
-          {/* ROBOT CHECK */}
-          <label className="flex items-center gap-2 border rounded-lg p-3">
+          {/* ROBOT */}
+          <label className="flex items-center gap-3 bg-[#0B1026] border border-white/10 rounded-lg px-4 py-3">
             <input
               type="checkbox"
               name="robot"
@@ -190,14 +213,16 @@ const WorkerRegistration = () => {
               onChange={handleChange}
               required
             />
-            <span className="text-sm">I'm not a robot</span>
+            <span className="text-sm text-gray-300">
+              I'm not a robot
+            </span>
           </label>
 
           {/* SUBMIT */}
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 flex items-center justify-center gap-2"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
           >
             {submitting ? (
               <>
@@ -212,6 +237,4 @@ const WorkerRegistration = () => {
       </div>
     </div>
   );
-};
-
-export default WorkerRegistration;
+}

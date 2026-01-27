@@ -68,7 +68,7 @@ const Index = () => {
             <div 
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-fade-in"
             >
-              <Link to="/register">
+              <Link to="/workers/registration">
                 <Button size="lg" className="w-full sm:w-auto btn-press group">
                   Register as Worker
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
