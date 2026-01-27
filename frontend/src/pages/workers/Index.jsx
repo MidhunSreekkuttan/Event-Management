@@ -38,7 +38,7 @@ const Index = () => {
           </div>
           <div className="flex items-center gap-2 md:gap-3">
             <Link to="/workers/registration">
-              <Button variant="outline" size="sm" className="btn-press text-xs md:text-sm">
+              <Button variant="outline" size="sm" className="btn-press text-black text-xs md:text-sm">
                 Register
               </Button>
             </Link>
@@ -61,14 +61,12 @@ const Index = () => {
             </h1>
             <p 
               className="text-base md:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in"
-              style={{ animationDelay: "100ms", opacity: 0 }}
             >
               A comprehensive platform for event management teams to register workers, 
               track assignments, and manage profiles all in one place.
             </p>
             <div 
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-fade-in"
-              style={{ animationDelay: "200ms", opacity: 0 }}
             >
               <Link to="/register">
                 <Button size="lg" className="w-full sm:w-auto btn-press group">
@@ -77,7 +75,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/dashboard">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto btn-press">
+                <Button size="lg" variant="outline" className="w-full text-black sm:w-auto btn-press">
                   View Dashboard
                 </Button>
               </Link>
@@ -91,7 +89,6 @@ const Index = () => {
         <div className="container px-4 md:px-6">
           <h2 
             className="text-xl md:text-2xl font-semibold text-center mb-8 md:mb-10 animate-fade-in"
-            style={{ animationDelay: "300ms", opacity: 0 }}
           >
             Everything You Need
           </h2>
@@ -100,7 +97,6 @@ const Index = () => {
               <Link key={idx} to={feature.link}>
                 <Card 
                   className="h-full card-hover cursor-pointer group animate-fade-in-up"
-                  style={{ animationDelay: `${400 + idx * 100}ms`, opacity: 0 }}
                 >
                   <CardHeader>
                     <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">

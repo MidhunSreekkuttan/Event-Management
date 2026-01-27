@@ -1,22 +1,22 @@
+"use client";
+
 import { useState, useMemo } from "react";
 import {
   Calendar,
-  CheckSquare,
+  SquareCheck,
   Mail,
   Clock,
   AlertCircle,
 } from "lucide-react";
 
 /* ---------------- STAT CARD ---------------- */
-const StatCard = ({ value, label, color }) => {
+const StatCard = ({ value, label, Icon, iconColor }) => {
   return (
-    <div className={`p-4 rounded-lg border-l-4 ${color}`}>
-      <div className="flex items-center gap-3">
-        {/*<Icon className="h-6 w-6 text-gray-700" />*/}
-        <div>
-          <p className="text-2xl font-bold">{value}</p>
-          <p className="text-sm text-gray-500">{label}</p>
-        </div>
+    <div className="flex items-center gap-4 rounded-xl bg-[#121833] border border-white/10 px-6 py-5">
+      <Icon className={`h-6 w-6 ${iconColor}`} />
+      <div>
+        <p className="text-2xl font-semibold text-white">{value}</p>
+        <p className="text-sm text-gray-400">{label}</p>
       </div>
     </div>
   );
@@ -66,18 +66,22 @@ const assignments = [
     time: "6:00 AM - 4:00 PM",
     status: "Cancelled",
   },
+
 ];
 
 /* ---------------- STATUS STYLE ---------------- */
 const statusStyle = (status) => {
-  if (status === "Confirmed") return "bg-green-100 text-green-700";
-  if (status === "Pending") return "bg-yellow-100 text-yellow-700";
-  if (status === "Cancelled") return "bg-red-100 text-red-700";
+  if (status === "Confirmed")
+    return "bg-blue-600/20 text-blue-400";
+  if (status === "Pending")
+    return "bg-yellow-600/20 text-yellow-400";
+  if (status === "Cancelled")
+    return "bg-red-600/20 text-red-400";
   return "";
 };
 
-/* ---------------- MAIN COMPONENT ---------------- */
-const WorkerDashboard = () => {
+/* ---------------- MAIN ---------------- */
+export default function WorkerDashboard() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
 
@@ -85,8 +89,7 @@ const WorkerDashboard = () => {
     return assignments.filter((a) => {
       const matchSearch =
         search === "" ||
-        a.title.toLowerCase().includes(search.toLowerCase()) ||
-        a.role.toLowerCase().includes(search.toLowerCase());
+        a.title.toLowerCase().includes(search.toLowerCase());
 
       const matchStatus = status === "all" || a.status === status;
 
@@ -94,89 +97,96 @@ const WorkerDashboard = () => {
     });
   }, [search, status]);
 
-  const confirmedCount = assignments.filter(
-    (a) => a.status === "Confirmed"
-  ).length;
-
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#0b1026] to-[#0f1738] p-6">
+      <div className="max-w-6xl mx-auto space-y-8">
+
         {/* HEADER */}
         <div>
-          <h1 className="text-2xl font-semibold">Worker Dashboard</h1>
-          <p className="text-gray-500">Welcome, John</p>
+          <h1 className="text-3xl font-semibold text-white">
+            Worker Dashboard
+          </h1>
+          <p className="text-gray-400 mt-1">
+            Welcome, John! <br /> Manage your event assignments here.
+          </p>
         </div>
 
         {/* STATS */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <StatCard
             Icon={Calendar}
-            value={confirmedCount}
+            value={4}
             label="Confirmed Events"
-            color="border-pink-500"
+            iconColor="text-pink-400"
           />
           <StatCard
-            Icon={CheckSquare}
+            Icon={SquareCheck}
             value={3}
             label="Completed Events"
-            color="border-green-500"
+            iconColor="text-green-400"
           />
           <StatCard
             Icon={Mail}
             value={5}
             label="New Messages"
-            color="border-purple-500"
+            iconColor="text-purple-400"
           />
-        </div>
-
-        {/* FILTER */}
-        <div className="flex flex-col sm:flex-row gap-3">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border rounded-md px-3 py-2 w-full"
-          />
-
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="border rounded-md px-3 py-2"
-          >
-            <option value="all">All Status</option>
-            <option value="Confirmed">Confirmed</option>
-            <option value="Pending">Pending</option>
-            <option value="Cancelled">Cancelled</option>
-          </select>
         </div>
 
         {/* ASSIGNMENTS */}
-        <div className="bg-white rounded-lg shadow">
+        <div className="rounded-2xl bg-[#121833] border border-white/10 p-6 space-y-5">
+          <h2 className="text-lg font-medium text-white">
+            My Upcoming Assignments
+          </h2>
+
+          {/* SEARCH + FILTER */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <input
+              placeholder="Search by event name..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full rounded-lg bg-[#0b1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
+            />
+
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="rounded-lg bg-[#0b1026] border border-white/10 px-4 py-2 text-gray-300"
+            >
+              <option value="all">All Status</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Pending">Pending</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          {/* LIST */}
           {filteredAssignments.length === 0 ? (
-            <div className="p-10 text-center">
-              <AlertCircle className="mx-auto h-10 w-10 text-gray-400" />
-              <p className="mt-2 text-gray-500">No assignments found</p>
+            <div className="py-10 text-center text-gray-400">
+              <AlertCircle className="mx-auto mb-2" />
+              No assignments found
             </div>
           ) : (
             filteredAssignments.map((a, i) => (
               <div
                 key={i}
-                className="flex flex-col sm:flex-row justify-between gap-3 px-4 py-3 border-b last:border-none"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-white/10 pt-4"
               >
                 <div>
-                  <h4 className="font-medium">{a.title}</h4>
-                  <p className="text-sm text-gray-500">
+                  <h4 className="text-white font-medium">
+                    {a.title}
+                  </h4>
+                  <p className="text-sm text-gray-400">
                     {a.date}
                   </p>
-                  <p className="flex items-center gap-1 text-sm text-gray-500">
+                  <p className="flex items-center gap-1 text-sm text-gray-400">
                     <Clock className="h-4 w-4" />
                     {a.role} · {a.time}
                   </p>
                 </div>
 
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${statusStyle(
+                  className={`px-4 py-1 rounded-full text-xs font-medium ${statusStyle(
                     a.status
                   )}`}
                 >
@@ -186,13 +196,7 @@ const WorkerDashboard = () => {
             ))
           )}
         </div>
-
-        <p className="text-center text-xs text-gray-500">
-          Showing {filteredAssignments.length} of {assignments.length}
-        </p>
       </div>
     </div>
   );
-};
-
-export default WorkerDashboard;
+}
