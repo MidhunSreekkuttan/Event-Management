@@ -8,9 +8,9 @@ import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
 import Login from './pages/users/Login'
 
-{/*...............................................Importing Workers things................................................*/}
-
-{/*.......................................................................................................................*/}
+{/*...............................................Importing Workers things................................................*/ }
+import Index from './pages/workers/Index'
+{/*.......................................................................................................................*/ }
 
 const App = () => {
 
@@ -40,6 +40,7 @@ const App = () => {
         <div>
           <Routes>
             <Route path='/workers/home' element={<HomePage />} />
+            {/*<Route path='/workers/index' element={<Index />} />*/}
           </Routes>
         </div>
 
