@@ -64,7 +64,7 @@ const Hero = () => {
 
               {/*                                                       Right Side                                                                          */}
 
-              <motion.div className='flex mx-auto w-full max-w-lg'
+              {     /*         <motion.div className='flex mx-auto w-full max-w-lg'
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -82,14 +82,14 @@ const Hero = () => {
                     </div>
                   </div>
                 </motion.div>
-              </motion.div>
+              </motion.div>*/}
             </div>
           </div>
         </div>
       </section>
       {/* MARQUEE */}
 
-      <motion.section className='border-y border-white/6 bg-white/1 max-md:mt-10'
+      <motion.section className='fixed bottom-0 left-0 w-full border-y border-white/6 bg-white/1 max-md:mt-10'
         initial={{ y: 60, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
