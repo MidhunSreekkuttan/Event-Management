@@ -10,6 +10,8 @@ import Login from './pages/users/Login'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
+import WorkerDashboard from './pages/workers/WorkersDashboard'
+import WorkerRegistration from './pages/workers/WorkersRegistration'
 {/*.......................................................................................................................*/ }
 
 const App = () => {
@@ -40,7 +42,9 @@ const App = () => {
         <div>
           <Routes>
             <Route path='/workers/home' element={<HomePage />} />
-            {/*<Route path='/workers/index' element={<Index />} />*/}
+            <Route path='/workers/index' element={<Index />} />
+            <Route path='/workers/dashboard' element={<WorkerDashboard />} />
+            <Route path='/workers/registration' element={<WorkerRegistration />} />
           </Routes>
         </div>
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../components/workers/ui/button";
+import  Button from "../../components/workers/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "../../components/workers/ui/card";
 import { LayoutGrid, Users, Calendar, ClipboardList, ArrowRight } from "lucide-react";
 
@@ -37,12 +37,12 @@ const Index = () => {
             <span className="text-xl font-semibold">Event Manager</span>
           </div>
           <div className="flex items-center gap-2 md:gap-3">
-            <Link to="/register">
+            <Link to="/workers/registration">
               <Button variant="outline" size="sm" className="btn-press text-xs md:text-sm">
                 Register
               </Button>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/workers/dashboard">
               <Button size="sm" className="btn-press text-xs md:text-sm">
                 Dashboard
               </Button>

@@ -12,7 +12,7 @@ const StatCard = ({ value, label, color }) => {
   return (
     <div className={`p-4 rounded-lg border-l-4 ${color}`}>
       <div className="flex items-center gap-3">
-        <Icon className="h-6 w-6 text-gray-700" />
+        {/*<Icon className="h-6 w-6 text-gray-700" />*/}
         <div>
           <p className="text-2xl font-bold">{value}</p>
           <p className="text-sm text-gray-500">{label}</p>
