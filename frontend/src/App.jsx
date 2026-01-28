@@ -6,12 +6,13 @@ import HomePage from './pages/workers/HomePage'
 import EventList from './pages/users/EventList'
 import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
-import Login from './pages/users/Login'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
 import WorkerDashboard from './pages/workers/WorkersDashboard'
 import WorkerRegistration from './pages/workers/WorkersRegistration'
+import Login from './pages/workers/WorkerLogin'
+import Signup from './pages/workers/WorkerSignUp'
 {/*.......................................................................................................................*/ }
 
 const App = () => {
@@ -45,6 +46,8 @@ const App = () => {
             <Route path='/workers/index' element={<Index />} />
             <Route path='/workers/dashboard' element={<WorkerDashboard />} />
             <Route path='/workers/registration' element={<WorkerRegistration />} />
+            <Route path='/workers/login' element={<Login />} />
+            <Route path='/workers/signup' element={<Signup />} />
           </Routes>
         </div>
 
