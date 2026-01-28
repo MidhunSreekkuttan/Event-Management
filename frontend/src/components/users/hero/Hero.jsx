@@ -72,10 +72,12 @@ const Hero = () => {
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
               >
                 <div className='flex gap-10'>
-                  <button onClick={() => navigate('/eventList')} className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
+                  <button onClick={() => navigate('/eventList')}
+                    className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
                     Explore Events
                   </button>
-                  <button onClick={() => navigate('/contactUs')} className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
+                  <button onClick={() => navigate('/contactUs')}
+                    className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
                     Contact Us
                   </button>
                 </div>
@@ -109,7 +111,7 @@ const Hero = () => {
       </section>
       {/* MARQUEE */}
 
-      <motion.section className='fixed bottom-0 left-0 w-full border-y border-white/6 bg-white/1 max-md:mt-10'
+      <motion.section className=' sticky bottom-0 left-0 w-full border-y border-white/6 bg-white/1 max-md:mt-10'
         initial={{ y: 60, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
