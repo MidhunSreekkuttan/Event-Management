@@ -3,8 +3,11 @@ import { motion } from 'framer-motion'
 import { heroImages, logo } from '../../../assets/assets'
 import HeroSlide from './HeroSlide'
 import bg_video from '../../../assets/projectVideo.mp4'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+
+  const navigate = useNavigate()
 
   const slides = [
     heroImages.birthday_cake1,
@@ -50,7 +53,7 @@ const Hero = () => {
 
               </motion.div>
 
-              <motion.h1 className='relative top-30 text-4xl md:text-5xl font-bold leading-tight mb-6 max-w-xl'
+              <motion.h1 className='text-4xl md:text-5xl font-bold leading-tight mb-6 max-w-xl'
                 initial={{ y: 60, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
@@ -61,6 +64,23 @@ const Hero = () => {
                   Your Event Our Responsibility
                 </span>
               </motion.h1>
+
+              <motion.div
+                initial={{ y: 60, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
+              >
+                <div className='flex gap-10'>
+                  <button onClick={() => navigate('/eventList')} className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
+                    Explore Events
+                  </button>
+                  <button onClick={() => navigate('/contactUs')} className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
+                    Contact Us
+                  </button>
+                </div>
+
+              </motion.div>
 
               {/*                                                       Right Side                                                                          */}
 
