@@ -1,8 +1,12 @@
 import React from 'react'
 import { icon, logo } from '../../assets/assets'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+
 const Navbar = () => {
+
+  const navigate = useNavigate()
+
   return (
     <motion.nav className='fixed top-5 left-0 right-0 z-50 px-4'
       initial={{ y: -100, opacity: 0 }}
@@ -35,11 +39,13 @@ const Navbar = () => {
           </NavLink>
         </ul>
 
-        <div className='flex items-center gap-6'>
-          <div className='group relative cursor-pointer bg-linear-to-br from-indigo-500 to-indigo-600 hover:opacity-90 transition-all px-6 py-1 rounded-4xl'>
-            <Link to='/login'>
-              <img className='w-9  cursor-pointer' src={icon.userIcon} alt="" />
-            </Link>
+        <div className='flex items-center gap-6 '>
+          <button onClick={() => navigate('/login')}
+            className='group relative cursor-pointer
+             bg-linear-to-br from-indigo-500 to-indigo-600 hover:opacity-90 transition-all px-7 py-1 rounded-2xl'>
+
+            <img className='w-7 cursor-pointer' src={icon.userIcon} alt="" />
+
             <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 '>
               <div className='flex flex-col gap-2 w-30 py-3 px-5 bg-violet-300 rounded text-amber-700'>
                 <p className='cursor-pointer hover:text-black'>Logout</p>
@@ -47,7 +53,7 @@ const Navbar = () => {
                 <p className='cursor-pointer hover:text-black'></p>
               </div>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </motion.nav>
