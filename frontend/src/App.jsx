@@ -7,6 +7,8 @@ import EventList from './pages/users/EventList'
 import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
 import Login from './pages/users/Login'
+import SoftBackdrop from './components/users/background/SoftBackdrop'
+import Lenis from './components/users/background/Lenis'
 
 const App = () => {
 
@@ -16,6 +18,10 @@ const App = () => {
 
   return (
     <>
+
+      <SoftBackdrop />
+      <Lenis />
+
       {!loginpage && !WorkersPage && <Navbar />}
 
       <div>
