@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
 * {
@@ -8,46 +9,16 @@ a.active hr {
   display: block;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     @apply bg-gray-950 text-white antialiased;
   }
-
-  :root {
-    --bg-start: #020617; /* near black */
-    --bg-mid: #1e1b4b; /* indigo */
-    --bg-end: #020617;
-
-    --glow-purple: 139 92 246; /* rgb for purple-500 */
-  }
-
-  body {
-    min-height: 100vh;
-    background: linear-gradient(
-      135deg,
-      var(--bg-start),
-      var(--bg-mid),
-      var(--bg-end)
-    );
-    color: white;
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  /* Purple glow */
-  body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-
-    background: radial-gradient(
-      600px 600px at 15% 10%,
-      rgba(var(--glow-purple), 0.35),
-      transparent 60%
-    );
-
-    filter: blur(120px);
+  button {
+    @apply cursor-pointer;
   }
 }
 
