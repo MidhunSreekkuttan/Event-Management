@@ -9,6 +9,7 @@ import ContactUs from './pages/users/ContactUs'
 import Login from './pages/users/Login'
 import SoftBackdrop from './components/users/background/SoftBackdrop'
 import Lenis from './components/users/background/Lenis'
+import Footer from './components/users/Footer'
 
 const App = () => {
 
@@ -34,6 +35,8 @@ const App = () => {
           <Route path='/contactUs' element={<ContactUs />} />
           <Route path='/login' element={<Login />} />
         </Routes>
+
+        {!loginpage && !WorkersPage && <Footer />}
 
         {/*//....................................................................................................................//*/}
 
