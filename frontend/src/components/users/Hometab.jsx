@@ -4,10 +4,20 @@ import { motion } from 'framer-motion'
 
 const Hometab = () => {
     return (
-        <section className='py-20 2xl:py-67'>
+        <section>
             <div className="max-w-6xl mx-auto px-4">
-                <h1 className='absolute font-bold text-3xl -my-17 px-80 left-96'>How It Works</h1>
-                <div className="relative flex top-40 gap-8">
+
+                <motion.h1 className='text-4xl md:text-5xl font-bold leading-tight mb-10 max-w-2xl flex justify-center'
+                    initial={{ y: 60, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
+                >
+                    <p className='relative bottom-70 left-50'>How It W
+                        <span className='bg-clip-text text-transparent bg-linear-to-br from-indigo-500 to-indigo-600'>orks</span></p>
+                </motion.h1>
+
+                <div className="relative flex bottom-30 gap-8">
                     <motion.div
                         initial={{ y: 100, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
