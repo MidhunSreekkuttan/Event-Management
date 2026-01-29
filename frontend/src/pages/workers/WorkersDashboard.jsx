@@ -101,7 +101,7 @@ export default function WorkerDashboard() {
   }, [search, status, role]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b1026] to-[#0f1738] p-6">
+    <div className="min-h-screen bg-linear-to-br from-[#0b1026] to-[#0f1738] p-6">
       <div className="max-w-6xl mx-auto space-y-8">
 
         {/* HEADER */}
