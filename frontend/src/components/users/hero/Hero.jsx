@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { heroImages, logo } from '../../../assets/assets'
 import HeroSlide from './HeroSlide'
 import bg_video from '../../../assets/projectVideo.mp4'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Hero = () => {
 
@@ -40,7 +40,7 @@ const Hero = () => {
   return (
     <>
       <section id='home' className='relative z-10'>
-        <div className='max-w-6xl mx-auto px-4 min-h-screen max-md:w-screen max-md:overflow-hidden pt-32 md:pt-26 flex items-center justify-center'>
+        <div className='relative min-h-screen flex items-center justify-center overflow-hidden'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center'>
             <div className='text-left'>
 
@@ -49,18 +49,18 @@ const Hero = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2 }}
               >
-                <video className='opacity-50 w-full h-full object-cover' src={bg_video} autoPlay muted loop />
+                <video className='w-full h-full object-cover opacity-50' src={bg_video} autoPlay muted loop />
 
               </motion.div>
 
-              <motion.h1 className='text-4xl md:text-5xl font-bold leading-tight mb-6 max-w-xl'
+              <motion.h1 className='relative font-bold text-5xl z-10 text-center px-4 max-w-3xl'
                 initial={{ y: 60, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
               >
-                Welcome to Our Web Page <br />
-                <span className='bg-clip-text text-transparent bg-linear-to-r from-indigo-300 to-indigo-400'>
+                <p className='relative bottom-10 left-90'>Welcome to Our Web Page</p><br />
+                <span className='relative bottom-15 left-90 bg-clip-text text-transparent bg-linear-to-r from-indigo-300 to-indigo-400'>
                   Your Event Our Responsibility
                 </span>
               </motion.h1>
@@ -71,15 +71,19 @@ const Hero = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
               >
-                <div className='flex gap-10'>
-                  <button onClick={() => navigate('/eventList')}
-                    className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
-                    Explore Events
-                  </button>
-                  <button onClick={() => navigate('/contactUs')}
-                    className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
-                    Contact Us
-                  </button>
+                <div className='relative top-15 left-120 text-2xl font-bold flex gap-10'>
+                  <NavLink to='#category'>
+                    <button onClick={() => navigate('')}
+                      className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
+                      Explore Events
+                    </button>
+                  </NavLink>
+                  <NavLink to='#info'>
+                    <button onClick={() => navigate('')}
+                      className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
+                      More Info
+                    </button>
+                  </NavLink>
                 </div>
 
               </motion.div>

@@ -14,7 +14,7 @@ const Footer = () => {
   const navigate = useNavigate()
 
   return (
-    <footer className="text-white">
+    <footer id="info" className="text-white">
 
       {/* CTA Section */}
       <motion.div

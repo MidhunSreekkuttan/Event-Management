@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const EventCategory = () => {
 
   return (
-    <section className='my-50'>
+    <section id='category' className='my-50'>
       <div className="max-w-6xl min-h-screen mx-auto px-4">
 
         <motion.h1 className='text-4xl md:text-5xl font-bold leading-tight mb-10 max-w-2xl flex justify-center'
