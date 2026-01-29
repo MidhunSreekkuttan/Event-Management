@@ -11,6 +11,14 @@ import SoftBackdrop from './components/users/background/SoftBackdrop'
 import Lenis from './components/users/background/Lenis'
 import Footer from './components/users/Footer'
 
+{/*...............................................Importing Workers things................................................*/ }
+import Index from './pages/workers/Index'
+import WorkerDashboard from './pages/workers/WorkersDashboard'
+import WorkerRegistration from './pages/workers/WorkersRegistration'
+import Login from './pages/workers/WorkerLogin'
+import Signup from './pages/workers/WorkerSignUp'
+{/*.......................................................................................................................*/ }
+
 const App = () => {
 
   const loginpage = useLocation().pathname.startsWith('/login')
@@ -45,6 +53,11 @@ const App = () => {
         <div>
           <Routes>
             <Route path='/workers/home' element={<HomePage />} />
+            <Route path='/workers/index' element={<Index />} />
+            <Route path='/workers/dashboard' element={<WorkerDashboard />} />
+            <Route path='/workers/registration' element={<WorkerRegistration />} />
+            <Route path='/workers/login' element={<Login />} />
+            <Route path='/workers/signup' element={<Signup />} />
           </Routes>
         </div>
 
