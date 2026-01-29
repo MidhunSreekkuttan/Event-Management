@@ -15,7 +15,7 @@ import Footer from './components/users/Footer'
 import Index from './pages/workers/Index'
 import WorkerDashboard from './pages/workers/WorkersDashboard'
 import WorkerRegistration from './pages/workers/WorkersRegistration'
-import Login from './pages/workers/WorkerLogin'
+import LoginPage from './pages/workers/WorkerLogin'
 import Signup from './pages/workers/WorkerSignUp'
 {/*.......................................................................................................................*/ }
 
@@ -56,7 +56,7 @@ const App = () => {
             <Route path='/workers/index' element={<Index />} />
             <Route path='/workers/dashboard' element={<WorkerDashboard />} />
             <Route path='/workers/registration' element={<WorkerRegistration />} />
-            <Route path='/workers/login' element={<Login />} />
+            <Route path='/workers/login' element={<LoginPage />} />
             <Route path='/workers/signup' element={<Signup />} />
           </Routes>
         </div>
