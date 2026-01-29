@@ -23,6 +23,14 @@ import party_light1 from "./heroImages/party-light1.jpg";
 import party_light2 from "./heroImages/party-light2.jpg";
 import party1 from "./heroImages/party1.jpg";
 import party2 from "./heroImages/party2.jpg";
+import birthday_party_icon from "./icon/birthday_party.png";
+import concern_icon from "./icon/concern_icon.png";
+import corporative_events from "./icon/corporative_events.png";
+import cultural_programs from "./icon/cultural_programs.png";
+import wedding_icon from "./icon/wedding.png";
+import create_event_icon from "./icon/create_event_icon.png";
+import party_event from "./icon/party_event.png";
+import search_icon from "./icon/search_icon.png";
 
 export const logo = {
   adhithiBeat,
@@ -36,6 +44,14 @@ export const icon = {
   crossIcon,
   left_arow,
   right_arow,
+  birthday_party_icon,
+  concern_icon,
+  corporative_events,
+  cultural_programs,
+  wedding_icon,
+  create_event_icon,
+  party_event,
+  search_icon,
 };
 
 export const heroImages = {

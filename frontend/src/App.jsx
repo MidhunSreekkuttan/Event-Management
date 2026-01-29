@@ -6,6 +6,10 @@ import HomePage from './pages/workers/HomePage'
 import EventList from './pages/users/EventList'
 import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
+import Login from './pages/users/Login'
+import SoftBackdrop from './components/users/background/SoftBackdrop'
+import Lenis from './components/users/background/Lenis'
+import Footer from './components/users/Footer'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -23,6 +27,10 @@ const App = () => {
 
   return (
     <>
+
+      <SoftBackdrop />
+      <Lenis />
+
       {!loginpage && !WorkersPage && <Navbar />}
 
       <div>
@@ -35,6 +43,8 @@ const App = () => {
           <Route path='/contactUs' element={<ContactUs />} />
           <Route path='/login' element={<Login />} />
         </Routes>
+
+        {!loginpage && !WorkersPage && <Footer />}
 
         {/*//....................................................................................................................//*/}
 
