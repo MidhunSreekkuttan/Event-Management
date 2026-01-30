@@ -62,8 +62,8 @@ export default function WorkerRegistration() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0B1026] to-[#0F1738] p-6">
-      <div className="max-w-3xl mx-auto bg-[#121833] border border-white/10 rounded-2xl p-8">
+    <div className="min-h-screen  p-6">
+      <div className="max-w-3xl mx-auto bg-white/3 border border-white rounded-2xl p-8">
 
         {/* HEADER */}
         <h1 className="text-2xl font-semibold text-white mb-1">
