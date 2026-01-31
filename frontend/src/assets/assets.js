@@ -31,6 +31,9 @@ import wedding_icon from "./icon/wedding.png";
 import create_event_icon from "./icon/create_event_icon.png";
 import party_event from "./icon/party_event.png";
 import search_icon from "./icon/search_icon.png";
+import call_us from "./icon/call_us.png";
+import contact_us from "./icon/contact_us.png";
+import visit_us from "./icon/visit_us.png";
 
 export const logo = {
   adhithiBeat,
@@ -52,6 +55,9 @@ export const icon = {
   create_event_icon,
   party_event,
   search_icon,
+  call_us,
+  contact_us,
+  visit_us,
 };
 
 export const heroImages = {
