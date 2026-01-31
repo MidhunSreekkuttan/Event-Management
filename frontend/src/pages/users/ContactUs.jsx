@@ -26,7 +26,7 @@ const ContactUs = () => {
             <img className='relative left-28 w-30' src={icon.visit_us} alt="Visit Us" />
             <h1 className='font-bold text-center text-2xl'>Visit Us</h1>
             <p>Visit our site to discuss your event ideas in person. <br/> We're always happy to help you plan something special. </p>
-            <p className='relative left-9 text-orange-500 font-bold text-2xl'>Event management Enterpretier</p>
+            <p className='relative left-9 text-orange-500 font-bold text-2xl'>Event management</p>
           </div>
 
           {/*Call Us Cards*/}
