@@ -34,6 +34,7 @@ import search_icon from "./icon/search_icon.png";
 import call_us from "./icon/call_us.png";
 import contact_us from "./icon/contact_us.png";
 import visit_us from "./icon/visit_us.png";
+import secure_icon from "./icon/secure.png";
 
 export const logo = {
   adhithiBeat,
@@ -58,6 +59,7 @@ export const icon = {
   call_us,
   contact_us,
   visit_us,
+  secure_icon
 };
 
 export const heroImages = {
