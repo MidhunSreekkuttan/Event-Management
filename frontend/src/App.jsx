@@ -25,6 +25,8 @@ const App = () => {
 
   const WorkersPage = useLocation().pathname.startsWith('/workers')
 
+  const Contact = useLocation().pathname.startsWith('/contactUs')
+
   return (
     <>
 
@@ -44,7 +46,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
         </Routes>
 
-        {!loginpage && !WorkersPage && <Footer />}
+        {!loginpage && !WorkersPage && !Contact && <Footer />}
 
         {/*//....................................................................................................................//*/}
 
