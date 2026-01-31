@@ -10,6 +10,7 @@ import Login from './pages/users/Login'
 import SoftBackdrop from './components/users/background/SoftBackdrop'
 import Lenis from './components/users/background/Lenis'
 import Footer from './components/users/Footer'
+import ScrollToTop from './components/users/background/ScrollToTop'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -30,6 +31,7 @@ const App = () => {
   return (
     <>
 
+      <ScrollToTop />
       <SoftBackdrop />
       <Lenis />
 
