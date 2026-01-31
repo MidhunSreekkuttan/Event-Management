@@ -16,27 +16,33 @@ const ContactUs = () => {
         </div>
       </section>
 
-      <section className='justify-center items-center'>
+      <section className='bg-white text-black justify-center items-center'>
 
         {/*Main devider*/}
         <div className='pt-50 max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
 
           {/*Visit Us Cards*/}
-          <div className='items-center justify-center border-r border-white/20 grid gap-10'>
-            <img className='relative w-30' src={icon.visit_us} alt="Visit Us" />
+          <div className='items-center justify-center border-r border-black/20 grid gap-10'>
+            <img className='relative left-28 w-30' src={icon.visit_us} alt="Visit Us" />
             <h1 className='font-bold text-center text-2xl'>Visit Us</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Duis vehicula ex eu quam vehicula.</p>
+            <p className='relative left-9 text-orange-500 font-bold text-2xl'>Elizabeth St. London, UK</p>
           </div>
 
           {/*Call Us Cards*/}
-          <div className='items-center justify-center border-r border-white/20 grid gap-10'>
-            <img className='relative w-30' src={icon.call_us} alt="Call Us" />
-            <h1 className='font-bold text-center text-2xl'>Call Us</h1>
+          <div className='items-center justify-center border-r border-black/20 grid gap-10'>
+            <img className='relative w-30 left-23' src={icon.call_us} alt="Call Us" />
+            <h1 className='relative -left-5 font-bold text-center text-2xl'>Call Us</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Duis vehicula ex eu quam vehicula.</p>
+            <p className='relative left-12 text-orange-500 font-bold text-2xl'>+44 (0) 203 116 771</p>
           </div>
 
           {/*Contact Us Cards*/}
           <div className='items-center justify-center grid gap-10'>
-            <img className='relative w-30' src={icon.contact_us} alt="Contact Us" />
+            <img className='relative w-30 left-27' src={icon.contact_us} alt="Contact Us" />
             <h1 className='font-bold text-center text-2xl'>Contact Us</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Duis vehicula ex eu quam vehicula.</p>
+            <p className='relative left-12 text-orange-500 font-bold text-2xl'>nonreply@domain.com</p>
           </div>
         </div>
       </section>
