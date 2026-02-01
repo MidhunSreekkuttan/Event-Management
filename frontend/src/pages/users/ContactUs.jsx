@@ -25,23 +25,23 @@ const ContactUs = () => {
           <div className='items-center justify-center border-r border-black/20 grid gap-10'>
             <img className='relative left-28 w-30' src={icon.visit_us} alt="Visit Us" />
             <h1 className='font-bold text-center text-2xl'>Visit Us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Duis vehicula ex eu quam vehicula.</p>
-            <p className='relative left-9 text-orange-500 font-bold text-2xl'>Elizabeth St. London, UK</p>
+            <p>Visit our site to discuss your event ideas in person. <br/> We're always happy to help you plan something special. </p>
+            <p className='relative left-9 text-orange-500 font-bold text-2xl'>Event management</p>
           </div>
 
           {/*Call Us Cards*/}
           <div className='items-center justify-center border-r border-black/20 grid gap-10'>
             <img className='relative w-30 left-23' src={icon.call_us} alt="Call Us" />
             <h1 className='relative -left-5 font-bold text-center text-2xl'>Call Us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Duis vehicula ex eu quam vehicula.</p>
-            <p className='relative left-12 text-orange-500 font-bold text-2xl'>+44 (0) 203 116 771</p>
+            <p>Call us to get quick answers and expert guidance. <br /> Our team is ready to assist you anytime.</p>
+            <p className='relative left-12 text-orange-500 font-bold text-2xl'>0471-2256895</p>
           </div>
 
           {/*Contact Us Cards*/}
           <div className='items-center justify-center grid gap-10'>
             <img className='relative w-30 left-27' src={icon.contact_us} alt="Contact Us" />
             <h1 className='font-bold text-center text-2xl'>Contact Us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Duis vehicula ex eu quam vehicula.</p>
+            <p>Send us your details and event requirements via email. <br /> We'll get back to you soon as possible.</p>
             <p className='relative left-12 text-orange-500 font-bold text-2xl'>nonreply@domain.com</p>
           </div>
         </div>
