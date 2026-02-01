@@ -28,6 +28,8 @@ const App = () => {
 
   const Contact = useLocation().pathname.startsWith('/contactUs')
 
+  const about = useLocation().pathname.startsWith('/about')
+
   return (
     <>
 
@@ -48,7 +50,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
         </Routes>
 
-        {!loginpage && !WorkersPage && !Contact && <Footer />}
+        {!loginpage && !WorkersPage && !Contact && !about && <Footer />}
 
         {/*//....................................................................................................................//*/}
 
