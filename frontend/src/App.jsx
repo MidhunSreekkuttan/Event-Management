@@ -6,10 +6,11 @@ import HomePage from './pages/workers/HomePage'
 import EventList from './pages/users/EventList'
 import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
-import Login from './pages/users/Login'
+import Login from './pages/users/login/Login'
 import SoftBackdrop from './components/users/background/SoftBackdrop'
 import Lenis from './components/users/background/Lenis'
 import Footer from './components/users/Footer'
+import ScrollToTop from './components/users/background/ScrollToTop'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -25,9 +26,14 @@ const App = () => {
 
   const WorkersPage = useLocation().pathname.startsWith('/workers')
 
+  const Contact = useLocation().pathname.startsWith('/contactUs')
+
+  const about = useLocation().pathname.startsWith('/about')
+
   return (
     <>
 
+      <ScrollToTop />
       <SoftBackdrop />
       <Lenis />
 
@@ -44,7 +50,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
         </Routes>
 
-        {!loginpage && !WorkersPage && <Footer />}
+        {!loginpage && !WorkersPage && !Contact && !about && <Footer />}
 
         {/*//....................................................................................................................//*/}
 
