@@ -14,24 +14,24 @@ const About = () => {
   return (
     <>
       <section className='relative justify-center items-center overflow-hidden'>
-        <div className='flex max-w-screen min-h-screen justify-center items-center'>
+        <div className='flex w-screen min-h-screen justify-center items-center'>
 
-          <motion.image className='absolute inset-0 -z-10'
+          <motion.div className='absolute inset-0 -z-10'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
           >
             <img className='absolute w-screen h-screen object-cover opacity-40' src={heroImages.dj_party3} alt="" />
-          </motion.image>
+          </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
           >
 
-            <div className='z-3 grid gap-5 text-center'>
+            <div className='z-10 grid gap-5 text-center'>
               <h1 className='font-semibold text-8xl'>About Us</h1>
               <p>*************************</p>
               <p>
@@ -43,11 +43,11 @@ const About = () => {
                   events without the usual chaos. From handling registrations to keeping track of attendees,
                   everything is managed in one place.</span>
               </p>
-              <p className='relative top-15 text-2xl font-semibold bg-linear-to-r from-pink-600 to-pink-300 bg-clip-text text-transparent'>
+              <p className='relative top-[60px] text-2xl font-semibold bg-linear-to-r from-pink-600 to-pink-300 bg-clip-text text-transparent'>
                 We take care of the technical side so you can focus on what really matters creating <br />
                 amazing events and unforgettable memories.</p>
             </div>
-          </motion.p>
+          </motion.div>
         </div>
       </section>
 
@@ -76,7 +76,7 @@ const About = () => {
                 memories that will last a lifetime..</p>
             </div>
             <div>
-              <button onClick={() => navigate('')} className="bg-pink-500 hover:bg-pink-600 text-white transition
+              <button className="bg-pink-500 hover:bg-pink-600 text-white transition
              px-10 py-3 rounded-full text-lg font-medium shadow-lg">
                 Get Started
               </button>
@@ -127,9 +127,9 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-100 p-5'>
+             justify-center h-60 rounded-2xl w-[400px] p-5'>
                 <img className='relative -top-10 w-18 object-contain' src={icon.corporative_events} alt="" />
-                <div className=''>
+                <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
                   <h1 className='relative top-20 right-15'>We're over 10 years of experience and <br />
                     gio ovents in panage were that ore tust <br />
@@ -147,9 +147,9 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-100 p-5'>
+             justify-center h-60 rounded-2xl w-[400px] p-5'>
                 <img className='relative -top-13 w-15 object-contain' src={icon.settings_icon} alt="" />
-                <div className=''>
+                <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
                   <h1 className='relative top-20 right-15'>We're over 10 years of experience and <br />
                     gio ovents in panage were that ore tust <br />
@@ -167,9 +167,9 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-100 p-5'>
+             justify-center h-60 rounded-2xl w-[400px] p-5'>
                 <img className='relative -top-13 w-12 object-contain' src={icon.like_icon} alt="" />
-                <div className=''>
+                <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
                   <h1 className='relative top-20 right-15'>We're over 10 years of experience and <br />
                     gio ovents in panage were that ore tust <br />
@@ -195,7 +195,7 @@ const About = () => {
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
           >
 
-            <h1 className='relative left-115 font-bold text-5xl'>Our Services</h1>
+            <h1 className='relative left-[460px] font-bold text-5xl'>Our Services</h1>
 
           </motion.div>
 
@@ -212,7 +212,7 @@ const About = () => {
                 <div className='w-60 h-40'>
                   <img className='w-screen' src={heroImages.birthday_cake1} alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl'>
+                <div className='w-60 h-[220px] shadow-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
