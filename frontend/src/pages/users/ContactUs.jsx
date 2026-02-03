@@ -14,7 +14,7 @@ const ContactUs = () => {
             transition={{ duration: 1.5, ease: "easeOut" }}
           >
 
-            <img className='absolute w-screen h-screen object-cover opacity-40' src={heroImages.party2} alt="" />
+              <img className='absolute w-screen h-screen object-cover opacity-40' src={heroImages.dj_party2} alt="" />
 
           </motion.div>
 
