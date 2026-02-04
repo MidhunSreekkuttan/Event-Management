@@ -1,14 +1,25 @@
 import express from "express";
 import dotenv, { config } from "dotenv";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import connectDB from "./dataBase/ConnectDB.js";
+import userRouter from "./routes/userRouter.js";
 
 const app = express();
 
-dotenv/config()
+dotenv / config();
 
 const PORT = process.env.PORT || 4000;
 
-app.get("/", (req, res) => res.send("Hello Makkaleeee"));
+//middleware
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
+
+//api end point
+
+app.use("/api/user", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
