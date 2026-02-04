@@ -61,21 +61,31 @@ export const login = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
       res.cookie("UserLoginToken", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
       });
     } else {
       return res.json({ succes: false, message: "Incorrect Password" });
     }
 
     return res.json({ succes: true });
+  } catch (error) {
+    res.json({ succes: false, message: error.message });
+  }
+};
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("UserLoginToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    });
+    return res.json({ succes: true, message: "User Logout" });
   } catch (error) {
     res.json({ succes: false, message: error.message });
   }
