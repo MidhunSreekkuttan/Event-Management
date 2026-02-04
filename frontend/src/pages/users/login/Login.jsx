@@ -3,7 +3,7 @@ import { icon } from '../../../assets/assets'
 
 const Login = () => {
 
-  const [state, setState] = useState('sign up')
+  const [state, setState] = useState('sign in')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
