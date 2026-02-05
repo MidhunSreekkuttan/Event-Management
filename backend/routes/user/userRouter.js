@@ -5,8 +5,8 @@ import {
   logout,
   sendVerifyOtp,
   verifyEmail,
-} from "../controllers/userController.js";
-import userAuth from "../middleware/user/userAuth.js";
+} from "../../controllers/userController.js";
+import userAuth from "../../middleware/user/userAuth.js";
 
 const userRouter = express.Router();
 
