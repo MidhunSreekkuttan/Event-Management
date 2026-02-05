@@ -38,7 +38,7 @@ export default function HeroSlide({
 
                 <div className="flex items-center justify-center gap-2">
                     {slides.map((_, i) => (
-                        <div className={
+                        <div key={i} className={
                             `transition-all w-2 h-2 bg-white rounded-full ${curr === i ? 'p-2' : 'bg-opacity-50'}`
                         } />
                     ))}
