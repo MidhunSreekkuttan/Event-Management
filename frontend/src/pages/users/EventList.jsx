@@ -2,7 +2,7 @@ import React from 'react'
 import { heroImages, icon } from '../../assets/assets'
 import { motion } from 'framer-motion'
 import HeroSlide from '../../components/users/hero/HeroSlide'
-import ListingEvents from '../../components/eventListing/ListingEvents'
+import ListingEvents from '../../components/users/eventListing/ListingEvents'
 
 const EventList = () => {
 
