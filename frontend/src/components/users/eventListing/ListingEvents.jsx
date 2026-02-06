@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { EventContext } from '../../context/EventContext'
+import { EventContext } from '../../../context/EventContext'
 import ProductList from './ProductList'
 
 const ListingEvents = () => {
