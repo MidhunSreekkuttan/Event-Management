@@ -42,14 +42,17 @@ const App = () => {
 
       <div>
         {/*//..............................Routes for Users.........................................................*/}
+        {!WorkersPage && (
 
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/eventList' element={<EventList />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/contactUs' element={<ContactUs />} />
-          <Route path='/login' element={<Login />} />
-        </Routes>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/eventList' element={<EventList />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contactUs' element={<ContactUs />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+
+        )}
 
         {!loginpage && !WorkersPage && <Footer whiteBg={whiteBgRoute.includes(pathname)} />}
 
@@ -58,14 +61,19 @@ const App = () => {
         {/*//..............................Routes for Workers.........................................................*/}
 
         <div>
-          <Routes>
-            <Route path='/workers/home' element={<HomePage />} />
-            <Route path='/workers/index' element={<Index />} />
-            <Route path='/workers/dashboard' element={<WorkerDashboard />} />
-            <Route path='/workers/registration' element={<WorkerRegistration />} />
-            <Route path='/workers/login' element={<LoginPage />} />
-            <Route path='/workers/signup' element={<Signup />} />
-          </Routes>
+          {WorkersPage && (
+
+            <Routes>
+              <Route path='/workers/home' element={<HomePage />} />
+              <Route path='/workers/index' element={<Index />} />
+              <Route path='/workers/dashboard' element={<WorkerDashboard />} />
+              <Route path='/workers/registration' element={<WorkerRegistration />} />
+              <Route path='/workers/login' element={<LoginPage />} />
+              <Route path='/workers/signup' element={<Signup />} />
+            </Routes>
+
+          )}
+
         </div>
 
         {/*//....................................................................................................................//*/}
