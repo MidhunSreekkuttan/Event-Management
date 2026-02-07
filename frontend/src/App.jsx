@@ -22,13 +22,14 @@ import Signup from './pages/workers/WorkerSignUp'
 
 const App = () => {
 
-  const loginpage = useLocation().pathname.startsWith('/login')
+  const location = useLocation()
+  const pathname = location.pathname
 
-  const WorkersPage = useLocation().pathname.startsWith('/workers')
+  const loginpage = pathname.startsWith('/login')
 
-  const Contact = useLocation().pathname.startsWith('/contactUs')
+  const WorkersPage = pathname.startsWith('/workers')
 
-  const about = useLocation().pathname.startsWith('/about')
+  const whiteBgRoute = ['/eventList', '/about', '/contactUs']
 
   return (
     <>
@@ -50,7 +51,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
         </Routes>
 
-        {!loginpage && !WorkersPage && !Contact && !about && <Footer />}
+        {!loginpage && !WorkersPage && <Footer whiteBg={whiteBgRoute.includes(pathname)} />}
 
         {/*//....................................................................................................................//*/}
 
