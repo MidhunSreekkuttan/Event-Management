@@ -40,12 +40,12 @@ const ListingComponent = () => {
                 <div className='flex gap-3 pt-4 mx-20'>
                     <button onClick={() => setfilter('all')} className={`flex gap-3 rounded-2xl font-semibold
                          text-violet-950 bg-white py-3 px-5 ${filter === 'all' ? 'pazham' : ''}`}>
-                        <img className='w-5' src={icon.birthday_party_icon} alt="" />
+                        <img className={`w-5 ${filter === 'all' ? 'invert brightness-0' : ''}`} src={icon.star_icon} alt="" />
                         All
                     </button>
                     <button onClick={() => setfilter('Wedding')} className={`flex gap-3 rounded-2xl font-semibold
                          text-violet-950 bg-white py-3 px-5 ${filter === 'Wedding' ? 'pazham' : ''}`}>
-                        <img className='w-5' src={icon.birthday_party_icon} alt="" />
+                        <img className='w-5' src={icon.wedding_icon} alt="" />
                         Wedding
                     </button>
                     <button onClick={() => setfilter('Birthday Party')} className={`flex gap-3 rounded-2xl font-semibold
@@ -55,17 +55,17 @@ const ListingComponent = () => {
                     </button>
                     <button onClick={() => setfilter('Corporate Events')} className={`flex gap-3 rounded-2xl font-semibold
                          text-violet-950 bg-white py-3 px-5 ${filter === 'Corporate Events' ? 'pazham' : ''}`}>
-                        <img className='w-5' src={icon.birthday_party_icon} alt="" />
+                        <img className='w-5' src={icon.corporative_events} alt="" />
                         CORPORATE EVENTS
                     </button>
                     <button onClick={() => setfilter('Concerts')} className={`flex gap-3 rounded-2xl font-semibold
                          text-violet-950 bg-white py-3 px-5 ${filter === 'Concerts' ? 'pazham' : ''}`}>
-                        <img className='w-5' src={icon.birthday_party_icon} alt="" />
+                        <img className='w-5' src={icon.concern_icon} alt="" />
                         CONCERTS
                     </button>
                     <button onClick={() => setfilter('Cultural Programs')} className={`flex gap-3 rounded-2xl font-semibold
                          text-violet-950 bg-white py-3 px-5 ${filter === 'Cultural Programs' ? 'pazham' : ''}`}>
-                        <img className='w-5' src={icon.birthday_party_icon} alt="" />
+                        <img className='w-5' src={icon.cultural_programs} alt="" />
                         CULTURAL PROGRAMS
                     </button>
                 </div>
@@ -80,11 +80,14 @@ const ListingComponent = () => {
                             Choose Date
                         </button>
                     </div>
-                    <div className='flex gap-3 rounded-2xl font-semibold text-violet-950 bg-white py-3 px-5 text-center'>
+                    <div className='flex gap-3 cursor-pointer rounded-2xl font-semibold text-violet-950 bg-white py-3 px-5 text-center'>
+
+                        <img className='w-6' src={icon.location_icon} alt="" />
+
                         <select
                             value={locationFilter}
                             onChange={(e) => setLocationFilter(e.target.value)}
-                            className='outline-none pr-45'
+                            className='outline-none pr-45 cursor-pointer'
                         >
                             <option value="All Location">All Location</option>
                             <option value="TVM">TVM</option>
@@ -139,6 +142,7 @@ const ListingComponent = () => {
                                     <button onClick={() => setfilter('all')} className={`flex gap-3 rounded-2xl
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                           ${filter === 'all' ? 'apple' : ''}`}>
+                                        <img className='w-6' src={icon.star_icon} alt="" />
                                         All
                                     </button>
                                 </li>
@@ -146,6 +150,7 @@ const ListingComponent = () => {
                                     <button onClick={() => setfilter('Wedding')} className={`flex gap-3 rounded-2xl
                                         -2xl font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                          ${filter === 'Wedding' ? 'apple' : ''}`}>
+                                        <img className='w-6' src={icon.wedding_icon} alt="" />
                                         Wedding
                                     </button>
                                 </li>
@@ -153,6 +158,7 @@ const ListingComponent = () => {
                                     <button onClick={() => setfilter('Birthday Party')} className={`flex gap-3 rounded-2xl
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                           ${filter === 'Birthday Party' ? 'apple' : ''}`}>
+                                        <img className='w-6' src={icon.birthday_party_icon} alt="" />
                                         Birthday Party
                                     </button>
                                 </li>
@@ -160,6 +166,7 @@ const ListingComponent = () => {
                                     <button onClick={() => setfilter('Corporate Events')} className={`flex gap-3 rounded-2xl
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                           ${filter === 'Corporate Events' ? 'apple' : ''}`}>
+                                        <img className='w-6' src={icon.corporative_events} alt="" />
                                         Corporate Events
                                     </button>
                                 </li>
@@ -167,6 +174,7 @@ const ListingComponent = () => {
                                     <button onClick={() => setfilter('Concerts')} className={`flex gap-3 rounded-2xl
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                           ${filter === 'Concerts' ? 'apple' : ''}`}>
+                                        <img className='w-6' src={icon.concern_icon} alt="" />
                                         Concerts
                                     </button>
                                 </li>
@@ -174,6 +182,7 @@ const ListingComponent = () => {
                                     <button onClick={() => setfilter('Cultural Programs')} className={`flex gap-3 rounded-2xl
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                           ${filter === 'Cultural Programs' ? 'apple' : ''}`}>
+                                        <img className='w-6' src={icon.cultural_programs} alt="" />
                                         Cultural Programs
                                     </button>
                                 </li>
@@ -187,11 +196,14 @@ const ListingComponent = () => {
                                         Choose Date
                                     </p>
                                 </li>
-                                <li className='flex gap-3 rounded-2xl font-semibold text-violet-950 bg-white py-3 px-5 w-55 text-center'>
+                                <li className='flex gap-3 cursor-pointer rounded-2xl font-semibold text-violet-950 bg-white py-3 px-5 w-55 text-center'>
+
+                                    <img className='w-6' src={icon.location_icon} alt="" />
+
                                     <select
                                         value={locationFilter}
                                         onChange={(e) => setLocationFilter(e.target.value)}
-                                        className='outline-none pr-10'
+                                        className='outline-none pr-5 cursor-pointer'
                                     >
                                         <option value="All Location">All Location</option>
                                         <option value="TVM">TVM</option>
