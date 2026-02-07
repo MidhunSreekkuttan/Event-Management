@@ -6,10 +6,16 @@ const ProductList = ({ id, name, image, location, category }) => {
     return (
         <Link className='text-black cursor-pointer' to={`/product/${id}`}>
 
-            <div className='rounded-3xl overflow-hidden hover:scale-110 transition ease-in-out'>
+            <div className='rounded-3xl overflow-hidden hover:scale-105 transition-transform'>
                 <div className='max-w-full h-40'>
-                    <img className='w-full h-full' src={image} alt="" />
+                    <img
+                        className='w-full h-full'
+                        src={image}
+                        alt={name}
+                        loading='lazy'
+                    />
                 </div>
+
                 <div className='w-full h-25 text-center bg-white'>
                     <p className='pt-3 pb-1 text-sm'>{name}</p>
                     <p className='text-sm font-medium'>{category}</p>
@@ -21,4 +27,4 @@ const ProductList = ({ id, name, image, location, category }) => {
     )
 }
 
-export default ProductList
+export default React.memo(ProductList)
