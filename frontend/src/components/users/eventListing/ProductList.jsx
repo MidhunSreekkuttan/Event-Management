@@ -8,7 +8,7 @@ const ProductList = ({ id, name, image, location, category }) => {
 
             <div className='rounded-3xl overflow-hidden hover:scale-110 transition ease-in-out'>
                 <div className='max-w-full h-40'>
-                    <img className='w-full h-full' src={image[0]} alt="" />
+                    <img className='w-full h-full' src={image} alt="" />
                 </div>
                 <div className='w-full h-25 text-center bg-white'>
                     <p className='pt-3 pb-1 text-sm'>{name}</p>
