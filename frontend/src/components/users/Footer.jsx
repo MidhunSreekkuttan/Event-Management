@@ -135,7 +135,7 @@ const Footer = () => {
 
             <div className="mt-6">
               <p className="font-semibold mb-3">Create Workers Account</p>
-              <button onClick={() => navigate('/workers/registration')} className="bg-purple-600 hover:bg-purple-700 transition px-6 py-2 rounded-full shadow-md">
+              <button onClick={() => navigate('/workers/login')} className="bg-purple-600 hover:bg-purple-700 transition px-6 py-2 rounded-full shadow-md">
                 Create Account
               </button>
             </div>

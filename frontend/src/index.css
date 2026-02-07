@@ -13,6 +13,15 @@ a.active hr {
   display: block;
 }
 
+.pazham {
+  background: linear-gradient(to right, #ec4899, #be185d);
+  color: white;
+}
+
+.apple {
+  background-color: #ebdcf9;
+}
+
 html {
   scroll-behavior: smooth;
 }
