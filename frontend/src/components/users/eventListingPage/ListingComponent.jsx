@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { icon } from '../../../assets/assets'
 import { EventContext } from '../../../context/EventContext'
 import ProductList from '../eventListing/ProductList'
@@ -16,21 +16,21 @@ const ListingComponent = () => {
 
     const handleSearch = () => {
         setSearchButton(search.trim())
-        if (setSearch === '') {
-            search('')
-        }
     }
 
-    const filterProducts = products.filter((item) => {
+    const filterProducts = useMemo(() => {
 
-        const categoryFilter = filter === 'all' || item.category === filter
+        return products.filter((item) => {
 
-        const filterLocation = locationFilter === 'All Location' || item.location === locationFilter
+            const categoryFilter = filter === 'all' || item.category === filter
 
-        const searchFilter = searchBotton === '' || item.name.toLowerCase().includes(searchBotton.toLowerCase());
+            const filterLocation = locationFilter === 'All Location' || item.location === locationFilter
 
-        return categoryFilter && filterLocation && searchFilter
-    })
+            const searchFilter = searchBotton === '' || item.name.toLowerCase().includes(searchBotton.toLowerCase());
+
+            return categoryFilter && filterLocation && searchFilter
+        })
+    }, [products, filter, locationFilter, searchBotton])
 
     return (
         <>
@@ -218,8 +218,8 @@ const ListingComponent = () => {
                     {/*.............................................Right Side........................................*/}
 
                     <div className='grid grid-cols-4 gap-6'>
-                        {filterProducts.map((item, index) => (
-                            <ProductList key={index} name={item.name} image={item.image}
+                        {filterProducts.map((item) => (
+                            <ProductList key={item._id} name={item.name} image={item.image}
                                 id={item._id} location={item.location} />
                         ))}
                     </div>
