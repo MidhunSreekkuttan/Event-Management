@@ -31,6 +31,8 @@ const App = () => {
 
   const WorkersPage = pathname.startsWith('/workers')
 
+  const ProductPage = pathname.startsWith('/product')
+
   const whiteBgRoute = ['/eventList', '/about', '/contactUs']
 
   return (
@@ -58,7 +60,14 @@ const App = () => {
 
         )}
 
-        {!loginpage && !WorkersPage && <Footer whiteBg={whiteBgRoute.includes(pathname)} />}
+        {!loginpage && !WorkersPage && !ProductPage && <Footer
+
+          whiteBg={
+
+            whiteBgRoute.includes(pathname)
+
+          }
+        />}
 
         {/*//....................................................................................................................//*/}
 
