@@ -11,6 +11,8 @@ import SoftBackdrop from './components/users/background/SoftBackdrop'
 import Lenis from './components/users/background/Lenis'
 import Footer from './components/users/Footer'
 import ScrollToTop from './components/users/background/ScrollToTop'
+import NotFound from './pages/users/NotFound'
+import Product from './pages/users/product'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -49,7 +51,9 @@ const App = () => {
             <Route path='/eventList' element={<EventList />} />
             <Route path='/about' element={<About />} />
             <Route path='/contactUs' element={<ContactUs />} />
+            <Route path='/product/:productId' element={<Product />} />
             <Route path='/login' element={<Login />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
 
         )}
