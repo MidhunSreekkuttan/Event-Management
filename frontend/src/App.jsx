@@ -36,6 +36,22 @@ const App = () => {
 
   const whiteBgRoute = ['/eventList', '/about', '/contactUs']
 
+  {/*404 Page not found*/ }
+
+  const userRoutes = [
+    '/',
+    '/eventList',
+    '/about',
+    '/contactUs',
+    '/login'
+  ];
+
+  const isUserRoute =
+    userRoutes.includes(pathname) ||
+    pathname.startsWith('/product/');
+
+  const isNotFoundPage = !isUserRoute && !WorkersPage;
+
   return (
     <>
 
@@ -44,7 +60,7 @@ const App = () => {
       <Lenis />
       <ToastContainer />
 
-      {!loginpage && !WorkersPage && <Navbar />}
+      {!loginpage && !WorkersPage && !isNotFoundPage && <Navbar />}
 
       <div>
         {/*//..............................Routes for Users.........................................................*/}
@@ -62,7 +78,7 @@ const App = () => {
 
         )}
 
-        {!loginpage && !WorkersPage && !ProductPage && <Footer
+        {!loginpage && !WorkersPage && !ProductPage && !isNotFoundPage && <Footer
 
           whiteBg={
 
