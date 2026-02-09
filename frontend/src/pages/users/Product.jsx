@@ -4,7 +4,7 @@ import { EventContext } from '../../context/EventContext'
 
 const Product = () => {
     const { productId } = useParams()
-    const { products } = useContext(EventContext)
+    const { products, addEnquiry } = useContext(EventContext)
 
     const [productData, setProductData] = useState(false)
     const [image, setImage] = useState('')
@@ -67,7 +67,7 @@ const Product = () => {
                     </p>
 
 
-                    <button className='relative top-52 left-50 rounded-2xl font-bold text-2xl bg-linear-to-r from-pink-500 to-pink-700 active:scale-110 px-4 py-3'>
+                    <button onClick={() => addEnquiry(productData._id)} className='relative top-52 left-50 rounded-2xl font-bold text-2xl bg-linear-to-r from-pink-500 to-pink-700 active:scale-110 px-4 py-3'>
                         Enquiry
                     </button>
 
