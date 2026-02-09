@@ -12,7 +12,8 @@ import Lenis from './components/users/background/Lenis'
 import Footer from './components/users/Footer'
 import ScrollToTop from './components/users/background/ScrollToTop'
 import NotFound from './pages/users/NotFound'
-import Product from './pages/users/product'
+import Product from './pages/users/Product'
+import { ToastContainer, toast } from 'react-toastify';
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -41,6 +42,7 @@ const App = () => {
       <ScrollToTop />
       <SoftBackdrop />
       <Lenis />
+      <ToastContainer />
 
       {!loginpage && !WorkersPage && <Navbar />}
 
