@@ -10,7 +10,7 @@ const ProductList = ({ id, name, image, location, category }) => {
                 <div className='max-w-full h-40'>
                     <img
                         className='w-full h-full'
-                        src={image}
+                        src={image[0]}
                         alt={name}
                         loading='lazy'
                     />

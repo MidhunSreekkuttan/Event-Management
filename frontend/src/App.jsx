@@ -11,6 +11,9 @@ import SoftBackdrop from './components/users/background/SoftBackdrop'
 import Lenis from './components/users/background/Lenis'
 import Footer from './components/users/Footer'
 import ScrollToTop from './components/users/background/ScrollToTop'
+import NotFound from './pages/users/NotFound'
+import Product from './pages/users/Product'
+import { ToastContainer, toast } from 'react-toastify';
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -29,7 +32,25 @@ const App = () => {
 
   const WorkersPage = pathname.startsWith('/workers')
 
+  const ProductPage = pathname.startsWith('/product')
+
   const whiteBgRoute = ['/eventList', '/about', '/contactUs']
+
+  {/*404 Page not found*/ }
+
+  const userRoutes = [
+    '/',
+    '/eventList',
+    '/about',
+    '/contactUs',
+    '/login'
+  ];
+
+  const isUserRoute =
+    userRoutes.includes(pathname) ||
+    pathname.startsWith('/product/');
+
+  const isNotFoundPage = !isUserRoute && !WorkersPage;
 
   return (
     <>
@@ -37,8 +58,9 @@ const App = () => {
       <ScrollToTop />
       <SoftBackdrop />
       <Lenis />
+      <ToastContainer />
 
-      {!loginpage && !WorkersPage && <Navbar />}
+      {!loginpage && !WorkersPage && !isNotFoundPage && <Navbar />}
 
       <div>
         {/*//..............................Routes for Users.........................................................*/}
@@ -49,12 +71,21 @@ const App = () => {
             <Route path='/eventList' element={<EventList />} />
             <Route path='/about' element={<About />} />
             <Route path='/contactUs' element={<ContactUs />} />
+            <Route path='/product/:productId' element={<Product />} />
             <Route path='/login' element={<Login />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
 
         )}
 
-        {!loginpage && !WorkersPage && <Footer whiteBg={whiteBgRoute.includes(pathname)} />}
+        {!loginpage && !WorkersPage && !ProductPage && !isNotFoundPage && <Footer
+
+          whiteBg={
+
+            whiteBgRoute.includes(pathname)
+
+          }
+        />}
 
         {/*//....................................................................................................................//*/}
 
