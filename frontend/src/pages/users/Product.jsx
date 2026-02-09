@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { EventContext } from '../../context/EventContext'
 
 const Product = () => {
     const { productId } = useParams()
+    const navigate = useNavigate()
     const { products, addEnquiry } = useContext(EventContext)
 
     const [productData, setProductData] = useState(false)
@@ -26,6 +27,11 @@ const Product = () => {
         fetchproductData()
 
     }, [productId, products])
+
+    const handleEnquiry = () => {
+        addEnquiry(productData._id)
+        navigate('/eventList')
+    }
 
     return productData ? (
         <div className="pt-32">
@@ -67,7 +73,7 @@ const Product = () => {
                     </p>
 
 
-                    <button onClick={() => addEnquiry(productData._id)} className='relative top-52 left-50 rounded-2xl font-bold text-2xl bg-linear-to-r from-pink-500 to-pink-700 active:scale-110 px-4 py-3'>
+                    <button onClick={handleEnquiry} className='relative top-52 left-50 rounded-2xl font-bold text-2xl bg-linear-to-r from-pink-500 to-pink-700 active:scale-110 px-4 py-3'>
                         Enquiry
                     </button>
 
