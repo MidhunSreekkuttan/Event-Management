@@ -15,6 +15,14 @@ const About = () => {
 
   const location = useNavigate()
 
+  const fadeUp = {
+    initial: { y: 100, opacity: 0 },
+    whileInView: { y: 0, opacity: 1 },
+    viewport: { once: true },
+    transition: { type: "spring", stiffness: 120, damping: 25 }
+  };
+
+
   return (
     <>
       <section className='relative justify-center items-center overflow-hidden'>
@@ -29,10 +37,7 @@ const About = () => {
           </motion.div>
 
           <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
+            {...fadeUp}
           >
 
             <div className='z-10 grid gap-5 text-center'>
@@ -97,7 +102,7 @@ const About = () => {
         >
 
           <div className='max-w-160'>
-            <img className=' rounded-2xl' src={heroImages.party1} alt="" />
+            <img loading='lazy' decoding='async' className=' rounded-2xl' src={heroImages.party1} alt="" />
           </div>
 
         </motion.div>
@@ -214,7 +219,7 @@ const About = () => {
 
               <div className=''>
                 <div className='w-60 h-40'>
-                  <img className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
                 </div>
                 <div className='w-60 h-[220px] shadow-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
@@ -242,7 +247,7 @@ const About = () => {
 
               <div className=''>
                 <div className='w-60 h-40'>
-                  <img className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
@@ -270,7 +275,7 @@ const About = () => {
 
               <div className=''>
                 <div className='w-60 h-40'>
-                  <img className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
@@ -298,7 +303,7 @@ const About = () => {
 
               <div className=''>
                 <div className='w-60 h-40'>
-                  <img className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
