@@ -120,7 +120,7 @@ const ListingComponent = () => {
                     </div>
                     <div>
                         <button onClick={handleSearch} className='flex gap-3 rounded-2xl font-semibold text-white text-[20px]
-                               bg-linear-to-r from-pink-500 to-pink-700 py-2 px-8'>
+                               bg-linear-to-r from-pink-500 to-pink-700 py-2 px-8 active:scale-90'>
                             Search
                         </button>
                     </div>

@@ -74,13 +74,13 @@ const Hero = () => {
                 <div className='relative top-15 left-120 text-2xl font-bold flex gap-10'>
                   <NavLink to='#category'>
                     <button onClick={() => navigate('')}
-                      className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
+                      className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 active:scale-90 text-white px-6 py-3 rounded-xl'>
                       Explore Events
                     </button>
                   </NavLink>
                   <NavLink to='#info'>
                     <button onClick={() => navigate('')}
-                      className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
+                      className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 active:scale-90 text-white px-6 py-3 rounded-xl'>
                       More Info
                     </button>
                   </NavLink>

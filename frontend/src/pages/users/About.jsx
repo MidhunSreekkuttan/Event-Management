@@ -9,8 +9,12 @@ import {
 } from "react-icons/fa";
 import { heroImages, icon } from '../../assets/assets'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom';
 
 const About = () => {
+
+  const location = useNavigate()
+
   return (
     <>
       <section className='relative justify-center items-center overflow-hidden'>
@@ -76,8 +80,8 @@ const About = () => {
                 memories that will last a lifetime..</p>
             </div>
             <div>
-              <button className="bg-pink-500 hover:bg-pink-600 text-white transition
-             px-10 py-3 rounded-full text-lg font-medium shadow-lg">
+              <button onClick={() => location('/eventList')} className="bg-pink-500 hover:bg-pink-600 text-white transition
+             px-10 py-3 rounded-full text-lg font-medium shadow-lg active:scale-90">
                 Get Started
               </button>
             </div>
@@ -85,7 +89,7 @@ const About = () => {
           </div>
         </motion.div>
 
-        <motion.image
+        <motion.div
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -96,7 +100,7 @@ const About = () => {
             <img className=' rounded-2xl' src={heroImages.party1} alt="" />
           </div>
 
-        </motion.image>
+        </motion.div>
       </section>
 
       <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40
@@ -201,7 +205,7 @@ const About = () => {
 
           <div className='relative bottom-20 flex gap-20'>
 
-            <motion.image
+            <motion.div
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -227,9 +231,9 @@ const About = () => {
                 </div>
               </div>
 
-            </motion.image>
+            </motion.div>
 
-            <motion.image
+            <motion.div
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -255,9 +259,9 @@ const About = () => {
                 </div>
               </div>
 
-            </motion.image>
+            </motion.div>
 
-            <motion.image
+            <motion.div
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -283,9 +287,9 @@ const About = () => {
                 </div>
               </div>
 
-            </motion.image>
+            </motion.div>
 
-            <motion.image
+            <motion.div
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -311,7 +315,7 @@ const About = () => {
                 </div>
               </div>
 
-            </motion.image>
+            </motion.div>
 
           </div>
         </div>

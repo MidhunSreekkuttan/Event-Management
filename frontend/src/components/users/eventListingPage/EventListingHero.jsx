@@ -58,7 +58,7 @@ const EventListingHero = () => {
 
                         <div className='relative left-36 font-semibold text-2xl'>
                             <Link to='#main'>
-                                <button className='py-2 px-4 rounded-2xl bg-linear-to-r from-pink-500 to-pink-700 bg-white'>
+                                <button className='py-2 px-4 rounded-2xl bg-linear-to-r from-pink-500 to-pink-700 active:scale-90 bg-white'>
                                     Click Me
                                 </button>
                             </Link>
