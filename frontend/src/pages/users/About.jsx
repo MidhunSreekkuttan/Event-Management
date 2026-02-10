@@ -60,7 +60,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40 bg-violet-100 text-black'>
+      <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40 bg-[#F6F0FD] text-black'>
 
         <motion.div
           initial={{ x: -100, opacity: 0 }}
@@ -109,7 +109,7 @@ const About = () => {
       </section>
 
       <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40
-       bg-violet-100 text-black'>
+       bg-[#F6F0FD] text-black'>
         <div className='grid gap-30'>
 
           <motion.div
@@ -194,7 +194,7 @@ const About = () => {
       </section>
 
       <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40
-       bg-violet-100 text-black'>
+       bg-[#F6F0FD] text-black'>
         <div className='grid gap-50'>
 
           <motion.div

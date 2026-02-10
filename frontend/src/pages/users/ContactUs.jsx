@@ -38,7 +38,7 @@ const ContactUs = () => {
         </div>
       </section>
 
-      <section className='bg-white text-black justify-center items-center'>
+      <section className='bg-[#F6F0FD] text-black justify-center items-center'>
 
         {/*Main devider*/}
         <div className='pt-[200px] max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
