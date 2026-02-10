@@ -13,6 +13,7 @@ const ProductList = ({ id, name, image, location, category }) => {
                         src={image[0]}
                         alt={name}
                         loading='lazy'
+                        decoding='async'
                     />
                 </div>
 
