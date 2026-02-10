@@ -44,6 +44,8 @@ const Product = () => {
                         <img
                             key={index}
                             src={item}
+                            loading='lazy'
+                            decoding='async'
                             alt=""
                             onClick={() => setImage(item)}
                             className="w-20 h-20 object-cover cursor-pointer border hover:border-black"
@@ -55,6 +57,8 @@ const Product = () => {
                 <div className="w-[400px] h-[500px]">
                     <img
                         src={image}
+                        loading="lazy"
+                        decoding='async'
                         alt=""
                         className="w-full h-full object-cover"
                     />
