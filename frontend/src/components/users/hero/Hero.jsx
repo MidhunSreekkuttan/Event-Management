@@ -74,13 +74,13 @@ const Hero = () => {
                 <div className='relative top-15 left-120 text-2xl font-bold flex gap-10'>
                   <NavLink to='#category'>
                     <button onClick={() => navigate('')}
-                      className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 active:scale-90 text-white px-6 py-3 rounded-xl'>
+                      className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
                       Explore Events
                     </button>
                   </NavLink>
                   <NavLink to='#info'>
                     <button onClick={() => navigate('')}
-                      className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 active:scale-90 text-white px-6 py-3 rounded-xl'>
+                      className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
                       More Info
                     </button>
                   </NavLink>
@@ -88,27 +88,6 @@ const Hero = () => {
 
               </motion.div>
 
-              {/*                                                       Right Side                                                                          */}
-
-              {     /*         <motion.div className='flex mx-auto w-full max-w-lg'
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
-              >
-                <motion.div className='relative left-[90vh] bottom-40 rounded-3xl overflow-hidden border border-white/6 shadow-2xl bg-linear-to-b from-black/50 to-transparent'>
-                  <div className='relative aspect-16/10 bg-gray-900'>
-
-                    <div className='max-w-lg'>
-                      <HeroSlide autoSlide={true} autoSlideTime={2000}>
-                        {slides.map((i) => (
-                          <img src={i} />
-                        ))}
-                      </HeroSlide>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>*/}
             </div>
           </div>
         </div>

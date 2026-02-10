@@ -23,7 +23,7 @@ const Hometab = () => {
                         whileInView={{ y: 0, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
-                        className="flex h-40 rounded-2xl w-100 p-6 bg-white/3"
+                        className="flex h-40 rounded-2xl w-100 p-6 bg-white/3 hover:scale-110"
                     >
                         <div className='grid gap-5' >
                             <img className='w-15' src={icon.search_icon} alt="" />
@@ -37,7 +37,7 @@ const Hometab = () => {
                         whileInView={{ y: 0, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.2 }}
-                        className="flex h-40 rounded-2xl w-100 p-6 bg-white/3"
+                        className="flex h-40 rounded-2xl w-100 p-6 bg-white/3 hover:scale-110"
                     >
                         <div className='grid gap-5' >
                             <img className='w-15' src={icon.create_event_icon} alt="" />
@@ -51,7 +51,7 @@ const Hometab = () => {
                         whileInView={{ y: 0, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
-                        className="flex h-40 rounded-2xl w-100 p-6 bg-white/3"
+                        className="flex h-40 rounded-2xl w-100 p-6 bg-white/3 hover:scale-110"
                     >
                         <div className='grid gap-5' >
                             <img className='w-15' src={icon.party_event} alt="" />

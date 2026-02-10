@@ -16,7 +16,7 @@ const Navbar = () => {
     >
       <div className='max-w-6xl mx-auto flex items-center justify-between h-18 bg-black/50 backdrop-blur-md border border-white/4 rounded-2xl p-3'>
 
-        <Link to='/'>
+        <Link to='/#home'>
           <img src={logo.adhithiShack} className='w-50' alt="" />
         </Link>
 
@@ -39,21 +39,21 @@ const Navbar = () => {
           </NavLink>
         </ul>
 
-        <div className='flex items-center gap-6 '>
+        <div className='relative flex group items-center gap-6 '>
           <button onClick={() => navigate('/login')}
-            className='group relative cursor-pointer
-             bg-linear-to-br from-indigo-500 to-indigo-600 hover:opacity-90 transition-all px-7 py-1 rounded-2xl'>
+            className='cursor-pointer
+             bg-linear-to-br from-indigo-500 to-indigo-600 transition-all px-7 py-1 rounded-2xl hover:opacity-80'>
 
             <img className='w-7 cursor-pointer' src={icon.userIcon} alt="" />
 
-            <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 '>
-              <div className='flex flex-col gap-2 w-30 py-3 px-5 bg-violet-300 rounded text-amber-700'>
-                <p className='cursor-pointer hover:text-black'>Logout</p>
-                <p className='cursor-pointer hover:text-black'></p>
-                <p className='cursor-pointer hover:text-black'></p>
-              </div>
-            </div>
           </button>
+          <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-30 -z-10'>
+            <div className='flex flex-col gap-2 w-30 py-3 px-5 bg-violet-300 rounded text-amber-700'>
+              <p className='cursor-pointer hover:text-black'>Logout</p>
+              <p className='cursor-pointer hover:text-black'></p>
+              <p className='cursor-pointer hover:text-black'></p>
+            </div>
+          </div>
         </div>
       </div>
     </motion.nav>

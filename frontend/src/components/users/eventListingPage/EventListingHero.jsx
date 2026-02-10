@@ -32,7 +32,7 @@ const EventListingHero = () => {
         <>
             {/*................................................Hero sectiom.................................................*/}
 
-            <section className='relative min-h-screen max-w-screen text-white'>
+            <section id='eventList' className='relative min-h-screen max-w-screen text-white'>
 
                 <motion.div
                     initial={{ opacity: 0 }}
