@@ -4,11 +4,14 @@ import { BrowserRouter } from 'react-router-dom'
 import EventContextProvider from './context/EventContext.jsx'
 import './index.css'
 import App from './App.jsx'
+import { domAnimation, LazyMotion } from 'framer-motion'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <EventContextProvider>
-      <App />
+      <LazyMotion features={domAnimation}>
+        <App />
+      </LazyMotion>
     </EventContextProvider>
   </BrowserRouter>,
 )
