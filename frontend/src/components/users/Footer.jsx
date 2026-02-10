@@ -96,10 +96,10 @@ const Footer = ({ whiteBg = false }) => {
           <div className={`${whiteBg ? 'border-r border-black/20' : 'border-r border-white/20'}`}>
             <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
             <ul className={`space-y-3 ${whiteBg ? "text-black" : 'text-white/80'}`}>
-              <li><a href="#">Scroll UP</a></li>
-              <li><a href="/eventList">Event List</a></li>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/contactUs">Contact Us</a></li>
+              <li className="hover:active:scale-110"><a href="#">Scroll UP</a></li>
+              <li className="hover:active:scale-110"><a href="/eventList">Event List</a></li>
+              <li className="hover:active:scale-110"><a href="/about">About Us</a></li>
+              <li className="hover:active:scale-110"><a href="/contactUs">Contact Us</a></li>
             </ul>
           </div>
         </motion.div>
@@ -114,11 +114,13 @@ const Footer = ({ whiteBg = false }) => {
           <div className={`${whiteBg ? 'border-r border-black/20' : 'border-r border-white/20'}`}>
             <h4 className="text-xl font-semibold mb-4">Explore Events</h4>
             <ul className={`space-y-3 ${whiteBg ? "text-black" : 'text-white/80'}`}>
-              <li><Link>Weddings</Link></li>
-              <li><Link>Birthday Parties</Link></li>
-              <li><Link>Corporate Events</Link></li>
-              <li><Link>Concertss</Link></li>
+              <li className="hover:active:scale-110"><Link to="/eventList#wedding">Weddings</Link></li>
+              <li className="hover:active:scale-110"><Link to="/eventList#birthday">Birthday Parties</Link></li>
+              <li className="hover:active:scale-110"><Link to="/eventList#corporate">Corporate Events</Link></li>
+              <li className="hover:active:scale-110"><Link to="/eventList#concerts">Concerts</Link></li>
+              <li className="hover:active:scale-110"><Link to="/eventList#cultural">Cultural Programs</Link></li>
             </ul>
+
           </div>
         </motion.div>
 

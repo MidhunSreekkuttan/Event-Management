@@ -1,7 +1,9 @@
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { icon } from '../../../assets/assets'
 import { EventContext } from '../../../context/EventContext'
 import ProductList from '../eventListing/ProductList'
+import { useLocation } from 'react-router-dom';
+import { useRef } from "react";
 
 const ListingComponent = () => {
 
@@ -31,6 +33,28 @@ const ListingComponent = () => {
             return categoryFilter && filterLocation && searchFilter
         })
     }, [products, filter, locationFilter, searchBotton])
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (!location.hash) return;
+
+        const hash = location.hash.replace("#", "").toLowerCase();
+
+        const categoryMap = {
+            wedding: "Wedding",
+            birthday: "Birthday Party",
+            corporate: "Corporate Events",
+            concerts: "Concerts",
+            cultural: "Cultural Programs",
+            all: "all",
+        };
+
+        if (categoryMap[hash]) {
+            setfilter(categoryMap[hash]);
+        }
+    }, [location.hash]);
+
 
     return (
         <>
