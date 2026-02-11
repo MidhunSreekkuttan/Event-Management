@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userModel from "../dataBase/models/user/userModel.js";
 import welcomeMessage from "../config/nodemailer.js";
+import { otpMail, welcomeMail } from "../config/emailTemplate.js";
 
 export const register = async (req, res) => {
   try {
@@ -42,7 +43,7 @@ export const register = async (req, res) => {
       from: `"Adhithi" <${process.env.NO_REPLAY_EMAIL}>`,
       to: email,
       subject: "Welcome to Our Web Page",
-      text: `Welcom to Our Adhithi Event Mangement ${name}`,
+      html: welcomeMail(name),
     };
     await welcomeMessage.sendMail(mailOption);
 
@@ -124,7 +125,7 @@ export const sendVerifyOtp = async (req, res) => {
       from: `"Adhithi" <${process.env.NO_REPLAY_EMAIL}>`,
       to: user.email,
       subject: "Your OTP",
-      text: `Do Not Share This ${otp} to anyone else`,
+      html: otpMail(user.name, otp),
     };
     await welcomeMessage.sendMail(mailOption);
 
