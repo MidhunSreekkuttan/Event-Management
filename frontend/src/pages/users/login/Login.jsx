@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { icon } from '../../../assets/assets'
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
 
@@ -7,6 +8,7 @@ const Login = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
     <div className='flex items-center justify-center min-h-screen p-6'>
@@ -32,7 +34,14 @@ const Login = () => {
           <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-amber-50 text-black'>
             <img className='w-6' src={icon.secure_icon} alt="" />
             <input onChange={e => setPassword(e.target.value)} value={password}
-              className='bg-transparent outline-none' type="password" placeholder='Enter your Password' required />
+              className='bg-transparent outline-none' type={showPassword ? 'text' : "password"} placeholder='Enter your Password' required />
+            <span className='cursor-pointer'>
+              {showPassword ? (
+                <p onClick={() => setShowPassword(false)}><EyeOff className='relative right-3 size-5' /></p>
+              ) : (
+                <p onClick={() => setShowPassword(true)}><Eye className='relative right-3 size-5' /></p>
+              )}
+            </span>
           </div>
 
           <button className='w-full mt-8 py-2.5 rounded-full bg-linear-to-r from-purple-500 to-purple-600 font-medium'>
