@@ -5,7 +5,7 @@ import {
   register,
   sendVerifyOtp,
   verifyEmail,
-} from "../../controllers/workersController.js";
+} from "../../controllers/workers/workersController.js";
 import workersAuth from "../../middleware/workers/workersAuth.js";
 
 const workersRouter = express.Router();

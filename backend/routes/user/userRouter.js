@@ -5,7 +5,8 @@ import {
   logout,
   sendVerifyOtp,
   verifyEmail,
-} from "../../controllers/userController.js";
+  isAuthendicated,
+} from "../../controllers/user/userController.js";
 import userAuth from "../../middleware/user/userAuth.js";
 
 const userRouter = express.Router();
@@ -15,5 +16,6 @@ userRouter.post("/login", login);
 userRouter.post("/logout", logout);
 userRouter.post("/sendVerifyOtp", userAuth, sendVerifyOtp);
 userRouter.post("/verifyEmail", userAuth, verifyEmail);
+userRouter.get("/isAuth", userAuth, isAuthendicated);
 
 export default userRouter;
