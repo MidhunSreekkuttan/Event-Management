@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { icon } from '../../../assets/assets'
 import { Eye, EyeOff } from 'lucide-react';
+import { BackendContex } from '../../../context/ConnectBackendContex';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+
+  const { backendUrl, setIsLoggedIn, setUserData, getUserData, userData } = useContext(BackendContex)
+
+  const navigate = useNavigate()
 
   const [state, setState] = useState('sign in')
   const [name, setName] = useState('')
@@ -10,13 +18,68 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
+  const sendVerifyOtp = async () => {
+
+    try {
+
+      const { data } = await axios.post(backendUrl + '/api/user/sendVerifyOtp')
+
+      if (data.success) {
+        navigate('/otp')
+        toast.success(data.message)
+      } else {
+        toast.error(data.message)
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+
+      axios.defaults.withCredentials = true
+
+      if (state === 'sign in') {
+
+        const { data } = await axios.post(backendUrl + '/api/user/login', { email, password })
+
+        if (data.success) {
+          getUserData()
+          setUserData(true)
+          setIsLoggedIn(true)
+          navigate('/')
+        }
+
+      } else {
+
+        const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password })
+
+
+        if (data.success) {
+          toast.success(data.message)
+        } else {
+          toast.error(data.message)
+        }
+
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+
+  }
+
   return (
     <div className='flex items-center justify-center min-h-screen p-6'>
       <div className='bg-white/7 p-10 rounded-lg shadow-lg w-full sm:w-96'>
         <h2 className='text-4xl font-bold text-center mb-5'>{state === 'sign up' ? 'Create Account' : 'Login'}</h2>
         <p className='text-center mb-6'>{state === 'sign up' ? 'Create Your Account' : 'login to your account'}</p>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           {state === 'sign up' && (
             <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-amber-50 text-black'>
               <img className='w-6' src={icon.userIcon} alt="" />

@@ -1,11 +1,50 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { icon, logo } from '../../assets/assets'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { BackendContex } from '../../context/ConnectBackendContex'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Navbar = () => {
 
+  const { backendUrl, userData, setUserData, setIsLoggedIn } = useContext(BackendContex)
+
+  axios.defaults.withCredentials = true
+
+  const logOut = async () => {
+
+    try {
+
+      const { data } = await axios.post(backendUrl + '/api/user/logout')
+      data.success && setIsLoggedIn(false)
+      data.success && setUserData(false)
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   const navigate = useNavigate()
+
+  const sendVerifyOtp = async () => {
+
+    try {
+
+      const { data } = await axios.post(backendUrl + '/api/user/sendVerifyOtp')
+
+      if (data.success) {
+        navigate('/otp')
+        toast.success(data.message)
+      } else {
+        toast.error(data.message)
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
 
   return (
     <motion.nav className='fixed top-5 left-0 right-0 z-50 px-4'
@@ -39,22 +78,37 @@ const Navbar = () => {
           </NavLink>
         </ul>
 
-        <div className='relative flex group items-center gap-6 '>
-          <button onClick={() => navigate('/login')}
-            className='cursor-pointer
+        {userData ? (
+          <div className='w-8 h-8 flex justify-center items-center rounded-full bg-amber-50 relative group text-black cursor-pointer'>
+
+            {userData?.name?.[0]?.toUpperCase() || "U"}
+
+            <div className='absolute hidden group-hover:block top-0 right-0 z-10 pt-10'>
+              <ul className='list-none m-0 p-2 text-xl font-semibold bg-linear-to-r from-purple-500 to-purple-600'>
+                <li onClick={logOut} className='px-2 hover:bg-linear-to-br from-indigo-500 to-indigo-600 hover:text-amber-50'>Logout</li>
+                
+                {!userData.isAccountVerified && (
+                  <li onClick={sendVerifyOtp} className='px-2 hover:bg-linear-to-br from-indigo-500 to-indigo-600
+                   hover:text-amber-50'>Verify</li>
+                )}
+              </ul>
+            </div>
+
+          </div>
+        ) : (
+
+          <div className='relative flex group items-center gap-6 '>
+            <button onClick={() => navigate('/login')}
+              className='cursor-pointer
              bg-linear-to-br from-indigo-500 to-indigo-600 transition-all px-7 py-1 rounded-2xl hover:opacity-80'>
 
-            <img className='w-7 cursor-pointer' src={icon.userIcon} alt="" />
+              <img className='w-7 cursor-pointer' src={icon.userIcon} alt="" />
 
-          </button>
-          <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-30 -z-10'>
-            <div className='flex flex-col gap-2 w-30 py-3 px-5 bg-violet-300 rounded text-amber-700'>
-              <p className='cursor-pointer hover:text-black'>Logout</p>
-              <p className='cursor-pointer hover:text-black'></p>
-              <p className='cursor-pointer hover:text-black'></p>
-            </div>
+            </button>
           </div>
-        </div>
+
+        )}
+
       </div>
     </motion.nav>
   )
