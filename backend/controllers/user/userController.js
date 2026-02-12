@@ -66,7 +66,7 @@ export const login = async (req, res) => {
     }
 
     const user = await userModel.findOne({ email });
-    if (!email) {
+    if (!user) {
       return res.json({ success: false, message: "User Not Found pz Sign up" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
