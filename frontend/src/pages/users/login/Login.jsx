@@ -18,24 +18,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const sendVerifyOtp = async () => {
-
-    try {
-
-      const { data } = await axios.post(backendUrl + '/api/user/sendVerifyOtp')
-
-      if (data.success) {
-        navigate('/otp')
-        toast.success(data.message)
-      } else {
-        toast.error(data.message)
-      }
-
-    } catch (error) {
-      toast.error(error.message)
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
