@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import userModel from "../dataBase/models/user/userModel.js";
-import welcomeMessage from "../config/nodemailer.js";
-import { otpMail, welcomeMail } from "../config/emailTemplate.js";
+import workersModel from "../../dataBase/models/workers/workersModel.js";
+import welcomeMessage from "../../config/nodemailer.js";
+import { otpMail, welcomeMail } from "../../config/emailTemplate.js";
 
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const alredyExist = await userModel.findOne({ email });
+    const alredyExist = await workersModel.findOne({ email });
     if (alredyExist) {
       return res.json({ succes: false, message: "User Already exist" });
     }
@@ -21,7 +21,7 @@ export const register = async (req, res) => {
     }
     const hashpassword = await bcrypt.hash(password, 10);
 
-    const newUser = new userModel({
+    const newUser = new workersModel({
       name,
       email,
       password: hashpassword,
@@ -32,7 +32,7 @@ export const register = async (req, res) => {
       expiresIn: "7d",
     });
 
-    res.cookie("UserRegisterationToken", token, {
+    res.cookie("WorkersRegisterationToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
@@ -65,7 +65,10 @@ export const login = async (req, res) => {
       return res.json({ succes: false, message: "Enter Password" });
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await workersModel.findOne({ email });
+    if (!user) {
+      return res.json({ succes: false, message: "User Not Found" });
+    }
     if (!email) {
       return res.json({ succes: false, message: "User Not Found pz Sign up" });
     }
@@ -73,7 +76,7 @@ export const login = async (req, res) => {
     if (isMatch) {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-      res.cookie("UserLoginToken", token, {
+      res.cookie("WorkersLoginToken", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
@@ -90,7 +93,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("UserLoginToken", {
+    res.clearCookie("WorkersLoginToken", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
@@ -105,7 +108,7 @@ export const sendVerifyOtp = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const user = await userModel.findById(userId);
+    const user = await workersModel.findById(userId);
 
     if (user.isAccountVerified) {
       return res.json({
@@ -148,7 +151,7 @@ export const verifyEmail = async (req, res) => {
     if (!otp) {
       return res.json({ succes: false, message: "OTP is missing" });
     }
-    const user = await userModel.findById(userId);
+    const user = await workersModel.findById(userId);
     if (!user) {
       return res.json({ succes: false, message: "User Not Found" });
     }
