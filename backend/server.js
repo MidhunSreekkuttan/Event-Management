@@ -5,6 +5,7 @@ import cors from "cors";
 import connectDB from "./dataBase/ConnectDB.js";
 import userRouter from "./routes/user/userRouter.js";
 import workersRouter from "./routes/workers/workersRoutes.js";
+import router from "./routes/user/getUserData.js";
 
 const app = express();
 
@@ -14,17 +15,25 @@ const PORT = process.env.PORT || 4000;
 
 //middleware
 
+const allowOrigins = "http://localhost:5173";
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    origin: allowOrigins,
+    credentials: true,
+  }),
+);
 
 //api end point
 
 app.use("/api/user", userRouter);
 app.use("/api/workers", workersRouter);
+app.use("/api/userData", router);
+
+await connectDB();
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-await connectDB();
