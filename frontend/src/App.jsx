@@ -13,7 +13,8 @@ import Footer from './components/users/Footer'
 import ScrollToTop from './components/users/background/ScrollToTop'
 import NotFound from './pages/users/NotFound'
 import Product from './pages/users/Product'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import Otp from './pages/users/login/Otp'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -73,6 +74,7 @@ const App = () => {
             <Route path='/contactUs' element={<ContactUs />} />
             <Route path='/product/:productId' element={<Product />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/otp' element={<Otp />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
 
