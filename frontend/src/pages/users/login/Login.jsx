@@ -18,11 +18,13 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
+  const [loading, setloading] = useState(false)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-
+      setloading(true)
       axios.defaults.withCredentials = true
 
       if (state === 'sign in') {
@@ -55,6 +57,9 @@ const Login = () => {
 
     } catch (error) {
       toast.error(error.message)
+    }
+    finally {
+      setloading(false)
     }
 
   }
@@ -93,8 +98,21 @@ const Login = () => {
             </span>
           </div>
 
-          <button className='w-full mt-8 py-2.5 rounded-full bg-linear-to-r from-purple-500 to-purple-600 font-medium'>
-            {state === 'sign up' ? 'Sign Up' : 'Login'}
+          <button disabled={loading}
+            className={`w-full mt-8 py-2.5 rounded-full ${loading ? 'bg-purple-400 cursor-not-allowed' :
+              'bg-linear-to-r from-purple-500 to-purple-600 font-medium'
+              }`}
+          >
+
+            {loading ? (
+              <>
+                <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                Please wait...
+              </>
+            ) : (
+              state === 'sign up' ? 'Sign Up' : 'Login'
+            )}
+
           </button>
         </form>
 
