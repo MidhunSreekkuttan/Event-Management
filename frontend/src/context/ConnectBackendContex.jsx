@@ -13,7 +13,6 @@ const BackendContexProvider = (props) => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userData, setUserData] = useState(false)
-    const [authloading, setAuthLoading] = useState(true)
 
     axios.defaults.withCredentials = true
 
