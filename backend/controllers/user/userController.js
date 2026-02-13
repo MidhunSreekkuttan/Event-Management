@@ -71,7 +71,9 @@ export const login = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "7d",
+      });
 
       res.cookie("UserLoginToken", token, {
         httpOnly: true,
@@ -82,7 +84,10 @@ export const login = async (req, res) => {
       return res.json({ success: false, message: "Incorrect Password" });
     }
 
-    return res.json({ success: true });
+    return res.json({
+      success: true,
+      isAccountVerified: user.isAccountVerified,
+    });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
