@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
 
-  const { backendUrl, setIsLoggedIn, setUserData, getUserData, userData } = useContext(BackendContex)
+  const { backendUrl, setIsLoggedIn, setUserData, getUserData } = useContext(BackendContex)
 
   const navigate = useNavigate()
 
@@ -19,6 +19,24 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   const [loading, setloading] = useState(false)
+
+  const sendVerifyOtp = async () => {
+
+    try {
+
+      const { data } = await axios.post(backendUrl + '/api/user/sendVerifyOtp')
+
+      if (data.success) {
+        navigate('/otp')
+        toast.success(data.message)
+      } else {
+        toast.error(data.message)
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -32,14 +50,16 @@ const Login = () => {
         const { data } = await axios.post(backendUrl + '/api/user/login', { email, password })
 
         if (data.success) {
-          toast.success(data.message)
-          getUserData()
-          setUserData(true)
-          setIsLoggedIn(true)
-          navigate('/')
-        } else {
-          toast.error(data.message)
+          if (!data.isAccountVerified) {
+            await sendVerifyOtp()
+          } else {
+            getUserData()
+            setUserData(true)
+            setIsLoggedIn(true)
+            navigate('/')
+          }
         }
+
 
       } else {
 

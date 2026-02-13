@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const BackendContex = createContext()
 
@@ -8,11 +9,15 @@ const BackendContexProvider = (props) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
+    const navigate = useNavigate()
+
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userData, setUserData] = useState(false)
+    const [authloading, setAuthLoading] = useState(true)
 
     axios.defaults.withCredentials = true
 
+    // check login status
     const getAuthState = async () => {
         try {
 
@@ -30,6 +35,7 @@ const BackendContexProvider = (props) => {
         }
     }
 
+    //get user data + verification check
     const getUserData = async () => {
 
         try {
@@ -37,6 +43,11 @@ const BackendContexProvider = (props) => {
             const { data } = await axios.get(`${backendUrl}/api/userData/getUserData`)
 
             data.success ? setUserData(data.userData) : toast.error(data.message)
+
+            if (!data.userData.isAccountVerified) {
+                toast.error('You are not verified')
+                navigate('/otp', { replace: true })
+            }
 
         } catch (error) {
 
