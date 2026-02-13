@@ -58,6 +58,8 @@ const Login = () => {
             setIsLoggedIn(true)
             navigate('/')
           }
+        } else {
+          toast.error(data.message)
         }
 
 
