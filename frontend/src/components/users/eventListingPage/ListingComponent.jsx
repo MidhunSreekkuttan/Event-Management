@@ -230,7 +230,7 @@ const ListingComponent = () => {
                                         className='outline-none pr-5 cursor-pointer'
                                     >
                                         <option value="All Location">All Location</option>
-                                        <option value="TVM">TVM</option>
+                                        <option value="Trivandrum">Trivandrum</option>
                                         <option value="Kollam">Kollam</option>
                                         <option value="Pathanamthitta">Pathanamthitta</option>
                                         <option value="Alappuzha">Alappuzha</option>
