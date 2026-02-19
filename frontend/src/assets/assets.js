@@ -97,7 +97,7 @@ export const products = [
     description: "This a birthday party event we recently completed",
     image: [birthday_cake1],
     category: "Birthday Party",
-    location: "TVM",
+    location: "Trivandrum",
   },
   {
     _id: "ammm",
@@ -113,7 +113,7 @@ export const products = [
     description: "This is a Wedding Party We are recently finished",
     image: [party1],
     category: "Corporate Events",
-    location: "TVM",
+    location: "Trivandrum",
   },
   {
     _id: "ahjhjbj",
@@ -137,7 +137,7 @@ export const products = [
     description: "This is a Wedding Party We are recently finished",
     image: [cattering_decoration1],
     category: "Wedding",
-    location: "TVM",
+    location: "Trivandrum",
   },
   {
     _id: "mmjhnjg",
@@ -153,7 +153,7 @@ export const products = [
     description: "This is a Wedding Party We are recently finished",
     image: [party_light2],
     category: "Cultural Programs",
-    location: "TVM",
+    location: "Trivandrum",
   },
   {
     _id: "ahddsvddvdjhjbj",
@@ -185,6 +185,6 @@ export const products = [
     description: "This is a Wedding Party We are recently finished",
     image: [birthday_party_design1],
     category: "Birthday Party",
-    location: "TVM",
+    location: "Trivandrum",
   },
 ];
