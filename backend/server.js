@@ -6,6 +6,7 @@ import connectDB from "./dataBase/ConnectDB.js";
 import userRouter from "./routes/user/userRouter.js";
 import workersRouter from "./routes/workers/workersRoutes.js";
 import router from "./routes/user/getUserData.js";
+import eventManagementRouter from "./routes/eventManagement/eventManagementRoutes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(
 app.use("/api/user", userRouter);
 app.use("/api/workers", workersRouter);
 app.use("/api/userData", router);
+app.use("/api/eventManagement", eventManagementRouter);
 
 await connectDB();
 
