@@ -6,6 +6,9 @@ import connectDB from "./dataBase/ConnectDB.js";
 import userRouter from "./routes/user/userRouter.js";
 import workersRouter from "./routes/workers/workersRoutes.js";
 import router from "./routes/user/getUserData.js";
+import eventManagementRouter from "./routes/eventManagement/eventManagementRoutes.js";
+import ProductRouter from "./routes/eventManagement/productRoutes.js";
+import connectCloudinary from "./config/cloudinary.js";
 
 const app = express();
 
@@ -31,8 +34,12 @@ app.use(
 app.use("/api/user", userRouter);
 app.use("/api/workers", workersRouter);
 app.use("/api/userData", router);
+app.use("/api/eventManagement", eventManagementRouter);
+app.use("/api/product", ProductRouter);
 
 await connectDB();
+
+await connectCloudinary();
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
