@@ -25,9 +25,14 @@ import Signup from './pages/workers/WorkerSignUp'
 
 {/*................................................Importing Event Management Thing........................................*/ }
 
+import EventMain from './pages/event-management/Main'
+import EventHome from './pages/event-management/Home'
 import Add from './pages/event-management/Add'
 import Booking from './pages/event-management/Booking'
-import List from './pages/event-management/List'
+import Events from './pages/event-management/Events'
+import Clients from './pages/event-management/Clients'
+import Reports from './pages/event-management/Reports'
+import Vendors from './pages/event-management/Vendors'
 
 {/*.........................................................................................................................*/ }
 
@@ -57,7 +62,13 @@ const App = () => {
       <Lenis />
       <ToastContainer />
 
+      {/*User Navbar*/}
+
       {!hideNavbar && <Navbar />}
+
+      {/*Event Management Navbar*/}
+
+      {EventManagementPage && <EventMain />}
 
       <Routes>
         {/*//..............................Routes for Users.........................................................*/}
@@ -81,9 +92,13 @@ const App = () => {
 
         {/*................................Event Management Routes....................................................*/}
 
+        <Route path='/event-management/home' element={<EventHome />} />
         <Route path='/event-management/add' element={<Add />} />
         <Route path='/event-management/booking' element={<Booking />} />
-        <Route path='/event-management/list' element={<List />} />
+        <Route path='/event-management/clients' element={<Clients />} />
+        <Route path='/event-management/events' element={<Events />} />
+        <Route path='/event-management/reports' element={<Reports />} />
+        <Route path='/event-management/vendors' element={< Vendors />} />
 
         {/*............................... 404 Page not Found Route................................................. */}
 
