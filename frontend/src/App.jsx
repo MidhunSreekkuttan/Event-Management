@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/users/Home'
 import Navbar from './components/users/Navbar'
@@ -33,6 +32,8 @@ import Events from './pages/event-management/Events'
 import Clients from './pages/event-management/Clients'
 import Reports from './pages/event-management/Reports'
 import Vendors from './pages/event-management/Vendors'
+import EventLogin from './pages/event-management/login/Login'
+import EventManagementProtected from './components/event-management/EventProtected'
 
 {/*.........................................................................................................................*/ }
 
@@ -92,13 +93,17 @@ const App = () => {
 
         {/*................................Event Management Routes....................................................*/}
 
-        <Route path='/event-management/home' element={<EventHome />} />
-        <Route path='/event-management/add' element={<Add />} />
-        <Route path='/event-management/booking' element={<Booking />} />
-        <Route path='/event-management/clients' element={<Clients />} />
-        <Route path='/event-management/events' element={<Events />} />
-        <Route path='/event-management/reports' element={<Reports />} />
-        <Route path='/event-management/vendors' element={< Vendors />} />
+        <Route path='/event-management/login' element={<EventLogin />} />
+
+        <Route element={<EventManagementProtected />}>
+          <Route path='/event-management/home' element={<EventHome />} />
+          <Route path='/event-management/add' element={<Add />} />
+          <Route path='/event-management/booking' element={<Booking />} />
+          <Route path='/event-management/clients' element={<Clients />} />
+          <Route path='/event-management/events' element={<Events />} />
+          <Route path='/event-management/reports' element={<Reports />} />
+          <Route path='/event-management/vendors' element={< Vendors />} />
+        </Route>
 
         {/*............................... 404 Page not Found Route................................................. */}
 
