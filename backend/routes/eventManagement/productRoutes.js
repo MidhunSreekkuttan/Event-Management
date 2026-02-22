@@ -6,11 +6,13 @@ import {
   singleProduct,
 } from "../../controllers/eventManagement/productController.js";
 import upload from "../../middleware/eventManagement/multer.js";
+import EventManagementAuth from "../../middleware/eventManagement/eventManagementAuth.js";
 
 const ProductRouter = express.Router();
 
 ProductRouter.post(
   "/addProduct",
+  EventManagementAuth,
   upload.fields([
     { name: "image1", maxCount: 1 },
     { name: "image2", maxCount: 1 },
@@ -19,8 +21,8 @@ ProductRouter.post(
   ]),
   addProduct,
 );
-ProductRouter.post("/listProduct", listProduct);
-ProductRouter.post("/removeProduct", removeProduct);
-ProductRouter.post("/singleProduct", singleProduct);
+ProductRouter.post("/listProduct", EventManagementAuth, listProduct);
+ProductRouter.post("/removeProduct", EventManagementAuth, removeProduct);
+ProductRouter.post("/singleProduct", EventManagementAuth, singleProduct);
 
 export default ProductRouter;
