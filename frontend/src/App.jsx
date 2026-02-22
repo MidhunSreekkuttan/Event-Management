@@ -22,36 +22,32 @@ import WorkerDashboard from './pages/workers/WorkersDashboard'
 import WorkerRegistration from './pages/workers/WorkersRegistration'
 import LoginPage from './pages/workers/WorkerLogin'
 import Signup from './pages/workers/WorkerSignUp'
-{/*.......................................................................................................................*/ }
+
+{/*................................................Importing Event Management Thing........................................*/ }
+
+import Add from './pages/event-management/Add'
+import Booking from './pages/event-management/Booking'
+import List from './pages/event-management/List'
+
+{/*.........................................................................................................................*/ }
 
 const App = () => {
 
   const location = useLocation()
   const pathname = location.pathname
 
-  const loginpage = pathname.startsWith('/login')
+  const loginpage = pathname === '/login' || pathname === '/otp'
 
   const WorkersPage = pathname.startsWith('/workers')
 
   const ProductPage = pathname.startsWith('/product')
 
+  const EventManagementPage = pathname.startsWith('/event-management')
+
   const whiteBgRoute = ['/eventList', '/about', '/contactUs']
 
-  {/*404 Page not found*/ }
-
-  const userRoutes = [
-    '/',
-    '/eventList',
-    '/about',
-    '/contactUs',
-    '/login'
-  ];
-
-  const isUserRoute =
-    userRoutes.includes(pathname) ||
-    pathname.startsWith('/product/');
-
-  const isNotFoundPage = !isUserRoute && !WorkersPage;
+  const hideNavbar = loginpage || WorkersPage || EventManagementPage
+  const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage
 
   return (
     <>
@@ -61,56 +57,42 @@ const App = () => {
       <Lenis />
       <ToastContainer />
 
-      {!loginpage && !WorkersPage && !isNotFoundPage && <Navbar />}
+      {!hideNavbar && <Navbar />}
 
-      <div>
+      <Routes>
         {/*//..............................Routes for Users.........................................................*/}
-        {!WorkersPage && (
 
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/eventList' element={<EventList />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contactUs' element={<ContactUs />} />
-            <Route path='/product/:productId' element={<Product />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/otp' element={<Otp />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-
-        )}
-
-        {!loginpage && !WorkersPage && !ProductPage && !isNotFoundPage && <Footer
-
-          whiteBg={
-
-            whiteBgRoute.includes(pathname)
-
-          }
-        />}
-
-        {/*//....................................................................................................................//*/}
+        <Route path='/' element={<Home />} />
+        <Route path='/eventList' element={<EventList />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contactUs' element={<ContactUs />} />
+        <Route path='/product/:productId' element={<Product />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/otp' element={<Otp />} />
 
         {/*//..............................Routes for Workers.........................................................*/}
 
-        <div>
-          {WorkersPage && (
+        <Route path='/workers/home' element={<HomePage />} />
+        <Route path='/workers/index' element={<Index />} />
+        <Route path='/workers/dashboard' element={<WorkerDashboard />} />
+        <Route path='/workers/registration' element={<WorkerRegistration />} />
+        <Route path='/workers/login' element={<LoginPage />} />
+        <Route path='/workers/signup' element={<Signup />} />
 
-            <Routes>
-              <Route path='/workers/home' element={<HomePage />} />
-              <Route path='/workers/index' element={<Index />} />
-              <Route path='/workers/dashboard' element={<WorkerDashboard />} />
-              <Route path='/workers/registration' element={<WorkerRegistration />} />
-              <Route path='/workers/login' element={<LoginPage />} />
-              <Route path='/workers/signup' element={<Signup />} />
-            </Routes>
+        {/*................................Event Management Routes....................................................*/}
 
-          )}
+        <Route path='/event-management/add' element={<Add />} />
+        <Route path='/event-management/booking' element={<Booking />} />
+        <Route path='/event-management/list' element={<List />} />
 
-        </div>
+        {/*............................... 404 Page not Found Route................................................. */}
 
-        {/*//....................................................................................................................//*/}
-      </div>
+        <Route path='*' element={<NotFound />} />
+
+      </Routes>
+
+      {!hideFooter && <Footer whiteBg={whiteBgRoute.includes(pathname)} />}
+
     </>
   )
 }
