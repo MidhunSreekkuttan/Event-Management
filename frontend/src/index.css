@@ -22,6 +22,10 @@ a.active hr {
   background-color: #ebdcf9;
 }
 
+.color{
+  background-color: #be185d;
+}
+
 html {
   scroll-behavior: smooth;
 }
