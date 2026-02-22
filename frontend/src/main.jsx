@@ -4,13 +4,16 @@ import EventContextProvider from './context/EventContext.jsx'
 import BackendContexProvider from './context/ConnectBackendContex.jsx'
 import './index.css'
 import App from './App.jsx'
+import EventManagementContextProvider from './context/EventManagementContext.jsx'
 
 createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
     <BackendContexProvider>
       <EventContextProvider>
-        <App />
+        <EventManagementContextProvider>
+          <App />
+        </EventManagementContextProvider>
       </EventContextProvider>
     </BackendContexProvider>
   </BrowserRouter>
