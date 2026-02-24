@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Home from './pages/users/Home'
 import Navbar from './components/users/Navbar'
 import HomePage from './pages/workers/HomePage'
@@ -24,7 +24,6 @@ import Signup from './pages/workers/WorkerSignUp'
 
 {/*................................................Importing Event Management Thing........................................*/ }
 
-import EventMain from './pages/event-management/Main'
 import EventHome from './pages/event-management/Home'
 import Add from './pages/event-management/Add'
 import Booking from './pages/event-management/Booking'
@@ -34,6 +33,10 @@ import Reports from './pages/event-management/Reports'
 import Vendors from './pages/event-management/Vendors'
 import EventLogin from './pages/event-management/login/Login'
 import EventManagementProtected from './components/event-management/EventProtected'
+import EventOtp from './pages/event-management/login/Otp'
+import EventNavbar from './components/event-management/Navbar'
+import SideBar from './components/event-management/SideBar'
+import { useEffect, useState } from 'react'
 
 {/*.........................................................................................................................*/ }
 
@@ -41,6 +44,8 @@ const App = () => {
 
   const location = useLocation()
   const pathname = location.pathname
+
+  const navigate = useNavigate()
 
   const loginpage = pathname === '/login' || pathname === '/otp'
 
@@ -52,8 +57,33 @@ const App = () => {
 
   const whiteBgRoute = ['/eventList', '/about', '/contactUs']
 
+  const [state, setState] = useState(true);
+
+  // ✅ never navigate inside render
+  useEffect(() => {
+    if (pathname.startsWith('/event-management')) {
+
+      if (state === false) {
+        navigate("/event-management/add", { replace: true });
+      }
+    }
+
+  }, [state, navigate]);
+
+  // hide Event management session
+  const userU1 = pathname.endsWith('/')
+  const userU2 = pathname.endsWith('/eventList')
+  const userU3 = pathname.endsWith('/about')
+  const userU4 = pathname.endsWith('/contactUs')
+  const userU5 = pathname.endsWith('/product/:productId')
+  //....
+
+
+  const hideEventMangement = loginpage || WorkersPage || ProductPage || userU1 || userU2 || userU3 || userU4 || userU5
   const hideNavbar = loginpage || WorkersPage || EventManagementPage
   const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage
+
+  const hideEventlogin = pathname.startsWith('/event-management/login')
 
   return (
     <>
@@ -69,7 +99,8 @@ const App = () => {
 
       {/*Event Management Navbar*/}
 
-      {EventManagementPage && <EventMain />}
+      {!hideEventMangement && !hideEventlogin && <EventNavbar /> }
+      {!hideEventMangement && !hideEventlogin && <SideBar />}
 
       <Routes>
         {/*//..............................Routes for Users.........................................................*/}
@@ -103,6 +134,7 @@ const App = () => {
           <Route path='/event-management/events' element={<Events />} />
           <Route path='/event-management/reports' element={<Reports />} />
           <Route path='/event-management/vendors' element={< Vendors />} />
+          <Route path='/event-management/otp' element={<EventOtp />} />
         </Route>
 
         {/*............................... 404 Page not Found Route................................................. */}
