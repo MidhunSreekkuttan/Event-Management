@@ -99,8 +99,8 @@ const App = () => {
 
       {/*Event Management Navbar*/}
 
-      {!hideEventMangement && !hideEventlogin && <EventNavbar /> }
-      {!hideEventMangement && !hideEventlogin && <SideBar />}
+      {!hideEventMangement && !hideEventlogin && hideNavbar && <EventNavbar />}
+      {!hideEventMangement && !hideEventlogin && hideNavbar && <SideBar />}
 
       <Routes>
         {/*//..............................Routes for Users.........................................................*/}
