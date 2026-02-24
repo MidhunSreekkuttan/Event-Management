@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  isAuthendicated,
   Login,
   Logout,
   Register,
@@ -7,6 +8,7 @@ import {
   verifyEmail,
 } from "../../controllers/eventManagement/eventManagementController.js";
 import EventManagementAuth from "../../middleware/eventManagement/eventManagementAuth.js";
+import getEventManagementData from "../../controllers/eventManagement/eventManagementAuth.js";
 
 const eventManagementRouter = express.Router();
 
@@ -19,5 +21,11 @@ eventManagementRouter.post(
   sendVerifyOtp,
 );
 eventManagementRouter.post("/verifyEmail", EventManagementAuth, verifyEmail);
+eventManagementRouter.get("/isAuth", EventManagementAuth, isAuthendicated);
+eventManagementRouter.get(
+  "/getUserData",
+  EventManagementAuth,
+  getEventManagementData,
+);
 
 export default eventManagementRouter;
