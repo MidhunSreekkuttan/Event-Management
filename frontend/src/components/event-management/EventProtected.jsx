@@ -1,10 +1,11 @@
-import { useState } from "react"
-import { Navigate, Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom";
 
 const EventManagementProtected = () => {
-    
-    const [token, setToken] = useState('g')
-    return token === '' ? <Navigate to="/event-management/login" /> : <Outlet />
-}
+    const token = localStorage.getItem("EventManagementLogin");
 
-export default EventManagementProtected
+    return token
+        ? <Outlet />
+        : <Navigate to="/event-management/login" replace />;
+};
+
+export default EventManagementProtected;
