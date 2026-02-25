@@ -24,6 +24,7 @@ const SideBar = () => {
 
                 <NavLink
                     className={({ isActive }) => `${linkBase} ${isActive ? 'color' : ''}`} to='/event-management/vendors'>
+                    <img className='w-7 ml-14' src={icon.vendor_icon} alt="" />
                     <p>Vendors</p>
                 </NavLink>
 
