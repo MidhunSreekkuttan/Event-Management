@@ -86,6 +86,12 @@ const App = () => {
 
   const hideEventlogin = pathname.startsWith('/event-management/login')
 
+  const [token, setToken] = useState(localStorage.getItem('EventManagementLogin') ? localStorage.getItem('EventManagementLogin') : '')
+
+  useEffect(() => {
+    localStorage.setItem('EventManagementLogin', token)
+  }, [token])
+
   return (
     <>
 
@@ -100,8 +106,8 @@ const App = () => {
 
       {/*Event Management Navbar*/}
 
-      {!hideEventMangement && !hideEventlogin && hideNavbar && <EventNavbar />}
-      {!hideEventMangement && !hideEventlogin && hideNavbar && <SideBar />}
+      {!hideEventMangement && !hideEventlogin && hideNavbar && <EventNavbar setToken={setToken} />}
+      {!hideEventMangement && !hideEventlogin && hideNavbar && <SideBar setToken={setToken} />}
 
       <Routes>
         {/*//..............................Routes for Users.........................................................*/}
@@ -129,12 +135,12 @@ const App = () => {
 
         <Route element={<EventManagementProtected />}>
           <Route path='/event-management/home' element={<EventHome />} />
-          <Route path='/event-management/add' element={<Add />} />
-          <Route path='/event-management/booking' element={<Booking />} />
-          <Route path='/event-management/clients' element={<Clients />} />
-          <Route path='/event-management/events' element={<Events />} />
-          <Route path='/event-management/reports' element={<Reports />} />
-          <Route path='/event-management/vendors' element={< Vendors />} />
+          <Route path='/event-management/add' element={<Add token={token} />} />
+          <Route path='/event-management/booking' element={<Booking token={token} />} />
+          <Route path='/event-management/clients' element={<Clients token={token} />} />
+          <Route path='/event-management/events' element={<Events token={token} />} />
+          <Route path='/event-management/reports' element={<Reports token={token} />} />
+          <Route path='/event-management/vendors' element={< Vendors token={token} />} />
           <Route path='/event-management/otp' element={<EventOtp />} />
         </Route>
 

@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { logo } from '../../assets/assets'
+import { EventManagementContext } from '../../context/EventManagementContext'
 
-const Navbar = () => {
+const Navbar = ({ setToken }) => {
+
+  const { setIsLoggedIn } = useContext(EventManagementContext)
+
+  const handleOnClick = () => {
+    setToken('')
+    setIsLoggedIn(false)
+  }
+
   return (
     <div className='flex items-center py-2 px-[4%] justify-between '>
-        <img className='w-[max(15%,80px)]' src={logo.adhithi} alt="" />
-        <button className='bg-amber-600 px-5 py-2 rounded-full'>Logout</button>
+      <img className='w-[max(15%,80px)]' src={logo.adhithi} alt="" />
+      <button onClick={handleOnClick} className='bg-amber-600 px-5 py-2 rounded-full'>Logout</button>
     </div>
   )
 }

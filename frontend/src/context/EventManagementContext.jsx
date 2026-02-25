@@ -24,8 +24,8 @@ const EventManagementContextProvider = (props) => {
             data.success ? setUserData(data.userData) : toast.error(data.message)
 
             if (!data.userData.isAccountVerified) {
-            //    toast.error('You are not verified')
-                //navigate('/event-management/otp', { replace: true })
+                toast.error('You are not verified')
+                navigate('/event-management/otp', { replace: true })
             }
         } catch (error) {
             console.log(error);
@@ -40,8 +40,8 @@ const EventManagementContextProvider = (props) => {
             const { data } = await axios.get(backendUrl + '/api/eventManagement/isAuth')
 
             if (data.success) {
-                setIsLoggedIn(true)
                 getUserData()
+                setIsLoggedIn(true)
             }
 
         } catch (error) {
@@ -49,7 +49,10 @@ const EventManagementContextProvider = (props) => {
             toast.error(error.message)
         }
     }
-    
+
+    console.log(isLoggedIn);
+
+
     useEffect(() => {
         getAuthState()
     }, [])
