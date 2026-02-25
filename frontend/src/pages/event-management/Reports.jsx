@@ -1,8 +1,12 @@
 import React from 'react'
+import SideBar from '../../components/event-management/SideBar'
 
 const Reports = () => {
   return (
-    <div>Reports</div>
+    <div className='flex'>
+      <SideBar />
+      <div>Reports</div>
+    </div>
   )
 }
 

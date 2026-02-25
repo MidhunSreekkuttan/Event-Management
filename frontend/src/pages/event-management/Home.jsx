@@ -1,8 +1,14 @@
 import React from 'react'
+import SideBar from '../../components/event-management/SideBar'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className='flex'>
+      <SideBar />
+      <div>
+        hkjdshv
+      </div>
+    </div>
   )
 }
 

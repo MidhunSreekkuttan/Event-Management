@@ -50,9 +50,6 @@ const EventManagementContextProvider = (props) => {
         }
     }
 
-    console.log(isLoggedIn);
-
-
     useEffect(() => {
         getAuthState()
     }, [])

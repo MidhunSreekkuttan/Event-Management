@@ -1,8 +1,12 @@
 import React from 'react'
+import SideBar from '../../components/event-management/SideBar'
 
 const Booking = () => {
   return (
-    <div>Booking</div>
+    <div className='flex'>
+      <SideBar />
+      <div>Booking</div>
+    </div>
   )
 }
 

@@ -107,7 +107,6 @@ const App = () => {
       {/*Event Management Navbar*/}
 
       {!hideEventMangement && !hideEventlogin && hideNavbar && <EventNavbar setToken={setToken} />}
-      {!hideEventMangement && !hideEventlogin && hideNavbar && <SideBar setToken={setToken} />}
 
       <Routes>
         {/*//..............................Routes for Users.........................................................*/}
