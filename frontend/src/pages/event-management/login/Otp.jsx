@@ -3,6 +3,7 @@ import { BackendContex } from '../../../context/ConnectBackendContex'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { EventManagementContext } from '../../../context/EventManagementContext'
 
 const Otp = () => {
 
@@ -11,6 +12,7 @@ const Otp = () => {
     const inputrefs = React.useRef([])
 
     const { backendUrl } = useContext(BackendContex)
+    const { setIsLoggedIn } = useContext(EventManagementContext)
 
     const handleInput = (e, index) => {
         if (e.target.value.length > 0 && index < inputrefs.current.length - 1) {
@@ -47,7 +49,9 @@ const Otp = () => {
             const { data } = await axios.post(backendUrl + '/api/eventManagement/verifyEmail', { otp })
 
             if (data.success) {
+                setIsLoggedIn(true)
                 navidate('/event-management/home')
+
             } else {
                 toast.error(data.message)
             }

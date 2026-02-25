@@ -9,26 +9,6 @@ const Hero = () => {
 
   const navigate = useNavigate()
 
-  const slides = [
-    heroImages.birthday_cake1,
-    heroImages.birthday_party_design1,
-    heroImages.cattering_counter1,
-    heroImages.cattering_counter2,
-    heroImages.cattering_counter3,
-    heroImages.cattering_decoration1,
-    heroImages.cattering_food1,
-    heroImages.cattering_food2,
-    heroImages.cattering_food3,
-    heroImages.cattering_table,
-    heroImages.dj_party1,
-    heroImages.dj_party2,
-    heroImages.dj_party3,
-    heroImages.party_light1,
-    heroImages.party_light2,
-    heroImages.party1,
-    heroImages.party2
-  ]
-
   const marquee = [
     'Event Management Team',
     'Wedding',

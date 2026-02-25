@@ -77,7 +77,12 @@ export const Login = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
-    return res.json({ success: true, message: "User login Successful" });
+    return res.json({
+      success: true,
+      token: token,
+      isAccountVerified: user.isAccountVerified,
+      message: "User login Successful",
+    });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }

@@ -1,8 +1,12 @@
 import React from 'react'
+import SideBar from '../../components/event-management/SideBar'
 
 const Vendors = () => {
   return (
-    <div>Vendors</div>
+    <div className='flex'>
+      <SideBar />
+      <div>Vendors</div>
+    </div>
   )
 }
 

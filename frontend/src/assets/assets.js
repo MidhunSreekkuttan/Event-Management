@@ -39,6 +39,8 @@ import like_icon from "./icon/like_icon.png";
 import settings_icon from "./icon/setting_icon.png";
 import location_icon from "./icon/location_icon.png";
 import star_icon from "./icon/star_icon.png";
+import upload_icon from "./icon/upload_icon.png";
+import vendor_icon from "./icon/vendor_icon.png";
 
 export const logo = {
   adhithiBeat,
@@ -68,6 +70,8 @@ export const icon = {
   settings_icon,
   location_icon,
   star_icon,
+  upload_icon,
+  vendor_icon,
 };
 
 export const heroImages = {

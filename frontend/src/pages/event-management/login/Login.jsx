@@ -4,12 +4,14 @@ import { BackendContex } from '../../../context/ConnectBackendContex'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { EventManagementContext } from '../../../context/EventManagementContext'
 
 const Login = () => {
 
   const navigate = useNavigate()
 
   const { backendUrl } = useContext(BackendContex)
+  const { setIsLoggedIn } = useContext(EventManagementContext)
 
   const [state, setState] = useState('login')
 
@@ -24,6 +26,7 @@ const Login = () => {
     const { data } = await axios.post(backendUrl + '/api/eventManagement/sendVerifyOtp')
 
     if (data.success) {
+      navigate('/event-management/otp')
       toast.success(data.message)
     }
 
@@ -39,9 +42,14 @@ const Login = () => {
         const { data } = await axios.post(backendUrl + '/api/eventManagement/login', { email, password })
 
         if (data.success) {
-          toast.success(data.message)
-          sendVerifyOtp()
-          navigate('/event-management/otp')
+          localStorage.setItem("EventManagementLogin", data.token)
+          if (!data.isAccountVerified) {
+            await sendVerifyOtp()
+          } else {
+            setIsLoggedIn(true)
+            navigate('/event-management/home')
+          }
+
         } else {
           toast.error(data.message)
         }
