@@ -79,7 +79,7 @@ export const Login = async (req, res) => {
     });
     return res.json({
       success: true,
-      token,
+      token: token,
       message: "User login Successful",
     });
   } catch (error) {

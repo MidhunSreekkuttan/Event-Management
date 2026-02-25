@@ -76,10 +76,11 @@ const App = () => {
   const userU3 = pathname.endsWith('/about')
   const userU4 = pathname.endsWith('/contactUs')
   const userU5 = pathname.endsWith('/product/:productId')
+  const hideEventOtp = pathname.endsWith('/event-management/otp')
   //....
 
 
-  const hideEventMangement = loginpage || WorkersPage || ProductPage || userU1 || userU2 || userU3 || userU4 || userU5
+  const hideEventMangement = loginpage || WorkersPage || ProductPage || userU1 || userU2 || userU3 || userU4 || userU5 || hideEventOtp
   const hideNavbar = loginpage || WorkersPage || EventManagementPage
   const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage
 

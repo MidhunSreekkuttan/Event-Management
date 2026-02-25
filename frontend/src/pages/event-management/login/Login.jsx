@@ -39,7 +39,7 @@ const Login = () => {
         const { data } = await axios.post(backendUrl + '/api/eventManagement/login', { email, password })
 
         if (data.success) {
-          toast.success(data.message)
+          localStorage.setItem("EventManagementLogin", data.token)
           sendVerifyOtp()
           navigate('/event-management/otp')
         } else {
