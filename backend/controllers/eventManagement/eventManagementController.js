@@ -80,6 +80,7 @@ export const Login = async (req, res) => {
     return res.json({
       success: true,
       token: token,
+      isAccountVerified: user.isAccountVerified,
       message: "User login Successful",
     });
   } catch (error) {
