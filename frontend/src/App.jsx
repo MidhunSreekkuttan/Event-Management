@@ -20,6 +20,7 @@ import WorkerDashboard from './pages/workers/WorkersDashboard'
 import WorkerRegistration from './pages/workers/WorkersRegistration'
 import LoginPage from './pages/workers/WorkerLogin'
 import Signup from './pages/workers/WorkerSignUp'
+import WorkersOtp from './pages/workers/Otp'
 
 {/*................................................Importing Event Management Thing........................................*/ }
 
@@ -125,6 +126,7 @@ const App = () => {
         <Route path='/workers/registration' element={<WorkerRegistration />} />
         <Route path='/workers/login' element={<LoginPage />} />
         <Route path='/workers/signup' element={<Signup />} />
+        <Route path='/workers/otp' element={<WorkersOtp />} />
 
         {/*................................Event Management Routes....................................................*/}
 
