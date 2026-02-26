@@ -1,10 +1,68 @@
-import React from "react";
+import { useContext, useState } from "react";
+import { BackendContex } from "../../context/ConnectBackendContex";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
+
+  const { backendUrl } = useContext(BackendContex);
+
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  axios.defaults.withCredentials = true;
+
+  const setVerifyOtp = async () => {
+
+    try {
+
+      const { data } = await axios.post(backendUrl + "/api/workers/sendVerifyOtp")
+
+      if (data.success) {
+        navigate("/workers/otp")
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+
+      const { data } = await axios.post(backendUrl + "/api/workers/login", { email, password })
+
+      if (data.success) {
+        if (!data.isAccountVerified) {
+          await setVerifyOtp();
+        } else {
+          toast.success(data.message);
+          navigate("/workers/index");
+        }
+      } else {
+        toast.error(data.message);
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-[#0f1b3d] to-[#070b1f]">
       <div className="w-full max-w-md rounded-2xl bg-[#0b1437]/90 p-8 shadow-2xl border border-[#1c2b6a]">
-        
+
         <h1 className="text-2xl font-semibold text-center text-white">
           Welcome Back
         </h1>
@@ -32,12 +90,15 @@ const Login = () => {
         </div>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-sm text-white">Email</label>
             <input
               type="email"
               placeholder="worker@example.com"
+              onChange={e => setEmail(e.target.value)}
+              value={email}
+              required
               className="mt-1 w-full rounded-lg border border-[#1c2b6a] bg-[#0b1437] px-4 py-2.5 text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -47,6 +108,9 @@ const Login = () => {
             <input
               type="password"
               placeholder="Password"
+              onChange={e => setPassword(e.target.value)}
+              value={password}
+              required
               className="mt-1 w-full rounded-lg border border-[#1c2b6a] bg-[#0b1437] px-4 py-2.5 text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
