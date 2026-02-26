@@ -1,14 +1,11 @@
 import { useContext, useState } from "react";
 import { BackendContex } from "../../context/ConnectBackendContex";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Signup = () => {
 
   const { backendUrl } = useContext(BackendContex);
-
-  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +25,6 @@ const Signup = () => {
       })
 
       if (data.success) {
-        navigate("/workers/index");
         toast.success(data.message);
       } else {
         toast.error(data.message);
