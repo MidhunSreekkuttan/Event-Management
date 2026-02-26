@@ -46,7 +46,7 @@ export const register = async (req, res) => {
     };
     await welcomeMessage.sendMail(mailOption);
 
-    return res.json({ success: true });
+    return res.json({ success: true, message: "Registered Successfully" });
   } catch (error) {
     console.log(error);
     res.json({ succes: false, message: error.message });
@@ -72,19 +72,26 @@ export const login = async (req, res) => {
       return res.json({ succes: false, message: "User Not Found pz Sign up" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-
-      res.cookie("WorkersLoginToken", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      });
-    } else {
+    if (!isMatch) {
       return res.json({ succes: false, message: "Incorrect Password" });
     }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
-    return res.json({ succes: true });
+    res.cookie("WorkersLoginToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    });
+
+    return res.json({
+      succes: true,
+      token: token,
+      isAccountVerified: user.isAccountVerified,
+      isAdminVerified: user.isAdminVerified,
+      message: "Login Successfull",
+    });
   } catch (error) {
     res.json({ succes: false, message: error.message });
   }
