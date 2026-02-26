@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Home from './pages/users/Home'
 import Navbar from './components/users/Navbar'
-import HomePage from './pages/workers/HomePage'
 import EventList from './pages/users/EventList'
 import About from './pages/users/About'
 import ContactUs from './pages/users/ContactUs'
@@ -121,7 +120,6 @@ const App = () => {
 
         {/*//..............................Routes for Workers.........................................................*/}
 
-        <Route path='/workers/home' element={<HomePage />} />
         <Route path='/workers/index' element={<Index />} />
         <Route path='/workers/dashboard' element={<WorkerDashboard />} />
         <Route path='/workers/registration' element={<WorkerRegistration />} />
