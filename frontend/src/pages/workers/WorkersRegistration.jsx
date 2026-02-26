@@ -85,7 +85,7 @@ export default function WorkerRegistration() {
                 name="fullName"
                 value={form.fullName}
                 onChange={handleChange}
-                placeholder="John Thomas"
+                placeholder="Enter your Full Name"
                 required
                 className="w-full rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
               />
@@ -99,7 +99,7 @@ export default function WorkerRegistration() {
                 name="mobileNumber"
                 value={form.mobileNumber}
                 onChange={handleChange}
-                placeholder="+91 9876543210"
+                placeholder="Enter your mobile number"
                 required
                 className="w-full rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
               />
@@ -118,7 +118,7 @@ export default function WorkerRegistration() {
                 type="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="john.thomas@email.com"
+                placeholder="Enter your email address"
                 disabled={emailVerified}
                 required
                 className="flex-1 rounded-lg bg-[#0B1026] border border-white/10 px-4 py-2 text-gray-300 focus:outline-none"
