@@ -10,11 +10,11 @@ export const register = async (req, res) => {
 
     const alredyExist = await workersModel.findOne({ email });
     if (alredyExist) {
-      return res.json({ succes: false, message: "User Already exist" });
+      return res.json({ success: false, message: "User Already exist" });
     }
     if (password.length < 8) {
       return res.json({
-        succes: false,
+        success: false,
         message: "Plz Enter more than 8 digits",
       });
     }
@@ -49,7 +49,7 @@ export const register = async (req, res) => {
     return res.json({ success: true, message: "Registered Successfully" });
   } catch (error) {
     console.log(error);
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -58,22 +58,22 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email) {
-      return res.json({ succes: false, message: "Enter Email" });
+      return res.json({ success: false, message: "Enter Email" });
     }
     if (!password) {
-      return res.json({ succes: false, message: "Enter Password" });
+      return res.json({ success: false, message: "Enter Password" });
     }
 
     const user = await workersModel.findOne({ email });
     if (!user) {
-      return res.json({ succes: false, message: "User Not Found" });
+      return res.json({ success: false, message: "User Not Found" });
     }
     if (!email) {
-      return res.json({ succes: false, message: "User Not Found pz Sign up" });
+      return res.json({ success: false, message: "User Not Found pz Sign up" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.json({ succes: false, message: "Incorrect Password" });
+      return res.json({ success: false, message: "Incorrect Password" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -86,14 +86,14 @@ export const login = async (req, res) => {
     });
 
     return res.json({
-      succes: true,
+      success: true,
       token: token,
       isAccountVerified: user.isAccountVerified,
       isAdminVerified: user.isAdminVerified,
       message: "Login Successfull",
     });
   } catch (error) {
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -104,9 +104,9 @@ export const logout = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
-    return res.json({ succes: true, message: "User Logout" });
+    return res.json({ success: true, message: "User Logout" });
   } catch (error) {
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -118,7 +118,7 @@ export const sendVerifyOtp = async (req, res) => {
 
     if (user.isAccountVerified) {
       return res.json({
-        succes: false,
+        success: false,
         message: "Your Account Already Verified",
       });
     }
@@ -139,11 +139,11 @@ export const sendVerifyOtp = async (req, res) => {
     await welcomeMessage.sendMail(mailOption);
 
     return res.json({
-      succes: true,
+      success: true,
       message: "Verification OTP Sent to your Email",
     });
   } catch (error) {
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -152,20 +152,20 @@ export const verifyEmail = async (req, res) => {
     const userId = req.user.id;
     const { otp } = req.body;
     if (!userId) {
-      return res.json({ succes: false, message: "UserId is missing" });
+      return res.json({ success: false, message: "UserId is missing" });
     }
     if (!otp) {
-      return res.json({ succes: false, message: "OTP is missing" });
+      return res.json({ success: false, message: "OTP is missing" });
     }
     const user = await workersModel.findById(userId);
     if (!user) {
-      return res.json({ succes: false, message: "User Not Found" });
+      return res.json({ success: false, message: "User Not Found" });
     }
     if (user.verifyOtp === "" || user.verifyOtp !== otp) {
-      return res.json({ succes: false, message: "Invalid OTP" });
+      return res.json({ success: false, message: "Invalid OTP" });
     }
     if (user.verifyOtpExpire < Date.now()) {
-      return res.json({ succes: false, message: "OTP Expired" });
+      return res.json({ success: false, message: "OTP Expired" });
     }
 
     ((user.isAccountVerified = true),
@@ -173,10 +173,10 @@ export const verifyEmail = async (req, res) => {
       (user.verifyOtpExpire = 0));
     await user.save();
     return res.json({
-      succes: true,
+      success: true,
       message: "Email Verification Is Successful",
     });
   } catch (error) {
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
