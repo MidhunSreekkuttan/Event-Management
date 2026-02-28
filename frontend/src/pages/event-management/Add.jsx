@@ -130,7 +130,7 @@ const Add = ({ token }) => {
               <select onChange={e => setCategory(e.target.value)} className='w-full px-3 py-2'>
                 <option className='text-black' value="Birthday Party">Birthday Party</option>
                 <option className='text-black' value="Wedding">Wedding</option>
-                <option className='text-black' value="Corporate Event">Corporate Event</option>
+                <option className='text-black' value="Corporate Events">Corporate Events</option>
                 <option className='text-black' value="Concerts">Concerts</option>
                 <option className='text-black' value="Cultural Programs">Cultural Programs</option>
               </select>
