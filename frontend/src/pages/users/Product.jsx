@@ -1,14 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { EventContext } from '../../context/EventContext'
 
 const Product = () => {
+
     const { productId } = useParams()
     const navigate = useNavigate()
     const { products, addEnquiry } = useContext(EventContext)
 
     const [productData, setProductData] = useState(false)
     const [image, setImage] = useState('')
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [eventData, setEventDate] = useState('')
+    const [place, setPlace] = useState('')
+    const [count, setCount] = useState('')
+    const [additionalDetails, setAdditionalDetails] = useState("")
 
     const fetchproductData = async () => {
 
@@ -34,24 +43,9 @@ const Product = () => {
     }
 
     return productData ? (
-        <div className="pt-32">
+        <div className="grid gap-20 pt-32 bg-[#F6F0FD] text-black">
 
-            <div className="flex gap-10 max-w-6xl mx-auto">
-
-                {/* Thumbnails */}
-                <div className="flex flex-col gap-3">
-                    {productData.image.map((item, index) => (
-                        <img
-                            key={index}
-                            src={item}
-                            loading='lazy'
-                            decoding='async'
-                            alt=""
-                            onClick={() => setImage(item)}
-                            className="w-20 h-20 object-cover cursor-pointer border hover:border-black"
-                        />
-                    ))}
-                </div>
+            <div className="flex gap-20 px-50">
 
                 {/* Main Image */}
                 <div className="w-[400px] h-[500px]">
@@ -60,41 +54,133 @@ const Product = () => {
                         loading="lazy"
                         decoding='async'
                         alt=""
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover rounded-2xl shadow-2xl"
                     />
                 </div>
 
                 {/*Product Info*/}
                 <div className='flex-1'>
-                    <h1 className='font-medium text-2xl mt-2'>
+                    <h1 className='font-bold text-4xl mt-2 text-center'>
                         {productData.name}
                     </h1>
-                    <p className='font-medium text-[20px] relative top-8'>
-                        Category: <span className='font-normal text-[15px]'>{productData.category}</span>
+                    <p className='font-semibold text-2xl relative top-25'>
+                        {productData.category}
                     </p>
-                    <p className='font-medium text-[20px] relative top-15'>
-                        Location: <span className='font-normal text-[15px]'>{productData.location}</span>
+                    <p className='relative top-40'>
+                        {productData.description}
                     </p>
-
-
-                    <button onClick={handleEnquiry} className='relative top-52 left-50 rounded-2xl font-bold text-2xl bg-linear-to-r from-pink-500 to-pink-700 active:scale-110 px-4 py-3'>
-                        Enquiry
-                    </button>
+                    <p className='font-medium text-[22px] relative top-50'>
+                        Location: <span className='font-sans text-[18px]'>{productData.location}</span>
+                    </p>
 
                 </div>
 
             </div>
 
-            <div className='grid mt-7 gap-5'>
-                <div className='relative left-78 w-29'>
-                    <h1 className='px-3 py-3 border border-gray-600'>
-                        Description :
-                    </h1>
+            {/* Thumbnails */}
+            <div className="flex flex-col gap-15 px-50">
+                <h1 className='text-center text-4xl font-bold'>
+                    Related Images
+                </h1>
+                <div className='flex gap-6 w-[280px] h-[250px]'>
+                    {productData.image.map((item, index) => (
+                        <img
+                            key={index}
+                            src={item}
+                            loading='lazy'
+                            decoding='async'
+                            alt=""
+                            onClick={() => setImage(item)}
+                            className="w-full h-full object-cover cursor-pointer border hover:border-black"
+                        />
+                    ))}
                 </div>
-                <div className='relative left-78'>
-                    <p>
-                        {productData.description}
-                    </p>
+
+            </div>
+
+            <div className='grid gap-5 justify-center items-center text-center'>
+                <div className='grid gap-3'>
+                    <h1 className='text-center text-4xl font-bold'>
+                        Book Your Enchanted {productData.category}
+                    </h1>
+                    <p>Fill out the form below and we'll create your perfect day</p>
+                </div>
+
+                <form>
+                    <div className='flex flex-col gap-10 bg-gray-300/50 w-full px-15 py-10 rounded-3xl'>
+                        <div className='flex gap-7'>
+                            <div className='flex flex-col gap-3'>
+                                <label className='relative right-25 text-[20px]'>Full Name*</label>
+                                <input onChange={e => setName(e.target.value)} value={name} type="text"
+                                    placeholder='Enter Your Name' required
+                                    className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
+                            </div>
+                            <div className='flex flex-col gap-3'>
+                                <label className='relative right-25 text-[20px]'>Email*</label>
+                                <input type="email" onChange={e => setEmail(e.target.value)} value={email}
+                                    placeholder='Enter Your Email' required
+                                    className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
+                            </div>
+                        </div>
+
+                        <div className='flex gap-7'>
+                            <div className='flex flex-col gap-3'>
+                                <label className='relative right-20 text-[20px]'>Phone Number.</label>
+                                <input type="number" onChange={e => setPhoneNumber(e.target.value)} value={phoneNumber}
+                                    placeholder='Enter Your Phone number'
+                                    className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
+                            </div>
+                            <div className='flex flex-col gap-3'>
+                                <label className='relative right-10 text-[20px]'>Preferred Event Date*</label>
+                                <input type="date" onChange={e => setEventDate(e.target.value)} value={eventData}
+                                    placeholder='Enter Your Email' required
+                                    className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
+                            </div>
+                        </div>
+
+                        <div className='flex gap-7'>
+                            <div className='flex flex-col gap-3'>
+                                <label className='relative right-28 text-[20px]'>Place*</label>
+                                <input type="text" onChange={e => setPlace(e.target.value)} value={place}
+                                    placeholder='Enter Your Place' required
+                                    className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
+                            </div>
+                            <div className='flex flex-col gap-3'>
+                                <label className='relative right-10 text-[20px]'>Expected Guest Count*</label>
+                                <input type="number" onChange={e => setCount(e.target.value)} value={count}
+                                    placeholder='Enter Cout' required
+                                    className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
+                            </div>
+                        </div>
+
+                        <div className='flex flex-col gap-5'>
+                            <label className='text-left'>Addition Details.</label>
+                            <textarea type='text' onChange={e => setAdditionalDetails(e.target.value)} value={additionalDetails}
+                                placeholder='Write here' className='w-full px-3 
+                                py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4 outline-none' />
+                        </div>
+
+                        <button type='submit' className='py-4 bg-gray-600 rounded-full text-white text-2xl font-bold'>
+                            SUBMIT
+                        </button>
+                        <p>
+                            By submitting, you agree to our Terms & Privacy Policy
+                        </p>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            {/*   Footer   */}
+            <div className={`border-t py-6 px-6 flex flex-col md:flex-row items-center justify-between text-sm
+                        border-black/10 text-black`}>
+                <p className="relative left-160">© 2024 Eventify. All rights reserved.</p>
+                <div className="flex gap-4 mt-2 md:mt-0">
+                    <a href="#" className="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#" className="hover:text-white">Terms of Service</a>
                 </div>
             </div>
 
