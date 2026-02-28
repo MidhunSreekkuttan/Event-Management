@@ -136,7 +136,7 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-[400px] p-5'>
+             justify-center h-60 rounded-2xl w-[400px] p-5 hover:scale-110 transition-all'>
                 <img className='relative -top-10 w-18 object-contain' src={icon.corporative_events} alt="" />
                 <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
@@ -156,7 +156,7 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-[400px] p-5'>
+             justify-center h-60 rounded-2xl w-[400px] p-5 hover:scale-110 transition-all'>
                 <img className='relative -top-13 w-15 object-contain' src={icon.settings_icon} alt="" />
                 <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
@@ -176,7 +176,7 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-[400px] p-5'>
+             justify-center h-60 rounded-2xl w-[400px] p-5 hover:scale-110 transition-all'>
                 <img className='relative -top-13 w-12 object-contain' src={icon.like_icon} alt="" />
                 <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
@@ -217,12 +217,12 @@ const About = () => {
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.2 }}
             >
 
-              <div className=''>
-                <div className='w-60 h-40 overflow-hidden'>
-                  <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[50%_40%]'
-                    src='/IMG-20241121-WA0029.jpg' alt="" />
+              <div className='hover:scale-110 transition-all'>
+                <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
+                  <img loading='lazy' decoding='async' className='relative left-5 w-screen h-full object-cover object-[10%_-20%] scale-130'
+                    src='/IMG_20260113_212004.avif' alt="" />
                 </div>
-                <div className='w-60 h-[220px] shadow-2xl'>
+                <div className='w-60 h-[220px] shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Midhun M</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -247,12 +247,12 @@ const About = () => {
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
             >
 
-              <div className=''>
-                <div className='w-60 h-40 overflow-hidden'>
+              <div className='hover:scale-110 transition-all'>
+                <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[10%_15%]'
-                    src='/IMG_20260228_152809.jpg' alt="" />
+                    src='/IMG_20260228_152809.avif' alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl'>
+                <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Sruthy Alex</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -277,12 +277,12 @@ const About = () => {
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
             >
 
-              <div className=''>
-                <div className='w-60 h-40 overflow-hidden'>
+              <div className='hover:scale-110 transition-all'>
+                <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative right-4 w-screen h-full object-cover scale-125 object-[10%_40%]'
-                    src='/IMG_20241204_124644.jpg' alt="" />
+                    src='/IMG_20241204_124644.avif' alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl'>
+                <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Alfina</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -307,13 +307,13 @@ const About = () => {
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
             >
 
-              <div className=''>
-                <div className='w-60 h-40 overflow-hidden'>
+              <div className='hover:scale-110 transition-all'>
+                <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative left-15 w-full h-full object-cover 
                       object-[10%_15%] scale-150'
-                    src='/IMG_20241207_113701_1.jpg' alt="" />
+                    src='/IMG_20241207_113701_1.avif' alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl'>
+                <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Abdulla Asid</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
