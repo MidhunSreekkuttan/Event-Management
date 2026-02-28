@@ -5,9 +5,9 @@ import { EventManagementContext } from "../../context/EventManagementContext";
 const EventManagementProtected = () => {
     const token = localStorage.getItem("EventManagementLogin");
 
-    const { isLoggedIn } = useContext(EventManagementContext)
+    // const { isLoggedIn } = useContext(EventManagementContext)
 
-    return isLoggedIn && token
+    return token
         ? <Outlet />
         : <Navigate to="/event-management/login" replace />;
 };
