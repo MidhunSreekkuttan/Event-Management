@@ -21,7 +21,7 @@ ProductRouter.post(
   ]),
   addProduct,
 );
-ProductRouter.get("/listProduct", EventManagementAuth, listProduct);
+ProductRouter.get("/listProduct", listProduct);
 ProductRouter.post("/removeProduct", EventManagementAuth, removeProduct);
 ProductRouter.post("/singleProduct", EventManagementAuth, singleProduct);
 

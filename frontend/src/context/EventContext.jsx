@@ -47,9 +47,6 @@ const EventContextProvider = (props) => {
         }
     }
 
-console.log(products);
-
-
     useEffect(() => {
         getEventList()
     }, [])
