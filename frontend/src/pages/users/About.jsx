@@ -218,16 +218,18 @@ const About = () => {
             >
 
               <div className=''>
-                <div className='w-60 h-40'>
-                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                <div className='w-60 h-40 overflow-hidden'>
+                  <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[50%_40%]'
+                    src='/IMG-20241121-WA0029.jpg' alt="" />
                 </div>
                 <div className='w-60 h-[220px] shadow-2xl'>
-                  <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
+                  <h1 className='relative top-4 font-semibold text-2xl text-center'>Midhun M</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
-                    <SocialIcon icon={<FaInstagram />} />
+                    <a href="https://www.instagram.com/midhun_sreekkuttan?igsh=NGJuaXJwNGtzdDJu" target="_blank">
+                      <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
                   <h1 className='p-2'>Lorem ipsum dasercet matics,
@@ -246,16 +248,18 @@ const About = () => {
             >
 
               <div className=''>
-                <div className='w-60 h-40'>
-                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                <div className='w-60 h-40 overflow-hidden'>
+                  <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[10%_15%]'
+                    src='/IMG_20260228_152809.jpg' alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl'>
-                  <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
+                  <h1 className='relative top-4 font-semibold text-2xl text-center'>Sruthy Alex</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
-                    <SocialIcon icon={<FaInstagram />} />
+                    <a href="https://www.instagram.com/sh.ruthi_7510?igsh=ZnozMjYxdW4wdmk4" target="_blank">
+                      <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
                   <h1 className='p-2'>Lorem ipsum dasercet matics,
@@ -274,16 +278,18 @@ const About = () => {
             >
 
               <div className=''>
-                <div className='w-60 h-40'>
-                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                <div className='w-60 h-40 overflow-hidden'>
+                  <img loading='lazy' decoding='async' className='relative right-4 w-screen h-full object-cover scale-125 object-[10%_40%]'
+                    src='/IMG_20241204_124644.jpg' alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl'>
-                  <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
+                  <h1 className='relative top-4 font-semibold text-2xl text-center'>Alfina</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
-                    <SocialIcon icon={<FaInstagram />} />
+                    <a href="https://www.instagram.com/___alfinaa___?igsh=NHFtd2hkY3Ntam5n" target="_blank">
+                      <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
                   <h1 className='p-2'>Lorem ipsum dasercet matics,
@@ -302,16 +308,19 @@ const About = () => {
             >
 
               <div className=''>
-                <div className='w-60 h-40'>
-                  <img loading='lazy' decoding='async' className='w-screen' src={heroImages.birthday_cake1} alt="" />
+                <div className='w-60 h-40 overflow-hidden'>
+                  <img loading='lazy' decoding='async' className='relative left-15 w-full h-full object-cover 
+                      object-[10%_15%] scale-150'
+                    src='/IMG_20241207_113701_1.jpg' alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl'>
-                  <h1 className='relative top-4 font-semibold text-2xl left-10'>Stephen Carter</h1>
+                  <h1 className='relative top-4 font-semibold text-2xl text-center'>Abdulla Asid</h1>
                   <h1 className='relative top-5 left-15'>Founder & CEO</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
-                    <SocialIcon icon={<FaInstagram />} />
+                    <a href="https://www.instagram.com/asid_sallu_?igsh=YjU4emI3NXF2b2wz" target="_blank">
+                      <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
                   <h1 className='p-2'>Lorem ipsum dasercet matics,
