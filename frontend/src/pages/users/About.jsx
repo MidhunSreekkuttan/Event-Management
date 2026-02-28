@@ -4,8 +4,6 @@ import {
   FaTwitter,
   FaInstagram,
   FaYoutube,
-  FaEnvelope,
-  FaPhoneAlt,
 } from "react-icons/fa";
 import { heroImages, icon } from '../../assets/assets'
 import { motion } from 'framer-motion'
