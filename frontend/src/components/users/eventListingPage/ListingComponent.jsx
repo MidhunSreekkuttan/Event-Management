@@ -3,7 +3,6 @@ import { icon } from '../../../assets/assets'
 import { EventContext } from '../../../context/EventContext'
 import ProductList from '../eventListing/ProductList'
 import { useLocation } from 'react-router-dom';
-import { useRef } from "react";
 
 const ListingComponent = () => {
 
@@ -20,9 +19,11 @@ const ListingComponent = () => {
         setSearchButton(search.trim())
     }
 
+    const safeProducts = Array.isArray(products) ? products : [];
+
     const filterProducts = useMemo(() => {
 
-        return products.filter((item) => {
+        return safeProducts.filter((item) => {
 
             const categoryFilter = filter === 'all' || item.category === filter
 
@@ -32,7 +33,7 @@ const ListingComponent = () => {
 
             return categoryFilter && filterLocation && searchFilter
         })
-    }, [products, filter, locationFilter, searchBotton])
+    }, [safeProducts, filter, locationFilter, searchBotton, products])
 
     const location = useLocation();
 
