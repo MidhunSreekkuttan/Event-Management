@@ -75,7 +75,7 @@ const Events = () => {
               key={index}>
               <img className='w-18 h-20 object-cover' src={item.image[0]} alt={item.name} />
               <p>{item.name}</p>
-              <p>{item.description}</p>
+              <p>{item.description.length > 15 ? item.description.slice(0, 15) + '...' : item.description}</p>
               <p>{item.category}</p>
               <p>{item.location}</p>
               <p>{item.price}</p>
