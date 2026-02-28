@@ -32,7 +32,6 @@ export const addProduct = async (req, res) => {
       image: imageUrl,
       date: Date.now(),
     };
-    console.log(productData);
 
     const product = new ProductModel(productData);
 
