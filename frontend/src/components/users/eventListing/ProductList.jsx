@@ -24,9 +24,9 @@ const ProductList = ({ id, name, image, location, category }) => {
             <section className='text-black cursor-pointer'>
 
                 <div className='rounded-3xl overflow-hidden hover:scale-105 transition-transform'>
-                    <div className='max-w-full h-40'>
+                    <div className='w-60 h-40  object-fill'>
                         <img
-                            className='w-full h-full'
+                            className='w-full h-full object-cover'
                             src={image[0]}
                             alt={name}
                             loading='lazy'
