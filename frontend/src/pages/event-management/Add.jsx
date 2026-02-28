@@ -40,7 +40,8 @@ const Add = ({ token }) => {
       image3 && formData.append('image3', image3)
       image4 && formData.append('image4', image4)
 
-      const response = await axios.post(backendUrl + '/api/product/addProduct', formData, { withCredentials: true }, { headers: { token } })
+      const response = await axios.post(backendUrl + '/api/product/addProduct',
+        formData, { withCredentials: true }, { headers: { token } })
 
       if (response.data.success) {
         toast.success(response.data.message)
@@ -110,13 +111,15 @@ const Add = ({ token }) => {
 
           <div className='w-full'>
             <p className='mb-2'>Event Name</p>
-            <input onChange={(e) => setName(e.target.value)} value={name} className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
+            <input onChange={(e) => setName(e.target.value)} value={name}
+              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
               type="text" placeholder='Enter Here' required />
           </div>
 
           <div className='w-full'>
             <p className='mb-2'>Event Description</p>
-            <textarea onChange={(e) => setDescription(e.target.value)} value={description} className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
+            <textarea onChange={(e) => setDescription(e.target.value)} value={description}
+              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
               type="text" placeholder='Write Here' required />
           </div>
 
