@@ -222,7 +222,7 @@ const About = () => {
                 </div>
                 <div className='w-60 h-[220px] shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Midhun M</h1>
-                  <h1 className='relative top-5 left-15'>Founder & CEO</h1>
+                  <h1 className='relative top-5 text-center'>Full Stack Developer</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
@@ -230,9 +230,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Lorem ipsum dasercet matics,
-                    cuntpoiine codinaolb lb and <br />
-                    ssage essecemniiselitpr Ibieam.</h1>
+                  <h1 className='p-2'>Converted the design into code,
+                    developed the backend and<br />
+                    database features.</h1>
                 </div>
               </div>
 
@@ -252,7 +252,7 @@ const About = () => {
                 </div>
                 <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Sruthy Alex</h1>
-                  <h1 className='relative top-5 left-15'>Founder & CEO</h1>
+                  <h1 className='relative top-5 text-center'>UI/UX Designer</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
@@ -260,9 +260,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Lorem ipsum dasercet matics,
-                    cuntpoiine codinaolb lb and <br />
-                    ssage essecemniiselitpr Ibieam.</h1>
+                  <h1 className='p-2'>Designed the UI
+                    interface, including the layout, color, and<br />
+                    user experience structure.</h1>
                 </div>
               </div>
 
@@ -281,8 +281,8 @@ const About = () => {
                     src='/IMG_20241204_124644.avif' alt="" />
                 </div>
                 <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
-                  <h1 className='relative top-4 font-semibold text-2xl text-center'>Alfina</h1>
-                  <h1 className='relative top-5 left-15'>Founder & CEO</h1>
+                  <h1 className='relative top-4 font-semibold text-2xl text-center'>Alfina S</h1>
+                  <h1 className='relative top-5 text-center'>Documentation Lead</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
@@ -290,9 +290,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Lorem ipsum dasercet matics,
-                    cuntpoiine codinaolb lb and <br />
-                    ssage essecemniiselitpr Ibieam.</h1>
+                  <h1 className='p-2'>Prepared the project report
+                    including SRS, DFD,ER diagram and system architecture.<br />
+                  </h1>
                 </div>
               </div>
 
@@ -313,7 +313,7 @@ const About = () => {
                 </div>
                 <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Abdulla Asid</h1>
-                  <h1 className='relative top-5 left-15'>Founder & CEO</h1>
+                  <h1 className='relative top-5 text-center'>Project Analyst</h1>
                   <div className="relative top-4 flex gap-4 p-4">
                     <SocialIcon icon={<FaFacebookF />} />
                     <SocialIcon icon={<FaTwitter />} />
@@ -321,9 +321,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Lorem ipsum dasercet matics,
-                    cuntpoiine codinaolb lb and <br />
-                    ssage essecemniiselitpr Ibieam.</h1>
+                  <h1 className='p-2'>Handled requirements,
+                    testing documentation, overall project<br />
+                    coordination.</h1>
                 </div>
               </div>
 
