@@ -2,6 +2,7 @@ import express from "express";
 import {
   addProduct,
   listProduct,
+  ownerListProduct,
   removeProduct,
   singleProduct,
 } from "../../controllers/eventManagement/productController.js";
@@ -21,8 +22,12 @@ ProductRouter.post(
   ]),
   addProduct,
 );
-ProductRouter.get("/listProduct", listProduct);
+ProductRouter.get("/ownerListProduct", EventManagementAuth, ownerListProduct);
 ProductRouter.post("/removeProduct", EventManagementAuth, removeProduct);
 ProductRouter.post("/singleProduct", EventManagementAuth, singleProduct);
+
+//route for public user
+
+ProductRouter.get("/listProduct", listProduct);
 
 export default ProductRouter;

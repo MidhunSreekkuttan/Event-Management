@@ -31,7 +31,7 @@ const Events = () => {
 
     try {
 
-      const response = await axios.get(backendUrl + '/api/product/listProduct')
+      const response = await axios.get(backendUrl + '/api/product/ownerListProduct')
       if (response.data.success) {
         setItemList(response.data.product)
       } else {
