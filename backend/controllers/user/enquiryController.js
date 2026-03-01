@@ -13,13 +13,17 @@ const createEnquiry = async (req, res) => {
       additionalDetails,
       productId,
     } = req.body;
+
+    const userData = req.user.id;
+
     if (
       !name ||
       !email ||
       !eventDate ||
       !place ||
       !count ||
-      !productId
+      !productId ||
+      !userData
     ) {
       return res.json({ success: false, message: "Missing Details" });
     }
@@ -38,6 +42,7 @@ const createEnquiry = async (req, res) => {
       count,
       additionalDetails,
       productId,
+      userData,
     });
     res.json({ success: true, message: "Enquiry Sumbitted", newEnquiry });
   } catch (error) {
