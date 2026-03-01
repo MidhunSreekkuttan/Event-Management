@@ -1,23 +1,50 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { EventContext } from '../../context/EventContext'
+import axios from 'axios'
+import { BackendContex } from '../../context/ConnectBackendContex'
+import { toast } from 'react-toastify'
 
 const Product = () => {
 
     const { productId } = useParams()
+
+    const { backendUrl } = useContext(BackendContex)
+
     const navigate = useNavigate()
-    const { products, addEnquiry } = useContext(EventContext)
+    const { products } = useContext(EventContext)
 
     const [productData, setProductData] = useState(false)
     const [image, setImage] = useState('')
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [eventData, setEventDate] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState(null)
+    const [eventDate, setEventDate] = useState('')
     const [place, setPlace] = useState('')
     const [count, setCount] = useState('')
-    const [additionalDetails, setAdditionalDetails] = useState("")
+    const [additionalDetails, setAdditionalDetails] = useState(null)
+
+    const createEnquiry = async (e) => {
+        e.preventDefault();
+
+        try {
+            axios.defaults.withCredentials = true
+            const { data } = await axios.post(backendUrl + '/api/user/enquiry', {
+                name, email, phoneNumber, eventDate, place, count, additionalDetails, productId
+            })
+            if (data.success) {
+                toast.success(data.message)
+                navigate('/')
+            } else {
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
 
     const fetchproductData = async () => {
 
@@ -36,11 +63,6 @@ const Product = () => {
         fetchproductData()
 
     }, [productId, products])
-
-    const handleEnquiry = () => {
-        addEnquiry(productData._id)
-        navigate('/eventList')
-    }
 
     return productData ? (
         <div className="grid gap-20 pt-32 bg-[#F6F0FD] text-black">
@@ -106,7 +128,7 @@ const Product = () => {
                     <p>Fill out the form below and we'll create your perfect day</p>
                 </div>
 
-                <form>
+                <form onSubmit={createEnquiry}>
                     <div className='flex flex-col gap-10 bg-gray-300/50 w-full px-15 py-10 rounded-3xl'>
                         <div className='flex gap-7'>
                             <div className='flex flex-col gap-3'>
@@ -132,7 +154,7 @@ const Product = () => {
                             </div>
                             <div className='flex flex-col gap-3'>
                                 <label className='relative right-10 text-[20px]'>Preferred Event Date*</label>
-                                <input type="date" onChange={e => setEventDate(e.target.value)} value={eventData}
+                                <input type="date" onChange={e => setEventDate(e.target.value)} value={eventDate}
                                     placeholder='Enter Your Email' required
                                     className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
                             </div>
