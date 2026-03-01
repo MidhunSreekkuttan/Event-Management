@@ -220,7 +220,7 @@ const About = () => {
                   <img loading='lazy' decoding='async' className='relative left-5 w-screen h-full object-cover object-[10%_-20%] scale-130'
                     src='/IMG_20260113_212004.avif' alt="" />
                 </div>
-                <div className='w-60 h-[220px] shadow-2xl rounded-b-2xl'>
+                <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Midhun M</h1>
                   <h1 className='relative top-5 text-center'>Full Stack Developer</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -230,9 +230,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Converted the design into code,
-                    developed the backend and<br />
-                    database features.</h1>
+                  <p className='p-5 px-7 text-justify'>Converted the design into code,
+                    developed the backend and
+                    database features.</p>
                 </div>
               </div>
 
@@ -250,7 +250,7 @@ const About = () => {
                   <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[10%_15%]'
                     src='/IMG_20260228_152809.avif' alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
+                <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Sruthy Alex</h1>
                   <h1 className='relative top-5 text-center'>UI/UX Designer</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -260,9 +260,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Designed the UI
-                    interface, including the layout, color, and<br />
-                    user experience structure.</h1>
+                  <p className='p-5 px-7 text-justify'>Designed the UI
+                    interface, including the layout, color, and
+                    user experience structure.</p>
                 </div>
               </div>
 
@@ -280,7 +280,7 @@ const About = () => {
                   <img loading='lazy' decoding='async' className='relative right-4 w-screen h-full object-cover scale-125 object-[10%_40%]'
                     src='/IMG_20241204_124644.avif' alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
+                <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Alfina S</h1>
                   <h1 className='relative top-5 text-center'>Documentation Lead</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -290,9 +290,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Prepared the project report
-                    including SRS, DFD,ER diagram and system architecture.<br />
-                  </h1>
+                  <p className='p-5 px-7 text-justify'>Prepared the project report
+                    including SRS, DFD,ER diagram and system architecture.
+                  </p>
                 </div>
               </div>
 
@@ -311,7 +311,7 @@ const About = () => {
                       object-[10%_15%] scale-150'
                     src='/IMG_20241207_113701_1.avif' alt="" />
                 </div>
-                <div className='w-60 h-55 shadow-2xl rounded-b-2xl'>
+                <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Abdulla Asid</h1>
                   <h1 className='relative top-5 text-center'>Project Analyst</h1>
                   <div className="relative top-4 flex gap-4 p-4">
@@ -321,9 +321,9 @@ const About = () => {
                       <SocialIcon icon={<FaInstagram />} /></a>
                     <SocialIcon icon={<FaYoutube />} />
                   </div>
-                  <h1 className='p-2'>Handled requirements,
-                    testing documentation, overall project<br />
-                    coordination.</h1>
+                  <p className='p-5 px-7 text-justify'>Handled requirements,
+                    testing documentation, overall project
+                    coordination.</p>
                 </div>
               </div>
 
