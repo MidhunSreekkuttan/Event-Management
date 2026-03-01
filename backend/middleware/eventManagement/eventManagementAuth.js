@@ -15,6 +15,7 @@ const EventManagementAuth = async (req, res, next) => {
     );
     if (decodeToken.id) {
       req.user = { id: decodeToken.id };
+      req.userId = decodeToken.id;
     } else {
       return res.json({ succes: false, message: "Not Autherised Login Again" });
     }

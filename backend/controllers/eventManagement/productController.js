@@ -25,6 +25,7 @@ export const addProduct = async (req, res) => {
     );
 
     const productData = {
+      owner: req.userId,
       name,
       description,
       category,
@@ -43,7 +44,17 @@ export const addProduct = async (req, res) => {
   }
 };
 
-//Function for List Product
+//Function for owner List Product
+export const ownerListProduct = async (req, res) => {
+  try {
+    const product = await ProductModel.find({ owner: req.userId });
+    return res.json({ success: true, product });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
+};
+
+//Function for public List Product
 export const listProduct = async (req, res) => {
   try {
     const product = await ProductModel.find({});

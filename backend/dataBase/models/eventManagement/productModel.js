@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
   name: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: Array, required: true },
