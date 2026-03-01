@@ -8,6 +8,7 @@ import {
   isAuthendicated,
 } from "../../controllers/user/userController.js";
 import userAuth from "../../middleware/user/userAuth.js";
+import createEnquiry from "../../controllers/user/enquiryController.js";
 
 const userRouter = express.Router();
 
@@ -17,5 +18,6 @@ userRouter.post("/logout", logout);
 userRouter.post("/sendVerifyOtp", userAuth, sendVerifyOtp);
 userRouter.post("/verifyEmail", userAuth, verifyEmail);
 userRouter.get("/isAuth", userAuth, isAuthendicated);
+userRouter.post("/enquiry", userAuth, createEnquiry);
 
 export default userRouter;
