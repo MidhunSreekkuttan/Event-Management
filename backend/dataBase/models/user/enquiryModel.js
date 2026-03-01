@@ -17,6 +17,12 @@ const EnquirySchema = new mongoose.Schema(
       ref: "product",
       required: true,
     },
+
+    userData: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    
   },
   { timestamps: true, minimize: false },
 );
