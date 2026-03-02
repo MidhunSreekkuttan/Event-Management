@@ -10,6 +10,7 @@ import eventManagementRouter from "./routes/eventManagement/eventManagementRoute
 import ProductRouter from "./routes/eventManagement/productRoutes.js";
 import connectCloudinary from "./config/cloudinary.js";
 import dns from "dns";
+import adminRouter from "./routes/admin/adminRoutes.js";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -39,6 +40,7 @@ app.use("/api/workers", workersRouter);
 app.use("/api/userData", router);
 app.use("/api/eventManagement", eventManagementRouter);
 app.use("/api/product", ProductRouter);
+app.use("/admin", adminRouter);
 
 await connectDB();
 
