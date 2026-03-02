@@ -9,6 +9,9 @@ import router from "./routes/user/getUserData.js";
 import eventManagementRouter from "./routes/eventManagement/eventManagementRoutes.js";
 import ProductRouter from "./routes/eventManagement/productRoutes.js";
 import connectCloudinary from "./config/cloudinary.js";
+import dns from "dns";
+
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const app = express();
 
