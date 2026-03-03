@@ -4,7 +4,16 @@ import ProductModel from "../../dataBase/models/eventManagement/productModel.js"
 //Function for Add Product
 export const addProduct = async (req, res) => {
   try {
-    const { name, description, category, location } = req.body;
+    const {
+      company_name,
+      event_name,
+      price,
+      starting_price,
+      main_services,
+      description,
+      category,
+      location,
+    } = req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
     const image2 = req.files.image2 && req.files.image2[0];
@@ -27,6 +36,11 @@ export const addProduct = async (req, res) => {
     const productData = {
       owner: req.userId,
       name,
+      company_name,
+      event_name,
+      price,
+      starting_price,
+      main_services,
       description,
       category,
       location,

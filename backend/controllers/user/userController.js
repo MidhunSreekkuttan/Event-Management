@@ -186,3 +186,23 @@ export const isAuthendicated = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const listUser = async (req, res) => {
+  try {
+    const userList = await userModel.find({});
+    res.json({ success: true, userList });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    await userModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "User Deleted" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};

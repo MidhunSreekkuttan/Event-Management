@@ -169,3 +169,23 @@ export const isAuthendicated = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const listEventManagementUser = async (req, res) => {
+  try {
+    const eventManagementUserList = await eventManagementModel.find({});
+    res.json({ success: true, eventManagementUserList });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const deleteEventManagementUser = async (req, res) => {
+  try {
+    await eventManagementModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "Event Management User deleted" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
