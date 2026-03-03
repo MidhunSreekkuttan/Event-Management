@@ -10,12 +10,16 @@ const Add = ({ token }) => {
 
   const { backendUrl } = useContext(BackendContex)
 
-  const [image1, setImage1] = useState(false)
-  const [image2, setImage2] = useState(false)
-  const [image3, setImage3] = useState(false)
-  const [image4, setImage4] = useState(false)
+  const [image1, setImage1] = useState(null)
+  const [image2, setImage2] = useState(null)
+  const [image3, setImage3] = useState(null)
+  const [image4, setImage4] = useState(null)
 
-  const [name, setName] = useState('')
+  const [company_name, setCompany_name] = useState('')
+  const [event_name, setEvent_name] = useState('')
+  const [price, setPrice] = useState('')
+  const [starting_price, setStarting_price] = useState('')
+  const [main_services, setMain_services] = useState([])
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('Birthday Party')
   const [location, setLocation] = useState('Trivandrum')
@@ -30,7 +34,11 @@ const Add = ({ token }) => {
 
       const formData = new FormData()
 
-      formData.append('name', name)
+      formData.append('company_name', company_name)
+      formData.append('event_name', event_name)
+      formData.append('price', price)
+      formData.append('starting_price', starting_price)
+      formData.append('main_services', main_services)
       formData.append('description', description)
       formData.append('category', category)
       formData.append('location', location)
@@ -40,19 +48,29 @@ const Add = ({ token }) => {
       image3 && formData.append('image3', image3)
       image4 && formData.append('image4', image4)
 
-      const response = await axios.post(backendUrl + '/api/product/addProduct',
-        formData, { withCredentials: true }, { headers: { token } })
+      const response = await axios.post(
+        backendUrl + '/api/product/addProduct',
+        formData, 
+          { 
+            withCredentials: true, 
+            headers: { token } 
+          }
+      )
 
       if (response.data.success) {
         toast.success(response.data.message)
-        setName('')
+        setCompany_name('')
+        setEvent_name('')
+        setPrice('')
+        setStarting_price('')
+        setMain_services('')
         setDescription('')
         setCategory('Birthday Party')
         setLocation('Trivandrum')
-        setImage1(false)
-        setImage2(false)
-        setImage3(false)
-        setImage4(false)
+        setImage1(null)
+        setImage2(null)
+        setImage3(null)
+        setImage4(null)
       } else {
         toast.error(response.data.message)
       }
@@ -73,14 +91,17 @@ const Add = ({ token }) => {
 
       {loading && <Loader />}
 
-      <div className='flex gap-5'>
+      <div className="flex min-h-screen bg-linear-to-br from-[#0f0c29] via-[#1c0f3f] to-[#0b0f2a] text-white">
         <SideBar />
-
-        <form onSubmit={onSubmitHandler} className='flex flex-col gap-3 mt-10 ml-20'>
+        <div className="flex-1 p-10 flex justify-center">
+          <form onSubmit={onSubmitHandler} 
+            className="w-full max-w-4xl bg-white/5 backdrop-blur-md p-10 rounded-2xl border border-white/10 shadow-xl space-y-8">
+          
+          {/* Upload Images */}
           <div>
             <p className='mb-2'>Upload Image</p>
 
-            <div className='flex gap-3'>
+            <div className='flex gap-4'>
               <label htmlFor="image1">
                 <div className='bg-white/50'>
                   <img className='w-20' src={!image1 ? icon.upload_icon : URL.createObjectURL(image1)} alt="" />
@@ -106,39 +127,98 @@ const Add = ({ token }) => {
                 </div>
               </label>
             </div>
-
           </div>
 
-          <div className='w-full'>
-            <p className='mb-2'>Event Name</p>
-            <input onChange={(e) => setName(e.target.value)} value={name}
-              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
-              type="text" placeholder='Enter Here' required />
-          </div>
-
-          <div className='w-full'>
-            <p className='mb-2'>Event Description</p>
-            <textarea onChange={(e) => setDescription(e.target.value)} value={description}
-              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
-              type="text" placeholder='Write Here' required />
-          </div>
-
-          <div className='flex gap-2 w-full'>
-
+          {/* Grid Inputs */}
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p className='mb-3'>Event Category</p>
-              <select onChange={e => setCategory(e.target.value)} className='w-full px-3 py-2'>
-                <option className='text-black' value="Birthday Party">Birthday Party</option>
-                <option className='text-black' value="Wedding">Wedding</option>
-                <option className='text-black' value="Corporate Events">Corporate Events</option>
-                <option className='text-black' value="Concerts">Concerts</option>
-                <option className='text-black' value="Cultural Programs">Cultural Programs</option>
+              <label className="block mb-2">Company Name</label>
+              <input
+                value={company_name}
+                onChange={(e) => setCompany_name(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                placeholder="Enter Company Name"
+                required
+              />
+            </div>
+            <div>
+              <label className="block mb-2">Event Name</label>
+              <input
+                value={event_name}
+                onChange={(e) => setEvent_name(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                placeholder="Enter Event Name"
+                required
+              />
+            </div>
+            <div>
+              <label className="block mb-2">Price</label>
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                placeholder="Enter Price"
+                required
+              />
+            </div>
+            <div>
+              <label className="block mb-2">Starting Price Range</label>
+              <input
+                value={starting_price}
+                onChange={(e) => setStarting_price(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                placeholder="Enter Starting Price"
+                required
+              />
+            </div>
+          </div>
+
+          {/* ✅ Services input */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Services (✓ list)</label>
+            <input
+              value={main_services}
+              onChange={(e) => setMain_services(e.target.value)}
+              placeholder="e.g. Floral Decor"
+              className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            />
+          </div>
+          <div>
+            <label className="block mb-2">Event Description</label>
+            <textarea 
+              onChange={(e) => setDescription(e.target.value)} 
+              value={description}
+              className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 min-h-30"
+              type="text" 
+              placeholder="Write Here..." 
+              required 
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className='mb-3'>Event Category</label>
+              <select 
+                value={category}
+                onChange={e => setCategory(e.target.value)} 
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
+                <option className='text-black' value='Birthday Party'>Birthday Party</option>
+                <option className='text-black' value='Wedding'>Wedding</option>
+                <option className='text-black' value='Corporate Events'>Corporate Events</option>
+                <option className='text-black' value='Concerts'>Concerts</option>
+                <option className='text-black' value='Cultural Programs'>Cultural Programs</option>
               </select>
             </div>
 
             <div>
-              <p className='mb-3'>Event Location</p>
-              <select onChange={e => setLocation(e.target.value)} className='w-full px-3 py-2'>
+              <label className="block mb-2">Event Location</label>
+              <select
+                value={location} 
+                onChange={e => setLocation(e.target.value)} 
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
                 <option className='text-black' value="Trivandrum">Trivandrum</option>
                 <option className='text-black' value="Kollam">Kollam</option>
                 <option className='text-black' value="Pathanamthitta">Pathanamthitta</option>
@@ -158,12 +238,20 @@ const Add = ({ token }) => {
 
           </div>
 
-          <button disabled={loading} type="submit" className={` text-white text-2xl font-semibold 
-              px-4 py-2 rounded-md ${loading ? 'bg-purple-400 cursor-not-allowed' : 'bg-linear-to-r from-pink-500 to-pink-700'}`}>
+          <button 
+            disabled={loading} 
+            type="submit" 
+            className={`w-full py-3 text-lg font-semibold rounded-lg transition
+            ${loading
+              ? 'bg-purple-400 cursor-not-allowed'
+              : 'bg-linear-to-r from-pink-500 to-pink-700 hover:scale-105'
+            }`}
+          >
             Add Event
           </button>
 
         </form>
+      </div>
 
 
       </div>
