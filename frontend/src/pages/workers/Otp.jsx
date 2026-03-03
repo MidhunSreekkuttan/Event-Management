@@ -25,14 +25,15 @@ const Otp = () => {
     }
 
     const handlePaste = (e) => {
+        e.preventDefault(); // prevent default paste behavior
+
         const paste = e.clipboardData.getData('text')
         const pasteArray = paste.split('')
+        
         pasteArray.forEach((char, index) => {
-            pasteArray.forEach((char, index) => {
-                if (inputrefs.current[index]) {
-                    inputrefs.current[index].value = char
-                }
-            })
+            if (inputrefs.current[index]) {
+                inputrefs.current[index].value = char
+            }
         })
     }
 
