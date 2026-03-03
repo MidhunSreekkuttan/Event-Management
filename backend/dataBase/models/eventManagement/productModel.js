@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
 
+const ProductSchema = new mongoose.Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: Array, required: true },
+  category: { type: String, required: true },
+  location: { type: String, required: true },
+  date: { type: Number },
+});
 const ProductSchema = new mongoose.Schema(
   {
     owner: {

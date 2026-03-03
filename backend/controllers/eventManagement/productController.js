@@ -35,6 +35,7 @@ export const addProduct = async (req, res) => {
 
     const productData = {
       owner: req.userId,
+      name,
       company_name,
       event_name,
       price,

@@ -19,6 +19,11 @@ const Product = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState(null)
+    const [eventDate, setEventDate] = useState('')
+    const [place, setPlace] = useState('')
+    const [count, setCount] = useState('')
+    const [additionalDetails, setAdditionalDetails] = useState(null)
     const [phoneNumber, setPhoneNumber] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [place, setPlace] = useState('')
@@ -86,6 +91,19 @@ const Product = () => {
 
                 {/*Product Info*/}
                 <div className='flex-1'>
+                    <h1 className='font-bold text-4xl mt-2 text-center'>
+                        {productData.name}
+                    </h1>
+                    <p className='font-semibold text-2xl relative top-25'>
+                        {productData.category}
+                    </p>
+                    <p className='relative top-40'>
+                        {productData.description}
+                    </p>
+                    <p className='font-medium text-[22px] relative top-50'>
+                        Location: <span className='font-sans text-[18px]'>{productData.location}</span>
+                    </p>
+
                     <p className='font-semibold text-purple-600 text-[20px]'>
                         By {productData.company_name} presents
                     </p>
@@ -131,6 +149,7 @@ const Product = () => {
                             decoding='async'
                             alt=""
                             onClick={() => setImage(item)}
+                            className="w-full h-full object-cover cursor-pointer border hover:border-black"
                             className="w-full h-full object-cover cursor-pointer rounded-2xl shadow-2xl"
                         />
                     ))}
@@ -147,6 +166,7 @@ const Product = () => {
                 </div>
 
                 <form onSubmit={createEnquiry}>
+                    <div className='flex flex-col gap-10 bg-gray-300/50 w-full px-15 py-10 rounded-3xl'>
                     <div className='flex flex-col gap-10 bg-gray-300/50 w-full px-15 py-10 rounded-3xl shadow-2xl'>
                         <div className='flex gap-7'>
                             <div className='flex flex-col gap-3'>

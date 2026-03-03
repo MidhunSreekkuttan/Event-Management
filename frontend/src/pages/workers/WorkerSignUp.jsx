@@ -11,6 +11,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // eslint-disable-next-line react-hooks/immutability
   axios.defaults.withCredentials = true;
 
   const handleSubmit = async (e) => {
