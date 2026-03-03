@@ -15,7 +15,11 @@ const Add = ({ token }) => {
   const [image3, setImage3] = useState(false)
   const [image4, setImage4] = useState(false)
 
-  const [name, setName] = useState('')
+  const [company_name, setCompany_name] = useState('')
+  const [event_name, setEvent_name] = useState('')
+  const [price, setPrice] = useState('')
+  const [starting_price, setStarting_price] = useState('')
+  const [main_services, setMain_services] = useState([])
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('Birthday Party')
   const [location, setLocation] = useState('Trivandrum')
@@ -30,7 +34,11 @@ const Add = ({ token }) => {
 
       const formData = new FormData()
 
-      formData.append('name', name)
+      formData.append('company_name', company_name)
+      formData.append('event_name', event_name)
+      formData.append('price', price)
+      formData.append('starting_price', starting_price)
+      formData.append('main_services', main_services)
       formData.append('description', description)
       formData.append('category', category)
       formData.append('location', location)
@@ -45,7 +53,11 @@ const Add = ({ token }) => {
 
       if (response.data.success) {
         toast.success(response.data.message)
-        setName('')
+        setCompany_name('')
+        setEvent_name('')
+        setPrice('')
+        setStarting_price('')
+        setMain_services('')
         setDescription('')
         setCategory('Birthday Party')
         setLocation('Trivandrum')
@@ -110,10 +122,45 @@ const Add = ({ token }) => {
           </div>
 
           <div className='w-full'>
-            <p className='mb-2'>Event Name</p>
-            <input onChange={(e) => setName(e.target.value)} value={name}
+            <p className='mb-2'>Company Name</p>
+            <input onChange={(e) => setCompany_name(e.target.value)} value={company_name}
               className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
-              type="text" placeholder='Enter Here' required />
+              type="text" placeholder='Enter your Company Name' required />
+          </div>
+
+          <div className='w-full'>
+            <p className='mb-2'>Event Name</p>
+            <input onChange={(e) => setEvent_name(e.target.value)} value={event_name}
+              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
+              type="text" placeholder='Enter your Event Name' required />
+          </div>
+
+          <div className='w-full'>
+            <p className='mb-2'>Price</p>
+            <input onChange={(e) => setPrice(e.target.value)} value={price}
+              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
+              type="number" placeholder='Enter your Price' required />
+          </div>
+
+          <div className='w-full'>
+            <p className='mb-2'>Startng Price range</p>
+            <input onChange={(e) => setStarting_price(e.target.value)} value={starting_price}
+              className='w-full max-w-[500px] px-3 py-2 border-2 border-[#c2c2c2] outline-[#c586A5] border-r-4'
+              type="text" placeholder='Enter your Starting Price range' required />
+          </div>
+
+          {/* ✅ Services input */}
+          <div className="rounded-lg border p-3">
+            <label className="block text-sm font-medium mb-2">Services (✓ list)</label>
+
+            <div className="flex gap-2">
+              <input
+                value={main_services}
+                onChange={(e) => setMain_services(e.target.value)}
+                placeholder="e.g. Floral Decor"
+                className="border p-2 flex-1"
+              />
+            </div>
           </div>
 
           <div className='w-full'>

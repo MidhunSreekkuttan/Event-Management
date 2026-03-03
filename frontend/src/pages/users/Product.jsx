@@ -19,11 +19,11 @@ const Product = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState(null)
+    const [phoneNumber, setPhoneNumber] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [place, setPlace] = useState('')
     const [count, setCount] = useState('')
-    const [additionalDetails, setAdditionalDetails] = useState(null)
+    const [additionalDetails, setAdditionalDetails] = useState('')
 
     const createEnquiry = async (e) => {
         e.preventDefault();
@@ -58,6 +58,10 @@ const Product = () => {
 
     }
 
+    const services = productData?.main_services?.flatMap((s) =>
+        String(s).split(",").map((x) => x.trim()).filter(Boolean)
+    ) || []
+
     useEffect(() => {
 
         fetchproductData()
@@ -82,18 +86,32 @@ const Product = () => {
 
                 {/*Product Info*/}
                 <div className='flex-1'>
-                    <h1 className='font-bold text-4xl mt-2 text-center'>
-                        {productData.name}
-                    </h1>
-                    <p className='font-semibold text-2xl relative top-25'>
-                        {productData.category}
+                    <p className='font-semibold text-purple-600 text-[20px]'>
+                        By {productData.company_name} presents
                     </p>
-                    <p className='relative top-40'>
+                    <h1 className='font-bold text-4xl mt-6'>
+                        {productData.event_name}
+                    </h1>
+
+                    <div className='py-5 px-6 w-fit text-center rounded-2xl bg-gray-300 mt-6 shadow-2xl'>
+                        <p className='font-bold text-purple-600 text-2xl'>
+                            $ {productData.starting_price} <br />
+                            <span className='text-sm'>Starting Package Price</span>
+                        </p>
+                    </div>
+
+                    <p className='mt-6'>
                         {productData.description}
                     </p>
-                    <p className='font-medium text-[22px] relative top-50'>
-                        Location: <span className='font-sans text-[18px]'>{productData.location}</span>
-                    </p>
+
+                    <div className="grid grid-cols-2 gap-y-5 mt-6">
+                        {services.map((item, i) => (
+                            <div key={i} className="flex items-center gap-2 text-gray-800">
+                                <span className="text-green-600 font-bold">✓</span>
+                                <span className="font-medium">{item}</span>
+                            </div>
+                        ))}
+                    </div>
 
                 </div>
 
@@ -113,7 +131,7 @@ const Product = () => {
                             decoding='async'
                             alt=""
                             onClick={() => setImage(item)}
-                            className="w-full h-full object-cover cursor-pointer border hover:border-black"
+                            className="w-full h-full object-cover cursor-pointer rounded-2xl shadow-2xl"
                         />
                     ))}
                 </div>
@@ -129,7 +147,7 @@ const Product = () => {
                 </div>
 
                 <form onSubmit={createEnquiry}>
-                    <div className='flex flex-col gap-10 bg-gray-300/50 w-full px-15 py-10 rounded-3xl'>
+                    <div className='flex flex-col gap-10 bg-gray-300/50 w-full px-15 py-10 rounded-3xl shadow-2xl'>
                         <div className='flex gap-7'>
                             <div className='flex flex-col gap-3'>
                                 <label className='relative right-25 text-[20px]'>Full Name*</label>
