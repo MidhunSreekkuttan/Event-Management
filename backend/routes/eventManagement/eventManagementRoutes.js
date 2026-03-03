@@ -1,6 +1,8 @@
 import express from "express";
 import {
+  deleteEventManagementUser,
   isAuthendicated,
+  listEventManagementUser,
   Login,
   Logout,
   Register,
@@ -27,5 +29,7 @@ eventManagementRouter.get(
   EventManagementAuth,
   getEventManagementData,
 );
+eventManagementRouter.get("/userList", listEventManagementUser);
+eventManagementRouter.post("/deleteuser", deleteEventManagementUser);
 
 export default eventManagementRouter;
