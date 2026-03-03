@@ -6,6 +6,8 @@ import {
   sendVerifyOtp,
   verifyEmail,
   isAuthendicated,
+  listUser,
+  deleteUser,
 } from "../../controllers/user/userController.js";
 import userAuth from "../../middleware/user/userAuth.js";
 import createEnquiry from "../../controllers/user/enquiryController.js";
@@ -19,5 +21,7 @@ userRouter.post("/sendVerifyOtp", userAuth, sendVerifyOtp);
 userRouter.post("/verifyEmail", userAuth, verifyEmail);
 userRouter.get("/isAuth", userAuth, isAuthendicated);
 userRouter.post("/enquiry", userAuth, createEnquiry);
+userRouter.get("/listUser", listUser);
+userRouter.post("/deleteUser", deleteUser);
 
 export default userRouter;
