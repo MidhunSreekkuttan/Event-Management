@@ -3,6 +3,7 @@ import SideBar from '../../components/event-management/SideBar'
 import { BackendContex } from '../../context/ConnectBackendContex'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import ProductList from '../../components/event-management/ProductList'
 
 const Events = () => {
 
@@ -11,10 +12,12 @@ const Events = () => {
   const [itemList, setItemList] = useState([])
 
   const removeItem = async (id) => {
+
     try {
 
       const response = await axios.post(backendUrl + '/api/product/removeProduct', { id })
-      if (response.data.success) {
+
+      if (response.data.message) {
         toast.success(response.data.message)
         await fetchData()
       } else {
@@ -55,44 +58,55 @@ const Events = () => {
       <div className='flex'>
         <SideBar />
 
-        <p className='relative mt-5 left-25'>ALL Event List</p>
-        <div className='relative flex flex-col gap-2 mt-20'>
-          {/*  List Table Title  */}
+        <div className='bg-white/8 w-[78rem]'>
+          <div className='flex flex-col gap-3'>
+            <h1 className='pl-6 mt-5 text-4xl font-semibold'>Events</h1>
+            <span className='pl-6 text-gray-400'>Manage and organize all your upcoming and past events.</span>
+          </div>
 
-          <div className='w-full'>
-            <div className='grid grid-cols-[1fr_1.5fr_1.5fr_1.5fr_1.5fr_1fr_1fr_1fr_1fr] items-center py-1 px-2 bg-gray-600 text-sm'>
-              <b>Image</b>
-              <b>Company_name</b>
-              <b>Event_name</b>
-              <b>Description</b>
-              <b>Category</b>
-              <b>location</b>
-              <b>Price</b>
-              <b>Starting Price</b>
-              <b className='text-center'>Action</b>
+          {/*topper*/}
+
+          <div className='flex gap-5 justify-center'>
+            <div className='bg-purple-600 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
+                 hover:scale-105'>
+              <p className='relative right-20 text-4xl'>{itemList.length}</p>
+              <p className='relative right-11 top-3 text-purple-300'>Total Events</p>
+            </div>
+            <div className='bg-blue-600 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
+                 hover:scale-105'>
+              <p className='relative right-13 text-4xl'></p>
+              <p className='relative right-13 top-3'>Upcoming</p>
+            </div>
+            <div className='bg-green-600 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
+                  hover:scale-105'>
+              <p className='relative right-13 text-4xl'></p>
+              <p className='relative right-13 top-3'>Ongoing</p>
+            </div>
+            <div className='bg-gray-500 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
+                  hover:scale-105'>
+              <p className='relative right-13 text-4xl'></p>
+              <p className='relative right-13 top-3'>Completed</p>
             </div>
           </div>
-          {/*  List Items */}
 
-          <div className='w-full'>
-            {itemList.map((item, index) => (
-              <div className='grid grid-cols-[1fr_1.5fr_1.5fr_1.5fr_1.5fr_1fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm'
-                key={index}>
-                <img className='w-18 h-20 object-cover' src={item.image[0]} alt={item.name} />
-                <p>{item.company_name}</p>
-                <p>{item.event_name}</p>
-                <p>{item.description.length > 15 ? item.description.slice(0, 15) + '...' : item.description}</p>
-                <p>{item.category}</p>
-                <p>{item.location}</p>
-                <p>{item.price}</p>
-                <p>{item.starting_price}</p>
-                <p onClick={() => removeItem(item._id)} className='text-center text-lg cursor-pointer'>X</p>
-              </div>
-            ))}
+          {/*Event List*/}
+
+          <div className='bg-white/10 mt-5 mx-5 rounded-2xl'>
+            <h1 className='text-2xl font-bold pl-6 p-5'>ALL Events</h1>
+            <hr />
+
+            {/*fetch events from backend*/}
+
+            <div className='grid grid-cols-3 gap-4 p-5'>
+              {itemList.map((item) => (
+                <ProductList key={item._id} image={item.image} event_name={item.event_name} category={item.category}
+                  location={item.location} price={item.price} starting_price={item.starting_price} _id={item._id}
+                  onDelete={removeItem} />
+              ))}
+            </div>
           </div>
 
         </div>
-
       </div>
 
     </>
