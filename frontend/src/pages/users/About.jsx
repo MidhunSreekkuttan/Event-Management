@@ -202,7 +202,7 @@ const About = () => {
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
           >
 
-            <h1 className='relative left-[460px] font-bold text-5xl'>Our Services</h1>
+            <h1 className='text-center font-bold text-5xl'>Behind the Web Application</h1>
 
           </motion.div>
 
