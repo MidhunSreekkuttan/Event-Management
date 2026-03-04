@@ -29,7 +29,9 @@ const ListingComponent = () => {
 
             const filterLocation = locationFilter === 'All Location' || item.location === locationFilter
 
-            const searchFilter = searchBotton === '' || item.name.toLowerCase().includes(searchBotton.toLowerCase());
+            const searcher = (item.event_name ?? '').toLowerCase()
+
+            const searchFilter = searchBotton === '' || searcher.includes(searchBotton)
 
             return categoryFilter && filterLocation && searchFilter
         })
@@ -256,7 +258,7 @@ const ListingComponent = () => {
 
                     <div className='grid grid-cols-4 gap-6'>
                         {filterProducts.map((item) => (
-                            <ProductList key={item._id} name={item.name} image={item.image}
+                            <ProductList key={item._id} event_name={item.event_name} image={item.image}
                                 id={item._id} location={item.location} />
                         ))}
                     </div>
