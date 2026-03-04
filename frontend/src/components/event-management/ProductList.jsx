@@ -21,7 +21,8 @@ const ProductList = ({ _id, event_name, image, location, category, price, starti
                         <p className='text-gray-400 font-medium'>{location}</p>
                         <p className='text-gray-400 font-medium'>${price}</p>
                         <p className='text-gray-400 font-medium'>Starts $ {starting_price}</p>
-                        <button onClick={() => onDelete(_id)} className='bg-linear-to-r from-pink-500 to-pink-700 text-white mt-3 px-4 py-1 w-full rounded-2xl'>
+                        <button onClick={() => onDelete(_id)} className='bg-linear-to-r from-pink-500
+                             to-pink-700 text-white mt-3 py-3 w-full rounded-2xl'>
                             Delete
                         </button>
                     </div>

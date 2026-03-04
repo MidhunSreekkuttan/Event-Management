@@ -4,6 +4,7 @@ import { BackendContex } from '../../context/ConnectBackendContex'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import ProductList from '../../components/event-management/ProductList'
+import { NavLink } from 'react-router-dom'
 
 const Events = () => {
 
@@ -92,8 +93,18 @@ const Events = () => {
           {/*Event List*/}
 
           <div className='bg-white/10 mt-5 mx-5 rounded-2xl'>
-            <h1 className='text-2xl font-bold pl-6 p-5'>ALL Events</h1>
-            <hr />
+            <div className='flex justify-between'>
+              <h1 className='text-2xl font-bold pl-6 p-5'>ALL Events</h1>
+              <NavLink className='flex gap-4 w-fit h-fit px-6 py-2 rounded-lg bg-purple-600 text-center
+                  mt-5 ml-207'
+                to='/event-management/add'>
+                <h1>+</h1>
+                <h1 className=''>
+                  Create Event
+                </h1>
+              </NavLink>
+              <hr />
+            </div>
 
             {/*fetch events from backend*/}
 
