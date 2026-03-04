@@ -82,7 +82,7 @@ const App = () => {
 
   const hideEventMangement = loginpage || WorkersPage || ProductPage || userU1 || userU2 || userU3 || userU4 || userU5 || hideEventOtp
   const hideNavbar = loginpage || WorkersPage || EventManagementPage
-  const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage
+  const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage || userU3
 
   const hideEventlogin = pathname.startsWith('/event-management/login')
 
