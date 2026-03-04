@@ -13,7 +13,10 @@ import {
 const StatCard = ({ value, label, Icon, iconColor }) => {
   return (
     <div className="flex items-center gap-4 rounded-xl bg-[#121833] border border-white/10 px-6 py-5">
-      <Icon className={`h-6 w-6 ${iconColor}`} />
+      {Icon && (
+        <Icon className={`h-6 w-6 ${iconColor || ""}`} />
+      )}
+
       <div>
         <p className="text-2xl font-semibold text-white">{value}</p>
         <p className="text-sm text-gray-400">{label}</p>
