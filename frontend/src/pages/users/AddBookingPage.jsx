@@ -3,6 +3,7 @@ import { EventContext } from '../../context/EventContext'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { BackendContex } from '../../context/ConnectBackendContex'
+import axios from 'axios'
 
 const BookingPage = () => {
 
@@ -10,7 +11,7 @@ const BookingPage = () => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const { enquiryList } = useContext(EventContext)
+    const { enquiryList, setEnquiryList } = useContext(EventContext)
     const [color, setColor] = useState('cod')
 
     const [formData, setFormData] = useState({
@@ -30,12 +31,47 @@ const BookingPage = () => {
         setFormData((data) => ({ ...data, [name]: value }))
     }
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault()
 
         try {
 
+            const items = Array.isArray(enquiryList) ? enquiryList : []
 
+            if (items.length === 0) {
+                toast.error("No enquiry items found")
+                return
+            }
+
+            const first = items[0]
+
+            const bookingData = {
+                address: formData,
+                userId: first.userData,
+                productId: first.productId._id || first.productId,
+                items
+            }
+
+            switch (color) {
+
+                //APi call for COD
+                case 'cod':
+
+                    const res = await axios.post(backendUrl + '/api/booking/placingBooking', bookingData)
+
+                    if (res.data.success) {
+                        setEnquiryList([])
+                        navidate('/')
+                    } else {
+                        toast.error(res.data.message)
+                    }
+
+                    break
+
+                default:
+
+                    break
+            }
 
         } catch (error) {
             console.log(error);
@@ -111,8 +147,8 @@ const BookingPage = () => {
                         </h1>
                         <hr className='mt-5' />
                         <div className='mt-20'>
-                            {Array.isArray(enquiryList.response) &&
-                                enquiryList.response.map((item, index) => (
+                            {Array.isArray(enquiryList) &&
+                                enquiryList.map((item, index) => (
                                     <div key={index} className='flex gap-5 text-[18px] font-bold'>
                                         <h1>TOTAL PRICE :</h1>
                                         <p>{item.productId.price}</p>
