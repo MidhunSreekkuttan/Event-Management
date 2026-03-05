@@ -57,7 +57,7 @@ const EventContextProvider = (props) => {
 
             const res = await axios.get(backendUrl + '/api/user/getEnquiry')
             if (res.data.success) {
-                setEnquiryList(res.data)
+                setEnquiryList(res.data.response)
             } else {
                 toast.error(res.data.message)
             }
