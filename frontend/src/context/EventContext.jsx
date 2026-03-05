@@ -9,26 +9,11 @@ const EventContextProvider = (props) => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const [enquiry, setEnquiry] = useState({})
-
     const [products, setProducts] = useState([])
+    const [listproducts, setlistProducts] = useState([])
+    const [enquiryList, setEnquiryList] = useState([])
 
-    const addEnquiry = async (itemId) => {
-
-        if (enquiry[itemId]) {
-            toast.error("You already submitted your enquiry");
-            return;
-        }
-
-        // ✅ add new enquiry
-        setEnquiry(prev => ({
-            ...prev,
-            [itemId]: true
-        }));
-
-        toast.success("Enquiry submitted successfully");
-    }
-
+    {/*Getting User seeing Product List*/ }
     const getEventList = async () => {
 
         try {
@@ -47,13 +32,53 @@ const EventContextProvider = (props) => {
         }
     }
 
+    {/*Getting Event Management teams seeing Product List*/ }
+    const listProduct = async () => {
+
+        try {
+
+            const res = await axios.get(backendUrl + '/api/product/ownerListProduct')
+            if (res.data.success) {
+                setlistProducts(res.data.product)
+            } else {
+                toast.error(res.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
+    //getting users enquiries
+    const listEnquiry = async () => {
+
+        try {
+
+            const res = await axios.get(backendUrl + '/api/user/getEnquiry')
+            if (res.data.success) {
+                setEnquiryList(res.data.response)
+            } else {
+                toast.error(res.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
     useEffect(() => {
         getEventList()
+        listProduct()
+        listEnquiry()
     }, [])
 
     const value = {
 
-        products, enquiry, addEnquiry
+        products,
+        listproducts, setlistProducts, listProduct,
+        enquiryList, setEnquiryList
 
     }
 
