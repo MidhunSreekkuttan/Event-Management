@@ -11,8 +11,10 @@ const BookingScheme = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
-  status: { type: Boolean, required: true, default: "Booked" },
-  paymentMethod: { type: Boolean, required: true },
+  items: { type: Array, required: true },
+  address: { type: Object, required: true },
+  status: { type: String, required: true, default: "Booked" },
+  paymentMethod: { type: String, required: true },
   payment: { type: Boolean, required: true, default: false },
   date: { type: Number, required: true },
 });
