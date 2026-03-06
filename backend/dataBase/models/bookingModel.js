@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const BookingScheme = new mongoose.Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "eventManagement",
+    required: true,
+  },
+
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
