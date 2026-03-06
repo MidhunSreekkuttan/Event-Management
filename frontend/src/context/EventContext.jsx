@@ -12,6 +12,8 @@ const EventContextProvider = (props) => {
     const [products, setProducts] = useState([])
     const [listproducts, setlistProducts] = useState([])
     const [enquiryList, setEnquiryList] = useState([])
+    const [clientData, setClientData] = useState([])
+    const [userBooking, setuserBooking] = useState([])
 
     {/*Getting User seeing Product List*/ }
     const getEventList = async () => {
@@ -22,8 +24,6 @@ const EventContextProvider = (props) => {
 
             if (response.data.success) {
                 setProducts(response.data.product)
-            } else {
-                toast.error(response.data.message)
             }
 
         } catch (error) {
@@ -40,8 +40,6 @@ const EventContextProvider = (props) => {
             const res = await axios.get(backendUrl + '/api/product/ownerListProduct')
             if (res.data.success) {
                 setlistProducts(res.data.product)
-            } else {
-                toast.error(res.data.message)
             }
 
         } catch (error) {
@@ -58,8 +56,39 @@ const EventContextProvider = (props) => {
             const res = await axios.get(backendUrl + '/api/user/getEnquiry')
             if (res.data.success) {
                 setEnquiryList(res.data.response)
-            } else {
-                toast.error(res.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
+    {/*Access data for event managemnet teams*/}
+    const getClientData = async () => {
+
+        try {
+
+            const res = await axios.get(backendUrl + '/api/booking/allOrderEventManagement')
+
+            if (res.data.success) {
+                setClientData(res.data.bookings)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
+    {/*Access data for users*/}
+    const getUserbooking = async () => {
+        try {
+
+            const res = await axios.get(backendUrl + '/api/booking/userBooking')
+
+            if (res.data.orders) {
+                setuserBooking(res.data.orders)
             }
 
         } catch (error) {
@@ -72,13 +101,17 @@ const EventContextProvider = (props) => {
         getEventList()
         listProduct()
         listEnquiry()
+        getClientData()
+        getUserbooking()
     }, [])
 
     const value = {
 
         products,
         listproducts, setlistProducts, listProduct,
-        enquiryList, setEnquiryList
+        enquiryList, setEnquiryList,
+        clientData, setClientData,
+        userBooking, setuserBooking
 
     }
 
