@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import EnquiryModel from "../../dataBase/models/user/enquiryModel.js";
 
-const createEnquiry = async (req, res) => {
+export const createEnquiry = async (req, res) => {
   try {
     const {
       name,
@@ -51,4 +51,19 @@ const createEnquiry = async (req, res) => {
   }
 };
 
-export default createEnquiry;
+export const listEnquiry = async (req, res) => {
+  try {
+    const response = await EnquiryModel.find({
+      userData: req.user.id,
+    })
+      .populate("productId")// ✅ get product data
+      .populate("userData") // ✅ get user data
+    return res.json({
+      success: true,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};

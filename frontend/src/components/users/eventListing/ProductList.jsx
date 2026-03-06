@@ -24,7 +24,7 @@ const ProductList = ({ id, event_name, image, location, category }) => {
             <section className='text-black cursor-pointer'>
 
                 <div className='rounded-3xl overflow-hidden hover:scale-105 transition-transform'>
-                    <div className='w-60 h-40  object-fill'>
+                    <div className='h-40  object-fill'>
                         <img
                             className='w-full h-full object-cover'
                             src={image[0]}

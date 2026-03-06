@@ -13,6 +13,8 @@ import NotFound from './pages/users/NotFound'
 import Product from './pages/users/Product'
 import { ToastContainer } from 'react-toastify';
 import Otp from './pages/users/login/Otp'
+import AddBookingPage from './pages/users/AddBookingPage'
+import BookingPage from './pages/users/BookingPage'
 
 {/*...............................................Importing Workers things................................................*/ }
 import Index from './pages/workers/Index'
@@ -30,13 +32,12 @@ import Booking from './pages/event-management/Booking'
 import Events from './pages/event-management/Events'
 import Clients from './pages/event-management/Clients'
 import Reports from './pages/event-management/Reports'
-import Vendors from './pages/event-management/Vendors'
 import EventLogin from './pages/event-management/login/Login'
 import EventManagementProtected from './components/event-management/EventProtected'
 import EventOtp from './pages/event-management/login/Otp'
 import EventNavbar from './components/event-management/Navbar'
-import SideBar from './components/event-management/SideBar'
 import { useEffect, useState } from 'react'
+import Response from './pages/users/Response'
 
 {/*.........................................................................................................................*/ }
 
@@ -76,13 +77,16 @@ const App = () => {
   const userU3 = pathname.endsWith('/about')
   const userU4 = pathname.endsWith('/contactUs')
   const userU5 = pathname.endsWith('/product/:productId')
+  const userU6 = pathname.endsWith('/adBooking')
+  const userU7 = pathname.endsWith('/booking')
+  const userU8 = pathname.endsWith('/response')
   const hideEventOtp = pathname.endsWith('/event-management/otp')
   //....
 
 
   const hideEventMangement = loginpage || WorkersPage || ProductPage || userU1 || userU2 || userU3 || userU4 || userU5 || hideEventOtp
   const hideNavbar = loginpage || WorkersPage || EventManagementPage
-  const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage || userU3
+  const hideFooter = loginpage || WorkersPage || ProductPage || EventManagementPage || userU3 || userU6 || userU7 || userU8
 
   const hideEventlogin = pathname.startsWith('/event-management/login')
 
@@ -118,6 +122,9 @@ const App = () => {
         <Route path='/product/:productId' element={<Product />} />
         <Route path='/login' element={<Login />} />
         <Route path='/otp' element={<Otp />} />
+        <Route path='/adBooking' element={<AddBookingPage />} />
+        <Route path='/Booking' element={<BookingPage />} />
+        <Route path='/response' element={<Response />} />
 
         {/*//..............................Routes for Workers.........................................................*/}
 
@@ -139,7 +146,6 @@ const App = () => {
           <Route path='/event-management/clients' element={<Clients token={token} />} />
           <Route path='/event-management/events' element={<Events token={token} />} />
           <Route path='/event-management/reports' element={<Reports token={token} />} />
-          <Route path='/event-management/vendors' element={< Vendors token={token} />} />
           <Route path='/event-management/otp' element={<EventOtp />} />
         </Route>
 

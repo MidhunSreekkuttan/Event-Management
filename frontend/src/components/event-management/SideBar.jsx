@@ -23,12 +23,6 @@ const SideBar = () => {
                 </NavLink>
 
                 <NavLink
-                    className={({ isActive }) => `${linkBase} ${isActive ? 'color' : ''}`} to='/event-management/vendors'>
-                    <img className='w-7 ml-14' src={icon.vendor_icon} alt="" />
-                    <p>Vendors</p>
-                </NavLink>
-
-                <NavLink
                     className={({ isActive }) => `${linkBase} ${isActive ? 'color' : ''}`} to='/event-management/clients'>
                     <img className='w-7 bg-amber-50 ml-14' src={icon.userIcon} alt="" />
                     <p>Clients</p>

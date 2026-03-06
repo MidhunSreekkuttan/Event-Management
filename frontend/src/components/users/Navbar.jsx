@@ -64,8 +64,12 @@ const Navbar = () => {
 
             {userData?.name?.[0]?.toUpperCase() || "U"}
 
-            <div className='absolute hidden group-hover:block top-0 right-0 z-10 pt-10'>
-              <ul className='list-none m-0 p-2 text-xl font-semibold bg-linear-to-r from-purple-500 to-purple-600'>
+            <div className='absolute hidden group-hover:block top-0 right-0 z-10 pt-10 w-40'>
+              <ul className='list-none m-0 p-2 text-xl font-semibold bg-linear-to-r from-purple-500 to-purple-600 grid gap-2'>
+                <li onClick={() => navigate('/booking')}
+                  className='px-2 hover:bg-linear-to-br from-indigo-500 to-indigo-600 hover:text-amber-50'>
+                  MY Booking
+                </li>
                 <li onClick={logOut} className='px-2 hover:bg-linear-to-br from-indigo-500 to-indigo-600 hover:text-amber-50'>
                   Logout
                 </li>

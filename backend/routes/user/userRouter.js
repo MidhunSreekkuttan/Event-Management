@@ -10,7 +10,10 @@ import {
   deleteUser,
 } from "../../controllers/user/userController.js";
 import userAuth from "../../middleware/user/userAuth.js";
-import createEnquiry from "../../controllers/user/enquiryController.js";
+import {
+  createEnquiry,
+  listEnquiry,
+} from "../../controllers/user/enquiryController.js";
 
 const userRouter = express.Router();
 
@@ -21,6 +24,7 @@ userRouter.post("/sendVerifyOtp", userAuth, sendVerifyOtp);
 userRouter.post("/verifyEmail", userAuth, verifyEmail);
 userRouter.get("/isAuth", userAuth, isAuthendicated);
 userRouter.post("/enquiry", userAuth, createEnquiry);
+userRouter.get("/getEnquiry", userAuth, listEnquiry);
 userRouter.get("/listUser", listUser);
 userRouter.post("/deleteUser", deleteUser);
 
