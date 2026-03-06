@@ -25,7 +25,7 @@ bookingRouter.get(
   allOrderEventManagement,
 );
 //For user
-bookingRouter.post("/userBooking", userAuth, userBooking);
+bookingRouter.get("/userBooking", userAuth, userBooking);
 //For event management panel
 bookingRouter.post("/updateStatus", EventManagementAuth, updateStatus);
 
