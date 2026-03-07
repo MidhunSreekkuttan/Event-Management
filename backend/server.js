@@ -23,7 +23,11 @@ const PORT = process.env.PORT || 4000;
 
 //middleware
 
-const allowOrigins = "http://localhost:5173";
+const allowOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+];
 
 app.use(express.json());
 app.use(cookieParser());
