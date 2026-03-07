@@ -1,4 +1,4 @@
-import React from 'react'
+import { ToastContainer } from 'react-toastify';
 import Navbar from './components/Navbar'
 import SideBar from './components/SideBar'
 import { Route, Routes } from 'react-router-dom'
@@ -11,24 +11,25 @@ import Settings from './pages/Settings'
 
 const App = () => {
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen bg-blue-100'>
 
       <>
 
         <Navbar />
 
-        <div className='flex gap-5 w-full'>
+        <div className='flex w-full'>
 
           <SideBar />
+          <ToastContainer />
 
           <Routes>
 
-            <Route path='/staff/dashBoard' element={<DashBoard />} />
-            <Route path='/staff/enquiries' element={<Enquiries />} />
-            <Route path='/staff/events' element={<Events />} />
-            <Route path='/staff/clients' element={<Clients />} />
-            <Route path='/staff/report' element={<Report />} />
-            <Route path='/staff/settings' element={<Settings />} />
+            <Route path='/' element={<DashBoard />} />
+            <Route path='/enquiries' element={<Enquiries />} />
+            <Route path='/events' element={<Events />} />
+            <Route path='/clients' element={<Clients />} />
+            <Route path='/report' element={<Report />} />
+            <Route path='/settings' element={<Settings />} />
 
           </Routes>
 
