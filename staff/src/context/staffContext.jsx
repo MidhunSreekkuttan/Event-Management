@@ -32,7 +32,8 @@ const StaffContextProvider = (props) => {
     const value = {
 
         backendUrl,
-        listEnquiry, setlistEnquiry
+        listEnquiry, setlistEnquiry,
+        getAllEnquiry
 
     }
 

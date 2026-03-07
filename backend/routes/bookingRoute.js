@@ -26,7 +26,7 @@ bookingRouter.get(
 );
 //For user
 bookingRouter.get("/userBooking", userAuth, userBooking);
-//For event management panel
-bookingRouter.post("/updateStatus", EventManagementAuth, updateStatus);
+//For event management panel || staff panel
+bookingRouter.post("/updateStatus", updateStatus);
 
 export default bookingRouter;

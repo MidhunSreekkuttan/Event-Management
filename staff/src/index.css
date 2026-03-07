@@ -6,4 +6,5 @@
 
 button{
     cursor: pointer;
+    @apply active:scale-95
 }

@@ -3,7 +3,7 @@ import { staff_icons } from '../assets/assets'
 
 const SideBar = () => {
     return (
-        <div className='flex flex-col w-[18%] h-screen bg-blue-400 rounded-l-2xl ml-1 mt-1 mb-3'>
+        <div className='flex flex-col w-[18%] bg-blue-400 rounded-l-2xl ml-1 mt-1 mb-3'>
 
             {/*Welcome staff*/}
 
@@ -18,7 +18,7 @@ const SideBar = () => {
             {/*.............*/}
 
             <div className='flex flex-col gap-3 w-full h-full p-3'>
-                <NavLink to='/staff/dashBoard' className='py-3 rounded-lg items-center text-center'>
+                <NavLink to='/' className='py-3 rounded-lg items-center text-center'>
                     <div className='flex gap-3 items-center ml-5'>
                         <img className='w-10' src={staff_icons.dashboard_icon} alt="" />
                         <h1 className='text-2xl font-semibold'>
@@ -26,7 +26,7 @@ const SideBar = () => {
                         </h1>
                     </div>
                 </NavLink>
-                <NavLink to='/staff/enquiries' className='py-3 rounded-lg items-center text-center'>
+                <NavLink to='/enquiries' className='py-3 rounded-lg items-center text-center'>
                     <div className='flex gap-3 items-center ml-5'>
                         <img className='w-10' src={staff_icons.enquiry_icon} alt="" />
                         <h1 className='text-2xl font-semibold'>
@@ -34,7 +34,7 @@ const SideBar = () => {
                         </h1>
                     </div>
                 </NavLink>
-                <NavLink to='/staff/events' className='py-3 rounded-lg items-center text-center'>
+                <NavLink to='/events' className='py-3 rounded-lg items-center text-center'>
                     <div className='flex gap-3 items-center ml-5'>
                         <img className='w-10' src={staff_icons.event_icon} alt="" />
                         <h1 className='text-2xl font-semibold'>
@@ -42,7 +42,7 @@ const SideBar = () => {
                         </h1>
                     </div>
                 </NavLink>
-                <NavLink to='/staff/clients' className='py-3 rounded-lg items-center text-center'>
+                <NavLink to='/clients' className='py-3 rounded-lg items-center text-center'>
                     <div className='flex gap-3 items-center ml-5'>
                         <img className='w-10' src={staff_icons.clients_icon} alt="" />
                         <h1 className='text-2xl font-semibold'>
@@ -50,7 +50,7 @@ const SideBar = () => {
                         </h1>
                     </div>
                 </NavLink>
-                <NavLink to='/staff/report' className='py-3 rounded-lg items-center text-center'>
+                <NavLink to='/report' className='py-3 rounded-lg items-center text-center'>
                     <div className='flex gap-3 items-center ml-5'>
                         <img className='w-10' src={staff_icons.reports_icon} alt="" />
                         <h1 className='text-2xl font-semibold'>
@@ -58,7 +58,7 @@ const SideBar = () => {
                         </h1>
                     </div>
                 </NavLink>
-                <NavLink to='/staff/settings' className='py-3 rounded-lg items-center text-center'>
+                <NavLink to='/settings' className='py-3 rounded-lg items-center text-center'>
                     <div className='flex gap-3 items-center ml-5'>
                         <img className='w-10' src={staff_icons.settings_icon} alt="" />
                         <h1 className='text-2xl font-semibold'>
