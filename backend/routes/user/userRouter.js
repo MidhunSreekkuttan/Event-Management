@@ -12,6 +12,7 @@ import {
 import userAuth from "../../middleware/user/userAuth.js";
 import {
   createEnquiry,
+  listAllEnquiry,
   listEnquiry,
 } from "../../controllers/user/enquiryController.js";
 
@@ -25,6 +26,7 @@ userRouter.post("/verifyEmail", userAuth, verifyEmail);
 userRouter.get("/isAuth", userAuth, isAuthendicated);
 userRouter.post("/enquiry", userAuth, createEnquiry);
 userRouter.get("/getEnquiry", userAuth, listEnquiry);
+userRouter.get("/getAllEnquiry", listAllEnquiry);
 userRouter.get("/listUser", listUser);
 userRouter.post("/deleteUser", deleteUser);
 
