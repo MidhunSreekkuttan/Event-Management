@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.active{
+    background-color: #96C7FF;
+}
+
+button{
+    cursor: pointer;
+}
