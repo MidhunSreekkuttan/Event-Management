@@ -31,7 +31,7 @@ const ClientData = ({ id, name, category, date, starting_price, status }) => {
 
     return (
         <div className="grid grid-cols-6 items-center">
-            <div>{name}</div>
+            <div>{name.length > 14 ? name.slice(0, 14) + '...' : name}</div>
             <div>{category}</div>
             <div>{date?.split("T")[0]}</div>
             <div>{starting_price}</div>

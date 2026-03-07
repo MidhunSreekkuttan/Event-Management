@@ -1,6 +1,8 @@
 import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { otpMail, welcomeMail } from "../../config/emailTemplate.js";
+import welcomeMessage from "../../config/nodemailer.js";
 
 export const Register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -39,6 +41,15 @@ export const Register = async (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
+    const mailOptions = {
+      from: `"Adhithi"<${process.env.NO_REPLAY_EMAIL}>`,
+      to: email,
+      subject: "Welcome To your Destiny",
+      html: welcomeMail(name),
+    };
+
+    await welcomeMessage.sendMail(mailOptions);
 
     res.json({ success: true, message: "Registeration Successful" });
   } catch (error) {
@@ -117,6 +128,15 @@ export const sendVerifyOtp = async (req, res) => {
     user.verifyOtpExpire = Date.now() + 2 * 60 * 60 * 1000;
 
     await user.save();
+
+    const mailOption = {
+      from: `"Adhithi"<${process.env.NO_REPLAY_EMAIL}>`,
+      to: user.email,
+      subject: "Verify Using This OTP",
+      html: otpMail(user.name, otp),
+    };
+
+    await welcomeMessage.sendMail(mailOption);
 
     return res.json({
       success: true,
