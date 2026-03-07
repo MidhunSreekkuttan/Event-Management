@@ -16,6 +16,10 @@ const DashBoard = () => {
     })
     : []
 
+  const pendingCount = Array.isArray(listEnquiry) ? listEnquiry.filter(item => item.status.toLowerCase() === 'pending').length : 0
+
+  const completeCount = Array.isArray(listEnquiry) ? listEnquiry.filter(item => item.status.toLowerCase() === 'completed').length : 0
+
   return (
     <div className='flex flex-col mt-1 w-[175vh] rounded-r-2xl '>
 
@@ -39,7 +43,7 @@ const DashBoard = () => {
               <div className='flex'>
                 <img className='w-16 object-cover' src={staff_icons.enquiry_icon} alt="" />
                 <div className='ml-5'>
-                  <p className='text-3xl text-left font-semibold'>152</p>
+                  <p className='text-3xl text-left font-semibold'>{pendingCount}</p>
                   <h1 className='text-2xl font-semibold'>Pending Enquiries</h1>
                 </div>
               </div>
@@ -49,7 +53,7 @@ const DashBoard = () => {
               <div className='flex'>
                 <img className='w-16 object-cover' src={staff_icons.enquiry_icon} alt="" />
                 <div className='ml-5'>
-                  <p className='text-3xl text-left font-semibold'>152</p>
+                  <p className='text-3xl text-left font-semibold'>{completeCount}</p>
                   <h1 className='text-[20px] font-semibold'>Completed Enquiries</h1>
                 </div>
               </div>
