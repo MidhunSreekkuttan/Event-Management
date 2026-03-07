@@ -43,6 +43,7 @@ export const createEnquiry = async (req, res) => {
       additionalDetails,
       productId,
       userData,
+      date: Date.now(),
     });
     res.json({ success: true, message: "Enquiry Sumbitted", newEnquiry });
   } catch (error) {
@@ -70,7 +71,9 @@ export const listEnquiry = async (req, res) => {
 
 export const listAllEnquiry = async (req, res) => {
   try {
-    const response = await EnquiryModel.find({});
+    const response = await EnquiryModel.find({})
+      .populate("productId")
+      .populate("userData");
     return res.json({ success: true, response });
   } catch (error) {
     console.log(error);
