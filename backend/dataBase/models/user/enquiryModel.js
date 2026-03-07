@@ -9,6 +9,8 @@ const EnquirySchema = new mongoose.Schema(
     place: { type: String, required: true },
     count: { type: String, required: true },
     additionalDetails: { type: String },
+    date: { type: Date, required: true },
+    status: { type: String, default: "pending" },
 
     //get and store product data
 
@@ -23,7 +25,6 @@ const EnquirySchema = new mongoose.Schema(
       ref: "user",
       required: true,
     },
-    
   },
   { timestamps: true, minimize: false },
 );
