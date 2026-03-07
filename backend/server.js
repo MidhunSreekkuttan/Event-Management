@@ -12,6 +12,7 @@ import connectCloudinary from "./config/cloudinary.js";
 import dns from "dns";
 import adminRouter from "./routes/admin/adminRoutes.js";
 import bookingRouter from "./routes/bookingRoute.js";
+import staffsRouter from "./routes/staffs/staffsRoutes.js";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -47,6 +48,7 @@ app.use("/api/eventManagement", eventManagementRouter);
 app.use("/api/product", ProductRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/booking", bookingRouter);
+app.use("/api/staffs/", staffsRouter);
 
 await connectDB();
 
