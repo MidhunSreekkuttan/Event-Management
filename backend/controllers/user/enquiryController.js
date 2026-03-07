@@ -56,12 +56,22 @@ export const listEnquiry = async (req, res) => {
     const response = await EnquiryModel.find({
       userData: req.user.id,
     })
-      .populate("productId")// ✅ get product data
-      .populate("userData") // ✅ get user data
+      .populate("productId") // ✅ get product data
+      .populate("userData"); // ✅ get user data
     return res.json({
       success: true,
       response,
     });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const listAllEnquiry = async (req, res) => {
+  try {
+    const response = await EnquiryModel.find({});
+    return res.json({ success: true, response });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
