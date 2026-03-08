@@ -48,7 +48,7 @@ app.use("/api/eventManagement", eventManagementRouter);
 app.use("/api/product", ProductRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/booking", bookingRouter);
-app.use("/api/staffs/", staffsRouter);
+app.use("/api/staffs", staffsRouter);
 
 await connectDB();
 
