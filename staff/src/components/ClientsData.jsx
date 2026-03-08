@@ -1,10 +1,20 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { StaffContext } from "../context/staffContext"
+import { useNavigate } from "react-router-dom"
 
 const ClientData = ({ id, name, category, date, starting_price, status }) => {
+
     const { backendUrl, getAllEnquiry } = useContext(StaffContext)
+
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+
+        navigate(`/enquiry-details/${id}`)
+
+    }
 
     const statusHandler = async (event, orderId) => {
 
@@ -47,7 +57,7 @@ const ClientData = ({ id, name, category, date, starting_price, status }) => {
                 </select>
             </div>
             <div>
-                <button className="bg-amber-200 px-10 py-2 rounded-lg">
+                <button onClick={handleClick} className="bg-amber-200 px-10 py-2 rounded-lg">
                     View
                 </button>
             </div>

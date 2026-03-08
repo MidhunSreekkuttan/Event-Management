@@ -12,6 +12,7 @@ const StaffContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
     const [listEnquiry, setlistEnquiry] = useState([])
+    const [eventList, setEventList] = useState([])
 
     const getAllEnquiry = async () => {
 
@@ -29,17 +30,36 @@ const StaffContextProvider = (props) => {
         }
     }
 
-    const value = {
+    const getEventList = async () => {
 
-        backendUrl,
-        listEnquiry, setlistEnquiry,
-        getAllEnquiry
+        try {
 
+            const res = await axios.get(backendUrl + '/api/product/listProduct')
+
+            if (res.data.success) {
+                setEventList(res.data.product)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
     }
 
     useEffect(() => {
         getAllEnquiry()
+        getEventList()
     }, [])
+
+    const value = {
+
+        backendUrl,
+        listEnquiry, setlistEnquiry,
+        getAllEnquiry,
+        getEventList,
+        eventList, setEventList
+
+    }
 
     return (
         <StaffContext.Provider value={value}>
