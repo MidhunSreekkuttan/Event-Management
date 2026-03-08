@@ -1,17 +1,28 @@
-const Loader = () => {
+export default function Loader() {
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* Blur background */}
-            <div className="absolute inset-0 backdrop-blur-sm bg-white/5" />
+        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
 
-            {/* Loader card */}
-            <div className="relative flex flex-col items-center gap-3 rounded-2xl bg-white/70 px-8 py-6 shadow-lg">
-                {/* Brand spinner */}
-                <div className="w-14 h-14 rounded-full border-4 border-pink-200 border-t-pink-600 animate-spin" />
-                <p className="text-sm font-medium text-gray-700">Loading...</p>
-            </div>
+
+                <div className="flex flex-col items-center text-center">
+                    <div className="relative mb-6 flex h-24 w-24 items-center justify-center">
+
+                        <div className="absolute inset-0 rounded-full border-4 border-white/10" />
+                        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-fuchsia-400 border-r-indigo-400 animate-spin" />
+                        <div className="absolute inset-3 rounded-full border-4 border-transparent border-t-cyan-400 animate-spin [animation-duration:1.6s] [animation-direction:reverse]" />
+
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-fuchsia-500 via-indigo-500 to-cyan-400 text-lg font-bold shadow-lg">
+                            A
+                        </div>
+
+                    </div>
+
+                    <p className="mb-2 text-sm uppercase tracking-[0.35em] text-white">
+                        Adhithi
+                    </p>
+
+                </div>
+
+
         </div>
-    )
+    );
 }
-
-export default Loader

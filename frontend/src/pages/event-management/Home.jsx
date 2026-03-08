@@ -6,10 +6,13 @@ import { BackendContex } from '../../context/ConnectBackendContex'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import EventsByTypePie from '../../components/event-management/PieChart'
+import { EventContext } from '../../context/EventContext'
 
 const Home = () => {
 
   const { backendUrl } = useContext(BackendContex)
+
+  const { clientData, getClientData } = useContext(EventContext)
 
   const [item, setItem] = useState([])
 
@@ -32,6 +35,7 @@ const Home = () => {
 
   useEffect(() => {
     getData()
+    getClientData()
   }, [])
 
   return (
@@ -82,7 +86,7 @@ const Home = () => {
                 <img src={icon.plusIcon} alt="icon" className='w-6' />
               </div>
               <p className='ml-7 text-3xl font-mono'>
-                Dummy
+                {clientData.length}
               </p>
               <h2 className='text-xl font-semibold ml-7'>Total Clients</h2>
             </div>

@@ -64,7 +64,7 @@ const EventContextProvider = (props) => {
         }
     }
 
-    {/*Access data for event managemnet teams*/}
+    {/*Access data for event managemnet teams*/ }
     const getClientData = async () => {
 
         try {
@@ -81,7 +81,7 @@ const EventContextProvider = (props) => {
         }
     }
 
-    {/*Access data for users*/}
+    {/*Access data for users*/ }
     const getUserbooking = async () => {
         try {
 
@@ -111,7 +111,8 @@ const EventContextProvider = (props) => {
         listproducts, setlistProducts, listProduct,
         enquiryList, setEnquiryList,
         clientData, setClientData,
-        userBooking, setuserBooking
+        userBooking, setuserBooking,
+        getClientData
 
     }
 

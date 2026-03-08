@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import SideBar from '../../components/event-management/SideBar'
 import { EventContext } from '../../context/EventContext'
 import { icon } from '../../assets/assets'
@@ -6,7 +6,11 @@ import ClientData from '../../components/event-management/ClientData'
 
 const Clients = () => {
 
-  const { clientData } = useContext(EventContext)
+  const { clientData, getClientData } = useContext(EventContext)
+
+  useEffect(() => {
+    getClientData()
+  }, [])
 
   return (
     <div className='flex gap-10'>
