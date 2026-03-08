@@ -2,13 +2,12 @@ import { useContext } from 'react'
 import { logo } from '../../assets/assets'
 import { EventManagementContext } from '../../context/EventManagementContext'
 
-const Navbar = ({ setToken }) => {
+const Navbar = () => {
 
-  const { setIsLoggedIn } = useContext(EventManagementContext)
+  const { setIsLoggedIn, logout } = useContext(EventManagementContext)
 
   const handleOnClick = () => {
-    localStorage.removeItem('EventManagementLogin')
-    setToken('')
+    logout()
     setIsLoggedIn(false)
   }
 

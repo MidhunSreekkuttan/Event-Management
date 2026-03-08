@@ -33,11 +33,11 @@ import Events from './pages/event-management/Events'
 import Clients from './pages/event-management/Clients'
 import Reports from './pages/event-management/Reports'
 import EventLogin from './pages/event-management/login/Login'
-import EventManagementProtected from './components/event-management/EventProtected'
 import EventOtp from './pages/event-management/login/Otp'
 import EventNavbar from './components/event-management/Navbar'
 import { useEffect, useState } from 'react'
 import Response from './pages/users/Response'
+import { LoginOutlet } from './components/event-management/outlets/loginOutlet'
 
 {/*.........................................................................................................................*/ }
 
@@ -90,12 +90,6 @@ const App = () => {
 
   const hideEventlogin = pathname.startsWith('/event-management/login')
 
-  const [token, setToken] = useState(localStorage.getItem('EventManagementLogin') ? localStorage.getItem('EventManagementLogin') : '')
-
-  useEffect(() => {
-    localStorage.setItem('EventManagementLogin', token)
-  }, [token])
-
   return (
     <>
 
@@ -110,7 +104,7 @@ const App = () => {
 
       {/*Event Management Navbar*/}
 
-      {!hideEventMangement && !hideEventlogin && hideNavbar && <EventNavbar setToken={setToken} />}
+      {!hideEventMangement && !hideEventlogin && hideNavbar && <EventNavbar />}
 
       <Routes>
         {/*//..............................Routes for Users.........................................................*/}
@@ -138,15 +132,15 @@ const App = () => {
         {/*................................Event Management Routes....................................................*/}
 
         <Route path='/event-management/login' element={<EventLogin />} />
+        <Route path='/event-management/otp' element={<EventOtp />} />
 
-        <Route element={<EventManagementProtected />}>
+        <Route element={<LoginOutlet />}>
           <Route path='/event-management/home' element={<EventHome />} />
-          <Route path='/event-management/add' element={<Add token={token} />} />
-          <Route path='/event-management/booking' element={<Booking token={token} />} />
-          <Route path='/event-management/clients' element={<Clients token={token} />} />
-          <Route path='/event-management/events' element={<Events token={token} />} />
-          <Route path='/event-management/reports' element={<Reports token={token} />} />
-          <Route path='/event-management/otp' element={<EventOtp />} />
+          <Route path='/event-management/add' element={<Add />} />
+          <Route path='/event-management/booking' element={<Booking />} />
+          <Route path='/event-management/clients' element={<Clients />} />
+          <Route path='/event-management/events' element={<Events />} />
+          <Route path='/event-management/reports' element={<Reports />} />
         </Route>
 
         {/*............................... 404 Page not Found Route................................................. */}

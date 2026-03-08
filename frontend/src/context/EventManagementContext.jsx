@@ -12,8 +12,9 @@ const EventManagementContextProvider = (props) => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const [userData, setUserData] = useState(false)
+    const [userData, setUserData] = useState(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [authLoading, setAuthLoading] = useState(true)
 
     axios.defaults.withCredentials = true
 
@@ -40,8 +41,31 @@ const EventManagementContextProvider = (props) => {
             const { data } = await axios.get(backendUrl + '/api/eventManagement/isAuth')
 
             if (data.success) {
-                getUserData()
                 setIsLoggedIn(true)
+                await getUserData()
+            } else {
+                setIsLoggedIn(false)
+                setUserData(null)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+        finally {
+            setAuthLoading(false)
+        }
+    }
+
+    const logout = async () => {
+
+        try {
+
+            const res = await axios.post(backendUrl + '/api/eventManagement/logout')
+
+            if (res.data.success) {
+                setIsLoggedIn(false)
+                setUserData(null)
             }
 
         } catch (error) {
@@ -58,7 +82,9 @@ const EventManagementContextProvider = (props) => {
 
         userData, setUserData,
         isLoggedIn, setIsLoggedIn,
-        getUserData
+        getUserData,
+        logout,
+        authLoading, setAuthLoading
 
     }
 
