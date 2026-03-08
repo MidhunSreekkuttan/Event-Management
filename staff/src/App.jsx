@@ -8,6 +8,7 @@ import Events from './pages/Events'
 import Clients from './pages/Clients'
 import Report from './pages/Report'
 import Settings from './pages/Settings'
+import EventDetailPage from './pages/EventDetailPage';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Routes>
 
             <Route path='/' element={<DashBoard />} />
+            <Route path='/enquiry-details/:enquiryId' element={<EventDetailPage />} />
             <Route path='/enquiries' element={<Enquiries />} />
             <Route path='/events' element={<Events />} />
             <Route path='/clients' element={<Clients />} />
