@@ -1,9 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BackendContex } from "./ConnectBackendContex";
 
 export const EventContext = createContext()
+
+axios.defaults.withCredentials = true
 
 const EventContextProvider = (props) => {
 
@@ -16,7 +18,7 @@ const EventContextProvider = (props) => {
     const [userBooking, setuserBooking] = useState([])
 
     {/*Getting User seeing Product List*/ }
-    const getEventList = async () => {
+    const getEventList = useCallback(async () => {
 
         try {
 
@@ -30,10 +32,11 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
-    }
+
+    }, [backendUrl])
 
     {/*Getting Event Management teams seeing Product List*/ }
-    const listProduct = async () => {
+    const listProduct = useCallback(async () => {
 
         try {
 
@@ -46,10 +49,11 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
-    }
+
+    }, [backendUrl])
 
     //getting users enquiries
-    const listEnquiry = async () => {
+    const listEnquiry = useCallback(async () => {
 
         try {
 
@@ -62,10 +66,11 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
-    }
+
+    }, [backendUrl])
 
     {/*Access data for event managemnet teams*/ }
-    const getClientData = async () => {
+    const getClientData = useCallback(async () => {
 
         try {
 
@@ -79,10 +84,12 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
-    }
+
+    }, [backendUrl])
 
     {/*Access data for users*/ }
-    const getUserbooking = async () => {
+    const getUserbooking = useCallback(async () => {
+
         try {
 
             const res = await axios.get(backendUrl + '/api/booking/userBooking')
@@ -95,26 +102,30 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
-    }
+
+    }, [backendUrl])
+
+    // listProduct()
+    //  listEnquiry()
+    //  getClientData()
+    //  getUserbooking()
 
     useEffect(() => {
         getEventList()
-        listProduct()
-        listEnquiry()
-        getClientData()
-        getUserbooking()
-    }, [])
+    }, [getEventList])
 
-    const value = {
-
+    const value = useMemo(() => ({
         products,
         listproducts, setlistProducts, listProduct,
         enquiryList, setEnquiryList,
         clientData, setClientData,
         userBooking, setuserBooking,
-        getClientData
-
-    }
+        getClientData,
+        listEnquiry,
+        getUserbooking,
+        getEventList
+    }), [products, listproducts, enquiryList, clientData, userBooking, getClientData, listProduct, listEnquiry,
+        getUserbooking, getEventList])
 
     return (
 
