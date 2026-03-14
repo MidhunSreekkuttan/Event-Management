@@ -209,16 +209,17 @@ const About = () => {
           <div className='relative bottom-20 flex gap-20'>
 
             <motion.div
-              initial={{ y: 100, opacity: 0 }}
+              initial={{ y: -100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.2 }}
+              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
             >
 
               <div className='hover:scale-110 transition-all'>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative left-5 w-screen h-full object-cover object-[10%_-20%] scale-130'
-                    src='/IMG_20260113_212004.avif' alt="" />
+                    src={`/IMG_20260113_212004.avif`.replace('/upload/',
+                      '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Midhun M</h1>
@@ -239,7 +240,7 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: 100, opacity: 0 }}
+              initial={{ y: -100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
@@ -248,7 +249,8 @@ const About = () => {
               <div className='hover:scale-110 transition-all'>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[10%_15%]'
-                    src='/IMG_20260228_152809.avif' alt="" />
+                    src={`/IMG_20260228_152809.avif`.replace('/upload/',
+                      '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Sruthy Alex</h1>
@@ -269,16 +271,17 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: 100, opacity: 0 }}
+              initial={{ y: -100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
+              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
             >
 
               <div className='hover:scale-110 transition-all'>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative right-4 w-screen h-full object-cover scale-125 object-[10%_40%]'
-                    src='/IMG_20241204_124644.avif' alt="" />
+                    src={`/IMG_20241204_124644.avif`.replace('/upload/',
+                      '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Alfina S</h1>
@@ -299,17 +302,18 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: 100, opacity: 0 }}
+              initial={{ y: -100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
+              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.7 }}
             >
 
               <div className='hover:scale-110 transition-all'>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative left-15 w-full h-full object-cover 
                       object-[10%_15%] scale-150'
-                    src='/IMG_20241207_113701_1.avif' alt="" />
+                    src={`/IMG_20241207_113701_1.avif`.replace('/upload/',
+                      '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
                   <h1 className='relative top-4 font-semibold text-2xl text-center'>Abdulla Asid</h1>

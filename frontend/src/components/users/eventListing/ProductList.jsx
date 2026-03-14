@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BackendContex } from '../../../context/ConnectBackendContex'
 import { toast } from 'react-toastify'
@@ -9,9 +9,17 @@ const ProductList = ({ id, event_name, image, location, category }) => {
 
     const { userData } = useContext(BackendContex)
 
+    const optimizedImage = useMemo(() => {
+        if (!image?.[0]) return '/fallback-image.jpg'
+        return image[0].replace(
+            '/upload/',
+            '/upload/w_400,h_300,c_fill,f_auto,q_auto/'
+        )
+    }, [image])
+
     const handleEnquiry = () => {
 
-        if (userData.isAccountVerified) {
+        if (userData?.isAccountVerified) {
             navigate(`/product/${id}`)
         } else {
             toast.error('Plz Login')
@@ -27,7 +35,7 @@ const ProductList = ({ id, event_name, image, location, category }) => {
                     <div className='h-40  object-fill'>
                         <img
                             className='w-full h-full object-cover'
-                            src={image[0]}
+                            src={optimizedImage}
                             loading='lazy'
                             decoding='async'
                         />

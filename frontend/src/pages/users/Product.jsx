@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { EventContext } from '../../context/EventContext'
 import axios from 'axios'
@@ -76,7 +76,8 @@ const Product = () => {
                 {/* Main Image */}
                 <div className="w-[400px] h-[500px]">
                     <img
-                        src={image}
+                        src={image.replace('/upload/',
+                            '/upload/w_400,h_300,c_fill,f_auto,q_auto/')}
                         loading="lazy"
                         decoding='async'
                         alt=""
@@ -126,7 +127,8 @@ const Product = () => {
                     {productData.image.map((item, index) => (
                         <img
                             key={index}
-                            src={item}
+                            src={item.replace('/upload/',
+                                '/upload/w_400,h_300,c_fill,f_auto,q_auto/')}
                             loading='lazy'
                             decoding='async'
                             alt=""
