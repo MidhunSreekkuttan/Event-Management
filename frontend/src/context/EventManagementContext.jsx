@@ -1,10 +1,12 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { BackendContex } from "./ConnectBackendContex";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const EventManagementContext = createContext()
+
+axios.defaults.withCredentials = true
 
 const EventManagementContextProvider = (props) => {
 
@@ -16,9 +18,8 @@ const EventManagementContextProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [authLoading, setAuthLoading] = useState(true)
 
-    axios.defaults.withCredentials = true
+    const getUserData = useCallback(async () => {
 
-    const getUserData = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/eventManagement/getUserData')
 
@@ -33,9 +34,11 @@ const EventManagementContextProvider = (props) => {
             toast.error(error.message)
 
         }
-    }
 
-    const getAuthState = async () => {
+    }, [backendUrl])
+
+    const getAuthState = useCallback(async () => {
+
         try {
 
             const { data } = await axios.get(backendUrl + '/api/eventManagement/isAuth')
@@ -55,7 +58,8 @@ const EventManagementContextProvider = (props) => {
         finally {
             setAuthLoading(false)
         }
-    }
+
+    }, [backendUrl, getUserData])
 
     const logout = async () => {
 
@@ -76,9 +80,9 @@ const EventManagementContextProvider = (props) => {
 
     useEffect(() => {
         getAuthState()
-    }, [])
+    }, [getAuthState])
 
-    const value = {
+    const value = useMemo(() => ({
 
         userData, setUserData,
         isLoggedIn, setIsLoggedIn,
@@ -86,7 +90,7 @@ const EventManagementContextProvider = (props) => {
         logout,
         authLoading, setAuthLoading
 
-    }
+    }), [userData, isLoggedIn, getUserData, logout, authLoading])
 
     return (
 

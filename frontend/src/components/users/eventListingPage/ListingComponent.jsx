@@ -1,12 +1,25 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { icon } from '../../../assets/assets'
-import { EventContext } from '../../../context/EventContext'
 import ProductList from '../eventListing/ProductList'
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { BackendContex } from '../../../context/ConnectBackendContex';
+import Loader from '../../Loading';
 
 const ListingComponent = () => {
 
-    const { products } = useContext(EventContext)
+    const { backendUrl } = useContext(BackendContex)
+
+    const listEevent = useCallback(async () => {
+        const { data } = await axios.get(backendUrl + '/api/product/listProduct')
+        return data.product
+    }, [backendUrl])
+
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['eventlist'],
+        queryFn: listEevent
+    })
 
     const [filter, setfilter] = useState('all')
 
@@ -15,11 +28,11 @@ const ListingComponent = () => {
     const [search, setSearch] = useState('')
     const [searchBotton, setSearchButton] = useState('')
 
-    const handleSearch = () => {
+    const handleSearch = useCallback(() => {
         setSearchButton(search.trim())
-    }
+    }, [search])
 
-    const safeProducts = Array.isArray(products) ? products : [];
+    const safeProducts = Array.isArray(data) ? data : [];
 
     const filterProducts = useMemo(() => {
 
@@ -35,7 +48,7 @@ const ListingComponent = () => {
 
             return categoryFilter && filterLocation && searchFilter
         })
-    }, [safeProducts, filter, locationFilter, searchBotton, products])
+    }, [safeProducts, filter, locationFilter, searchBotton])
 
     const location = useLocation();
 
@@ -58,6 +71,8 @@ const ListingComponent = () => {
         }
     }, [location.hash]);
 
+    if (error) return <div>Error:{error.message}</div>
+    if (isLoading) return <Loader />
 
     return (
         <>
