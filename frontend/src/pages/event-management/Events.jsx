@@ -108,7 +108,7 @@ const Events = () => {
 
             {/*fetch events from backend*/}
 
-            <div className='grid grid-cols-3 gap-4 p-5'>
+            <div className='grid grid-cols-3 gap-7 p-5'>
               {itemList.map((item) => (
                 <ProductList key={item._id} image={item.image} event_name={item.event_name} category={item.category}
                   location={item.location} price={item.price} starting_price={item.starting_price} _id={item._id}

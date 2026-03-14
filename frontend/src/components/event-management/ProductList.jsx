@@ -1,4 +1,15 @@
+import { useMemo } from "react"
+
 const ProductList = ({ _id, event_name, image, location, category, price, starting_price, onDelete }) => {
+
+    //optimise image
+    const optimizedImage = useMemo(() => {
+        if (!image?.[0]) return '/fallback-image.jpg'
+        return image[0].replace(
+            '/upload/',
+            '/upload/w_400,h_300,c_fill,f_auto,q_auto/'
+        )
+    }, [image])
 
     return (
         <>
@@ -9,7 +20,7 @@ const ProductList = ({ _id, event_name, image, location, category, price, starti
                     <div className='h-45'>
                         <img
                             className='w-full h-full object-cover'
-                            src={image[0]}
+                            src={optimizedImage}
                             loading='lazy'
                             decoding='async'
                         />

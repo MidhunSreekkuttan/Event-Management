@@ -9,6 +9,7 @@ const ProductList = ({ id, event_name, image, location, category }) => {
 
     const { userData } = useContext(BackendContex)
 
+    //optimise image
     const optimizedImage = useMemo(() => {
         if (!image?.[0]) return '/fallback-image.jpg'
         return image[0].replace(
