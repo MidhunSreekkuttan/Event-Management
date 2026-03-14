@@ -1,0 +1,33 @@
+import { Outlet, useLocation } from 'react-router-dom'
+import Navbar from '../components/users/Navbar';
+import Footer from '../components/users/Footer';
+
+const UserLayout = () => {
+
+  const { pathname } = useLocation()
+
+  const whiteBgRoute = ["/eventList", "/about", "/contactUs"];
+
+  const hideNavbar =
+    pathname === '/login' ||
+    pathname === '/otp'
+
+  const hideFooter =
+    pathname === "/about" ||
+    pathname === "/adBooking" ||
+    pathname === "/Booking" ||
+    pathname === "/response" ||
+    pathname.startsWith("/product/");
+
+  return (
+    <>
+
+      {!hideNavbar && <Navbar />}
+      <Outlet />
+      {!hideFooter && <Footer whiteBg={whiteBgRoute.includes(pathname)} />}
+
+    </>
+  )
+}
+
+export default UserLayout

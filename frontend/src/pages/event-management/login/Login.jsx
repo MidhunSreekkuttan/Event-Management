@@ -46,7 +46,6 @@ const Login = () => {
         const { data } = await axios.post(backendUrl + '/api/eventManagement/login', { email, password })
 
         if (data.success) {
-          localStorage.setItem("EventManagementLogin", data.token)
           if (!data.isAccountVerified) {
             await sendVerifyOtp()
           } else {
