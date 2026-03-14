@@ -1,13 +1,7 @@
-import React from 'react'
 import { motion } from 'framer-motion'
-import { heroImages, logo } from '../../../assets/assets'
-import HeroSlide from './HeroSlide'
 import bg_video from '../../../assets/projectVideo.mp4'
-import { NavLink, useNavigate } from 'react-router-dom'
 
 const Hero = () => {
-
-  const navigate = useNavigate()
 
   const marquee = [
     'Event Management Team',
@@ -52,18 +46,18 @@ const Hero = () => {
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
               >
                 <div className='relative top-15 left-120 text-2xl font-bold flex gap-10'>
-                  <NavLink to='#category'>
-                    <button onClick={() => navigate('')}
+                  <a href='#category'>
+                    <button
                       className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
                       Explore Events
                     </button>
-                  </NavLink>
-                  <NavLink to='#info'>
-                    <button onClick={() => navigate('')}
+                  </a>
+                  <a href='#info'>
+                    <button
                       className='cursor-pointer bg-linear-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl'>
                       More Info
                     </button>
-                  </NavLink>
+                  </a>
                 </div>
 
               </motion.div>

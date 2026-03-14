@@ -97,9 +97,9 @@ const Footer = ({ whiteBg = false }) => {
             <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
             <ul className={`space-y-3 ${whiteBg ? "text-black" : 'text-white/80'}`}>
               <li className="hover:active:scale-110"><a href="#">Scroll UP</a></li>
-              <li className="hover:active:scale-110"><a href="/eventList">Event List</a></li>
-              <li className="hover:active:scale-110"><a href="/about">About Us</a></li>
-              <li className="hover:active:scale-110"><a href="/contactUs">Contact Us</a></li>
+              <li className="hover:active:scale-110"><Link to="/eventList">Event List</Link></li>
+              <li className="hover:active:scale-110"><Link to="/about">About Us</Link></li>
+              <li className="hover:active:scale-110"><Link to="/contactUs">Contact Us</Link></li>
             </ul>
           </div>
         </motion.div>

@@ -59,7 +59,7 @@ const Navbar = () => {
           </NavLink>
         </ul>
 
-        {userData.isAccountVerified ? (
+        {userData?.isAccountVerified ? (
           <div className='w-8 h-8 flex justify-center items-center rounded-full bg-amber-50 relative group text-black cursor-pointer'>
 
             {userData?.name?.[0]?.toUpperCase() || "U"}
