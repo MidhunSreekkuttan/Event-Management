@@ -1,6 +1,13 @@
-import { useMemo } from "react"
+import axios from "axios"
+import { useContext, useMemo } from "react"
+import { toast } from "react-toastify"
+import { BackendContex } from "../../context/ConnectBackendContex"
+import { EventContext } from "../../context/EventContext"
 
-const ClientData = ({ id, image, name, place, event_name, status = "pending" }) => {
+const ClientData = ({ id, image, name, place, event_name, status }) => {
+
+    const { backendUrl } = useContext(BackendContex)
+    const { getClientData } = useContext(EventContext)
 
     const optimizedImage = useMemo(() => {
         if (!image?.[0]) return '/fallback-image.jpg'
@@ -9,6 +16,28 @@ const ClientData = ({ id, image, name, place, event_name, status = "pending" }) 
             '/upload/w_400,h_300,c_fill,f_auto,q_auto/'
         )
     }, [image])
+
+    const statusHandler = async (event, orderId) => {
+
+        try {
+
+            const res = await axios.post(backendUrl + '/api/booking/updateStatus', {
+                orderId,
+                status: event.target.value,
+            })
+
+            if (res.data.success) {
+                toast.success(res.data.message)
+                await getClientData()
+            } else {
+                toast.error(res.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
 
     return (
         <section>
@@ -50,12 +79,13 @@ const ClientData = ({ id, image, name, place, event_name, status = "pending" }) 
                 {/* Status Select */}
                 <div className="flex items-center md:justify-center">
                     <select
-                        defaultValue={status}
+                        value={status || "pending"}
+                        onChange={(event) => statusHandler(event, id)}
                         className="bg-slate-900 border border-white/10 text-sm rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
                     >
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
+                        <option value="pending">pending</option>
+                        <option value="approved">approved</option>
+                        <option value="rejected">rejected</option>
                     </select>
                 </div>
 

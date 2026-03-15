@@ -14,6 +14,7 @@ import {
   createEnquiry,
   listAllEnquiry,
   listEnquiry,
+  updateStatus,
 } from "../../controllers/user/enquiryController.js";
 
 const userRouter = express.Router();
@@ -27,6 +28,9 @@ userRouter.get("/isAuth", userAuth, isAuthendicated);
 userRouter.post("/enquiry", userAuth, createEnquiry);
 userRouter.get("/getEnquiry", userAuth, listEnquiry);
 userRouter.get("/getAllEnquiry", listAllEnquiry);
+//access ally staff || admin
+userRouter.post("/updateStatus", updateStatus);
+//............................
 userRouter.get("/listUser", listUser);
 userRouter.post("/deleteUser", deleteUser);
 
