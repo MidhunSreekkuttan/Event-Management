@@ -16,6 +16,7 @@ const EventContextProvider = (props) => {
     const [enquiryList, setEnquiryList] = useState([])
     const [clientData, setClientData] = useState([])
     const [userBooking, setuserBooking] = useState([])
+    const [loading, setLoading] = useState(false)
 
     {/*Getting User seeing Product List*/ }
     const getEventList = useCallback(async () => {
@@ -84,6 +85,9 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
+        finally {
+            setLoading(false)
+        }
 
     }, [backendUrl])
 
@@ -123,9 +127,10 @@ const EventContextProvider = (props) => {
         getClientData,
         listEnquiry,
         getUserbooking,
-        getEventList
+        getEventList,
+        loading
     }), [products, listproducts, enquiryList, clientData, userBooking, getClientData, listProduct, listEnquiry,
-        getUserbooking, getEventList])
+        getUserbooking, getEventList, loading])
 
     return (
 

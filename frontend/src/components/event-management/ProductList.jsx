@@ -1,8 +1,7 @@
 import { useMemo } from "react"
 
-const ProductList = ({ _id, event_name, image, location, category, price, starting_price, onDelete }) => {
+const ProductList = ({ _id, event_name, image, location, category, price, starting_price, status, onDelete }) => {
 
-    //optimise image
     const optimizedImage = useMemo(() => {
         if (!image?.[0]) return '/fallback-image.jpg'
         return image[0].replace(
@@ -11,37 +10,79 @@ const ProductList = ({ _id, event_name, image, location, category, price, starti
         )
     }, [image])
 
+    const statusStyle = {
+        upcoming: "bg-purple-500/20 text-purple-300 border-purple-400/30",
+        ongoing: "bg-green-500/20 text-green-300 border-green-400/30",
+        completed: "bg-gray-500/20 text-gray-300 border-gray-400/30",
+    }
+
     return (
-        <>
 
-            <section className='text-black cursor-pointer'>
+        <section className='cursor-pointer'>
 
-                <div className='rounded-3xl overflow-hidden hover:scale-105 transition-transform'>
-                    <div className='h-45'>
-                        <img
-                            className='w-full h-full object-cover'
-                            src={optimizedImage}
-                            loading='lazy'
-                            decoding='async'
-                        />
-                    </div>
+            <div className='group rounded-3xl overflow-hidden border border-white/10 
+            bg-gradient-to-br from-slate-900 via-slate-950 to-black 
+            shadow-lg hover:shadow-2xl hover:shadow-purple-900/30 
+            transition-all duration-300 hover:-translate-y-1'>
 
-                    <div className='w-full h-fit pb-5 px-5 bg-white/20 text-white'>
-                        <p className='pt-3 pb-2 text-2xl font-semibold'>{event_name}</p>
-                        <p className='font-medium text-purple-300 pb-3'>{category}</p>
-                        <p className='text-gray-400 font-medium'>{location}</p>
-                        <p className='text-gray-400 font-medium'>${price}</p>
-                        <p className='text-gray-400 font-medium'>Starts $ {starting_price}</p>
-                        <button onClick={() => onDelete(_id)} className='bg-linear-to-r from-pink-500
-                             to-pink-700 text-white mt-3 py-3 w-full rounded-2xl'>
-                            Delete
-                        </button>
-                    </div>
+                {/* Image */}
+                <div className='relative h-48 overflow-hidden'>
+
+                    <img
+                        className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
+                        src={optimizedImage}
+                        loading='lazy'
+                        decoding='async'
+                    />
+
+                    {/* Status Badge */}
+                    <span className={`absolute top-3 left-3 text-xs px-3 py-1 rounded-full border font-semibold backdrop-blur-sm
+                        ${statusStyle[status] || statusStyle.upcoming}`}>
+                        {status || "upcoming"}
+                    </span>
+
                 </div>
 
-            </section>
+                {/* Content */}
+                <div className='p-5 text-white flex flex-col gap-2'>
 
-        </>
+                    <p className='text-xl font-semibold tracking-tight'>
+                        {event_name}
+                    </p>
+
+                    <p className='text-sm font-medium text-purple-400'>
+                        {category}
+                    </p>
+
+                    <p className='text-sm text-gray-400'>
+                        📍 {location}
+                    </p>
+
+                    <div className='flex justify-between text-sm mt-2 text-gray-300'>
+                        <span className='font-medium'>
+                            Price: ${price}
+                        </span>
+                        <span className='text-purple-300 font-medium'>
+                            From ${starting_price}
+                        </span>
+                    </div>
+
+                    <button
+                        onClick={() => onDelete(_id)}
+                        className='mt-4 w-full py-2.5 rounded-xl 
+                        bg-gradient-to-r from-pink-500 to-pink-700
+                        hover:from-pink-600 hover:to-pink-800
+                        text-white font-semibold text-sm
+                        shadow-md hover:shadow-pink-700/40
+                        transition-all duration-300'
+                    >
+                        Delete Event
+                    </button>
+
+                </div>
+            </div>
+
+        </section>
     )
 }
 

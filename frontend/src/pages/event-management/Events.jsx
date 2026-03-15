@@ -157,6 +157,7 @@ const Events = () => {
                       location={item.location}
                       price={item.price}
                       starting_price={item.starting_price}
+                      status={item.status}
                       _id={item._id}
                       onDelete={removeItem}
                     />

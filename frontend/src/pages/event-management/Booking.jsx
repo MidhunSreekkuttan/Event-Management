@@ -1,96 +1,227 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import SideBar from '../../components/event-management/SideBar'
 import { EventContext } from '../../context/EventContext'
 import { icon } from '../../assets/assets'
 import ClientData from '../../components/event-management/ClientData'
+import Loader from '../../components/Loading'
 
 const Booking = () => {
 
-  const { clientData, getClientData } = useContext(EventContext)
+  const { clientData, getClientData, loading } = useContext(EventContext)
+
+  //filter the booking session
+  const [filter, setFilter] = useState("all")
+
+  const filteredClients = useMemo(() => {
+
+    clientData?.map(data => ({
+      ...data,
+      items: data.items.filter(item =>
+        filter === "all" ? true : item.status === filter
+      )
+    }))
+
+  }, [clientData, filter])
+  //..........................
 
   useEffect(() => {
     getClientData()
   }, [])
 
   return (
-    <div className='flex gap-10'>
-      <SideBar />
 
-      <div className='flex flex-col bg-white/10 w-6xl mt-5 rounded-2xl p-7'>
-        {/*Topper*/}
+    <>
 
-        <div className='flex flex-col gap-5'>
-          <h1 className='text-5xl font-bold'>
-            Bookings
-          </h1>
-          <p className='text-white/55'>
-            Manage and monitor all registered users
-          </p>
+      {loading && <Loader />}
+
+      <div className='flex min-h-screen bg-slate-950 text-white'>
+        <SideBar />
+
+        <div className='flex-1 p-4 md:p-6 lg:p-8'>
+          <div className='rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-slate-950 to-black
+           shadow-2xl overflow-hidden'>
+
+            {/* Header */}
+            <div className='border-b border-white/10 px-6 py-6 md:px-8 md:py-7'>
+              <div className='flex flex-col gap-2'>
+                <h1 className='text-3xl md:text-4xl font-bold tracking-tight text-white'>
+                  Bookings
+                </h1>
+                <p className='text-sm md:text-base text-slate-400'>
+                  Manage and monitor all registered users
+                </p>
+              </div>
+            </div>
+
+            <div className='p-6 md:p-8'>
+
+              {/* Stats Cards */}
+              <div className='grid grid-cols-4 gap-6 mb-8'>
+                <div className='group relative overflow-hidden rounded-3xl border border-purple-400/20 bg-gradient-to-br
+                 from-purple-600 via-fuchsia-600 to-indigo-700 p-6 shadow-lg shadow-purple-900/30 transition-all
+                   duration-300 hover:-translate-y-1 hover:shadow-purple-800/40'>
+
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex items-center justify-between'>
+                    <div className='flex flex-col gap-2'>
+                      <p className='text-sm font-medium text-white/70'>Total Bookings</p>
+                      <h1 className='text-4xl font-bold tracking-tight'>{clientData.length}</h1>
+                      <p className='text-sm text-white/70'>All customer booking requests</p>
+                    </div>
+                    <div className='rounded-2xl bg-white/15 p-4 border border-white/10 backdrop-blur-sm'>
+                      <img className='w-8 h-8 object-contain' src={icon.clients_icon} alt="" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-amber-300/20 bg-gradient-to-br
+                 from-amber-400 via-yellow-500 to-orange-500 p-6 shadow-lg shadow-yellow-900/30 transition-all
+                   duration-300 hover:-translate-y-1 hover:shadow-yellow-700/40'>
+
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex items-center justify-between text-slate-950'>
+                    <div className='flex flex-col gap-2'>
+                      <p className='text-sm font-medium text-slate-900/70'>Pending Events</p>
+                      <h1 className='text-4xl font-bold tracking-tight'>320</h1>
+                      <p className='text-sm text-slate-900/70'>Pending bookings requests</p>
+                    </div>
+                    <div className='rounded-2xl bg-white/40 p-4 border border-white/30 backdrop-blur-sm'>
+                      <img className='w-8 h-8 object-contain' src={icon.events_icon} alt="" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-amber-300/20 bg-gradient-to-br
+                 from-green-300 via-green-500 to-green-800 p-6 shadow-lg shadow-yellow-900/30 transition-all
+                   duration-300 hover:-translate-y-1 hover:shadow-yellow-700/40'>
+
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex items-center justify-between text-slate-950'>
+                    <div className='flex flex-col gap-2'>
+                      <p className='text-sm font-medium text-slate-900/70'>Approved Events</p>
+                      <h1 className='text-4xl font-bold tracking-tight'>320</h1>
+                      <p className='text-sm text-slate-900/70'>Successfully approved bookings</p>
+                    </div>
+                    <div className='rounded-2xl bg-white/40 p-4 border border-white/30 backdrop-blur-sm'>
+                      <img className='w-8 h-8 object-contain' src={icon.events_icon} alt="" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-rose-400/20 bg-gradient-to-br
+                 from-rose-600 via-red-600 to-pink-700 p-6 shadow-lg shadow-rose-900/30 transition-all duration-300
+                   hover:-translate-y-1 hover:shadow-rose-800/40'>
+
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex items-center justify-between'>
+                    <div className='flex flex-col gap-2'>
+                      <p className='text-sm font-medium text-white/70'>Rejected Events</p>
+                      <h1 className='text-4xl font-bold tracking-tight'>320</h1>
+                      <p className='text-sm text-white/70'>Declined booking requests</p>
+                    </div>
+                    <div className='rounded-2xl bg-white/40 p-4 border border-white/10 backdrop-blur-sm'>
+                      <img className='w-8 h-8 object-contain' src={icon.delete_icon} alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/*filter UI buttons*/}
+              <div className="flex gap-3 mb-6">
+
+                <button
+                  onClick={() => setFilter("all")}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition 
+                    ${filter === "all"
+                      ? "bg-purple-600 text-white"
+                      : "bg-white/10 text-gray-300 hover:bg-white/20"}`}
+                >
+                  All
+                </button>
+
+                <button
+                  onClick={() => setFilter("pending")}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition 
+                    ${filter === "pending"
+                      ? "bg-yellow-500 text-black"
+                      : "bg-white/10 text-gray-300 hover:bg-white/20"}`}
+                >
+                  Pending
+                </button>
+
+                <button
+                  onClick={() => setFilter("approved")}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition 
+                    ${filter === "approved"
+                      ? "bg-green-500 text-white"
+                      : "bg-white/10 text-gray-300 hover:bg-white/20"}`}
+                >
+                  Approved
+                </button>
+
+                <button
+                  onClick={() => setFilter("rejected")}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition 
+                    ${filter === "rejected"
+                      ? "bg-red-500 text-white"
+                      : "bg-white/10 text-gray-300 hover:bg-white/20"}`}
+                >
+                  Rejected
+                </button>
+
+              </div>
+
+              {/* Table Section */}
+              <div className='rounded-3xl border border-white/10 bg-white/5 shadow-xl backdrop-blur-sm overflow-hidden'>
+                <div className='border-b border-white/10 px-6 py-5'>
+                  <h2 className='text-2xl font-bold text-white'>Booking Requests</h2>
+                  <p className='mt-1 text-sm text-slate-400'>
+                    Review customer bookings, event details, and actions.
+                  </p>
+                </div>
+
+                {/* Table Header */}
+                <div className='hidden md:grid grid-cols-[0.7fr_1fr_1.2fr_1fr_1fr_1fr] 
+                  gap-4 px-6 py-4 text-sm font-semibold
+                  text-slate-300 border-b border-white/10 bg-white/[0.03]'>
+
+                  <b className='text-center'>Image</b>
+                  <b className='text-center relative right-9'>Name</b>
+                  <b className='text-center'>Event Name</b>
+                  <b className='text-center'>Place</b>
+                  <b className='text-center relative right-5'>Status</b>
+                  <b className='text-center relative right-5'>Action</b>
+
+                </div>
+
+                {/* Table Body */}
+                <div className='p-4 md:p-6'>
+                  <div className='flex flex-col gap-4'>
+                    {Array.isArray(clientData) &&
+                      clientData.map((data, index) =>
+                        data.items.map((item, Itemindex) => (
+                          <ClientData
+                            key={`${index}-${Itemindex}`}
+                            id={item._id}
+                            image={item.productId.image}
+                            name={item.name}
+                            event_name={item.productId.event_name}
+                            place={item.place}
+                          />
+                        ))
+                      )
+                    }
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
-        {/*Badjes*/}
-
-        <div className='grid grid-cols-3 gap-3 mt-5'>
-          <div className='flex flex-col gap-3 p-5 items-center w-full bg-purple-500 rounded-2xl'>
-            <div className='flex'>
-              <div className='bg-white/60 relative right-15 py-1 px-2 rounded-full'>
-                <img className='w-10' src={icon.clients_icon} alt="" />
-              </div>
-              <h1 className='text-3xl font-semibold'>{clientData.length}</h1>
-            </div>
-            <h1 className='text-lg font-bold'>TOTAL BOOKINGS</h1>
-          </div>
-          <div className='flex flex-col gap-3 p-5 items-center w-full bg-yellow-600 rounded-2xl'>
-            <div className='flex'>
-              <div className='bg-yellow-300 relative right-15 py-1 px-2 rounded-full'>
-                <img className='w-10' src={icon.events_icon} alt="" />
-              </div>
-              <h1 className='text-3xl font-semibold'>320</h1>
-            </div>
-            <h1 className='text-lg font-bold'>APROVED EVENTS</h1>
-          </div>
-          <div className='flex flex-col gap-3 p-5 items-center w-full bg-red-700/85 rounded-2xl'>
-            <div className='flex'>
-              <div className='bg-yellow-300 relative right-15 py-1 px-2 rounded-full'>
-                <img className='w-10' src={icon.delete_icon} alt="" />
-              </div>
-              <h1 className='text-3xl font-semibold'>320</h1>
-            </div>
-            <h1 className='text-lg font-bold'>REGECTED EVENTS</h1>
-          </div>
-        </div>
-        {/*middle*/}
-
-        <div className='bg-white/10 w-full mt-10 rounded-2xl'>
-          <div className='p-2'>
-            {/*heading*/}
-
-            <ul className='grid grid-cols-[1fr_1fr_1fr_1fr_1fr] ml-20 mt-3'>
-              <b className=''>Image</b>
-              <b className=''>name</b>
-              <b className='text-center'>Event Name</b>
-              <b className='text-center'>Place</b>
-              <b className='text-center'>Action</b>
-            </ul>
-
-            <div className='mt-3 w-full h-full p-5'>
-              <div className='flex flex-col gap-3'>
-                {Array.isArray(clientData) &&
-                  clientData.map((data, index) =>
-                    data.items.map((item, Itemindex) => (
-                      <ClientData key={`${index}-${Itemindex}`} id={item._id} image={item.productId.image} name={item.name}
-                        event_name={item.productId.event_name} place={item.place} />
-                    ))
-                  )
-                }
-              </div>
-            </div>
-
-          </div>
-        </div>
-
       </div>
 
-    </div>
+    </>
+
   )
 }
 
