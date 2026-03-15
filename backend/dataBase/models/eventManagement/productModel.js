@@ -16,11 +16,26 @@ const ProductSchema = new mongoose.Schema(
     category: { type: String, required: true },
     location: { type: String, required: true },
     date: { type: Date, required: true },
+
+    //event || product start time
+    startTime: { type: Date, required: true },
+    //event || product end time
+    endTime: { type: Date, required: true },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   },
 );
+
+ProductSchema.virtual("status").get(function () {
+  const now = new Date();
+
+  if (now < this.startTime) return "upcoming";
+  if (now >= this.startTime && now <= this.endTime) return "ongoing";
+  return "completed";
+});
 
 const ProductModel =
   mongoose.models.Product || mongoose.model("Product", ProductSchema);
