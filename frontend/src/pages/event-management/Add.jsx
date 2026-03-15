@@ -23,6 +23,8 @@ const Add = ({ token }) => {
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('Birthday Party')
   const [location, setLocation] = useState('Trivandrum')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
 
   const [loading, setLoading] = useState(false)
 
@@ -42,6 +44,8 @@ const Add = ({ token }) => {
       formData.append('description', description)
       formData.append('category', category)
       formData.append('location', location)
+      formData.append('startTime', startTime)
+      formData.append('endTime', endTime)
 
       image1 && formData.append('image1', image1)
       image2 && formData.append('image2', image2)
@@ -61,6 +65,8 @@ const Add = ({ token }) => {
         setDescription('')
         setCategory('Birthday Party')
         setLocation('Trivandrum')
+        setStartTime('')
+        setEndTime('')
         setImage1(false)
         setImage2(false)
         setImage3(false)
@@ -178,6 +184,43 @@ const Add = ({ token }) => {
                 className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 min-h-30'
                 type="text" placeholder='Write Here' required />
+            </div>
+
+            {/*Adding starting and ending date's*/}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mt-2">
+
+              {/* Start Date */}
+              <div className="bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm backdrop-blur-md">
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Start Date
+                </label>
+                <input
+                  type="datetime-local"
+                  value={startTime}
+                  onChange={(e) => setStartTime(e.target.value)}
+                  className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
+                     focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
+                        transition duration-200"
+                  required
+                />
+              </div>
+
+              {/* End Date */}
+              <div className="bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm backdrop-blur-md">
+                <label className="block text-sm font-semibold text-white mb-2">
+                  End Date
+                </label>
+                <input
+                  type="datetime-local"
+                  value={endTime}
+                  onChange={(e) => setEndTime(e.target.value)}
+                  className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
+                     focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
+                       transition duration-200"
+                  required
+                />
+              </div>
+              
             </div>
 
             <div className='flex justify-between w-full'>
