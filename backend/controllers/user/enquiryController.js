@@ -80,3 +80,41 @@ export const listAllEnquiry = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+//Update enquiry status staff panel
+
+export const updateStatus = async (req, res) => {
+  try {
+    const { orderId, status } = req.body;
+
+    if (!orderId || !status) {
+      return res.json({
+        success: false,
+        message: "Order ID and Status are required",
+      });
+    }
+
+    const updatedBooking = await EnquiryModel.findByIdAndUpdate(orderId, {
+      status,
+    });
+
+    if (!updatedBooking) {
+      return res.json({
+        success: false,
+        message: "Booking not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Status Updated Successfully",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

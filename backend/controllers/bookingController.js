@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import BookingModel from "../dataBase/models/bookingModel.js";
 import ProductModel from "../dataBase/models/eventManagement/productModel.js";
-import EnquiryModel from "../dataBase/models/user/enquiryModel.js";
 
 //place booking in cod methode
 
@@ -95,9 +94,8 @@ export const userBooking = async (req, res) => {
   }
 };
 
-//Update booking status for event management panel || staff panel
-
-export const updateStatus = async (req, res) => {
+//update booking status for event managemnet panel
+export const updateBooking = async (req, res) => {
   try {
     const { orderId, status } = req.body;
 
@@ -108,7 +106,7 @@ export const updateStatus = async (req, res) => {
       });
     }
 
-    const updatedBooking = await EnquiryModel.findByIdAndUpdate(orderId, {
+    const updatedBooking = await BookingModel.findByIdAndUpdate(orderId, {
       status,
     });
 
@@ -126,9 +124,6 @@ export const updateStatus = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.json({
-      success: false,
-      message: error.message,
-    });
+    res.json({ success: false, message: error.message });
   }
 };
