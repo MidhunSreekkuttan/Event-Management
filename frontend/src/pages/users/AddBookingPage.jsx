@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { EventContext } from '../../context/EventContext'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -11,7 +11,7 @@ const BookingPage = () => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const { enquiryList, setEnquiryList } = useContext(EventContext)
+    const { enquiryList, setEnquiryList, listEnquiry } = useContext(EventContext)
     const [color, setColor] = useState('cod')
 
     const [formData, setFormData] = useState({
@@ -60,6 +60,7 @@ const BookingPage = () => {
                     const res = await axios.post(backendUrl + '/api/booking/placingBooking', bookingData)
 
                     if (res.data.success) {
+                        toast.success(res.data.message)
                         setEnquiryList([])
                         navidate('/')
                     } else {
@@ -78,6 +79,10 @@ const BookingPage = () => {
             toast.error(error.message)
         }
     }
+
+    useEffect(() => {
+        listEnquiry()
+    }, [listEnquiry])
 
     return (
         <div className='flex flex-col justify-center items-center mt-35'>

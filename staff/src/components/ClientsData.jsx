@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { StaffContext } from "../context/staffContext"
@@ -20,7 +20,7 @@ const ClientData = ({ id, name, category, date, starting_price, status }) => {
 
         try {
             const { data } = await axios.post(
-                `${backendUrl}/api/booking/updateStatus`,
+                `${backendUrl}/api/user/updateStatus`,
                 {
                     orderId,
                     status: event.target.value,
