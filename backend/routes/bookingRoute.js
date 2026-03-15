@@ -4,7 +4,7 @@ import {
   allOrderEventManagement,
   placebooking,
   placebookingStrip,
-  updateStatus,
+  updateBooking,
   userBooking,
 } from "../controllers/bookingController.js";
 import EventManagementAuth from "../middleware/eventManagement/eventManagementAuth.js";
@@ -26,7 +26,7 @@ bookingRouter.get(
 );
 //For user
 bookingRouter.get("/userBooking", userAuth, userBooking);
-//For event management panel || staff panel
-bookingRouter.post("/updateStatus", updateStatus);
+//update status for event managemnet panel
+bookingRouter.post("/updateStatus", updateBooking);
 
 export default bookingRouter;
