@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Bar } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -18,7 +18,6 @@ export default function RevenueBarChart() {
         []
     );
 
-    // ✅ Chart.js supports backgroundColor as a function, so we can create a gradient
     const data = useMemo(() => {
         return {
             labels,
@@ -26,21 +25,22 @@ export default function RevenueBarChart() {
                 {
                     label: "Monthly Revenue",
                     data: [20000, 40000, 60000, 80000, 50000, 70000, 65000, 72000, 80000, 90000, 95000, 100000],
-                    borderRadius: 10,
+                    borderRadius: 12,
                     borderSkipped: false,
+                    barThickness: 28,
                     backgroundColor: (ctx) => {
                         const { chart } = ctx;
                         const { ctx: canvasCtx, chartArea } = chart;
 
-                        // chartArea is undefined on first render
-                        if (!chartArea) return "rgba(59, 130, 246, 0.6)";
+                        if (!chartArea) return "rgba(168, 85, 247, 0.7)";
 
                         const gradient = canvasCtx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-                        gradient.addColorStop(0, "rgba(59, 130, 246, 0.25)");
-                        gradient.addColorStop(1, "rgba(59, 130, 246, 0.95)");
+                        gradient.addColorStop(0, "rgba(139, 92, 246, 0.35)");
+                        gradient.addColorStop(0.5, "rgba(168, 85, 247, 0.7)");
+                        gradient.addColorStop(1, "rgba(217, 70, 239, 0.95)");
                         return gradient;
                     },
-                    hoverBackgroundColor: "rgba(59, 130, 246, 1)",
+                    hoverBackgroundColor: "rgba(192, 132, 252, 1)",
                 },
             ],
         };
@@ -53,13 +53,29 @@ export default function RevenueBarChart() {
             plugins: {
                 legend: {
                     position: "top",
-                    labels: { boxWidth: 10, boxHeight: 10 },
+                    align: "end",
+                    labels: {
+                        color: "#cbd5e1",
+                        boxWidth: 10,
+                        boxHeight: 10,
+                        usePointStyle: true,
+                        pointStyle: "circle",
+                        padding: 20,
+                        font: {
+                            size: 12,
+                        },
+                    },
                 },
                 title: {
-                    display: true,
-                    text: "Revenue Overview",
+                    display: false,
                 },
                 tooltip: {
+                    backgroundColor: "#0f172a",
+                    titleColor: "#fff",
+                    bodyColor: "#e2e8f0",
+                    borderColor: "rgba(255,255,255,0.1)",
+                    borderWidth: 1,
+                    padding: 12,
                     callbacks: {
                         label: (item) => ` ₹${Number(item.raw).toLocaleString("en-IN")}`,
                     },
@@ -67,12 +83,34 @@ export default function RevenueBarChart() {
             },
             scales: {
                 x: {
-                    grid: { display: false },
+                    ticks: {
+                        color: "#94a3b8",
+                        font: {
+                            size: 12,
+                            weight: "500",
+                        },
+                    },
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    },
+                    border: {
+                        display: false,
+                    },
                 },
                 y: {
                     beginAtZero: true,
                     ticks: {
+                        color: "#94a3b8",
+                        padding: 10,
                         callback: (v) => `₹${Number(v).toLocaleString("en-IN")}`,
+                    },
+                    grid: {
+                        color: "rgba(255,255,255,0.06)",
+                        drawBorder: false,
+                    },
+                    border: {
+                        display: false,
                     },
                 },
             },
@@ -80,49 +118,27 @@ export default function RevenueBarChart() {
     }, []);
 
     return (
-        <div className="w-[50%] object-cover bg-purple-900/30 rounded-2xl p-5">
-            <div >
-                <div className="">
-                    <div style={styles.title}>Monthly Revenue</div>
-                    <div style={styles.sub}>Last 12 months</div>
+        <div className="w-full rounded-3xl border border-white/10 bg-gradient-to-br from-[#1e1b2e] via-[#111827]
+             to-[#0f172a] p-5 md:p-6 shadow-xl backdrop-blur-md">
+            <div className="mb-5 flex items-start justify-between">
+                <div>
+                    <h3 className="text-lg md:text-xl font-semibold text-white tracking-tight cursor-context-menu">
+                        Monthly Revenue
+                    </h3>
+                    <p className="mt-1 text-sm text-slate-400 cursor-context-menu">
+                        Last 12 months performance overview
+                    </p>
+                </div>
+
+                <div className="rounded-xl border border-purple-400/20 bg-purple-500/10 px-3 py-1.5 text-xs font-medium
+                     text-purple-300 cursor-context-menu">
+                    Revenue Stats
                 </div>
             </div>
 
-            <div style={styles.chartWrap}>
+            <div className="h-[320px] md:h-[360px]">
                 <Bar data={data} options={options} />
             </div>
         </div>
     );
 }
-
-const styles = {
-    card: {
-        background: "rgb(57, 57, 57)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: 16,
-        padding: 16,
-        color: "#e5e7eb",
-        width: "100%",
-        maxWidth: 900,
-    },
-    header: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 12,
-        marginBottom: 12,
-    },
-    title: { fontSize: 18, fontWeight: 700 },
-    sub: { fontSize: 12, opacity: 0.7, marginTop: 4 },
-    btn: {
-        background: "rgba(255,255,255,0.06)",
-        color: "#e5e7eb",
-        border: "1px solid rgba(255,255,255,0.12)",
-        padding: "8px 12px",
-        borderRadius: 10,
-        cursor: "pointer",
-    },
-    chartWrap: {
-        height: 340, // ✅ responsive height
-    },
-};
