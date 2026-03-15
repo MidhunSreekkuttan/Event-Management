@@ -88,7 +88,7 @@ const Events = () => {
             <div className='p-6 md:p-8'>
 
               {/* Top Cards */}
-              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-8'>
+              <div className='grid grid-cols-4 gap-6 mb-8'>
 
                 <div className='group relative overflow-hidden rounded-3xl border border-purple-400/20 bg-gradient-to-br
                    from-purple-600 via-fuchsia-600 to-indigo-700 p-6 shadow-lg shadow-purple-900/30 transition-all
@@ -102,12 +102,31 @@ const Events = () => {
                 </div>
 
                 <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br
+                   from-amber-400 via-yellow-500 to-orange-500 p-6 shadow-lg shadow-emerald-900/30 transition-all
+                     duration-300 hover:-translate-y-1 hover:shadow-emerald-800/40'>
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex flex-col gap-3'>
+                    <p className='text-sm font-medium text-white/70'>UpComing</p>
+                    <p className='text-4xl font-bold tracking-tight'>
+                      {Array.isArray(itemList) ?
+                        itemList.filter(item => item.status?.toLowerCase() === 'upcoming').length : 0
+                      }
+                    </p>
+                    <p className='text-sm text-white/70'>UpComing active event status</p>
+                  </div>
+                </div>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br
                    from-emerald-500 via-green-500 to-teal-600 p-6 shadow-lg shadow-emerald-900/30 transition-all
                      duration-300 hover:-translate-y-1 hover:shadow-emerald-800/40'>
                   <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
                   <div className='relative flex flex-col gap-3'>
                     <p className='text-sm font-medium text-white/70'>Ongoing</p>
-                    <p className='text-4xl font-bold tracking-tight'>--</p>
+                    <p className='text-4xl font-bold tracking-tight'>
+                      {Array.isArray(itemList) ?
+                        itemList.filter(item => item.status?.toLowerCase() === 'ongoing').length : 0
+                      }
+                    </p>
                     <p className='text-sm text-white/70'>Currently active event status</p>
                   </div>
                 </div>
@@ -118,7 +137,11 @@ const Events = () => {
                   <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
                   <div className='relative flex flex-col gap-3'>
                     <p className='text-sm font-medium text-white/70'>Completed</p>
-                    <p className='text-4xl font-bold tracking-tight'>--</p>
+                    <p className='text-4xl font-bold tracking-tight'>
+                      {Array.isArray(itemList) ?
+                        itemList.filter(item => item.status?.toLowerCase() === 'completed').length : 0
+                      }
+                    </p>
                     <p className='text-sm text-white/70'>Finished events overview</p>
                   </div>
                 </div>
