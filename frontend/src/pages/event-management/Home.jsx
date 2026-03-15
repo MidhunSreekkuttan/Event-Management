@@ -41,7 +41,7 @@ const Home = () => {
   useEffect(() => {
     getData()
     getClientData()
-  }, [])
+  }, [getData, getClientData])
 
   return (
 
@@ -93,7 +93,7 @@ const Home = () => {
                     </div>
                     <div>
                       <p className='text-4xl font-bold tracking-tight cursor-context-menu'>
-                        Dummy
+                        --
                       </p>
                       <h2 className='mt-2 text-base md:text-lg font-semibold text-white/90 cursor-context-menu'>
                         Total Revenue

@@ -5,12 +5,14 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import ProductList from '../../components/event-management/ProductList'
 import { NavLink } from 'react-router-dom'
+import Loader from '../../components/Loading'
 
 const Events = () => {
 
   const { backendUrl } = useContext(BackendContex)
 
   const [itemList, setItemList] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const removeItem = async (id) => {
 
@@ -29,6 +31,9 @@ const Events = () => {
       console.log(error);
       toast.error(error.message)
     }
+    finally {
+      setLoading(false)
+    }
   }
 
   const fetchData = async () => {
@@ -46,80 +51,123 @@ const Events = () => {
       console.log(error);
       toast.error(error.message)
     }
+    finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   return (
 
     <>
 
-      <div className='flex'>
+      {loading && <Loader />}
+
+      <div className='flex min-h-screen bg-slate-950 text-white'>
         <SideBar />
 
-        <div className='bg-white/8 w-[78rem]'>
-          <div className='flex flex-col gap-3'>
-            <h1 className='pl-6 mt-5 text-4xl font-semibold'>Events</h1>
-            <span className='pl-6 text-gray-400'>Manage and organize all your upcoming and past events.</span>
-          </div>
+        <div className='flex-1 p-4 md:p-6 lg:p-8'>
+          <div className='rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-slate-950
+             to-black shadow-2xl overflow-hidden'>
 
-          {/*topper*/}
-
-          <div className='flex gap-5 justify-center'>
-            <div className='bg-purple-600 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
-                 hover:scale-105'>
-              <p className='relative right-20 text-4xl'>{itemList.length}</p>
-              <p className='relative right-11 top-3 text-purple-300'>Total Events</p>
-            </div>
-            <div className='bg-blue-600 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
-                 hover:scale-105'>
-              <p className='relative right-13 text-4xl'></p>
-              <p className='relative right-13 top-3'>Upcoming</p>
-            </div>
-            <div className='bg-green-600 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
-                  hover:scale-105'>
-              <p className='relative right-13 text-4xl'></p>
-              <p className='relative right-13 top-3'>Ongoing</p>
-            </div>
-            <div className='bg-gray-500 w-70 h-28 rounded-3xl mt-5 flex flex-col justify-center items-center
-                  hover:scale-105'>
-              <p className='relative right-13 text-4xl'></p>
-              <p className='relative right-13 top-3'>Completed</p>
-            </div>
-          </div>
-
-          {/*Event List*/}
-
-          <div className='bg-white/10 mt-5 mx-5 rounded-2xl'>
-            <div className='flex justify-between'>
-              <h1 className='text-2xl font-bold pl-6 p-5'>ALL Events</h1>
-              <NavLink className='flex gap-4 w-fit h-fit px-6 py-2 rounded-lg bg-purple-600 text-center
-                  mt-5 ml-207'
-                to='/event-management/add'>
-                <h1>+</h1>
-                <h1 className=''>
-                  Create Event
+            {/* Header */}
+            <div className='border-b border-white/10 px-6 py-6 md:px-8 md:py-7'>
+              <div className='flex flex-col gap-2'>
+                <h1 className='text-3xl md:text-4xl font-bold tracking-tight text-white'>
+                  Events
                 </h1>
-              </NavLink>
-              <hr />
+                <span className='text-sm md:text-base text-slate-400'>
+                  Manage and organize all your upcoming and past events.
+                </span>
+              </div>
             </div>
 
-            {/*fetch events from backend*/}
+            <div className='p-6 md:p-8'>
 
-            <div className='grid grid-cols-3 gap-7 p-5'>
-              {itemList.map((item) => (
-                <ProductList key={item._id} image={item.image} event_name={item.event_name} category={item.category}
-                  location={item.location} price={item.price} starting_price={item.starting_price} _id={item._id}
-                  onDelete={removeItem} />
-              ))}
+              {/* Top Cards */}
+              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-8'>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-purple-400/20 bg-gradient-to-br
+                   from-purple-600 via-fuchsia-600 to-indigo-700 p-6 shadow-lg shadow-purple-900/30 transition-all
+                       duration-300 hover:-translate-y-1 hover:shadow-purple-800/40'>
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex flex-col gap-3'>
+                    <p className='text-sm font-medium text-white/70'>Total Events</p>
+                    <p className='text-4xl font-bold tracking-tight'>{itemList.length}</p>
+                    <p className='text-sm text-white/70'>All created events in your system</p>
+                  </div>
+                </div>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br
+                   from-emerald-500 via-green-500 to-teal-600 p-6 shadow-lg shadow-emerald-900/30 transition-all
+                     duration-300 hover:-translate-y-1 hover:shadow-emerald-800/40'>
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex flex-col gap-3'>
+                    <p className='text-sm font-medium text-white/70'>Ongoing</p>
+                    <p className='text-4xl font-bold tracking-tight'>--</p>
+                    <p className='text-sm text-white/70'>Currently active event status</p>
+                  </div>
+                </div>
+
+                <div className='group relative overflow-hidden rounded-3xl border border-slate-300/10 bg-gradient-to-br
+                   from-slate-500 via-slate-600 to-slate-700 p-6 shadow-lg shadow-slate-900/30 transition-all
+                     duration-300 hover:-translate-y-1 hover:shadow-slate-800/40'>
+                  <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
+                  <div className='relative flex flex-col gap-3'>
+                    <p className='text-sm font-medium text-white/70'>Completed</p>
+                    <p className='text-4xl font-bold tracking-tight'>--</p>
+                    <p className='text-sm text-white/70'>Finished events overview</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Event List Section */}
+              <div className='rounded-3xl border border-white/10 bg-white/5 shadow-xl backdrop-blur-sm overflow-hidden'>
+                <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-white/10
+                   px-6 py-5'>
+                  <div>
+                    <h1 className='text-2xl font-bold text-white'>All Events</h1>
+                    <p className='mt-1 text-sm text-slate-400'>
+                      View, manage, and update event listings from one place.
+                    </p>
+                  </div>
+
+                  <NavLink
+                    className='inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-purple-600
+                       to-fuchsia-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-900/30
+                         transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-700/40'
+                    to='/event-management/add'
+                  >
+                    <span className='text-lg leading-none'>+</span>
+                    <span>Create Event</span>
+                  </NavLink>
+                </div>
+
+                {/* fetch events from backend */}
+                <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6'>
+                  {itemList.map((item) => (
+                    <ProductList
+                      key={item._id}
+                      image={item.image}
+                      event_name={item.event_name}
+                      category={item.category}
+                      location={item.location}
+                      price={item.price}
+                      starting_price={item.starting_price}
+                      _id={item._id}
+                      onDelete={removeItem}
+                    />
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
-
         </div>
       </div>
-
     </>
   )
 }
