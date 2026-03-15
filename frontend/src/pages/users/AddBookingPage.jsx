@@ -12,7 +12,10 @@ const BookingPage = () => {
     const { backendUrl } = useContext(BackendContex)
 
     const { enquiryList, setEnquiryList, listEnquiry } = useContext(EventContext)
+
     const [color, setColor] = useState('cod')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -49,7 +52,9 @@ const BookingPage = () => {
                 address: formData,
                 userId: first.userData,
                 productId: first.productId._id || first.productId,
-                items
+                items,
+                bookingStartTime: startTime,
+                bookingEndTime: endTime
             }
 
             switch (color) {
@@ -134,6 +139,43 @@ const BookingPage = () => {
                                     type="text" placeholder='Place' required
                                     className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
                             </div>
+                        </div>
+
+                        {/*Adding starting and ending date's*/}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mt-2">
+
+                            {/* Start Date */}
+                            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm backdrop-blur-md">
+                                <label className="block text-sm font-semibold text-white mb-2">
+                                    Start Date
+                                </label>
+                                <input
+                                    type="datetime-local"
+                                    value={startTime}
+                                    onChange={e => setStartTime(e.target.value)}
+                                    className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
+                                         focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
+                                              transition duration-200"
+                                    required
+                                />
+                            </div>
+
+                            {/* End Date */}
+                            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm backdrop-blur-md">
+                                <label className="block text-sm font-semibold text-white mb-2">
+                                    End Date
+                                </label>
+                                <input
+                                    type="datetime-local"
+                                    value={endTime}
+                                    onChange={e => setEndTime(e.target.value)}
+                                    className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
+                                         focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
+                                           transition duration-200"
+                                    required
+                                />
+                            </div>
+
                         </div>
 
                         <div className='flex flex-col gap-2'>
