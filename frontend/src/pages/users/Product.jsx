@@ -94,7 +94,7 @@ const Product = () => {
                         {productData.event_name}
                     </h1>
 
-                    <div className='py-5 px-6 w-fit text-center rounded-2xl bg-gray-300 mt-6 shadow-2xl'>
+                    <div className='py-5 px-6 w-fit text-center rounded-2xl bg-gray-300 mt-6'>
                         <p className='font-bold text-purple-600 text-2xl'>
                             $ {productData.starting_price} <br />
                             <span className='text-sm'>Starting Package Price</span>
@@ -133,7 +133,8 @@ const Product = () => {
                             decoding='async'
                             alt=""
                             onClick={() => setImage(item)}
-                            className="w-full h-full object-cover cursor-pointer rounded-2xl shadow-2xl"
+                            className="w-full h-full object-cover cursor-pointer rounded-2xl
+                                hover:-translate-y-2 transition-all hover:shadow-2xl"
                         />
                     ))}
                 </div>

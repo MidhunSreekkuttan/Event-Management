@@ -13,6 +13,7 @@ const UserLayout = () => {
     pathname === '/otp'
 
   const hideFooter =
+    pathname === '/login' ||
     pathname === "/about" ||
     pathname === "/adBooking" ||
     pathname === "/Booking" ||

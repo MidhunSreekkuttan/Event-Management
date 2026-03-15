@@ -209,13 +209,13 @@ const About = () => {
           <div className='relative bottom-20 flex gap-20'>
 
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
+              initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
             >
 
-              <div className='hover:scale-110 transition-all'>
+              <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative left-5 w-screen h-full object-cover object-[10%_-20%] scale-130'
                     src={`/IMG_20260113_212004.avif`.replace('/upload/',
@@ -240,13 +240,13 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
+              initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
             >
 
-              <div className='hover:scale-110 transition-all'>
+              <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[10%_15%]'
                     src={`/IMG_20260228_152809.avif`.replace('/upload/',
@@ -271,13 +271,13 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
+              initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
             >
 
-              <div className='hover:scale-110 transition-all'>
+              <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative right-4 w-screen h-full object-cover scale-125 object-[10%_40%]'
                     src={`/IMG_20241204_124644.avif`.replace('/upload/',
@@ -302,13 +302,13 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
+              initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.7 }}
             >
 
-              <div className='hover:scale-110 transition-all'>
+              <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative left-15 w-full h-full object-cover 
                       object-[10%_15%] scale-150'

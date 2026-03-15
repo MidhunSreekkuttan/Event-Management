@@ -8,7 +8,6 @@ import Otp from '../pages/event-management/login/Otp'
 import Home from '../pages/event-management/Home'
 import Add from '../pages/event-management/Add'
 import Booking from '../pages/event-management/Booking'
-import Clients from '../pages/event-management/Clients'
 import Events from '../pages/event-management/Events'
 import Reports from '../pages/event-management/Reports'
 
@@ -38,7 +37,6 @@ const EventManagementRoutes = () => {
         <Route path='home' element={<Home />} />
         <Route path='add' element={<Add />} />
         <Route path='booking' element={<Booking />} />
-        <Route path='clients' element={<Clients />} />
         <Route path='events' element={<Events />} />
         <Route path='reports' element={<Reports />} />
 

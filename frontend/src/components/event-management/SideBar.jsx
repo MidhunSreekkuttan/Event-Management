@@ -22,12 +22,6 @@ const SideBar = () => {
                 </NavLink>
 
                 <NavLink
-                    className={({ isActive }) => `${linkBase} ${isActive ? 'color' : ''}`} to='/event-management/clients'>
-                    <img className='w-7 ml-5 bg-amber-50' src={icon.userIcon} alt="" />
-                    <p>Clients</p>
-                </NavLink>
-
-                <NavLink
                     className={({ isActive }) => `${linkBase} ${isActive ? 'color' : ''}`} to='/event-management/booking'>
                     <img className='w-7 ml-5' src={icon.contact_us} alt="" />
                     <p>Bookings</p>
