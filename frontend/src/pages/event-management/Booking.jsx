@@ -14,12 +14,10 @@ const Booking = () => {
 
   const filteredClients = useMemo(() => {
 
-    clientData?.map(data => ({
-      ...data,
-      items: data.items.filter(item =>
-        filter === "all" ? true : item.status === filter
-      )
-    }))
+    return Array.isArray(clientData) ? clientData.filter((item) => {
+      if (filter === 'all') return true
+      return item.status?.toLowerCase() === filter.toLowerCase()
+    }) : []
 
   }, [clientData, filter])
   //..........................
@@ -82,7 +80,11 @@ const Booking = () => {
                   <div className='relative flex items-center justify-between text-slate-950'>
                     <div className='flex flex-col gap-2'>
                       <p className='text-sm font-medium text-slate-900/70'>Pending Events</p>
-                      <h1 className='text-4xl font-bold tracking-tight'>320</h1>
+                      <h1 className='text-4xl font-bold tracking-tight'>
+                        {Array.isArray(clientData) ?
+                          clientData.filter(item => item.status?.toLowerCase() === 'pending').length : 0
+                        }
+                      </h1>
                       <p className='text-sm text-slate-900/70'>Pending bookings requests</p>
                     </div>
                     <div className='rounded-2xl bg-white/40 p-4 border border-white/30 backdrop-blur-sm'>
@@ -99,7 +101,11 @@ const Booking = () => {
                   <div className='relative flex items-center justify-between text-slate-950'>
                     <div className='flex flex-col gap-2'>
                       <p className='text-sm font-medium text-slate-900/70'>Approved Events</p>
-                      <h1 className='text-4xl font-bold tracking-tight'>320</h1>
+                      <h1 className='text-4xl font-bold tracking-tight'>
+                        {Array.isArray(clientData) ?
+                          clientData.filter(item => item.status?.toLowerCase() === 'approved').length : 0
+                        }
+                      </h1>
                       <p className='text-sm text-slate-900/70'>Successfully approved bookings</p>
                     </div>
                     <div className='rounded-2xl bg-white/40 p-4 border border-white/30 backdrop-blur-sm'>
@@ -116,7 +122,11 @@ const Booking = () => {
                   <div className='relative flex items-center justify-between'>
                     <div className='flex flex-col gap-2'>
                       <p className='text-sm font-medium text-white/70'>Rejected Events</p>
-                      <h1 className='text-4xl font-bold tracking-tight'>320</h1>
+                      <h1 className='text-4xl font-bold tracking-tight'>
+                        {Array.isArray(clientData) ?
+                          clientData.filter(item => item.status?.toLowerCase() === 'rejected').length : 0
+                        }
+                      </h1>
                       <p className='text-sm text-white/70'>Declined booking requests</p>
                     </div>
                     <div className='rounded-2xl bg-white/40 p-4 border border-white/10 backdrop-blur-sm'>
@@ -197,16 +207,17 @@ const Booking = () => {
                 {/* Table Body */}
                 <div className='p-4 md:p-6'>
                   <div className='flex flex-col gap-4'>
-                    {Array.isArray(clientData) &&
-                      clientData.map((data, index) =>
+                    {Array.isArray(filteredClients) &&
+                      filteredClients.map((data, index) =>
                         data.items.map((item, Itemindex) => (
                           <ClientData
                             key={`${index}-${Itemindex}`}
-                            id={item._id}
+                            id={data._id}
                             image={item.productId.image}
                             name={item.name}
                             event_name={item.productId.event_name}
                             place={item.place}
+                            status={data.status}
                           />
                         ))
                       )
