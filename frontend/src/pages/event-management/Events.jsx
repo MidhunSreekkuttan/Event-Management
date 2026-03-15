@@ -58,7 +58,7 @@ const Events = () => {
 
   useEffect(() => {
     fetchData()
-  }, [fetchData])
+  }, [])
 
   return (
 

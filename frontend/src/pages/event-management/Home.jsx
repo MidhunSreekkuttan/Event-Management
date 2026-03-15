@@ -41,7 +41,7 @@ const Home = () => {
   useEffect(() => {
     getData()
     getClientData()
-  }, [getData, getClientData])
+  }, [])
 
   return (
 
