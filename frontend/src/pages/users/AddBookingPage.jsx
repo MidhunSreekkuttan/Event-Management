@@ -195,7 +195,7 @@ const BookingPage = () => {
                         <hr className='mt-5' />
                         <div className='mt-20'>
                             {Array.isArray(enquiryList) &&
-                                enquiryList.map((item, index) => (
+                                enquiryList?.map((item, index) => (
                                     <div key={index} className='flex gap-5 text-[18px] font-bold'>
                                         <h1>TOTAL PRICE :</h1>
                                         <p>{item.productId.price}</p>

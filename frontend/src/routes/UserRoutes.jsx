@@ -22,7 +22,7 @@ const UserRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/otp" element={<Otp />} />
       <Route path="/adBooking" element={<AddBookingPage />} />
-      <Route path="/Booking" element={<BookingPage />} />
+      <Route path="/booking" element={<BookingPage />} />
       <Route path="/response" element={<Response />} />
     </Route>
   )
