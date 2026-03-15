@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import ProductModel from "../../dataBase/models/eventManagement/productModel.js";
+import getEventStatus from "../../config/getEventStatus.js";
 
 //Function for Add Product
 export const addProduct = async (req, res) => {
@@ -13,6 +14,8 @@ export const addProduct = async (req, res) => {
       description,
       category,
       location,
+      startTime,
+      endTime,
     } = req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
@@ -38,6 +41,20 @@ export const addProduct = async (req, res) => {
       }),
     );
 
+    if (!startTime || !endTime) {
+      return res.json({
+        success: false,
+        message: "Start time and end time are required",
+      });
+    }
+
+    if (new Date(endTime) <= new Date(startTime)) {
+      return res.json({
+        success: false,
+        message: "End time must be greater than start time",
+      });
+    }
+
     const productData = {
       owner: req.userId,
       company_name,
@@ -50,6 +67,8 @@ export const addProduct = async (req, res) => {
       location,
       image: imageUrl,
       date: Date.now(),
+      startTime: new Date(startTime),
+      endTime: new Date(endTime),
     };
 
     const product = new ProductModel(productData);
@@ -66,7 +85,13 @@ export const addProduct = async (req, res) => {
 export const ownerListProduct = async (req, res) => {
   try {
     const product = await ProductModel.find({ owner: req.userId });
-    return res.json({ success: true, product });
+
+    const productsWithStatus = product.map((product) => ({
+      ...product.toObject(),
+      status: getEventStatus(product.startTime, product.endTime),
+    }));
+
+    return res.json({ success: true, product: productsWithStatus });
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }
@@ -76,7 +101,13 @@ export const ownerListProduct = async (req, res) => {
 export const listProduct = async (req, res) => {
   try {
     const product = await ProductModel.find({});
-    return res.json({ success: true, product });
+
+    const productsWithStatus = product.map((product) => ({
+      ...product.toObject(),
+      status: getEventStatus(product.startTime, product.endTime),
+    }));
+
+    return res.json({ success: true, product: productsWithStatus });
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }
