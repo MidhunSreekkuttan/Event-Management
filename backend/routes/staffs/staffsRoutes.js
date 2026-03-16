@@ -10,6 +10,7 @@ import {
   getResponse,
   sendResponse,
 } from "../../controllers/staffs/responseController.js";
+import userAuth from "../../middleware/user/userAuth.js";
 
 const staffsRouter = express.Router();
 
@@ -18,6 +19,6 @@ staffsRouter.post("/login", login);
 staffsRouter.post("/logout", logout);
 staffsRouter.get("/getAuth", staffsAuth, getAuth);
 staffsRouter.post("/sendResponse", sendResponse);
-staffsRouter.get("/getResponse", getResponse);
+staffsRouter.get("/getResponse", userAuth, getResponse);
 
 export default staffsRouter;

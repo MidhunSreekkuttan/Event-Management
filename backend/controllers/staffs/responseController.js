@@ -2,7 +2,7 @@ import ResponseModel from "../../dataBase/models/staffs/responseModel.js";
 
 export const sendResponse = async (req, res) => {
   try {
-    const { enquiryId, relatedEvents, respondMessage } = req.body;
+    const { enquiryId, relatedEvents, respondMessage, userId } = req.body;
 
     if (!enquiryId) {
       return res.json({ success: false, message: "Enquiry Id not found" });
@@ -23,6 +23,7 @@ export const sendResponse = async (req, res) => {
       enquiryId,
       relatedEvents,
       respondMessage,
+      userId,
       date: Date.now(),
     });
 
@@ -45,9 +46,13 @@ export const sendResponse = async (req, res) => {
 
 export const getResponse = async (req, res) => {
   try {
-    const responsedata = await ResponseModel.find({})
+    const responsedata = await ResponseModel.find({ userId: req.userId })
       .populate("enquiryId")
       .populate("relatedEvents");
+
+    if (responsedata.length === 0) {
+      return res.json({ success: false, message: "User Not found" });
+    }
 
     res.json({ success: true, responsedata });
   } catch (error) {

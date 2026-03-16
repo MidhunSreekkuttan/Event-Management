@@ -8,6 +8,12 @@ const ResponseSchema = new mongoose.Schema(
       required: true,
     },
 
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+
     relatedEvents: [
       {
         type: mongoose.Schema.Types.ObjectId,
