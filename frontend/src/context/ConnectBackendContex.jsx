@@ -16,6 +16,7 @@ const BackendContexProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userData, setUserData] = useState('')
     const [loading, setloading] = useState(false)
+    const [bookingData, setBookingData] = useState([])
 
     //get user data + verification check
     const getUserData = useCallback(async () => {
@@ -69,6 +70,27 @@ const BackendContexProvider = (props) => {
 
     }, [backendUrl, getUserData])
 
+    //getting booking data's from staff to see users
+    const getBookingData = useCallback(async () => {
+
+        try {
+            setloading(true)
+
+            const { data } = await axios.get(backendUrl + '/api/staffs/getResponse')
+            if (data.success) {
+                setBookingData(data.responsedata)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+        finally {
+            setloading(false)
+        }
+
+    }, [backendUrl])
+
     useEffect(() => {
         getAuthState()
     }, [getAuthState])
@@ -78,8 +100,10 @@ const BackendContexProvider = (props) => {
         isLoggedIn, setIsLoggedIn,
         userData, setUserData,
         getUserData,
-        loading
-    }), [backendUrl, isLoggedIn, userData, getUserData, loading])
+        loading,
+        getBookingData,
+        bookingData
+    }), [backendUrl, isLoggedIn, userData, getUserData, loading, getBookingData, bookingData])
 
     return (
         <BackendContex.Provider value={value}>
