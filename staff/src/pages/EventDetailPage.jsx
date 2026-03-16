@@ -43,7 +43,8 @@ const EventDetailPage = () => {
             const res = await axios.post(backendUrl + '/api/staffs/sendResponse', {
                 enquiryId: enquiryData._id,
                 relatedEvents: selectedEvent.map((item) => item._id),
-                respondMessage: responseMessage
+                respondMessage: responseMessage,
+                userId: enquiryData.userData?._id
             })
 
             if (res.data.success) {

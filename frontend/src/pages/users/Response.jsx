@@ -40,7 +40,7 @@ const Response = () => {
     getBookingList()
   }, [])
 
-  return (
+  return response.length > 0 ? (
 
     <>
 
@@ -138,7 +138,31 @@ const Response = () => {
 
     </>
 
-  );
+  ) : <div className="min-h-screen flex items-center justify-center px-6">
+
+    <div className="max-w-lg w-full text-center bg-white dark:bg-slate-800 shadow-lg rounded-3xl p-10 border border-slate-200 dark:border-slate-700">
+
+      <div className="text-6xl mb-4">📭</div>
+
+      <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">
+        No Responses Yet
+      </h1>
+
+      <p className="text-slate-600 dark:text-slate-300 mb-6">
+        You haven't received any responses for your enquiries yet.
+        Once staff respond with event suggestions, they will appear here.
+      </p>
+
+      <button
+        onClick={() => navigate("/eventList")}
+        className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition"
+      >
+        Explore Events
+      </button>
+
+    </div>
+
+  </div>
 }
 
 export default Response
