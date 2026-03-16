@@ -5,10 +5,13 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import Loader from '../../components/Loading'
+import { EventContext } from '../../context/EventContext'
 
 const BookingPage = () => {
 
   const { backendUrl } = useContext(BackendContex)
+
+  const { getUserbooking } = useContext(EventContext)
 
   const [orderData, setOrderData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -33,6 +36,7 @@ const BookingPage = () => {
 
   useEffect(() => {
     getOrder()
+    getUserbooking()
   }, [])
 
   return (
@@ -83,7 +87,7 @@ const BookingPage = () => {
                     <div className='flex justify-between mt-13'>
                       <div className='flex items-center gap-2'>
                         <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
-                        <p className='text-sm text-amber-200 mr-95'>Booked</p>
+                        <p className='text-sm text-amber-200 mr-95'>{order.status}</p>
                       </div>
                       <button className='border px-4 py-2 text-sm font-medium rounded-sm text-amber-50'>
                         Track Booking
