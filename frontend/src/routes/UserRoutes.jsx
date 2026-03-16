@@ -10,6 +10,7 @@ import Otp from '../pages/users/login/Otp'
 import AddBookingPage from '../pages/users/AddBookingPage'
 import BookingPage from '../pages/users/BookingPage'
 import Response from '../pages/users/Response'
+import ResponseDetails from '../pages/users/ResponseDetails'
 
 const UserRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const UserRoutes = () => {
       <Route path="/adBooking" element={<AddBookingPage />} />
       <Route path="/booking" element={<BookingPage />} />
       <Route path="/response" element={<Response />} />
+      <Route path="/response-Details/:enquiryId" element={<ResponseDetails />} />
     </Route>
   )
 }
