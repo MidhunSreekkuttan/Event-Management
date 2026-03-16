@@ -28,10 +28,6 @@ const EventDetailPage = () => {
 
     const filterCategory = eventList.filter(event => event.category === enquiryData?.productId?.category)
 
-    console.log(enquiryData);
-    console.log(filterCategory);
-    console.log(selectedEvent);
-
     const sendResponse = async () => {
 
         try {

@@ -1,6 +1,6 @@
 import ResponseModel from "../../dataBase/models/staffs/responseModel.js";
 
-const sendResponse = async (req, res) => {
+export const sendResponse = async (req, res) => {
   try {
     const { enquiryId, relatedEvents, respondMessage } = req.body;
 
@@ -43,4 +43,15 @@ const sendResponse = async (req, res) => {
   }
 };
 
-export default sendResponse;
+export const getResponse = async (req, res) => {
+  try {
+    const responsedata = await ResponseModel.find({})
+      .populate("enquiryId")
+      .populate("relatedEvents");
+
+    res.json({ success: true, responsedata });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
