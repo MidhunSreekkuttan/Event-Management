@@ -62,25 +62,24 @@ const BookingPage = () => {
                     <img
                       className='w-30 h-38 object-cover rounded'
                       src={
-                        Array.isArray(bookingItem.productId.image)
-                          ? bookingItem.productId.image[0]
-                          : bookingItem.productId.image || undefined
+                        Array.isArray(bookingItem.image)
+                          ? bookingItem.image[0]
+                          : bookingItem.image || undefined
                       }
                       alt="booking"
                     />
 
                     <div className='flex-1'>
                       <p className='text-white font-medium'>
-                        {bookingItem.productId.company_name}
+                        {bookingItem.company_name}
                       </p>
 
                       <div className='items-center gap-3 mt-2 text-sm text-amber-100'>
-                        <p>Name: {bookingItem.name}</p>
-                        <p>Email: {bookingItem.email}</p>
-                        <p>Phone: {bookingItem.phoneNumber}</p>
-                        <p>Event Date: {bookingItem.eventDate}</p>
-                        <p>Place: {bookingItem.place}</p>
-                        <p>Count: {bookingItem.count}</p>
+                        <p>Name: {order.address?.firstName}</p>
+                        <p>Email: {order.address?.email}</p>
+                        <p>Phone: {order.address?.phoneNumber}</p>
+                        <p>Event Date: {order.eventDate}</p>
+                        <p>Place: {order.address?.place}</p>
                       </div>
                     </div>
 

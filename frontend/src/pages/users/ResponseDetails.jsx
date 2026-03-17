@@ -1,7 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BackendContex } from "../../context/ConnectBackendContex";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loading";
+import { toast } from "react-toastify";
 
 const ResponseDetails = () => {
 
@@ -9,13 +10,32 @@ const ResponseDetails = () => {
 
     const { enquiryId } = useParams()
 
+    const [selectedEvent, setSelectedEvent] = useState([])
+
     const navigate = useNavigate()
 
     const getData = Array.isArray(bookingData) && bookingData.find(item => item._id === enquiryId)
 
-    const handleClick = () => {
-        navigate('/adBooking')
+    const handleClick = (id) => {
+        if (selectedEvent.length === 0) {
+            return toast.error("Select an Event")
+        }
+        navigate(`/adBooking/${id}`)
     }
+
+    const handleSelectEvent = (event) => {
+        setSelectedEvent((prev) => {
+            const alreadySelected = prev.some((item) => item._id === event._id)
+
+            if (alreadySelected) {
+                return prev.filter((item) => item._id !== event._id)
+            } else {
+                return [...prev, event]
+            }
+        })
+    }
+    console.log(selectedEvent);
+
 
     useEffect(() => {
         getBookingData()
@@ -207,13 +227,26 @@ const ResponseDetails = () => {
                                             </div>
 
                                             <p className="min-h-[110px] text-base leading-7 text-slate-600">
-                                                {event.description}
+                                                {event.description?.length > 150 ? event.description?.slice(0, 150) + '...'
+                                                    :
+                                                    event.description}
                                             </p>
 
-                                            <button onClick={handleClick} className="w-full rounded-xl bg-gradient-to-r from-[#21409a] to-[#0d2f7c] px-5 py-3 text-lg font-semibold text-white shadow-md transition hover:opacity-95">
-                                                Book this Event
+                                            <button onClick={() => handleSelectEvent(event)}
+                                                className={`w-full rounded-xl px-5 py-3 text-lg font-semibold
+                                                 text-white shadow-md transition hover:opacity-95 ${selectedEvent.length > 0 ?
+                                                        "bg-green-500" : "bg-gradient-to-r from-[#21409a] to-[#0d2f7c]"
+                                                    }`}>
+                                                {selectedEvent.some(item => item._id === event._id) ? "Selected" : "Select"}
                                             </button>
                                         </div>
+
+                                        <div className="flex justify-center mx-5 mb-5">
+                                            <button onClick={() => handleClick(event._id)} className="bg-black text-2xl text-white w-full py-3 rounded-2xl">
+                                                Booking
+                                            </button>
+                                        </div>
+
                                     </article>
                                 ))}
                         </div>

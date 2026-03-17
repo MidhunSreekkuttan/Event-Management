@@ -22,7 +22,7 @@ const UserRoutes = () => {
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/login" element={<Login />} />
       <Route path="/otp" element={<Otp />} />
-      <Route path="/adBooking" element={<AddBookingPage />} />
+      <Route path="/adBooking/:bookingId" element={<AddBookingPage />} />
       <Route path="/booking" element={<BookingPage />} />
       <Route path="/response" element={<Response />} />
       <Route path="/response-Details/:enquiryId" element={<ResponseDetails />} />
