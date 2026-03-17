@@ -209,14 +209,14 @@ const Booking = () => {
                   <div className='flex flex-col gap-4'>
                     {Array.isArray(filteredClients) &&
                       filteredClients.map((data, index) =>
-                        data.items.map((item, Itemindex) => (
+                        data.items?.map((item, Itemindex) => (
                           <ClientData
                             key={`${index}-${Itemindex}`}
                             id={data._id}
-                            image={item.productId.image}
-                            name={item.name}
-                            event_name={item.productId.event_name}
-                            place={item.place}
+                            image={item.image}
+                            name={data.address?.firstName}
+                            event_name={item.event_name}
+                            place={data.address?.place}
                             status={data.status}
                           />
                         ))

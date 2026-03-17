@@ -27,8 +27,7 @@ const BookingScheme = new mongoose.Schema(
     },
     paymentMethod: { type: String, required: true },
     payment: { type: Boolean, required: true, default: false },
-    bookingStartTime: { type: Date, required: true },
-    bookingEndTime: { type: Date, required: true },
+    eventDate: { type: String, required: true },
     date: { type: Number, required: true },
   },
   {

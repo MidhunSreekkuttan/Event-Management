@@ -6,14 +6,7 @@ import ProductModel from "../dataBase/models/eventManagement/productModel.js";
 
 export const placebooking = async (req, res) => {
   try {
-    const {
-      userId,
-      productId,
-      address,
-      items,
-      bookingStartTime,
-      bookingEndTime,
-    } = req.body;
+    const { userId, productId, address, items, eventDate } = req.body;
 
     const product = await ProductModel.findById(productId);
 
@@ -40,8 +33,7 @@ export const placebooking = async (req, res) => {
       paymentMethod: "COD",
       payment: false,
       date: Date.now(),
-      bookingStartTime,
-      bookingEndTime,
+      eventDate,
     };
 
     const newBooking = new BookingModel(bookingData);

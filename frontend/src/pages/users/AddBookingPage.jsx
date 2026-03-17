@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { EventContext } from '../../context/EventContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { BackendContex } from '../../context/ConnectBackendContex'
 import axios from 'axios'
@@ -9,13 +9,18 @@ const BookingPage = () => {
 
     const navidate = useNavigate()
 
+    const { bookingId } = useParams()
+
     const { backendUrl } = useContext(BackendContex)
 
-    const { enquiryList, setEnquiryList, listEnquiry } = useContext(EventContext)
+    const { enquiryList, listEnquiry, products } = useContext(EventContext)
+
+    const usersId = enquiryList.find(item => item.userData?._id)?.userData?._id;
+
+    const bookedData = products.find(item => item._id === bookingId)
 
     const [color, setColor] = useState('cod')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
+    const [date, setDate] = useState('')
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -39,22 +44,16 @@ const BookingPage = () => {
 
         try {
 
-            const items = Array.isArray(enquiryList) ? enquiryList : []
-
-            if (items.length === 0) {
-                toast.error("No enquiry items found")
-                return
+            if (!bookedData) {
+                toast.error("Event Not Found")
             }
-
-            const first = items[0]
 
             const bookingData = {
                 address: formData,
-                userId: first.userData,
-                productId: first.productId._id || first.productId,
-                items,
-                bookingStartTime: startTime,
-                bookingEndTime: endTime
+                userId: usersId,
+                productId: bookedData?._id,
+                items: bookedData,
+                eventDate: date
             }
 
             switch (color) {
@@ -66,7 +65,6 @@ const BookingPage = () => {
 
                     if (res.data.success) {
                         toast.success(res.data.message)
-                        setEnquiryList([])
                         navidate('/')
                     } else {
                         toast.error(res.data.message)
@@ -87,7 +85,7 @@ const BookingPage = () => {
 
     useEffect(() => {
         listEnquiry()
-    }, [listEnquiry])
+    }, [])
 
     return (
         <div className='flex flex-col justify-center items-center mt-35'>
@@ -142,17 +140,17 @@ const BookingPage = () => {
                         </div>
 
                         {/*Adding starting and ending date's*/}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mt-2">
+                        <div className="grid grid-cols-2 gap-4 w-full mt-2">
 
-                            {/* Start Date */}
-                            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm backdrop-blur-md">
+                            {/* Date */}
+                            <div>
                                 <label className="block text-sm font-semibold text-white mb-2">
-                                    Start Date
+                                    Date
                                 </label>
                                 <input
-                                    type="datetime-local"
-                                    value={startTime}
-                                    onChange={e => setStartTime(e.target.value)}
+                                    type="date"
+                                    value={date}
+                                    onChange={e => setDate(e.target.value)}
                                     className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
                                          focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
                                               transition duration-200"
@@ -160,30 +158,15 @@ const BookingPage = () => {
                                 />
                             </div>
 
-                            {/* End Date */}
-                            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm backdrop-blur-md">
-                                <label className="block text-sm font-semibold text-white mb-2">
-                                    End Date
-                                </label>
-                                <input
-                                    type="datetime-local"
-                                    value={endTime}
-                                    onChange={e => setEndTime(e.target.value)}
-                                    className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
-                                         focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
-                                           transition duration-200"
-                                    required
-                                />
+                            <div className='flex flex-col gap-2'>
+                                <label>Phone Number:</label>
+                                <input onChange={onChangeHandler} name='phoneNumber' value={formData.phoneNumber}
+                                    type="number" placeholder='Enter Your Phone Number'
+                                    className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
                             </div>
 
                         </div>
 
-                        <div className='flex flex-col gap-2'>
-                            <label>Phone Number:</label>
-                            <input onChange={onChangeHandler} name='phoneNumber' value={formData.phoneNumber}
-                                type="number" placeholder='Enter Your Phone Number'
-                                className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                        </div>
                     </div>
 
                     {/*Right side*/}
@@ -194,13 +177,12 @@ const BookingPage = () => {
                         </h1>
                         <hr className='mt-5' />
                         <div className='mt-20'>
-                            {Array.isArray(enquiryList) &&
-                                enquiryList?.map((item, index) => (
-                                    <div key={index} className='flex gap-5 text-[18px] font-bold'>
-                                        <h1>TOTAL PRICE :</h1>
-                                        <p>{item.productId.price}</p>
-                                    </div>
-                                ))}
+
+                            <div className='flex gap-5 text-[18px] font-bold'>
+                                <h1>TOTAL PRICE :</h1>
+                                <p>{bookedData?.price}</p>
+                            </div>
+
                         </div>
 
                         {/*Payment Method*/}

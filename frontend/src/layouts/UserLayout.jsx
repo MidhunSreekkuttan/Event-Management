@@ -15,7 +15,7 @@ const UserLayout = () => {
   const hideFooter =
     pathname === '/login' ||
     pathname === "/about" ||
-    pathname === "/adBooking" ||
+    pathname.startsWith('/adBooking/') ||
     pathname === "/booking" ||
     pathname === "/response" ||
     pathname.startsWith("/product/") ||
