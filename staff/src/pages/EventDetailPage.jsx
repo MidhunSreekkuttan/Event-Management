@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { StaffContext } from '../context/staffContext'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { icon } from '../../../frontend/src/assets/assets'
@@ -8,6 +8,8 @@ import { icon } from '../../../frontend/src/assets/assets'
 const EventDetailPage = () => {
 
     const { enquiryId } = useParams()
+
+    const navigate = useNavigate()
 
     const { backendUrl, listEnquiry, eventList } = useContext(StaffContext)
 
@@ -49,6 +51,7 @@ const EventDetailPage = () => {
 
             if (res.data.success) {
                 toast.success(res.data.message)
+                navigate('/')
             } else {
                 toast.error(res.data.message)
             }
