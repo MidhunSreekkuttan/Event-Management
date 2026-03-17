@@ -6,10 +6,13 @@ import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import Loader from '../../components/Loading'
 import { EventContext } from '../../context/EventContext'
+import { useNavigate } from 'react-router-dom'
 
 const BookingPage = () => {
 
   const { backendUrl } = useContext(BackendContex)
+
+  const navigate = useNavigate()
 
   const { getUserbooking } = useContext(EventContext)
 
@@ -39,7 +42,7 @@ const BookingPage = () => {
     getUserbooking()
   }, [])
 
-  return (
+  return orderData.length > 0 ? (
 
     <>
 
@@ -102,7 +105,29 @@ const BookingPage = () => {
 
     </>
 
-  )
+  ) : <div className="flex min-h-screen flex-col items-center justify-center bg-[#120d09] text-center text-[#f7ecd8] px-6">
+
+    <div className="rounded-3xl border border-[#c7a45a]/20 bg-white/5 p-10 backdrop-blur-lg shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
+
+      <h1 className="text-4xl font-semibold text-[#fff5e7] mb-3">
+        No Bookings Found
+      </h1>
+
+      <p className="text-[#e7d6bc]/70 mb-6 max-w-md">
+        There are currently no booking details available.
+        Once you submit enquiry, they will go to staff's hands and they will send a response to you here.
+      </p>
+
+      <button
+        onClick={() => navigate('/eventList')}
+        className="rounded-xl border border-[#c7a45a]/40 bg-[#c7a45a]/10 px-6 py-3 font-semibold text-[#d9bb78] transition hover:bg-[#c7a45a] hover:text-black"
+      >
+        Find Your Events
+      </button>
+
+    </div>
+
+  </div>
 }
 
 export default BookingPage
