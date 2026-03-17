@@ -1,24 +1,22 @@
-import { toast } from 'react-toastify'
-import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
-import { BackendContex } from '../../context/ConnectBackendContex'
-import Loader from '../../components/Loading'
-import { useNavigate } from 'react-router-dom'
+import { BackendContex } from '../../context/ConnectBackendContex';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Response = () => {
-
-  const navigate = useNavigate()
 
   const { backendUrl } = useContext(BackendContex)
 
   const [response, setResponse] = useState([])
-  const [loading, setLoading] = useState(true)
 
-  const getBookingList = async () => {
+  console.log(response);
+
+
+  const getResponseData = async () => {
 
     try {
 
-      const { data } = await axios.get(backendUrl + '/api/staffs/getResponse')
+      const { data } = await axios.get(backendUrl + "/api/staffs/getResponse")
       if (data.success) {
         setResponse(data.responsedata)
       }
@@ -27,142 +25,147 @@ const Response = () => {
       console.log(error);
       toast.error(error.message)
     }
-    finally {
-      setLoading(false)
-    }
-  }
-
-  const handleClick = (id) => {
-    navigate(`/response-Details/${id}`)
   }
 
   useEffect(() => {
-    getBookingList()
+    getResponseData()
   }, [])
 
-  return response.length > 0 ? (
+  return (
+    <div className="min-h-screen bg-[#120d09] text-[#f7ecd8] pt-15">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(212,175,55,0.12),_transparent_35%),linear-gradient(180deg,_rgba(255,255,255,0.02),_transparent_30%)] pointer-events-none" />
 
-    <>
-
-      {loading && <Loader />}
-
-      <div className="min-h-screen p-6 md:p-10">
-        <div className="mx-auto max-w-6xl rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg overflow-hidden mt-15">
-
-          <div className="border-b border-slate-200 dark:border-slate-700 px-6 py-6 md:px-10">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+      <div className="relative mx-auto max-w-7xl px-6 py-10 md:px-10 lg:px-12">
+        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="mb-3 text-sm font-medium uppercase tracking-[0.35em] text-[#c7a45a]">
+              Response Management
+            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-[#fff5e7] md:text-5xl">
               Enquiry Responses
             </h1>
-          </div>
-
-          <div className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700 px-6 py-5 md:px-10">
-            <p className="text-slate-600 dark:text-slate-300 text-lg">
-              View all responses submitted for your enquiry and open any response for full details.
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#e7d6bc]/75 md:text-base">
+              A refined overview of staff proposals with related event suggestions,
+              pricing, and locations in a premium dark interface.
             </p>
           </div>
 
-          <div className="px-6 py-6 md:px-10">
-
-            <div className="space-y-5">
-
-              <div className="grid grid-cols-2 gap-5">
-
-                {Array.isArray(response) &&
-                  response.map((data, dataIndex) =>
-                    data.relatedEvents?.map((item, index) => (
-
-                      <div
-                        key={`${dataIndex}-${index}`}
-                        className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm overflow-hidden"
-                      >
-                        <div className="px-6 py-5">
-
-                          <div className="flex items-start justify-between mb-3">
-                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-                              {item.company_name}
-                            </h2>
-                          </div>
-
-                          <p className="text-slate-700 dark:text-slate-300 text-lg mb-2">
-                            Responsed By: <span className="font-bold">Staff</span>
-                          </p>
-
-                          <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
-
-                          {item.category && (
-                            <p className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                              {item.category}: ${item.price}
-                            </p>
-                          )}
-
-                          <div className="flex justify-between text-slate-700 dark:text-slate-300 text-lg">
-                            {data.enquiryId?.date && (
-                              <p>
-                                Proposal Date:{" "}
-                                <span className="font-bold">
-                                  {data.enquiryId?.date.split("T")[0]}
-                                </span>
-                              </p>
-                            )}
-
-                            <p>
-                              Location:{" "}
-                              <span className="font-bold">{item.location}</span>
-                            </p>
-                          </div>
-
-                        </div>
-
-                        <div className="flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700 px-6 py-4">
-                          <p className="text-slate-600 dark:text-slate-300 text-base">
-                            {data.respondMessage}
-                          </p>
-
-                          <button
-                            onClick={() => handleClick(data._id)}
-                            className="rounded-lg bg-blue-600 hover:bg-blue-700 px-5 py-2 text-white font-semibold whitespace-nowrap"
-                          >
-                            View Details
-                          </button>
-                        </div>
-                      </div>
-
-                    ))
-                  )}
-
-              </div>
-            </div>
+          <div className="rounded-2xl border border-[#c7a45a]/20 bg-white/5 p-4 backdrop-blur-sm text-center">
+            <p className="text-xs uppercase tracking-[0.25em] text-[#e7d6bc]/60">
+              Total Responses
+            </p>
+            <p className="mt-2 text-2xl font-semibold text-[#fff5e7]">
+              {response.length}
+            </p>
           </div>
+
+        </div>
+
+        <div className="grid gap-6">
+          {Array.isArray(response) &&
+            response.map((response) => (
+              <div
+                key={response._id}
+                className="group overflow-hidden rounded-3xl border border-[#c7a45a]/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#c7a45a]/40"
+              >
+                <div className="border-b border-[#c7a45a]/10 bg-[linear-gradient(135deg,rgba(199,164,90,0.16),rgba(255,255,255,0.02))] px-6 py-5 md:px-8">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.3em] text-[#d9bb78]">
+                        Response ID
+                      </p>
+                      <h2 className="mt-2 text-2xl font-semibold text-[#fff8ee]">
+                        {response._id}
+                      </h2>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3 text-sm">
+                      <span className="rounded-full border border-[#c7a45a]/20 bg-black/20 px-4 py-2 text-[#f4e7d0]">
+                        Staff: <span className="font-semibold text-[#fff8ee]">Test Staff</span>
+                      </span>
+
+                      <span className="rounded-full border border-[#c7a45a]/20 bg-black/20 px-4 py-2 text-[#f4e7d0]">
+                        Proposal Date:{'  '}
+                        <span className="font-semibold text-[#d9bb78]">
+                          {response.enquiryId?.date.split("T")[0]}
+                        </span>
+                      </span>
+
+                      {/* VIEW BUTTON */}
+                      <button
+                        className="ml-2 rounded-xl bg-[#c7a45a] px-4 py-2 text-sm font-semibold text-black transition hover:bg-[#e2c177]"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="px-6 py-6 md:px-8 md:py-7">
+                  <div className="mb-5 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold text-[#fff5e7]">
+                        Related Events Summary
+                      </h3>
+                      <p className="mt-1 text-sm text-[#e7d6bc]/65">
+                        Suggested events tailored for this enquiry response.
+                      </p>
+                    </div>
+                    <div className="hidden rounded-full border border-[#c7a45a]/20 bg-[#c7a45a]/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-[#d9bb78] md:block">
+                      {response.relatedEvents?.length} Options
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    {response.relatedEvents?.map((event) => (
+                      <div
+                        key={event._id}
+                        className="rounded-2xl border border-[#c7a45a]/10 bg-black/20 p-4 transition duration-300 group-hover:border-[#c7a45a]/20"
+                      >
+                        <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-3">
+                              <span className="h-2.5 w-2.5 rounded-full bg-[#c7a45a] shadow-[0_0_20px_rgba(199,164,90,0.8)]" />
+                              <h4 className="text-lg font-medium text-[#fff8ee]">
+                                {event.event_name}
+                              </h4>
+                            </div>
+                            <p className="text-sm text-[#e7d6bc]/70">
+                              Category: <span className="text-[#f4e7d0]">{event.category}</span>
+                            </p>
+                          </div>
+
+                          <div className="grid gap-2 text-sm md:text-right">
+                            <p className="text-[#e7d6bc]/70">
+                              Price: <span className="font-semibold text-[#d9bb78]">{event.price}</span>
+                            </p>
+                            <p className="text-[#e7d6bc]/70">
+                              Location: <span className="text-[#f4e7d0]">{event.location}</span>
+                            </p>
+                          </div>
+
+                        </div>
+
+                        <div className='mt-3 flex gap-2 text-sm justify-between'>
+                          <p className="text-[#e7d6bc]/70">
+                            status: <span className="font-semibold text-[#d9bb78]">{event.status}</span>
+                          </p>
+                          <p className="text-[#e7d6bc]/70">
+                            starting_price: <span className="text-[#f4e7d0]">{event.starting_price}</span>
+                          </p>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
-
-    </>
-
-  ) : <div className="min-h-screen flex items-center justify-center px-6">
-
-    <div className="max-w-lg w-full text-center bg-white dark:bg-slate-800 shadow-lg rounded-3xl p-10 border border-slate-200 dark:border-slate-700">
-
-      <div className="text-6xl mb-4">📭</div>
-
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">
-        No Responses Yet
-      </h1>
-
-      <p className="text-slate-600 dark:text-slate-300 mb-6">
-        You haven't received any responses for your enquiries yet.
-        Once staff respond with event suggestions, they will appear here.
-      </p>
-
-      <button
-        onClick={() => navigate("/eventList")}
-        className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition"
-      >
-        Explore Events
-      </button>
-
     </div>
-
-  </div>
+  )
 }
 
 export default Response
