@@ -25,7 +25,7 @@ const UserRoutes = () => {
       <Route path="/adBooking/:bookingId" element={<AddBookingPage />} />
       <Route path="/booking" element={<BookingPage />} />
       <Route path="/response" element={<Response />} />
-      <Route path="/response-Details/:enquiryId/:eventId" element={<ResponseDetails />} />
+      <Route path="/response-Details/:enquiryId" element={<ResponseDetails />} />
     </Route>
   )
 }

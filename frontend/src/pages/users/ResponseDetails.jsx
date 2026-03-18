@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const ResponseDetails = () => {
     const { bookingData, getBookingData, loading } = useContext(BackendContex);
 
-    const { enquiryId, eventId } = useParams();
+    const { enquiryId } = useParams();
 
     const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -16,11 +16,6 @@ const ResponseDetails = () => {
     const getData =
         Array.isArray(bookingData) &&
         bookingData.find((item) => item._id === enquiryId);
-
-    const matchEvent = getData?.relatedEvents?.find(item => item._id === eventId)
-
-    console.log(matchEvent);
-
 
     const handleClick = () => {
         if (!selectedEvent) {
@@ -97,48 +92,6 @@ const ResponseDetails = () => {
                                         </span>
                                     </div>
 
-                                    <div className="border-t border-slate-200 bg-slate-50 px-4 py-4 md:border-l 
-                                            md:border-t-0 md:px-5">
-                                        <div className="flex flex-col gap-4 text-base md:text-lg">
-                                            <div>
-                                                <span className="font-medium text-slate-700">
-                                                    Company Name:
-                                                </span>
-                                                <div className="mt-2 flex flex-wrap gap-2">
-
-                                                    {matchEvent && (
-
-                                                        <p className="rounded-full bg-slate-200 px-3 py-1 text-sm 
-                                                                font-medium text-slate-700"
-                                                        >
-                                                            {matchEvent.company_name}
-                                                        </p>
-
-                                                    )}
-
-                                                </div>
-
-                                            </div>
-
-                                            <div>
-                                                <span className="font-medium text-slate-700">
-                                                    Category:
-                                                </span>
-                                                <div className="mt-2 flex flex-wrap gap-2">
-
-                                                    {matchEvent && (
-
-                                                        <p className="rounded-full bg-blue-100 px-3 py-1 text-sm 
-                                                                font-medium text-blue-700">
-                                                            {matchEvent.category}
-                                                        </p>
-
-                                                    )}
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <InfoRow

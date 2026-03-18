@@ -32,6 +32,10 @@ const Response = () => {
     }
   }
 
+  const handleClick = (id) => {
+    navigate(`/response-Details/${id}`)
+  }
+
   useEffect(() => {
     getResponseData()
   }, [])
@@ -102,7 +106,7 @@ const Response = () => {
                         </span>
 
                         {/* VIEW BUTTON */}
-                        <button
+                        <button onClick={() => handleClick(response._id)}
                           className="ml-2 rounded-xl bg-[#c7a45a] px-4 py-2 text-sm font-semibold text-black transition hover:bg-[#e2c177]"
                         >
                           View Details
