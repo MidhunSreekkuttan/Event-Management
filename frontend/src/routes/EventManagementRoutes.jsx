@@ -1,5 +1,5 @@
 import { EventManagementContext } from '../context/EventManagementContext'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import Loader from '../components/Loading'
 import { Navigate, Outlet, Route } from 'react-router-dom'
 import EventManagementLayout from '../layouts/EventManagementLayout'
@@ -12,6 +12,7 @@ import Events from '../pages/event-management/Events'
 import Reports from '../pages/event-management/Reports'
 import StayingPage from '../pages/event-management/StayingPage'
 import Registeration from '../pages/event-management/Registeration'
+import Waiting from '../pages/event-management/Waiting'
 
 const EventManagementRoutes = () => {
 
@@ -43,6 +44,7 @@ const EventManagementRoutes = () => {
 
         <Route path='staying' element={<StayingPage />} />
         <Route path='registeration' element={<Registeration />} />
+        <Route path='waiting' element={<Waiting />} />
 
         <Route element={protectedRoute()}>
 
