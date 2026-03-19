@@ -11,6 +11,7 @@ import Booking from '../pages/event-management/Booking'
 import Events from '../pages/event-management/Events'
 import Reports from '../pages/event-management/Reports'
 import StayingPage from '../pages/event-management/StayingPage'
+import Registeration from '../pages/event-management/Registeration'
 
 const EventManagementRoutes = () => {
 
@@ -41,6 +42,7 @@ const EventManagementRoutes = () => {
       <Route path='/event-management' element={<EventManagementLayout />}>
 
         <Route path='staying' element={<StayingPage />} />
+        <Route path='registeration' element={<Registeration />} />
 
         <Route element={protectedRoute()}>
 

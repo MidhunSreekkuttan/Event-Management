@@ -13,7 +13,8 @@ const EventManagementLayout = () => {
   const hideNavbar =
     pathname === "/event-management/login" ||
     pathname === "/event-management/otp" ||
-    pathname === '/event-management/staying'
+    pathname === '/event-management/staying'||
+    pathname==='/event-management/registeration'
 
   if (authLoading) {
 

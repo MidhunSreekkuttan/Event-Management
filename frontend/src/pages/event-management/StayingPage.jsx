@@ -1,31 +1,17 @@
-import { useContext, useEffect } from "react"
-import { EventManagementContext } from "../../context/EventManagementContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 const StayingPage = () => {
 
-    const { userData, authLoading } = useContext(EventManagementContext)
-
     const navigate = useNavigate()
 
-    if (authLoading) return null
-
-    const navigateHome = () => {
-        if (userData?.isAdminVerified) {
-            navigate('/event-management/home')
-        }
+    const handleClick = () => {
+        navigate('/event-management/registeration')
     }
 
-    useEffect(() => {
-        navigateHome()
-    }, [])
-
     return (
-        <div className="min-h-screen bg-[#03051b] text-white overflow-hidden">
+        <div className="min-h-screen text-white overflow-hidden">
             <section className="relative mx-auto flex min-h-screen max-w-7xl items-center px-6 py-12 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_45%,rgba(30,58,138,0.28),transparent_22%),radial-gradient(circle_at_78%_48%,rgba(59,130,246,0.18),transparent_20%),radial-gradient(circle_at_70%_78%,rgba(37,99,235,0.12),transparent_18%)]" />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,4,20,0.98)_0%,rgba(1,4,20,0.94)_34%,rgba(2,6,23,0.6)_58%,rgba(2,6,23,0.2)_100%)]" />
-
+                
                 <div className="relative z-10 grid w-full items-center gap-10 lg:grid-cols-[1.05fr_1fr]">
                     <div className="max-w-xl">
                         <h1 className="text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
@@ -40,15 +26,16 @@ const StayingPage = () => {
                             and track event operations easily.
                         </p>
 
-                        <button className="mt-10 rounded-2xl bg-[#2348ff] px-10 py-5 text-xl font-semibold text-white shadow-[0_18px_40px_rgba(35,72,255,0.35)] transition hover:scale-[1.02] hover:bg-[#3255ff]">
+                        <button onClick={handleClick}
+                            className="mt-10 rounded-2xl bg-[#2348ff] px-10 py-5 text-xl font-semibold
+                                 text-white shadow-[0_18px_40px_rgba(35,72,255,0.35)] transition hover:scale-[1.02]
+                                     hover:bg-[#3255ff]">
                             Get Started
                         </button>
                     </div>
 
                     <div className="relative flex min-h-[560px] items-center justify-center lg:min-h-[640px]">
-                        <div className="absolute bottom-14 right-16 h-40 w-40 rounded-full bg-[#1d4ed8]/20 blur-3xl" />
-                        <div className="absolute left-8 top-20 h-28 w-28 rounded-full bg-emerald-400/10 blur-3xl" />
-
+                      
                         <div className="relative h-[520px] w-full max-w-[760px]">
                             <div className="absolute left-[24%] top-[10%] z-20 flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-[#1f4ee5] shadow-[0_10px_30px_rgba(31,78,229,0.35)]">
                                 <div className="text-3xl">✓</div>
