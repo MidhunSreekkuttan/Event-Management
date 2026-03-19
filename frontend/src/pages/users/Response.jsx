@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { BackendContex } from '../../context/ConnectBackendContex';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -14,7 +14,7 @@ const Response = () => {
   const [response, setResponse] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const getResponseData = async () => {
+  const getResponseData = useCallback(async () => {
 
     try {
 
@@ -30,7 +30,8 @@ const Response = () => {
     finally {
       setLoading(false)
     }
-  }
+
+  }, [backendUrl])
 
   const handleClick = (id) => {
     navigate(`/response-Details/${id}`)

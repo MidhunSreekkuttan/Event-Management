@@ -93,7 +93,7 @@ const BackendContexProvider = (props) => {
 
     useEffect(() => {
         getAuthState()
-    }, [getAuthState])
+    }, [])
 
     const value = useMemo(() => ({
         backendUrl,

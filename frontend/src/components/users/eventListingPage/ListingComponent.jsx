@@ -11,11 +11,13 @@ const ListingComponent = () => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const listEevent = async () => {
+    const listEevent = useCallback(async () => {
+
         const { data } = await axios.get(backendUrl + '/api/product/listProduct')
         return data.product
-    }
 
+    }, [backendUrl])
+    
     const { data, error, isLoading } = useQuery({
         queryKey: ['eventlist'],
         queryFn: listEevent

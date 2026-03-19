@@ -80,7 +80,7 @@ const EventManagementContextProvider = (props) => {
 
     useEffect(() => {
         getAuthState()
-    }, [getAuthState])
+    }, [])
 
     const value = useMemo(() => ({
 

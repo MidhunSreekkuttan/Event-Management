@@ -16,7 +16,7 @@ const EventContextProvider = (props) => {
     const [enquiryList, setEnquiryList] = useState([])
     const [clientData, setClientData] = useState([])
     const [userBooking, setuserBooking] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     {/*Getting User seeing Product List*/ }
     const getEventList = useCallback(async () => {
@@ -32,6 +32,9 @@ const EventContextProvider = (props) => {
         } catch (error) {
             console.log(error);
             toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
         }
 
     }, [backendUrl])
@@ -50,6 +53,9 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
+        finally {
+            setLoading(false)
+        }
 
     }, [backendUrl])
 
@@ -66,6 +72,9 @@ const EventContextProvider = (props) => {
         } catch (error) {
             console.log(error);
             toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
         }
 
     }, [backendUrl])
@@ -106,17 +115,15 @@ const EventContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
+        finally {
+            setLoading(false)
+        }
 
     }, [backendUrl])
 
-    // listProduct()
-    //  listEnquiry()
-    //  getClientData()
-    //  getUserbooking()
-
     useEffect(() => {
         getEventList()
-    }, [getEventList])
+    }, [])
 
     const value = useMemo(() => ({
         products,
