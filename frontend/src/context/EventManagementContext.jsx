@@ -25,14 +25,16 @@ const EventManagementContextProvider = (props) => {
 
             data.success ? setUserData(data.userData) : toast.error(data.message)
 
-            if (!data.userData.isAccountVerified) {
+            if (!data.userData?.isAccountVerified) {
                 toast.error('You are not verified')
                 navigate('/event-management/otp', { replace: true })
             }
         } catch (error) {
             console.log(error);
             toast.error(error.message)
-
+        }
+        finally {
+            setAuthLoading(false)
         }
 
     }, [backendUrl])
