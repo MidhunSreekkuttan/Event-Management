@@ -39,6 +39,9 @@ app.use(
   }),
 );
 
+// make uploads folder public
+app.use("/uploads", express.static("uploads"));
+
 //api end point
 
 app.use("/api/user", userRouter);
