@@ -8,6 +8,7 @@ const getEventManagementData = async (req, res) => {
       res.json({
         success: true,
         userData: {
+          userId: userId,
           name: user.name,
           isAccountVerified: user.isAccountVerified,
           isAdminVerified: user.isAdminVerified,

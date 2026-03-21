@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const { backendUrl } = useContext(BackendContex)
-  const { setIsLoggedIn } = useContext(EventManagementContext)
+  const { setIsLoggedIn, getAuthState } = useContext(EventManagementContext)
 
   const [state, setState] = useState('login')
 
@@ -50,7 +50,8 @@ const Login = () => {
             await sendVerifyOtp()
           } else {
             setIsLoggedIn(true)
-            navigate('/event-management/home')
+            await getAuthState()
+            navigate('/event-management/staying')
           }
 
         } else {

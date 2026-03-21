@@ -90,9 +90,10 @@ const EventManagementContextProvider = (props) => {
         isLoggedIn, setIsLoggedIn,
         getUserData,
         logout,
-        authLoading, setAuthLoading
+        authLoading, setAuthLoading,
+        getAuthState
 
-    }), [userData, isLoggedIn, getUserData, logout, authLoading])
+    }), [userData, isLoggedIn, getUserData, logout, authLoading, getAuthState])
 
     return (
 

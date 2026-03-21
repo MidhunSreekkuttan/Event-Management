@@ -4,11 +4,43 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { BackendContex } from '../../context/ConnectBackendContex';
 import Loader from '../../components/Loading';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 import { EventManagementContext } from '../../context/EventManagementContext';
 
 const Registration = () => {
 
     const { backendUrl } = useContext(BackendContex)
+    const { userData } = useContext(EventManagementContext)
+
+    const QueryClient = useQueryClient()
+
+    const checkRegistrationSubmit = useCallback(async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + '/api/product/listDocument')
+            if (data.success) {
+                return data.data
+            } else {
+                return []
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }, [backendUrl])
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["registrationForm", userData?.userId],
+        queryFn: checkRegistrationSubmit,
+        enabled: !!userData?.userId
+    })
+
+    const existUser = userData?.userId ? data?.some(item => item.owner?.toString() === userData?.userId?.toString()) : false
+    console.log(existUser);
 
     const navigate = useNavigate()
 
@@ -56,6 +88,7 @@ const Registration = () => {
 
             const { data } = await axios.post(backendUrl + '/api/product/uploadDocument', fileData)
             if (data.success) {
+                await QueryClient.invalidateQueries({ queryKey: ["registrationForm"] })
                 toast.success(data.message)
                 navigate('/event-management/waiting')
             } else {
@@ -71,11 +104,21 @@ const Registration = () => {
         }
     };
 
+    if (error) return <div>Error:{error.message}</div>
+
+    useEffect(() => {
+
+        if (existUser) {
+            navigate('/event-management/waiting')
+        }
+
+    }, [existUser, navigate])
+
     return (
 
         <>
 
-            {loading && <Loader />}
+            {(loading || isLoading) && <Loader />}
 
             <div className="min-h-screen overflow-hidden bg-[#020617] text-white">
                 <div className="relative flex min-h-screen items-center justify-center px-6 py-10">
