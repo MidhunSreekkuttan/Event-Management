@@ -53,7 +53,7 @@ const Otp = () => {
 
             if (data.success) {
                 setIsLoggedIn(true)
-                navidate('/event-management/home')
+                navidate('/event-management/staying')
 
             } else {
                 toast.error(data.message)

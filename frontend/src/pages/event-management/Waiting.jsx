@@ -1,6 +1,34 @@
-import React from 'react'
+import { useContext, useEffect } from 'react'
+import { EventManagementContext } from '../../context/EventManagementContext'
+import { useNavigate } from 'react-router-dom'
 
 const Waiting = () => {
+
+  const { userData } = useContext(EventManagementContext)
+
+  const navigate = useNavigate()
+
+  const navigateHome = () => {
+    if (userData?.isAdminVerified?.toLowerCase() === 'approved') {
+      navigate('/event-management/home')
+    }
+  }
+
+  const fnIntervel = () => {
+
+    const intervel = setInterval(() => {
+      navigateHome()
+    }, 5000)
+
+    return () => clearInterval(intervel)
+
+  }
+
+  useEffect(() => {
+    fnIntervel()
+  }, [fnIntervel])
+
+
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-[560px] rounded-[30px] bg-white shadow-[0_12px_30px_rgba(0,0,0,0.12)] px-11 py-10">

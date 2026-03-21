@@ -27,7 +27,7 @@ const EventManagementRoutes = () => {
 
     } else {
 
-      return userData?.isAdminVerified ? <Outlet /> : <Navigate to='/event-management/staying' replace />
+      return userData?.isAdminVerified === 'pending'.toLowerCase() ? <Navigate to='/event-management/staying' /> : <Outlet />
 
     }
 
