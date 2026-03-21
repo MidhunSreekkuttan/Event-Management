@@ -8,7 +8,7 @@ const eventManagementSchema = new mongoose.Schema(
     verifyOtp: { type: String, default: "" },
     verifyOtpExpire: { type: Number, default: 0 },
     isAccountVerified: { type: Boolean, default: false },
-    isAdminVerified: { type: Boolean, default: false },
+    isAdminVerified: { type: String, default: "pending" },
   },
   { minimize: false },
 );

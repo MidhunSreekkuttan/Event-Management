@@ -36,11 +36,14 @@ ProductRouter.get("/listProduct", listProduct);
 
 //upload pdf
 ProductRouter.post(
-  "/uploadPdf",
+  "/uploadDocument",
   EventManagementAuth,
-  upload.single("pdf"),
+  upload.fields([
+    { name: "businessRegistrationFile", maxCount: 1 },
+    { name: "GSTVerificationFile", maxCount: 1 },
+  ]),
   uploadPdf,
 );
-ProductRouter.get("/listPdf", listPdf);
+ProductRouter.get("/listDocument", listPdf);
 
 export default ProductRouter;

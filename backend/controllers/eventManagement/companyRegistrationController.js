@@ -2,25 +2,32 @@ import CompanyRegistrationModel from "../../dataBase/models/eventManagement/comp
 
 export const uploadPdf = async (req, res) => {
   try {
-    const { pdfTitle, companyName, ownerName, contactNumber, email, address } =
-      req.body;
+    const { companyName, ownerName, contactNumber, email, address } = req.body;
 
     const eventManagementId = req.userId;
 
+    const businessFile = req.files?.businessRegistrationFile?.[0];
+    const gstFile = req.files?.GSTVerificationFile?.[0];
+
+    if (!businessFile || !gstFile) {
+      return res.json({ success: false, message: "Files not uploaded" });
+    }
+
     const pdf = new CompanyRegistrationModel({
-      pdfTitle,
-      pdfPath: `/uploads/${req.file.filename}`,
+      businessRegistrationFile: `/uploads/${businessFile.filename}`,
+      GSTVerificationFile: `/uploads/${gstFile.filename}`,
       companyName,
       ownerName,
       contactNumber,
       email,
       address,
       owner: eventManagementId,
+      date: Date.now(),
     });
 
     await pdf.save();
 
-    res.json({ success: true, message: "pdf Upload Successfull", data: pdf });
+    res.json({ success: true, message: "pdf Upload Successfull" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });

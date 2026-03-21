@@ -14,8 +14,9 @@ const CompanyRegistrationSchema = new mongoose.Schema(
     email: { type: String, required: true },
     address: { type: String, required: true },
 
-    pdfTitle: { type: String, required: true },
-    pdfPath: { type: String, required: true },
+    businessRegistrationFile: { type: String, required: true },
+    GSTVerificationFile: { type: String, required: true },
+    date: { type: Date, required: true },
   },
   {
     timestamps: true,
