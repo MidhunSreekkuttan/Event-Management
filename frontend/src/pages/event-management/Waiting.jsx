@@ -19,7 +19,7 @@ const Waiting = () => {
   useEffect(() => {
 
     if (userData?.isAdminVerified?.toLowerCase() === "approved") {
-      navigate("/event-management/home")
+      navigate("/event-management/approval")
     }
 
   }, [userData?.isAdminVerified])

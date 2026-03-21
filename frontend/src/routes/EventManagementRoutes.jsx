@@ -13,6 +13,7 @@ import Reports from '../pages/event-management/Reports'
 import StayingPage from '../pages/event-management/StayingPage'
 import Registeration from '../pages/event-management/Registeration'
 import Waiting from '../pages/event-management/Waiting'
+import Approval from '../pages/event-management/Approval'
 
 const EventManagementRoutes = () => {
 
@@ -45,6 +46,7 @@ const EventManagementRoutes = () => {
         <Route path='staying' element={<StayingPage />} />
         <Route path='registeration' element={<Registeration />} />
         <Route path='waiting' element={<Waiting />} />
+        <Route path='approval' element={<Approval />} />
 
         <Route element={protectedRoute()}>
 

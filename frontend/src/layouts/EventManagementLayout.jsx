@@ -15,7 +15,8 @@ const EventManagementLayout = () => {
     pathname === "/event-management/otp" ||
     pathname === '/event-management/staying' ||
     pathname === '/event-management/registeration' ||
-    pathname === '/event-management/waiting'
+    pathname === '/event-management/waiting' ||
+    pathname === '/event-management/approval'
 
   if (authLoading) {
 
