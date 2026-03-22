@@ -19,6 +19,7 @@ const UserLayout = () => {
     pathname === "/booking" ||
     pathname === "/response" ||
     pathname.startsWith("/product/") ||
+    pathname === '/otp' ||
     pathname.startsWith('/response-Details/')
 
   return (
