@@ -51,7 +51,7 @@ const Login = () => {
           } else {
             setIsLoggedIn(true)
             await getAuthState()
-            navigate('/event-management/staying')
+            navigate('/event-management/home')
           }
 
         } else {

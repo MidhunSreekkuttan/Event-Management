@@ -1,7 +1,7 @@
 import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { otpMail, welcomeMail } from "../../config/emailTemplate.js";
+import { eventManagement, otpMail } from "../../config/emailTemplate.js";
 import welcomeMessage from "../../config/nodemailer.js";
 
 export const Register = async (req, res) => {
@@ -46,7 +46,7 @@ export const Register = async (req, res) => {
       from: `"Adhithi"<${process.env.NO_REPLAY_EMAIL}>`,
       to: email,
       subject: "Welcome To your Destiny",
-      html: welcomeMail(name),
+      html: eventManagement(name),
     };
 
     await welcomeMessage.sendMail(mailOptions);
