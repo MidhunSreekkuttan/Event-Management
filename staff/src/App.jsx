@@ -3,7 +3,6 @@ import Navbar from './components/Navbar'
 import SideBar from './components/SideBar'
 import { Route, Routes } from 'react-router-dom'
 import DashBoard from './pages/DashBoard'
-import Enquiries from './pages/Enquiries'
 import Events from './pages/Events'
 import Clients from './pages/Clients'
 import Report from './pages/Report'
@@ -27,7 +26,6 @@ const App = () => {
 
             <Route path='/' element={<DashBoard />} />
             <Route path='/enquiry-details/:enquiryId' element={<EventDetailPage />} />
-            <Route path='/enquiries' element={<Enquiries />} />
             <Route path='/events' element={<Events />} />
             <Route path='/clients' element={<Clients />} />
             <Route path='/report' element={<Report />} />

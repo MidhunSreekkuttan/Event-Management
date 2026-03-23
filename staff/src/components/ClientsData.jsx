@@ -40,24 +40,39 @@ const ClientData = ({ id, name, category, date, starting_price, status }) => {
     }
 
     return (
-        <div className="grid grid-cols-6 items-center">
-            <div>{name.length > 14 ? name.slice(0, 14) + '...' : name}</div>
-            <div>{category}</div>
-            <div>{date?.split("T")[0]}</div>
-            <div>{starting_price}</div>
+        <div className="grid grid-cols-6 items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-4 shadow-sm transition duration-200 hover:border-violet-200 hover:bg-white hover:shadow-md">
+            <div className="text-sm font-semibold text-slate-800">
+                {name.length > 14 ? name.slice(0, 14) + '...' : name}
+            </div>
+
+            <div className="text-sm font-medium text-slate-600">
+                {category}
+            </div>
+
+            <div className="text-sm text-slate-600">
+                {date?.split("T")[0]}
+            </div>
+
+            <div className="text-sm font-semibold text-slate-800">
+                {starting_price}
+            </div>
 
             <div>
                 <select
                     value={status || "pending"}
                     onChange={(event) => statusHandler(event, id)}
-                    className={`px-5 py-1 rounded-2xl appearance-none outline-none cursor-pointer border`}
+                    className="cursor-pointer appearance-none rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 outline-none transition duration-200 hover:border-violet-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
                 >
                     <option value="pending">pending</option>
                     <option value="completed">completed</option>
                 </select>
             </div>
+
             <div>
-                <button onClick={handleClick} className="bg-amber-200 px-10 py-2 rounded-lg">
+                <button
+                    onClick={handleClick}
+                    className="rounded-2xl bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-violet-600 hover:shadow-lg"
+                >
                     View
                 </button>
             </div>
