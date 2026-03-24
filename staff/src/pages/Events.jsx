@@ -4,10 +4,13 @@ import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { StaffContext } from "../context/staffContext";
 import Loader from "../../../frontend/src/components/Loading";
+import { useNavigate } from 'react-router-dom'
 
 const Events = () => {
 
   const { backendUrl } = useContext(StaffContext)
+
+  const navigate = useNavigate()
 
   const [filtering, setFiltering] = useState('all Events')
 
@@ -34,10 +37,14 @@ const Events = () => {
   const filter = filtering === 'all Events' ? data : data?.filter(item => item?.status === filtering)
 
   const getStatusClass = (status) => {
-    if (status === 'Upcoming') return 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200';
-    if (status === 'Ongoing') return 'bg-amber-100 text-amber-700 ring-1 ring-amber-200';
+    if (status === 'upcoming') return 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200';
+    if (status === 'ongoing') return 'bg-amber-100 text-amber-700 ring-1 ring-amber-200';
     return 'bg-slate-200 text-slate-700 ring-1 ring-slate-300';
   };
+
+  const handleClick = (id) => {
+    navigate(`/eventDetails/${id}`)
+  }
 
   if (isLoading) return <div><Loader /></div>
   if (error) return <div>Error:{error.message}</div>
@@ -47,10 +54,12 @@ const Events = () => {
     <>
 
       <div className="min-h-screen w-7xl bg-slate-100 p-4 sm:p-6 lg:p-10 mt-1 rounded-r-2xl mb-3">
-        <div className="mx-auto max-w-7xl rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.10)]">
-          <header className="flex flex-col gap-5 border-b border-slate-200 px-6 py-6 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mx-auto -mt-5 max-w-7xl rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.10)]">
+          <header className="flex flex-col gap-5 border-b border-slate-200 px-6 py-6 sm:px-8 lg:flex-row lg:items-center
+              lg:justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-600 text-2xl font-bold text-white shadow-lg shadow-violet-200">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-600 text-2xl font-bold text-white
+                 shadow-lg shadow-violet-200">
                 S
               </div>
               <div>
@@ -106,7 +115,7 @@ const Events = () => {
                           </span>
                         </td>
                         <td className="px-6 py-5">
-                          <button className="rounded-xl border border-violet-200 bg-violet-50 px-5 py-2.5 text-sm font-semibold text-violet-700 transition hover:bg-violet-100">
+                          <button onClick={() => handleClick(event._id)} className="rounded-xl border border-violet-200 bg-violet-50 px-5 py-2.5 text-sm font-semibold text-violet-700 transition hover:bg-violet-100">
                             View Details
                           </button>
                         </td>
