@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useMemo } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios'
 import { useState } from "react";
@@ -13,6 +13,8 @@ const StaffContextProvider = (props) => {
 
     const [listEnquiry, setlistEnquiry] = useState([])
     const [eventList, setEventList] = useState([])
+    const [listUser, setListUser] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const getAllEnquiry = async () => {
 
@@ -46,20 +48,41 @@ const StaffContextProvider = (props) => {
         }
     }
 
+    const getUsersList = async () => {
+
+        try {
+            setLoading(true)
+
+            const { data } = await axios.get(backendUrl + '/api/user/listUser')
+            if (data.success) {
+                setListUser(data.userList)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
     useEffect(() => {
         getAllEnquiry()
         getEventList()
     }, [])
 
-    const value = {
+    const value = useMemo(() => ({
 
         backendUrl,
         listEnquiry, setlistEnquiry,
         getAllEnquiry,
         getEventList,
-        eventList, setEventList
+        eventList, setEventList,
+        getUsersList, listUser, setListUser,
+        loading
 
-    }
+    }), [backendUrl, listEnquiry, eventList, listUser, getAllEnquiry, getEventList, getUsersList, loading])
 
     return (
         <StaffContext.Provider value={value}>
