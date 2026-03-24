@@ -72,7 +72,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.json({ success: true, message: "Incorrect Password" });
+      return res.json({ success: false, message: "Incorrect Password" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
@@ -110,6 +110,18 @@ export const logout = async (req, res) => {
 export const getAuth = async (req, res) => {
   try {
     res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getStaffData = async (req, res) => {
+  try {
+    const userID = req.userId;
+
+    const user = await staffsModel.findById(userID);
+    res.json({ success: true, user });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
