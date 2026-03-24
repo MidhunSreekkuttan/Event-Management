@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getAuth,
+  getStaffData,
   login,
   logout,
   register,
@@ -18,6 +19,7 @@ staffsRouter.post("/register", register);
 staffsRouter.post("/login", login);
 staffsRouter.post("/logout", logout);
 staffsRouter.get("/getAuth", staffsAuth, getAuth);
+staffsRouter.get("/getStaffData", staffsAuth, getStaffData);
 staffsRouter.post("/sendResponse", sendResponse);
 staffsRouter.get("/getResponse", userAuth, getResponse);
 
