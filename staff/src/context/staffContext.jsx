@@ -11,10 +11,54 @@ const StaffContextProvider = (props) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
+    const [isLoggedIn, setIsloggedIn] = useState(false)
+    const [staffData, setStaffData] = useState(null)
     const [listEnquiry, setlistEnquiry] = useState([])
     const [eventList, setEventList] = useState([])
     const [listUser, setListUser] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+
+    const getStaffData = async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + '/api/staffs/getStaffData')
+            if (data.success) {
+                setStaffData(data.user)
+            } else {
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
+    const getAuthState = async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + '/api/staffs/getAuth')
+            if (data.success) {
+                setIsloggedIn(true)
+                await getStaffData()
+            } else {
+                setIsloggedIn(false)
+                setStaffData(null)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
 
     const getAllEnquiry = async () => {
 
@@ -51,7 +95,6 @@ const StaffContextProvider = (props) => {
     const getUsersList = async () => {
 
         try {
-            setLoading(true)
 
             const { data } = await axios.get(backendUrl + '/api/user/listUser')
             if (data.success) {
@@ -70,7 +113,8 @@ const StaffContextProvider = (props) => {
     useEffect(() => {
         getAllEnquiry()
         getEventList()
-    }, [])
+        getAuthState()
+    }, [getAuthState])
 
     const value = useMemo(() => ({
 
@@ -80,9 +124,14 @@ const StaffContextProvider = (props) => {
         getEventList,
         eventList, setEventList,
         getUsersList, listUser, setListUser,
-        loading
+        loading, setIsloggedIn,
+        getStaffData,
+        isLoggedIn, staffData,
+        setLoading,
+        setStaffData
 
-    }), [backendUrl, listEnquiry, eventList, listUser, getAllEnquiry, getEventList, getUsersList, loading])
+    }), [backendUrl, listEnquiry, eventList, listUser, getAllEnquiry, getEventList, getUsersList, loading, setIsloggedIn,
+        getStaffData, isLoggedIn, staffData, setLoading, setStaffData])
 
     return (
         <StaffContext.Provider value={value}>
