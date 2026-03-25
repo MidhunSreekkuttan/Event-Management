@@ -2,14 +2,24 @@ import { NavLink } from 'react-router-dom'
 import { staff_icons } from '../assets/assets'
 import { useContext } from 'react'
 import { StaffContext } from '../context/staffContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const SideBar = () => {
 
-    const { setIsloggedIn, setStaffData } = useContext(StaffContext)
+    const { setIsloggedIn, setStaffData, backendUrl } = useContext(StaffContext)
 
-    const handleClick = () => {
-        setIsloggedIn(false)
-        setStaffData(null)
+    const handleClick = async () => {
+
+        const { data } = await axios.post(backendUrl + '/api/staffs/logout')
+        if (data.success) {
+            toast.success(data.message)
+            setIsloggedIn(false)
+            setStaffData(null)
+        } else {
+            toast.error(data.message)
+        }
+
     }
 
     return (

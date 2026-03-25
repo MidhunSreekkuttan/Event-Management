@@ -27,6 +27,7 @@ const Login = () => {
                 email, password
             })
             if (data.success) {
+                toast.success(data.message)
                 setIsloggedIn(true)
                 await getStaffData()
                 navigate('/')

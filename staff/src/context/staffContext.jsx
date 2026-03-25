@@ -74,6 +74,9 @@ const StaffContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
+        finally {
+            setLoading(false)
+        }
     }
 
     const getEventList = async () => {
@@ -111,7 +114,6 @@ const StaffContextProvider = (props) => {
     }
 
     useEffect(() => {
-        getAllEnquiry()
         getEventList()
         getAuthState()
     }, [])
