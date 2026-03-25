@@ -114,7 +114,7 @@ const StaffContextProvider = (props) => {
         getAllEnquiry()
         getEventList()
         getAuthState()
-    }, [getAuthState])
+    }, [])
 
     const value = useMemo(() => ({
 

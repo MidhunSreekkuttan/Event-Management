@@ -51,6 +51,8 @@ const App = () => {
 
           <Routes>
 
+            <Route path='/login' element={<Login />} />
+
             <Route element={protectedROute()}>
               <Route path='/' element={<DashBoard />} />
               <Route path='/enquiry-details/:enquiryId' element={<EventDetailPage />} />
@@ -60,7 +62,6 @@ const App = () => {
               <Route path='/report' element={<Report />} />
               <Route path='/settings' element={<Settings />} />
               <Route path='/eventDetails/:eventId' element={<EventsDetailPage />} />
-              <Route path='/login' element={<Login />} />
             </Route>
 
           </Routes>

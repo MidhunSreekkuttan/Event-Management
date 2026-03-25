@@ -1,7 +1,17 @@
 import { NavLink } from 'react-router-dom'
 import { staff_icons } from '../assets/assets'
+import { useContext } from 'react'
+import { StaffContext } from '../context/staffContext'
 
 const SideBar = () => {
+
+    const { setIsloggedIn, setStaffData } = useContext(StaffContext)
+
+    const handleClick = () => {
+        setIsloggedIn(false)
+        setStaffData(null)
+    }
+
     return (
         <div className='flex flex-col w-[13%] bg-sky-500 text-white rounded-l-3xl ml-1 mt-1 mb-3 shadow-xl'>
 
@@ -22,8 +32,8 @@ const SideBar = () => {
 
             <div className='flex flex-col gap-2 w-full h-full px-4 pb-4'>
 
-                <NavLink 
-                    to='/' 
+                <NavLink
+                    to='/'
                     className='py-3 rounded-xl transition duration-200'
                 >
                     <div className='flex gap-3 items-center ml-3'>
@@ -34,8 +44,8 @@ const SideBar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink 
-                    to='/events' 
+                <NavLink
+                    to='/events'
                     className='py-3 rounded-xl transition duration-200'
                 >
                     <div className='flex gap-3 items-center ml-3'>
@@ -46,8 +56,8 @@ const SideBar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink 
-                    to='/clients' 
+                <NavLink
+                    to='/clients'
                     className='py-3 rounded-xl transition duration-200'
                 >
                     <div className='flex gap-3 items-center ml-3'>
@@ -58,8 +68,8 @@ const SideBar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink 
-                    to='/report' 
+                <NavLink
+                    to='/report'
                     className='py-3 rounded-xl transition duration-200'
                 >
                     <div className='flex gap-3 items-center ml-3'>
@@ -70,8 +80,8 @@ const SideBar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink 
-                    to='/settings' 
+                <NavLink
+                    to='/settings'
                     className='py-3 rounded-xl transition duration-200'
                 >
                     <div className='flex gap-3 items-center ml-3'>
@@ -85,7 +95,7 @@ const SideBar = () => {
                 {/*Logout Button*/}
 
                 <div className='pt-4 border-t border-slate-700'>
-                    <button className='w-full py-3 rounded-xl bg-red-500 hover:bg-red-600 transition duration-200'>
+                    <button onClick={handleClick} className='w-full py-3 rounded-xl bg-red-500 hover:bg-red-600 transition duration-200'>
                         <h1 className='text-lg font-semibold'>
                             Logout
                         </h1>
