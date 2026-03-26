@@ -121,10 +121,6 @@ const EventContextProvider = (props) => {
 
     }, [backendUrl])
 
-    useEffect(() => {
-        getEventList()
-    }, [])
-
     const value = useMemo(() => ({
         products,
         listproducts, setlistProducts, listProduct,

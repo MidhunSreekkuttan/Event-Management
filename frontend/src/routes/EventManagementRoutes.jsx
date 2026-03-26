@@ -1,19 +1,20 @@
 import { EventManagementContext } from '../context/EventManagementContext'
-import { useContext } from 'react'
+import { lazy, Suspense, useContext } from 'react'
 import Loader from '../components/Loading'
 import { Navigate, Outlet, Route } from 'react-router-dom'
 import EventManagementLayout from '../layouts/EventManagementLayout'
-import Login from '../pages/event-management/login/Login'
-import Otp from '../pages/event-management/login/Otp'
-import Home from '../pages/event-management/Home'
-import Add from '../pages/event-management/Add'
-import Booking from '../pages/event-management/Booking'
-import Events from '../pages/event-management/Events'
-import Reports from '../pages/event-management/Reports'
-import StayingPage from '../pages/event-management/StayingPage'
-import Registeration from '../pages/event-management/Registeration'
-import Waiting from '../pages/event-management/Waiting'
-import Approval from '../pages/event-management/Approval'
+
+const Login = lazy(() => import('../pages/event-management/login/Login'))
+const Otp = lazy(() => import('../pages/event-management/login/Otp'))
+const Home = lazy(() => import('../pages/event-management/Home'))
+const Add = lazy(() => import('../pages/event-management/Add'))
+const Booking = lazy(() => import('../pages/event-management/Booking'))
+const Events = lazy(() => import('../pages/event-management/Events'))
+const Reports = lazy(() => import('../pages/event-management/Reports'))
+const StayingPage = lazy(() => import('../pages/event-management/StayingPage'))
+const Registeration = lazy(() => import('../pages/event-management/Registeration'))
+const Waiting = lazy(() => import('../pages/event-management/Waiting'))
+const Approval = lazy(() => import('../pages/event-management/Approval'))
 
 const EventManagementRoutes = () => {
 
@@ -38,23 +39,67 @@ const EventManagementRoutes = () => {
 
     <>
 
-      <Route path='/event-management/login' element={<Login />} />
-      <Route path='/event-management/otp' element={<Otp />} />
+      <Route path='/event-management/login' element={
+        <Suspense fallback={<Loader />}>
+          <Login />
+        </Suspense>
+      } />
+      <Route path='/event-management/otp' element={
+        <Suspense fallback={<Loader />}>
+          <Otp />
+        </Suspense>
+      } />
 
       <Route path='/event-management' element={<EventManagementLayout />}>
 
-        <Route path='staying' element={<StayingPage />} />
-        <Route path='registeration' element={<Registeration />} />
-        <Route path='waiting' element={<Waiting />} />
-        <Route path='approval' element={<Approval />} />
+        <Route path='staying' element={
+          <Suspense fallback={<Loader />}>
+            <StayingPage />
+          </Suspense>
+        } />
+        <Route path='registeration' element={
+          <Suspense fallback={<Loader />}>
+            <Registeration />
+          </Suspense>
+        } />
+        <Route path='waiting' element={
+          <Suspense fallback={<Loader />}>
+            <Waiting />
+          </Suspense>
+        } />
+        <Route path='approval' element={
+          <Suspense fallback={<Loader />}>
+            <Approval />
+          </Suspense>
+        } />
 
         <Route element={protectedRoute()}>
 
-          <Route path='home' element={<Home />} />
-          <Route path='add' element={<Add />} />
-          <Route path='booking' element={<Booking />} />
-          <Route path='events' element={<Events />} />
-          <Route path='reports' element={<Reports />} />
+          <Route path='home' element={
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
+          } />
+          <Route path='add' element={
+            <Suspense fallback={<Loader />}>
+              <Add />
+            </Suspense>
+          } />
+          <Route path='booking' element={
+            <Suspense fallback={<Loader />}>
+              <Booking />
+            </Suspense>
+          } />
+          <Route path='events' element={
+            <Suspense fallback={<Loader />}>
+              <Events />
+            </Suspense>
+          } />
+          <Route path='reports' element={
+            <Suspense fallback={<Loader />}>
+              <Reports />
+            </Suspense>
+          } />
 
         </Route>
 

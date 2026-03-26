@@ -6,10 +6,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { BackendContex } from '../../../context/ConnectBackendContex';
 import Loader from '../../Loading';
+import { EventContext } from '../../../context/EventContext';
 
 const ListingComponent = () => {
 
     const { backendUrl } = useContext(BackendContex)
+
+    const { getEventList } = useContext(EventContext)
 
     const listEevent = useCallback(async () => {
 
@@ -17,7 +20,7 @@ const ListingComponent = () => {
         return data.product
 
     }, [backendUrl])
-    
+
     const { data, error, isLoading } = useQuery({
         queryKey: ['eventlist'],
         queryFn: listEevent
@@ -72,6 +75,10 @@ const ListingComponent = () => {
             setfilter(categoryMap[hash]);
         }
     }, [location.hash]);
+
+    useEffect(() => {
+        getEventList()
+    }, [])
 
     if (error) return <div>Error:{error.message}</div>
     if (isLoading) return <Loader />
