@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import WorkersLayout from '../layouts/WorkersLayout'
 import Loader from '../components/Loading'
 import WorkersHome from '../pages/workers/WorkersHome'
+import Waiting from '../pages/workers/WorkersWaitingPage'
 
 const Index = lazy(() => import('../pages/workers/Index'))
 const WorkerDashboard = lazy(() => import('../pages/workers/WorkersDashboard'))
@@ -35,6 +36,11 @@ const WorkerRoutes = () => {
         <Route path='registration' element={
           <Suspense fallback={<Loader />}>
             <WorkerRegistration />
+          </Suspense>
+        } />
+        <Route path='waiting' element={
+          <Suspense fallback={<Loader />}>
+            <Waiting />
           </Suspense>
         } />
         <Route path='login' element={
