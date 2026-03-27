@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BackendContex } from "../../context/ConnectBackendContex";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loading";
+import { workersContext } from "../../context/WorkersContext";
 
 const Login = () => {
 
   const { backendUrl } = useContext(BackendContex);
+  const { getUserData, authLoading } = useContext(workersContext)
 
   const navigate = useNavigate();
 
@@ -50,6 +52,7 @@ const Login = () => {
         if (!data.isAccountVerified) {
           await setVerifyOtp();
         } else {
+          await getUserData()
           toast.success(data.message);
           navigate("/workers/index");
         }
@@ -70,7 +73,7 @@ const Login = () => {
 
     <>
 
-      {loading && <Loader />}
+      {(loading || authLoading) && <Loader />}
 
       <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-[#0f1b3d] to-[#070b1f]">
         <div className="w-full max-w-md rounded-2xl bg-[#0b1437]/90 p-8 shadow-2xl border border-[#1c2b6a]">
