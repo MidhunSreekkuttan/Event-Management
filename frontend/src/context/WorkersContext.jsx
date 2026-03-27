@@ -12,8 +12,6 @@ const WorkersContextProvider = (props) => {
     const [authLoading, setAuthLoading] = useState(false)
     const [userData, setUserData] = useState([])
 
-    console.log(userData);
-
     const getUserData = useCallback(async () => {
 
         try {

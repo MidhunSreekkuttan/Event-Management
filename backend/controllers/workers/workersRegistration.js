@@ -19,6 +19,7 @@ const workersRegistration = async (req, res) => {
     }
 
     const registration = new WorkersRegistrationModel({
+      user: req.user.id,
       name,
       mobileNumber,
       email,

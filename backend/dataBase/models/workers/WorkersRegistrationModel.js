@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const WorkersRegistrationSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "workers",
+      required: true,
+    },
+
     name: { type: String, required: true },
     mobileNumber: { type: String, required: true },
     email: { type: String, required: true },

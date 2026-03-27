@@ -25,6 +25,7 @@ workersRouter.get("/getUserData", workersAuth, getUserData);
 //upload registration
 workersRouter.post(
   "/uploadFile",
+  workersAuth,
   upload.fields([
     { name: "uploadIdProof", maxCount: 1 },
     { name: "uploadWorkPermit", maxCount: 1 },
