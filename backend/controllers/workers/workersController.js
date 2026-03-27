@@ -177,6 +177,26 @@ export const verifyEmail = async (req, res) => {
       message: "Email Verification Is Successful",
     });
   } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getAuth = async (req, res) => {
+  try {
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getUserData = async (req, res) => {
+  try {
+    const user = await workersModel.find(req.userId);
+    res.json({ success: true, user });
+  } catch (error) {
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
