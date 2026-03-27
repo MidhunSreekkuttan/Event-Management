@@ -10,7 +10,10 @@ import {
 } from "../../controllers/workers/workersController.js";
 import workersAuth from "../../middleware/workers/workersAuth.js";
 import upload from "../../middleware/eventManagement/multer.js";
-import workersRegistration from "../../controllers/workers/workersRegistration.js";
+import {
+  listRegistration,
+  workersRegistration,
+} from "../../controllers/workers/workersRegistration.js";
 
 const workersRouter = express.Router();
 
@@ -34,5 +37,7 @@ workersRouter.post(
   ]),
   workersRegistration,
 );
+
+workersRouter.get("/listFiles", workersAuth, listRegistration);
 
 export default workersRouter;
