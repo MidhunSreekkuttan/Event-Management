@@ -5,12 +5,31 @@ import axios from "axios";
 import { BackendContex } from "../../context/ConnectBackendContex";
 import Loader from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { useQuery } from '@tanstack/react-query'
+import { useEffect } from "react";
+import { workersContext } from "../../context/WorkersContext";
 
 export default function WorkerRegistration() {
 
   const { backendUrl } = useContext(BackendContex)
+  const { userData } = useContext(workersContext)
 
   const navigate = useNavigate()
+
+  const getRegistrationList = useCallback(async () => {
+
+    const { data } = await axios.get(backendUrl + "/api/workers/listFiles")
+    return data.registrations
+
+  }, [backendUrl])
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["registration"],
+    queryFn: getRegistrationList
+  })
+
+  const finding = data && userData ? data.some(item => item.user === userData._id) : []
 
   const [form, setForm] = useState({
     name: "",
@@ -64,11 +83,21 @@ export default function WorkerRegistration() {
 
   };
 
+  useEffect(() => {
+
+    if (finding) {
+      navigate('/workers/waiting')
+    }
+
+  }, [finding])
+
+  if (error) return <div>Error:{error.message}</div>
+
   return (
 
     <>
 
-      {loading && <Loader />}
+      {(loading || isLoading) && <Loader />}
 
       <div className="min-h-screen  p-6">
         <div className="max-w-3xl mx-auto bg-white/3 border border-white rounded-2xl p-8">
