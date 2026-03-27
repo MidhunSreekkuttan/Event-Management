@@ -1,6 +1,6 @@
 import WorkersRegistrationModel from "../../dataBase/models/workers/WorkersRegistrationModel.js";
 
-const workersRegistration = async (req, res) => {
+export const workersRegistration = async (req, res) => {
   try {
     const { name, mobileNumber, email, jobRole } = req.body;
 
@@ -39,4 +39,15 @@ const workersRegistration = async (req, res) => {
   }
 };
 
-export default workersRegistration;
+//for workers
+export const listRegistration = async (req, res) => {
+  try {
+    const registrations = await WorkersRegistrationModel.find({
+      user: req.user.id,
+    });
+    res.json({ success: true, registrations });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
