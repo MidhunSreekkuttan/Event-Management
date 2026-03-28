@@ -9,13 +9,12 @@ const WorkersContextProvider = (props) => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const [authLoading, setAuthLoading] = useState(false)
-    const [userData, setUserData] = useState([])
+    const [authLoading, setAuthLoading] = useState(true)
+    const [userData, setUserData] = useState(null)
 
     const getUserData = useCallback(async () => {
 
         try {
-            setAuthLoading(true)
 
             const { data } = await axios.get(backendUrl + "/api/workers/getUserData")
             if (data.success) {
@@ -32,7 +31,7 @@ const WorkersContextProvider = (props) => {
             setAuthLoading(false)
         }
 
-    }, [])
+    }, [backendUrl])
 
     const getAuth = useCallback(async () => {
 
@@ -47,8 +46,11 @@ const WorkersContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
+        finally {
+            setAuthLoading(false)
+        }
 
-    }, [])
+    }, [backendUrl])
 
     useEffect(() => {
         getAuth()

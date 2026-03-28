@@ -42,10 +42,10 @@ export const workersRegistration = async (req, res) => {
 //for workers
 export const listRegistration = async (req, res) => {
   try {
-    const registrations = await WorkersRegistrationModel.find({
+    const registrations = await WorkersRegistrationModel.findOne({
       user: req.user.id,
     });
-    res.json({ success: true, registrations });
+    res.json({ success: true, registrations: registrations });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
