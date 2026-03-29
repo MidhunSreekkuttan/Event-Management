@@ -14,33 +14,17 @@ const Router = () => {
 
         <>
 
-            <Route element={<Layout />} >
+            <Route element={
+                <Suspense fallback={<Loader />}>
+                    <Layout />
+                </Suspense>
+            }>
 
-                <Route path='/' element={
-                    <Suspense fallback={<Loader />} >
-                        <Dashboard />
-                    </Suspense>
-                } />
-                <Route path='/eventManagers' element={
-                    <Suspense fallback={<Loader />} >
-                        <EventManagersList />
-                    </Suspense>
-                } />
-                <Route path='/events' element={
-                    <Suspense fallback={<Loader />} >
-                        <Events />
-                    </Suspense>
-                } />
-                <Route path='/staffsList' element={
-                    <Suspense fallback={<Loader />} >
-                        <StaffsList />
-                    </Suspense>
-                } />
-                <Route path='/usersList' element={
-                    <Suspense fallback={<Loader />} >
-                        <UsersList />
-                    </Suspense>
-                } />
+                <Route path='/' element={<Dashboard />} />
+                <Route path='/eventManagers' element={<EventManagersList />} />
+                <Route path='/events' element={<Events />} />
+                <Route path='/staffsList' element={<StaffsList />} />
+                <Route path='/usersList' element={<UsersList />} />
 
             </Route>
 
