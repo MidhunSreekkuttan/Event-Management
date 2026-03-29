@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+.active{
+    background: linear-gradient(to right, #000000, #ff0000);
+    color: white;
+}
