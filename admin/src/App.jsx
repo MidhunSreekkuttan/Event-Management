@@ -1,8 +1,19 @@
-import React from 'react'
+import { Routes } from 'react-router-dom'
+import Router from './Router'
 
 const App = () => {
   return (
-    <div>App</div>
+
+    <>
+
+      <Routes>
+
+        {Router()}
+
+      </Routes>
+
+    </>
+
   )
 }
 
