@@ -63,7 +63,7 @@ const BookingPage = () => {
     }, [backendUrl])
 
     const responseId = response?.find(item => item?.relatedEvents?.some(data => data?.id === bookingId))?._id
-    
+
     const initPay = (order) => {
         const options = {
             key: import.meta.env.VITE_RAZORPAY_TEST_API_KEY,
@@ -117,7 +117,8 @@ const BookingPage = () => {
                 userId: usersId,
                 productId: bookedData?._id,
                 items: bookedData,
-                eventDate: date
+                eventDate: date,
+                responseId: responseId
             }
 
             switch (color) {
@@ -141,7 +142,10 @@ const BookingPage = () => {
                     const { data } = await axios.post(backendUrl + "/api/booking/placebookingRazorpay", bookingData)
 
                     if (data.success) {
+                        toast.success(data.message)
                         initPay(data.order);
+                    } else {
+                        toast.error(data.message)
                     }
 
                     break

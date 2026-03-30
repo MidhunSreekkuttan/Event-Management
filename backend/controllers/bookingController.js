@@ -8,7 +8,8 @@ import ResponseModel from "../dataBase/models/staffs/responseModel.js";
 
 export const placebooking = async (req, res) => {
   try {
-    const { userId, productId, address, items, eventDate } = req.body;
+    const { userId, productId, address, items, eventDate, responseId } =
+      req.body;
 
     const product = await ProductModel.findById(productId);
 
@@ -40,6 +41,9 @@ export const placebooking = async (req, res) => {
 
     const newBooking = new BookingModel(bookingData);
     await newBooking.save();
+
+    await ResponseModel.findByIdAndUpdate(responseId, { status: "paid" });
+
     res.json({
       success: true,
       message: "Booking Successful",
