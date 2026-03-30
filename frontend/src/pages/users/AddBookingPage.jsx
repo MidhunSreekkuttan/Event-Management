@@ -13,7 +13,7 @@ const BookingPage = () => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const { enquiryList, listEnquiry, products } = useContext(EventContext)
+    const { enquiryList, getEventList, products } = useContext(EventContext)
 
     const usersId = enquiryList.find(item => item.userData?._id)?.userData?._id;
 
@@ -84,7 +84,7 @@ const BookingPage = () => {
     }
 
     useEffect(() => {
-        listEnquiry()
+        getEventList()
     }, [])
 
     return (
