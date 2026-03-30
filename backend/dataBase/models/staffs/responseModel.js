@@ -24,6 +24,8 @@ const ResponseSchema = new mongoose.Schema(
 
     respondMessage: { type: String, required: true },
 
+    status: { type: String, default: "pending", required: true },
+
     date: { type: Date, required: true },
   },
 

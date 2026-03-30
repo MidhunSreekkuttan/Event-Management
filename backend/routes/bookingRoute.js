@@ -6,6 +6,7 @@ import {
   placebookingRazorpay,
   updateBooking,
   userBooking,
+  verifyRazorpay,
 } from "../controllers/bookingController.js";
 import EventManagementAuth from "../middleware/eventManagement/eventManagementAuth.js";
 import adminAuth from "../middleware/admin/adminAuth.js";
@@ -16,6 +17,7 @@ const bookingRouter = express.Router();
 //For user
 bookingRouter.post("/placingBooking", userAuth, placebooking);
 bookingRouter.post("/placebookingRazorpay", userAuth, placebookingRazorpay);
+bookingRouter.post("/verifyRazorpay", verifyRazorpay);
 //For Admin
 bookingRouter.get("/allOrder", adminAuth, allOrder);
 //For event management panel
