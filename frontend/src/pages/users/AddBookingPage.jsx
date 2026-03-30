@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { EventContext } from '../../context/EventContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -23,6 +23,7 @@ const BookingPage = () => {
     const [color, setColor] = useState('cod')
     const [date, setDate] = useState('')
     const [loading, setLoading] = useState(false)
+    const [response, setResponse] = useState([])
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -41,6 +42,28 @@ const BookingPage = () => {
         setFormData((data) => ({ ...data, [name]: value }))
     }
 
+    const getResponseData = useCallback(async () => {
+
+        try {
+            setLoading(true)
+
+            const { data } = await axios.get(backendUrl + "/api/staffs/getResponse")
+            if (data.success) {
+                setResponse(data.responsedata)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
+        }
+
+    }, [backendUrl])
+
+    const responseId = response?.find(item => item._id)?._id
+
     const initPay = (order) => {
         const options = {
             key: import.meta.env.VITE_RAZORPAY_TEST_API_KEY,
@@ -51,7 +74,28 @@ const BookingPage = () => {
             order_id: order.id,
             receipt: order.receipt,
             handler: async (response) => {
-                console.log(response);
+
+                const datas = {
+                    ...response,
+                    responseId
+                }
+
+                try {
+                    setLoading(true)
+
+                    const { data } = await axios.post(backendUrl + '/api/booking/verifyRazorpay', datas)
+
+                    if (data.success) {
+                        navidate('/booking')
+                    }
+
+                } catch (error) {
+                    console.log(error);
+                    toast.error(error.message)
+                }
+                finally {
+                    setLoading(false)
+                }
             }
         }
         const rzp = new window.Razorpay(options)
@@ -97,8 +141,6 @@ const BookingPage = () => {
                     const { data } = await axios.post(backendUrl + "/api/booking/placebookingRazorpay", bookingData)
 
                     if (data.success) {
-                        console.log(data.order);
-                        
                         initPay(data.order);
                     }
 
@@ -121,6 +163,7 @@ const BookingPage = () => {
     useEffect(() => {
         listEnquiry()
         getEventList()
+        getResponseData()
     }, [])
 
     return (
