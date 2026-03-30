@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import BookingModel from "../dataBase/models/bookingModel.js";
 import ProductModel from "../dataBase/models/eventManagement/productModel.js";
+import razorpay from "../config/razorpay.js";
 
 //place booking in cod methode
 
@@ -51,7 +52,61 @@ export const placebooking = async (req, res) => {
 
 //place booking in strip methode
 
-export const placebookingStrip = async (req, res) => {};
+export const placebookingRazorpay = async (req, res) => {
+  try {
+    const { userId, productId, address, items, eventDate } = req.body;
+
+    const product = await ProductModel.findById(productId);
+
+    if (!product) {
+      return res.json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    if (!product.owner) {
+      return res.json({
+        success: false,
+        message: "Product owner missing",
+      });
+    }
+
+    const amount = items.price;
+
+    const bookingData = {
+      owner: product.owner,
+      userId,
+      productId,
+      address,
+      items,
+      paymentMethod: "Razorpay",
+      payment: false,
+      date: Date.now(),
+      eventDate,
+    };
+
+    const newBooking = new BookingModel(bookingData);
+    await newBooking.save();
+
+    const options = {
+      amount: amount * 100,
+      currency: "INR",
+      receipt: newBooking._id.toString(),
+    };
+
+    await razorpay.orders.create(options, (error, order) => {
+      if (error) {
+        console.log(error);
+        return res.json({ success: false, message: error });
+      }
+      res.json({ success: true, order });
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 //All bookings data for admin panal
 
