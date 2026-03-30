@@ -3,7 +3,7 @@ import {
   allOrder,
   allOrderEventManagement,
   placebooking,
-  placebookingStrip,
+  placebookingRazorpay,
   updateBooking,
   userBooking,
 } from "../controllers/bookingController.js";
@@ -15,7 +15,7 @@ const bookingRouter = express.Router();
 
 //For user
 bookingRouter.post("/placingBooking", userAuth, placebooking);
-bookingRouter.post("/placebookingStrip", userAuth, placebookingStrip);
+bookingRouter.post("/placebookingRazorpay", userAuth, placebookingRazorpay);
 //For Admin
 bookingRouter.get("/allOrder", adminAuth, allOrder);
 //For event management panel
