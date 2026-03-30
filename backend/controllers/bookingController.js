@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import BookingModel from "../dataBase/models/bookingModel.js";
 import ProductModel from "../dataBase/models/eventManagement/productModel.js";
 import razorpay from "../config/razorpay.js";
+import ResponseModel from "../dataBase/models/staffs/responseModel.js";
 
 //place booking in cod methode
 
@@ -102,6 +103,29 @@ export const placebookingRazorpay = async (req, res) => {
       }
       res.json({ success: true, order });
     });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+//verify razorpay
+export const verifyRazorpay = async (req, res) => {
+  try {
+    const { responseId, razorpay_order_id } = req.body;
+
+    const orderInfo = await razorpay.orders.fetch(razorpay_order_id);
+
+    if (orderInfo.status === "paid") {
+      await BookingModel.findByIdAndUpdate(orderInfo.receipt, {
+        payment: true,
+      });
+
+      await ResponseModel.findByIdAndUpdate(responseId, { status: "paid" });
+
+      res.json({ success: true, message: "payment successfull" });
+    } else {
+      res.json({ success: false, message: "payment faild" });
+    }
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
