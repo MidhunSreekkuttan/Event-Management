@@ -22,7 +22,7 @@ a.active hr {
   background-color: #ebdcf9;
 }
 
-.color{
+.color {
   background-color: #be185d;
 }
 
@@ -36,7 +36,10 @@ html {
   }
   button {
     @apply cursor-pointer;
-    @apply active:scale-90
+    @apply active:scale-90;
+  }
+  button:disabled {
+    @apply active:scale-100;
   }
 }
 

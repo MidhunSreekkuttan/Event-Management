@@ -62,8 +62,8 @@ const BookingPage = () => {
 
     }, [backendUrl])
 
-    const responseId = response?.find(item => item._id)?._id
-
+    const responseId = response?.find(item => item?.relatedEvents?.some(data => data?.id === bookingId))?._id
+    
     const initPay = (order) => {
         const options = {
             key: import.meta.env.VITE_RAZORPAY_TEST_API_KEY,
