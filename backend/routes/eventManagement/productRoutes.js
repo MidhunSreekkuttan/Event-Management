@@ -5,6 +5,7 @@ import {
   ownerListProduct,
   removeProduct,
   singleProduct,
+  updateProduct
 } from "../../controllers/eventManagement/productController.js";
 import upload from "../../middleware/eventManagement/multer.js";
 import EventManagementAuth from "../../middleware/eventManagement/eventManagementAuth.js";
@@ -15,6 +16,7 @@ import {
 
 const ProductRouter = express.Router();
 
+// ADD PRODUCT
 ProductRouter.post(
   "/addProduct",
   EventManagementAuth,
@@ -26,12 +28,28 @@ ProductRouter.post(
   ]),
   addProduct,
 );
+
+// UPDATE PRODUCT
+ProductRouter.put(
+  "/updateProduct/:id",
+  EventManagementAuth,
+  upload.fields([
+    { name: "image1", maxCount: 1},
+    { name: "image2", maxCount: 1},
+    { name: "image3", maxCount: 1},
+    { name: "image4", maxCount: 1},
+  ]),
+  updateProduct
+);
+
+//OWNER LIST
 ProductRouter.get("/ownerListProduct", EventManagementAuth, ownerListProduct);
+//REMOVE LIST
 ProductRouter.post("/removeProduct", EventManagementAuth, removeProduct);
-ProductRouter.post("/singleProduct", EventManagementAuth, singleProduct);
+// SINGLE PRODUCT
+ProductRouter.get("/singleProduct/:id", EventManagementAuth, singleProduct);
 
 //route for public user
-
 ProductRouter.get("/listProduct", listProduct);
 
 //upload pdf
