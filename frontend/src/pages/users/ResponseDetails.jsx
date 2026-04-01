@@ -132,7 +132,7 @@ const ResponseDetails = () => {
                                         <div className="relative h-56 overflow-hidden">
                                             <img
                                                 src={
-                                                    item?.image[0].replace('/upload/',
+                                                    item?.image[0]?.replace('/upload/',
                                                         '/upload/w_400,h_300,c_fill,f_auto,q_auto/')
                                                 }
                                                 alt={item.event}
