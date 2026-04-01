@@ -85,6 +85,11 @@ const EventManagementRoutes = () => {
               <Add />
             </Suspense>
           } />
+          <Route path='add/:id' element={
+            <Suspense fallback={<Loader />}>
+              <Add />
+            </Suspense>
+          } />
           <Route path='booking' element={
             <Suspense fallback={<Loader />}>
               <Booking />
