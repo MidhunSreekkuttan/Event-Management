@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import SideBar from '../../components/event-management/SideBar'
 import { icon } from '../../assets/assets'
 import { BackendContex } from '../../context/ConnectBackendContex'
@@ -9,6 +10,7 @@ import Loader from '../../components/Loading'
 const Add = ({ token }) => {
 
   const { backendUrl } = useContext(BackendContex)
+  const { id } = useParams()
 
   const [image1, setImage1] = useState(false)
   const [image2, setImage2] = useState(false)
@@ -19,7 +21,7 @@ const Add = ({ token }) => {
   const [event_name, setEvent_name] = useState('')
   const [price, setPrice] = useState('')
   const [starting_price, setStarting_price] = useState('')
-  const [main_services, setMain_services] = useState([])
+  const [main_services, setMain_services] = useState('')
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('Birthday Party')
   const [location, setLocation] = useState('Trivandrum')
@@ -27,6 +29,53 @@ const Add = ({ token }) => {
   const [endTime, setEndTime] = useState('')
 
   const [loading, setLoading] = useState(false)
+
+  // Fetch event data for edit
+  useEffect(() => {
+
+    const fetchEventData = async () => {
+
+      if (!id)
+        return
+
+      try {
+
+        const response = await axios.get(`${backendUrl}/api/product/singleProduct/${id}`)
+
+        if (response.data.success) {
+
+          const data = response.data.product
+          setCompany_name(data.company_name)
+          setEvent_name(data.event_name)
+          setPrice(data.price)
+          setStarting_price(data.starting_price)
+          setMain_services(data.main_services)
+          setDescription(data.description)
+          setCategory(data.category)
+          setLocation(data.location)
+
+          // Load images from DB
+          setImage1(data.image?.[0] || false)
+          setImage2(data.image?.[1] || false)
+          setImage3(data.image?.[2] || false)
+          setImage4(data.image?.[3] || false)
+
+          // Format date for datetime-local
+          const formatDate = (date) => {
+            const d = new Date(date)
+            const pad = (n) => n.toString().padStart(2, "0")
+            return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+          }
+          setStartTime(formatDate(data.startTime))
+          setEndTime(formatDate(data.endTime))
+        }
+      } catch (error) {
+        console.log(error)
+        toast.error("Failed to load event data")
+      }
+    }
+    fetchEventData()
+  }, [id, backendUrl])
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
@@ -47,13 +96,36 @@ const Add = ({ token }) => {
       formData.append('startTime', startTime)
       formData.append('endTime', endTime)
 
-      image1 && formData.append('image1', image1)
-      image2 && formData.append('image2', image2)
-      image3 && formData.append('image3', image3)
-      image4 && formData.append('image4', image4)
+      if (image1 && typeof image1 !== "string") formData.append('image1', image1)
+      if (image2 && typeof image2 !== "string") formData.append('image2', image2)
+      if (image3 && typeof image3 !== "string") formData.append('image3', image3)
+      if (image4 && typeof image4 !== "string") formData.append('image4', image4)
 
-      const response = await axios.post(backendUrl + '/api/product/addProduct',
-        formData, { withCredentials: true }, { headers: { token } })
+      let response
+
+      if (id) {
+
+        response = await axios.put(
+          `${backendUrl}/api/product/updateProduct/${id}`,
+          formData,
+          {
+            withCredentials: true,
+            headers: { token }
+          }
+        )
+
+      } else {
+
+        response = await axios.post(
+          `${backendUrl}/api/product/addProduct`,
+          formData,
+          {
+            withCredentials: true,
+            headers: { token }
+          }
+        )
+
+      }
 
       if (response.data.success) {
         toast.success(response.data.message)
@@ -85,6 +157,14 @@ const Add = ({ token }) => {
 
   }
 
+  // Image preview helper
+  const previewImage = (image) => {
+    if (!image) return icon.upload_icon
+    if (typeof image === "string")
+      return image
+    return URL.createObjectURL(image)
+  }
+
   return (
 
     <>
@@ -103,25 +183,25 @@ const Add = ({ token }) => {
               <div className='flex gap-3'>
                 <label htmlFor="image1">
                   <div className='bg-white/50'>
-                    <img className='w-15' src={!image1 ? icon.upload_icon : URL.createObjectURL(image1)} alt="" />
+                    <img className='w-15' src={previewImage(image1)} alt="" />
                     <input onChange={e => setImage1(e.target.files[0])} type="file" id='image1' hidden />
                   </div>
                 </label>
                 <label htmlFor="image2">
                   <div className='bg-white/50'>
-                    <img className='w-15' src={!image2 ? icon.upload_icon : URL.createObjectURL(image2)} alt="" />
+                    <img className='w-15' src={previewImage(image2)} alt="" />
                     <input onChange={e => setImage2(e.target.files[0])} type="file" id='image2' hidden />
                   </div>
                 </label>
                 <label htmlFor="image3">
                   <div className='bg-white/50'>
-                    <img className='w-15' src={!image3 ? icon.upload_icon : URL.createObjectURL(image3)} alt="" />
+                    <img className='w-15' src={previewImage(image3)} alt="" />
                     <input onChange={e => setImage3(e.target.files[0])} type="file" id='image3' hidden />
                   </div>
                 </label>
                 <label htmlFor="image4">
                   <div className='bg-white/50'>
-                    <img className='w-15' src={!image4 ? icon.upload_icon : URL.createObjectURL(image4)} alt="" />
+                    <img className='w-15' src={previewImage(image4)} alt="" />
                     <input onChange={e => setImage4(e.target.files[0])} type="file" id='image4' hidden />
                   </div>
                 </label>
@@ -133,7 +213,7 @@ const Add = ({ token }) => {
               <div className='w-full'>
                 <p className='mb-2'>Company Name</p>
                 <input onChange={(e) => setCompany_name(e.target.value)} value={company_name}
-                  className='w-full max-w-[500px] px-3 py-2 border border-white/30 focus:outline-none 
+                  className='w-full max-w-125 px-3 py-2 border border-white/30 focus:outline-none 
                       focus:ring-2 focus:ring-pink-500 rounded-md'
                   type="text" placeholder='Enter your Company Name' required />
               </div>
@@ -141,7 +221,7 @@ const Add = ({ token }) => {
               <div className='w-full'>
                 <p className='mb-2'>Event Name</p>
                 <input onChange={(e) => setEvent_name(e.target.value)} value={event_name}
-                  className='w-full max-w-[500px] px-3 py-2 border border-white/30 focus:outline-none 
+                  className='w-full max-w-125 px-3 py-2 border border-white/30 focus:outline-none 
                       focus:ring-2 focus:ring-pink-500 rounded-md'
                   type="text" placeholder='Enter your Event Name' required />
               </div>
@@ -149,7 +229,7 @@ const Add = ({ token }) => {
               <div className='w-full'>
                 <p className='mb-2'>Price</p>
                 <input onChange={(e) => setPrice(e.target.value)} value={price}
-                  className='w-full max-w-[500px] px-3 py-2 border border-white/30 focus:outline-none 
+                  className='w-full max-w-125 px-3 py-2 border border-white/30 focus:outline-none 
                       focus:ring-2 focus:ring-pink-500 rounded-md'
                   type="number" placeholder='Enter your Price' required />
               </div>
@@ -157,7 +237,7 @@ const Add = ({ token }) => {
               <div className='w-full'>
                 <p className='mb-2'>Startng Price range</p>
                 <input onChange={(e) => setStarting_price(e.target.value)} value={starting_price}
-                  className='w-full max-w-[500px] px-3 py-2 border border-white/30 focus:outline-none 
+                  className='w-full max-w-125 px-3 py-2 border border-white/30 focus:outline-none 
                       focus:ring-2 focus:ring-pink-500 rounded-md'
                   type="text" placeholder='Enter your Starting Price range' required />
               </div>
@@ -220,7 +300,7 @@ const Add = ({ token }) => {
                   required
                 />
               </div>
-              
+
             </div>
 
             <div className='flex justify-between w-full'>
@@ -262,9 +342,12 @@ const Add = ({ token }) => {
 
             </div>
 
-            <button disabled={loading} type="submit" className={` text-white text-2xl font-semibold 
-              px-4 py-2 rounded-md ${loading ? 'bg-purple-400 cursor-not-allowed' : 'bg-linear-to-r from-pink-500 to-pink-700'}`}>
-              Add Event
+            <button
+              disabled={loading}
+              type="submit"
+              className={` text-white text-2xl font-semibold px-4 py-2 rounded-md 
+              ${loading ? 'bg-purple-400 cursor-not-allowed' : 'bg-linear-to-r from-pink-500 to-pink-700'}`}>
+              {loading ? "Processing..." : id ? "Update Event" : "Add Events"}
             </button>
 
           </form>

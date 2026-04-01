@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 
-const ProductList = ({ _id, event_name, image, location, category, price, starting_price, status, onDelete }) => {
+const ProductList = ({ _id, event_name, image, location, category, price, starting_price, status, onEdit, onDelete }) => {
 
     const optimizedImage = useMemo(() => {
         if (!image?.[0]) return '/fallback-image.jpg'
@@ -21,7 +21,7 @@ const ProductList = ({ _id, event_name, image, location, category, price, starti
         <section className='cursor-pointer'>
 
             <div className='group rounded-3xl overflow-hidden border border-white/10 
-            bg-gradient-to-br from-slate-900 via-slate-950 to-black 
+            bg-linear-to-br from-slate-900 via-slate-950 to-black 
             shadow-lg hover:shadow-2xl hover:shadow-purple-900/30 
             transition-all duration-300 hover:-translate-y-1'>
 
@@ -67,18 +67,30 @@ const ProductList = ({ _id, event_name, image, location, category, price, starti
                         </span>
                     </div>
 
-                    <button
-                        onClick={() => onDelete(_id)}
-                        className='mt-4 w-full py-2.5 rounded-xl 
-                        bg-gradient-to-r from-pink-500 to-pink-700
-                        hover:from-pink-600 hover:to-pink-800
-                        text-white font-semibold text-sm
-                        shadow-md hover:shadow-pink-700/40
-                        transition-all duration-300'
-                    >
-                        Delete Event
-                    </button>
+                    {/* Edit + Delete Buttons */}
+                    <div className="flex gap-3 mt-4">
 
+                        <button
+                            onClick={() => onEdit(_id)}
+                            className="flex-1 py-2.5 rounded-xl 
+                                       bg-blue-600 hover:bg-blue-700
+                                       text-white font-semibold text-sm
+                                       transition-all duration-300"
+                        >
+                            Edit Event
+                        </button>
+
+                        <button
+                            onClick={() => onDelete(_id)}
+                            className="flex-1 py-2.5 rounded-xl 
+                                       bg-pink-600 hover:bg-pink-700
+                                       text-white font-semibold text-sm
+                                       transition-all duration-300"
+                        >
+                            Delete Event
+                        </button>
+
+                    </div>
                 </div>
             </div>
 

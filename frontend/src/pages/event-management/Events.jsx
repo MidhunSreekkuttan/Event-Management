@@ -4,15 +4,19 @@ import { BackendContex } from '../../context/ConnectBackendContex'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import ProductList from '../../components/event-management/ProductList'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loading'
 
 const Events = () => {
 
   const { backendUrl } = useContext(BackendContex)
+  const navigate = useNavigate()
 
   const [itemList, setItemList] = useState([])
   const [loading, setLoading] = useState(true)
+  const handleEdit = (id) => {
+    navigate(`/event-management/add/${id}`)
+  }
 
   const removeItem = async (id) => {
 
@@ -70,7 +74,7 @@ const Events = () => {
         <SideBar />
 
         <div className='flex-1 p-4 md:p-6 lg:p-8'>
-          <div className='rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-slate-950
+          <div className='rounded-3xl border border-white/10 bg-linear-to-br from-slate-900 via-slate-950
              to-black shadow-2xl overflow-hidden'>
 
             {/* Header */}
@@ -90,7 +94,7 @@ const Events = () => {
               {/* Top Cards */}
               <div className='grid grid-cols-4 gap-6 mb-8'>
 
-                <div className='group relative overflow-hidden rounded-3xl border border-purple-400/20 bg-gradient-to-br
+                <div className='group relative overflow-hidden rounded-3xl border border-purple-400/20 bg-linear-to-br
                    from-purple-600 via-fuchsia-600 to-indigo-700 p-6 shadow-lg shadow-purple-900/30 transition-all
                        duration-300 hover:-translate-y-1 hover:shadow-purple-800/40'>
                   <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
@@ -101,7 +105,7 @@ const Events = () => {
                   </div>
                 </div>
 
-                <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br
+                <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-linear-to-br
                    from-amber-400 via-yellow-500 to-orange-500 p-6 shadow-lg shadow-emerald-900/30 transition-all
                      duration-300 hover:-translate-y-1 hover:shadow-emerald-800/40'>
                   <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
@@ -116,7 +120,7 @@ const Events = () => {
                   </div>
                 </div>
 
-                <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br
+                <div className='group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-linear-to-br
                    from-emerald-500 via-green-500 to-teal-600 p-6 shadow-lg shadow-emerald-900/30 transition-all
                      duration-300 hover:-translate-y-1 hover:shadow-emerald-800/40'>
                   <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
@@ -131,7 +135,7 @@ const Events = () => {
                   </div>
                 </div>
 
-                <div className='group relative overflow-hidden rounded-3xl border border-slate-300/10 bg-gradient-to-br
+                <div className='group relative overflow-hidden rounded-3xl border border-slate-300/10 bg-linear-to-br
                    from-slate-500 via-slate-600 to-slate-700 p-6 shadow-lg shadow-slate-900/30 transition-all
                      duration-300 hover:-translate-y-1 hover:shadow-slate-800/40'>
                   <div className='absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-2xl'></div>
@@ -159,7 +163,7 @@ const Events = () => {
                   </div>
 
                   <NavLink
-                    className='inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-purple-600
+                    className='inline-flex items-center justify-center gap-3 rounded-xl bg-linear-to-r from-purple-600
                        to-fuchsia-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-900/30
                          transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-700/40'
                     to='/event-management/add'
@@ -183,6 +187,7 @@ const Events = () => {
                       status={item.status}
                       _id={item._id}
                       onDelete={removeItem}
+                      onEdit={handleEdit}
                     />
                   ))}
                 </div>
