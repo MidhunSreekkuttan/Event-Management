@@ -14,9 +14,7 @@ const BookingPage = () => {
 
     const { backendUrl } = useContext(BackendContex)
 
-    const { enquiryList, listEnquiry, getEventList, products } = useContext(EventContext)
-
-    const usersId = enquiryList.find(item => item.userData?._id)?.userData?._id;
+    const { listEnquiry, getEventList, products } = useContext(EventContext)
 
     const bookedData = products.find(item => item._id === bookingId)
 
@@ -65,39 +63,28 @@ const BookingPage = () => {
     const responseId = response?.find(item => item?.relatedEvents?.some(data => data?.id === bookingId))?._id
 
     const initPay = (order) => {
+
         const options = {
             key: import.meta.env.VITE_RAZORPAY_TEST_API_KEY,
             amount: order.amount,
             currency: order.currency,
-            name: "Order payment",
-            description: "Order payment",
+            name: "Event Booking",
+            description: "Book your event",
             order_id: order.id,
-            receipt: order.receipt,
-            handler: async (response) => {
-
-                const datas = {
-                    ...response,
-                    responseId
-                }
-
-                try {
-                    setLoading(true)
-
-                    const { data } = await axios.post(backendUrl + '/api/booking/verifyRazorpay', datas)
-
-                    if (data.success) {
-                        navidate('/booking')
-                    }
-
-                } catch (error) {
-                    console.log(error);
-                    toast.error(error.message)
-                }
-                finally {
-                    setLoading(false)
-                }
+            handler: async function (response) {
+                const verifyRes = await axios.post(backendUrl + '/api/booking/verifyRazorpay', {
+                    bookingId: order.bookingId,
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature
+                }, { withCredentials: true })
+                console.log("verified:", verifyRes.data);
+            },
+            theme: {
+                color: "#3399cc",
             }
         }
+
         const rzp = new window.Razorpay(options)
         rzp.open()
     }
@@ -114,11 +101,10 @@ const BookingPage = () => {
 
             const bookingData = {
                 address: formData,
-                userId: usersId,
                 productId: bookedData?._id,
                 items: bookedData,
                 eventDate: date,
-                responseId: responseId
+                responseId
             }
 
             switch (color) {
@@ -139,7 +125,8 @@ const BookingPage = () => {
 
                 case "razorpay":
 
-                    const { data } = await axios.post(backendUrl + "/api/booking/placebookingRazorpay", bookingData)
+                    const { data } = await axios.post(backendUrl + "/api/booking/placebookingRazorpay", bookingData,
+                        { withCredentials: true })
 
                     if (data.success) {
                         toast.success(data.message)
