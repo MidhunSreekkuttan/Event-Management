@@ -1,3 +1,5 @@
+import welcomeMessage from "./nodemailer.js";
+
 export const welcomeMail = (name) => {
   return `
   <!DOCTYPE html>
@@ -422,3 +424,54 @@ export const otpMail = (name, otp) => {
   </html>
   `;
 };
+
+export const sendBookingSuccessEmail = ({
+  to,
+  customerName,
+  bookingId,
+  receipt,
+  eventName,
+  eventDate,
+  totalPaid,
+  razorpayOrderId,
+  razorpayPaymentId
+}) => {
+
+  const formattedDate = new Date(eventDate).toLocaleDateString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  })
+
+  const html =
+    `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+      <h2>Payment Successful</h2>
+      <p>Hello ${customerName || "Customer"},</p>
+      <p>Your booking has been confirmed successfully.</p>
+
+      <h3>Booking Details</h3>
+      <table cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse;">
+        <tr><td><strong>Booking ID</strong></td><td>${bookingId}</td></tr>
+        <tr><td><strong>Receipt Ref</strong></td><td>${receipt}</td></tr>
+        <tr><td><strong>Event</strong></td><td>${eventName}</td></tr>
+        <tr><td><strong>Event Date</strong></td><td>${formattedDate}</td></tr>
+        <tr><td><strong>Total Paid</strong></td><td>₹${totalPaid}</td></tr>
+        <tr><td><strong>Razorpay Order ID</strong></td><td>${razorpayOrderId}</td></tr>
+        <tr><td><strong>Razorpay Payment ID</strong></td><td>${razorpayPaymentId}</td></tr>
+      </table>
+
+      <p style="margin-top:16px;">
+        Thank you for booking with us.
+      </p>
+    </div>
+
+  `
+
+  return welcomeMessage.sendMail({
+    from: process.env.NO_REPLAY_EMAIL,
+    to,
+    subject: "Booking Confirmed - Payment Successful",
+    html
+  })
+
+}
