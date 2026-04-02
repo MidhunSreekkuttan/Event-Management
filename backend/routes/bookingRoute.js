@@ -2,6 +2,7 @@ import express from "express";
 import {
   allOrder,
   allOrderEventManagement,
+  getReceipt,
   placebooking,
   placebookingRazorpay,
   updateBooking,
@@ -17,7 +18,8 @@ const bookingRouter = express.Router();
 //For user
 bookingRouter.post("/placingBooking", userAuth, placebooking);
 bookingRouter.post("/placebookingRazorpay", userAuth, placebookingRazorpay);
-bookingRouter.post("/verifyRazorpay", verifyRazorpay);
+bookingRouter.post("/verifyRazorpay", userAuth, verifyRazorpay);
+bookingRouter.get("/getReceipt/:bookingId", userAuth, getReceipt)
 //For Admin
 bookingRouter.get("/allOrder", adminAuth, allOrder);
 //For event management panel

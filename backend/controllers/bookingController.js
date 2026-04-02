@@ -5,7 +5,7 @@ import BookingModel from "../dataBase/models/bookingModel.js";
 import ProductModel from "../dataBase/models/eventManagement/productModel.js";
 import razorpay from "../config/razorpay.js";
 import ResponseModel from "../dataBase/models/staffs/responseModel.js";
-import calculateMoneySplit from "../config/calculateMoneySplit .js";
+import calculateMoneySplit from "../config/calculateMoneySplit.js";
 import PaymentModel from "../dataBase/models/paymentModel.js";
 import { sendBookingSuccessEmail } from "../config/emailTemplate.js";
 
