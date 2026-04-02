@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BookingScheme = new mongoose.Schema(
   {
+
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "eventManagement",
@@ -20,13 +21,26 @@ const BookingScheme = new mongoose.Schema(
     },
     items: { type: Array, required: true },
     address: { type: Object, required: true },
+
     status: {
       type: String,
       enum: ["pending", "confirmed", "rejected"],
       default: "pending",
     },
+
     paymentMethod: { type: String, required: true },
-    payment: { type: Boolean, required: true, default: false },
+    baseAmount: { type: Number, required: true },
+    totalPaid: { type: Number, required: true },
+    adminCommissionPercent: { type: Number, required: true },
+    adminCommissionAmount: { type: Number, required: true },
+    eventManagerAmount: { type: String, required: true },
+
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid", "failed", "refunded"],
+      default: "pending",
+    },
+
     eventDate: { type: String, required: true },
     date: { type: Number, required: true },
   },
@@ -37,7 +51,7 @@ const BookingScheme = new mongoose.Schema(
   },
 );
 
-BookingScheme.virtual("eventStatus").get(function () {
+BookingScheme.virtual("bookingStatus").get(function () {
   const now = new Date();
 
   if (this.status === "rejected") return "rejected";

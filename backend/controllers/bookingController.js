@@ -1,14 +1,22 @@
 import mongoose from "mongoose";
+import crypto from 'crypto'
+
 import BookingModel from "../dataBase/models/bookingModel.js";
 import ProductModel from "../dataBase/models/eventManagement/productModel.js";
 import razorpay from "../config/razorpay.js";
 import ResponseModel from "../dataBase/models/staffs/responseModel.js";
+import calculateMoneySplit from "../config/calculateMoneySplit .js";
+import PaymentModel from "../dataBase/models/paymentModel.js";
+import { sendBookingSuccessEmail } from "../config/emailTemplate.js";
 
 //place booking in cod methode
 
 export const placebooking = async (req, res) => {
   try {
-    const { userId, productId, address, items, eventDate, responseId } =
+
+    const { userId } = req.userId
+
+    const { productId, address, items, eventDate, responseId } =
       req.body;
 
     const product = await ProductModel.findById(productId);
@@ -55,11 +63,14 @@ export const placebooking = async (req, res) => {
   }
 };
 
-//place booking in strip methode
+//place booking in razorpay methode
 
 export const placebookingRazorpay = async (req, res) => {
   try {
-    const { userId, productId, address, items, eventDate } = req.body;
+
+    const userId = req.userId
+
+    const { productId, address, items, eventDate, responseId } = req.body;
 
     const product = await ProductModel.findById(productId);
 
@@ -77,36 +88,72 @@ export const placebookingRazorpay = async (req, res) => {
       });
     }
 
-    const amount = items.price;
+    const baseAmount = Number(product.price.toFixed(2))
+    const split = calculateMoneySplit(baseAmount, 30)
 
-    const bookingData = {
+    const booking = await BookingModel.create({
       owner: product.owner,
-      userId,
-      productId,
+      userId: userId,
+      productId: productId,
       address,
       items,
       paymentMethod: "Razorpay",
-      payment: false,
-      date: Date.now(),
       eventDate,
-    };
+      baseAmount,
+      totalPaid: split.totalPaid,
+      adminCommissionPercent: split.adminCommissionPercent,
+      adminCommissionAmount: split.adminCommissionAmount,
+      eventManagerAmount: split.eventManagerAmount,
+      date: Date.now()
+    })
 
-    const newBooking = new BookingModel(bookingData);
-    await newBooking.save();
+    const receipt = `bk_${booking._id.toString().slice(-12)}`
 
-    const options = {
-      amount: amount * 100,
+    const order = await razorpay.orders.create({
+      amount: Math.round(split.totalPaid * 100), //paisa
       currency: "INR",
-      receipt: newBooking._id.toString(),
-    };
-
-    await razorpay.orders.create(options, (error, order) => {
-      if (error) {
-        console.log(error);
-        return res.json({ success: false, message: error });
+      receipt,
+      notes: {
+        bookingId: String(booking._id),
+        eventId: String(product._id),
+        userId: String(userId)
       }
-      res.json({ success: true, order });
-    });
+    })
+
+    if (!order || !order.id) {
+      return res.json({
+        success: false,
+        message: "Failed to create Razorpay order"
+      });
+    }
+
+    await PaymentModel.create({
+      booking: booking._id,
+      user: userId,
+      event: product._id,
+      eventManager: product.owner,
+      razorpayOrderId: order.id,
+      receipt,
+      amount: split.totalPaid,
+      currency: "INR",
+      adminCommissionPercent: split.adminCommissionPercent,
+      adminCommissionAmount: split.adminCommissionAmount,
+      eventManagerAmount: split.eventManagerAmount
+    })
+
+    await ResponseModel.findByIdAndUpdate(responseId, { status: "paid" });
+
+    res.json({
+      success: true, message: "Order created successfully",
+      bookingId: booking._id,
+      order: {
+        id: order.id,
+        amount: order.amount,
+        currency: order.currency,
+        receipt,
+      }
+    })
+
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -114,31 +161,183 @@ export const placebookingRazorpay = async (req, res) => {
 };
 //verify razorpay
 export const verifyRazorpay = async (req, res) => {
+
+  const session = await mongoose.startSession()
+  session.startTransaction()
+
   try {
-    const { responseId, razorpay_order_id } = req.body;
 
-    const orderInfo = await razorpay.orders.fetch(razorpay_order_id);
+    const userId = req.userId
 
-    if (orderInfo.status === "paid") {
-      await BookingModel.findByIdAndUpdate(orderInfo.receipt, {
-        payment: true,
-      });
+    const { bookingId, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
-      await ResponseModel.findByIdAndUpdate(responseId, { status: "paid" });
+    if (!bookingId || !razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      await session.abortTransaction()
+      session.endSession()
 
-      res.json({ success: true, message: "payment successfull" });
-    } else {
-      res.json({ success: false, message: "payment faild" });
+      return res.json({ success: false, message: "Missing payment verification fields" })
     }
+
+    const generatedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_TEST_API_SECRET)
+      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+      .digest("hex")
+
+    if (generatedSignature !== razorpay_signature) {
+      await session.abortTransaction()
+      session.endSession()
+      return res.json({ success: false, message: "Invalid payment signature" })
+    }
+
+    const booking = await BookingModel.findOne({
+      _id: bookingId,
+      userId: userId
+    })
+      .populate("userId")
+      .populate("productId")
+      .session(session)
+
+    if (!booking) {
+      await session.abortTransaction()
+      session.endSession()
+
+      return res.json({ success: false, message: "Booking not found" })
+    }
+
+    const payment = await PaymentModel.findOne({
+      booking: bookingId,
+      razorpayOrderId: razorpay_order_id
+    }).session(session)
+
+    if (!payment) {
+      return res.json({ success: false, message: "Payment record not found" })
+    }
+
+    if (payment.status === "paid" && booking.paymentStatus === "paid") {
+      await session.abortTransaction()
+      session.endSession()
+
+      return res.json({ success: false, message: "Payment already verified" })
+    }
+
+    const event = await ProductModel.findById(booking.productId._id).session(session)
+
+    if (!event) {
+      await session.abortTransaction()
+      session.endSession()
+
+      return res.json({ success: false, message: "Event not found" })
+    }
+
+    await event.save({ session })
+
+    booking.razorpayPaymentId = razorpay_payment_id
+    payment.razorpaySignature = razorpay_signature
+    payment.status = "paid"
+    await payment.save({ session })
+
+    await session.commitTransaction()
+    session.endSession()
+
+    try {
+
+      if (!payment.emailSent) {
+        await sendBookingSuccessEmail({
+          to: booking.userId.email,
+          customerName: booking.userId.name,
+          receipt: payment.receipt,
+          eventName: event.event_name,
+          eventDate: event.date.split("T"[0]),
+          totalPaid: booking.totalPaid,
+          razorpayOrderId: razorpay_order_id,
+          razorpayPaymentId: razorpay_payment_id
+        })
+      }
+
+      await PaymentModel.updateOne(
+        { _id: payment._id },
+        { $set: { emailSent: true } }
+      )
+
+    } catch (mailError) {
+      console.log(mailError);
+      res.json({ success: false, message: mailError.message })
+    }
+
+    return res.json({
+      success: true,
+      message: "Payment verified and booking confirmed",
+      receipt: payment.receipt,
+      data: {
+        bookingId: booking._id,
+        paymentId: razorpay_payment_id,
+        orderId: razorpay_order_id,
+        totalPaid: booking.totalPaid,
+      }
+    })
+
   } catch (error) {
+    await session.abortTransaction()
+    session.endSession()
+
     console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
 
+export const getReceipt = async (req, res) => {
+
+  try {
+
+    const { userId } = req.userId
+    const { bookingId } = req.params
+
+    const booking = await BookingModel.findOne({
+      _id: bookingId,
+      userId: userId,
+      paymentStatus: "paid"
+    })
+      .populate("productId")
+      .populate("userId")
+
+    if (!booking) {
+      return res.json({ success: false, message: "Paid booking not found" })
+    }
+
+    const payment = await PaymentModel.findOne({
+      booking: booking._id,
+      status: "paid"
+    })
+
+    if (!payment) {
+      return res.json({ success: true, message: "Payment not found" })
+    }
+
+    return res.json({
+      success: true,
+      receipt: {
+        receiptRef: payment.receipt,
+        bookingId: booking._id,
+        event: booking.productId.event_name,
+        eventDate: booking.productId.date,
+        totalPaid: booking.totalPaid,
+        currency: payment.currency,
+        razorpayOrderId: payment.razorpayOrderId,
+        razorpayPaymentId: payment.razorpayPaymentId,
+        paidAt: payment.updatedAt
+      }
+    })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message })
+  }
+
+}
+
 //All bookings data for admin panal
 
-export const allOrder = async (req, res) => {};
+export const allOrder = async (req, res) => { };
 
 //All bookings data for event management panel
 
