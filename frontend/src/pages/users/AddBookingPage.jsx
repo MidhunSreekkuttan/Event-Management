@@ -7,13 +7,10 @@ import axios from 'axios'
 import Loader from '../../components/Loading'
 
 const BookingPage = () => {
-
     const navidate = useNavigate()
-
     const { bookingId } = useParams()
 
     const { backendUrl } = useContext(BackendContex)
-
     const { listEnquiry, getEventList, products } = useContext(EventContext)
 
     const bookedData = products.find(item => item._id === bookingId)
@@ -36,12 +33,10 @@ const BookingPage = () => {
     const onChangeHandler = (event) => {
         const name = event.target.name
         const value = event.target.value
-
         setFormData((data) => ({ ...data, [name]: value }))
     }
 
     const getResponseData = useCallback(async () => {
-
         try {
             setLoading(true)
 
@@ -49,18 +44,17 @@ const BookingPage = () => {
             if (data.success) {
                 setResponse(data.responsedata)
             }
-
         } catch (error) {
             console.log(error);
             toast.error(error.message)
-        }
-        finally {
+        } finally {
             setLoading(false)
         }
-
     }, [backendUrl])
 
-    const responseId = response?.find(item => item?.relatedEvents?.some(data => data?.id === bookingId))?._id
+    const responseId = response?.find(item =>
+        item?.relatedEvents?.some(data => data?.id === bookingId)
+    )?._id
 
     const bookingData = {
         address: formData,
@@ -71,7 +65,6 @@ const BookingPage = () => {
     }
 
     const initPay = (order) => {
-
         setLoading(true)
 
         const options = {
@@ -82,7 +75,6 @@ const BookingPage = () => {
             description: "Book your event",
             order_id: order.id,
             handler: async function (response) {
-
                 try {
                     setLoading(true)
 
@@ -107,12 +99,10 @@ const BookingPage = () => {
                     } else {
                         toast.error(verifyRes.data.message)
                     }
-
                 } catch (error) {
                     console.log(error);
                     toast.error(error.message)
-                }
-                finally {
+                } finally {
                     setLoading(false)
                 }
             }
@@ -120,7 +110,6 @@ const BookingPage = () => {
 
         const rzp = new window.Razorpay(options)
         rzp.open()
-
     }
 
     const onSubmitHandler = async (e) => {
@@ -131,14 +120,15 @@ const BookingPage = () => {
 
             if (!bookedData) {
                 toast.error("Event Not Found")
+                return
             }
 
             switch (color) {
-
-                //APi call for COD
-                case 'cod':
-
-                    const res = await axios.post(backendUrl + '/api/booking/placingBooking', bookingData)
+                case 'cod': {
+                    const res = await axios.post(
+                        backendUrl + '/api/booking/placingBooking',
+                        bookingData
+                    )
 
                     if (res.data.success) {
                         toast.success(res.data.message)
@@ -146,32 +136,31 @@ const BookingPage = () => {
                     } else {
                         toast.error(res.data.message)
                     }
-
                     break
+                }
 
-                case "razorpay":
-
-                    const { data } = await axios.post(backendUrl + "/api/booking/placebookingRazorpay", bookingData,
-                        { withCredentials: true })
+                case "razorpay": {
+                    const { data } = await axios.post(
+                        backendUrl + "/api/booking/placebookingRazorpay",
+                        bookingData,
+                        { withCredentials: true }
+                    )
 
                     if (data.success) {
                         initPay(data.order);
                     } else {
                         toast.error(data.message)
                     }
-
                     break
+                }
 
                 default:
-
                     break
             }
-
         } catch (error) {
             console.log(error);
             toast.error(error.message)
-        }
-        finally {
+        } finally {
             setLoading(false)
         }
     }
@@ -183,132 +172,207 @@ const BookingPage = () => {
     }, [])
 
     return (
-
         <>
-
             {loading && <Loader />}
 
-            <div className='flex flex-col justify-center items-center mt-35'>
-                <form onSubmit={onSubmitHandler}>
-                    <div className='bg-white/10 justify-between w-[90rem] rounded-lg grid grid-cols-2 p-7'>
+            <div className='min-h-screen bg-[#F6F0FD] pt-10 px-4 md:px-8'>
+                <div className='mx-auto max-w-7xl'>
+                    <form onSubmit={onSubmitHandler}>
+                        <div className='grid gap-8 rounded-[28px] border border-purple-200 bg-white p-6 shadow-md lg:grid-cols-2 lg:p-8'>
 
-                        {/*Left Side*/}
-
-                        <div className='grid gap-3 w-[35rem] bg-white/10 rounded-2xl p-5'>
-
-                            <div className='grid grid-cols-2 gap-5'>
-                                <div className='flex flex-col gap-2'>
-                                    <label>First Name*:</label>
-                                    <input onChange={onChangeHandler} name='firstName' value={formData.firstName}
-                                        type="text" placeholder='Enter Your First name' required
-                                        className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                                </div>
-                                <div className='flex flex-col gap-2'>
-                                    <label>Last Name:</label>
-                                    <input onChange={onChangeHandler} name='lastName' value={formData.lastName}
-                                        type="text" placeholder='Enter Your Last name'
-                                        className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                                </div>
-                            </div>
-
-                            <div className='flex flex-col gap-2'>
-                                <label>Email*:</label>
-                                <input onChange={onChangeHandler} name='email' value={formData.email}
-                                    type="text" placeholder='Enter Your Email' required
-                                    className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                            </div>
-                            <div className='flex flex-col gap-2'>
-                                <label>Street*:</label>
-                                <input onChange={onChangeHandler} name='street' value={formData.street}
-                                    type="text" placeholder='Street' required
-                                    className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                            </div>
-
-                            <div className='grid grid-cols-2 gap-5'>
-                                <div className='flex flex-col gap-2'>
-                                    <label>City*:</label>
-                                    <input onChange={onChangeHandler} name='city' value={formData.city}
-                                        type="text" placeholder='City' required
-                                        className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                                </div>
-                                <div className='flex flex-col gap-2'>
-                                    <label>Place*:</label>
-                                    <input onChange={onChangeHandler} name='place' value={formData.place}
-                                        type="text" placeholder='Place' required
-                                        className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                                </div>
-                            </div>
-
-                            {/*Adding starting and ending date's*/}
-                            <div className="grid grid-cols-2 gap-4 w-full mt-2">
-
-                                {/* Date */}
+                            {/* Left Side */}
+                            <div className='grid gap-4 rounded-[24px] border border-purple-200 bg-[#FCFAFF] p-5 md:p-6'>
                                 <div>
-                                    <label className="block text-sm font-semibold text-white mb-2">
-                                        Date
-                                    </label>
-                                    <input
-                                        type="date"
-                                        value={date}
-                                        onChange={e => setDate(e.target.value)}
-                                        className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white
-                                         focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
-                                              transition duration-200"
+                                    <p className='text-sm font-medium uppercase tracking-[0.35em] bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent'>
+                                        Booking Details
+                                    </p>
+                                    <h1 className='mt-2 text-3xl font-semibold text-slate-900'>
+                                        Complete Your Booking
+                                    </h1>
+                                    <p className='mt-2 text-sm text-slate-600'>
+                                        Fill in your details and choose a payment method to confirm your event booking.
+                                    </p>
+                                </div>
+
+                                <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
+                                    <InputField
+                                        label="First Name*"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={onChangeHandler}
+                                        type="text"
+                                        placeholder="Enter Your First name"
+                                        required
+                                    />
+                                    <InputField
+                                        label="Last Name"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={onChangeHandler}
+                                        type="text"
+                                        placeholder="Enter Your Last name"
+                                    />
+                                </div>
+
+                                <InputField
+                                    label="Email*"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={onChangeHandler}
+                                    type="text"
+                                    placeholder="Enter Your Email"
+                                    required
+                                />
+
+                                <InputField
+                                    label="Street*"
+                                    name="street"
+                                    value={formData.street}
+                                    onChange={onChangeHandler}
+                                    type="text"
+                                    placeholder="Street"
+                                    required
+                                />
+
+                                <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
+                                    <InputField
+                                        label="City*"
+                                        name="city"
+                                        value={formData.city}
+                                        onChange={onChangeHandler}
+                                        type="text"
+                                        placeholder="City"
+                                        required
+                                    />
+                                    <InputField
+                                        label="Place*"
+                                        name="place"
+                                        value={formData.place}
+                                        onChange={onChangeHandler}
+                                        type="text"
+                                        placeholder="Place"
                                         required
                                     />
                                 </div>
 
-                                <div className='flex flex-col gap-2'>
-                                    <label>Phone Number:</label>
-                                    <input onChange={onChangeHandler} name='phoneNumber' value={formData.phoneNumber}
-                                        type="number" placeholder='Enter Your Phone Number'
-                                        className='outline-none focus:ring-2 focus:ring-pink-500 border border-white/30 rounded-lg pl-3 py-2' />
-                                </div>
+                                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                                    <div>
+                                        <label className="mb-2 block text-sm font-semibold text-slate-700">
+                                            Date
+                                        </label>
+                                        <input
+                                            type="date"
+                                            value={date}
+                                            onChange={e => setDate(e.target.value)}
+                                            className="w-full rounded-xl border border-purple-200 bg-white px-4 py-3 text-slate-800 outline-none transition duration-200 focus:border-pink-500 focus:ring-2 focus:ring-pink-500"
+                                            required
+                                        />
+                                    </div>
 
+                                    <InputField
+                                        label="Phone Number"
+                                        name="phoneNumber"
+                                        value={formData.phoneNumber}
+                                        onChange={onChangeHandler}
+                                        type="number"
+                                        placeholder="Enter Your Phone Number"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Right Side */}
+                            <div className='rounded-[24px] border border-purple-200 bg-[#FCFAFF] p-5 md:p-6'>
+                                <p className='text-sm font-medium uppercase tracking-[0.35em]
+                                     bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent'>
+                                    Payment Summary
+                                </p>
+
+                                <h1 className='mt-2 text-3xl font-semibold text-slate-900'>
+                                    Total amount of Your Booking
+                                </h1>
+
+                                <hr className='mt-5 border-purple-200' />
+
+                                <div className='mt-8 space-y-4'>
+                                    <div className='rounded-2xl border border-purple-200 bg-white p-4'>
+                                        <div className='flex items-center justify-between text-lg font-semibold'>
+                                            <h1 className='text-slate-700'>TOTAL PRICE</h1>
+                                            <p className='bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text
+                                                 text-transparent'>
+                                                {bookedData?.price}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className='rounded-2xl border border-purple-200 bg-white p-4'>
+                                        <h1 className='text-left text-xl font-semibold text-slate-900'>
+                                            Payment Method
+                                        </h1>
+
+                                        <div className='mt-5 flex flex-col gap-3'>
+                                            <div
+                                                onClick={() => setColor('razorpay')}
+                                                className='flex cursor-pointer items-center rounded-xl border
+                                                     border-purple-200 bg-[#FCFAFF] p-3 transition hover:border-pink-400'
+                                            >
+                                                <p className={`min-w-4 h-4 rounded-full border border-purple-300
+                                                     ${color === 'razorpay' ? 'bg-green-500' : 'bg-white'}`}></p>
+                                                <p className='mx-4 text-sm font-medium text-slate-700'>
+                                                    RAZORPAY
+                                                </p>
+                                            </div>
+
+                                            <div
+                                                onClick={() => setColor('cod')}
+                                                className='flex cursor-pointer items-center rounded-xl border
+                                                 border-purple-200 bg-[#FCFAFF] p-3 transition hover:border-pink-400'
+                                            >
+                                                <p className={`min-w-4 h-4 rounded-full border border-purple-300
+                                                     ${color === 'cod' ? 'bg-green-500' : 'bg-white'}`}></p>
+                                                <p className='mx-4 text-sm font-medium text-slate-700'>
+                                                    CASH ON DELIVERY
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='rounded-2xl border border-purple-200 bg-white p-4'>
+                                        <button
+                                            type='submit'
+                                            className='w-full rounded-xl
+                                              bg-gradient-to-r from-pink-500 to-pink-700 px-6 py-3 text-lg
+                                                  font-semibold text-white'
+                                        >
+                                            PROCEED
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
-
-                        {/*Right side*/}
-
-                        <div className='ml-20 text-center'>
-                            <h1 className='text-3xl font-semibold'>
-                                Total amount of Your Booking
-                            </h1>
-                            <hr className='mt-5' />
-                            <div className='mt-20'>
-
-                                <div className='flex gap-5 text-[18px] font-bold'>
-                                    <h1>TOTAL PRICE :</h1>
-                                    <p>{bookedData?.price}</p>
-                                </div>
-
-                            </div>
-
-                            {/*Payment Method*/}
-                            <h1 className='text-left mt-5 text-2xl font-semibold'><u>PAYMENT METHOD</u></h1>
-                            <div className='flex gap-3 mt-5'>
-                                <div onClick={() => setColor('razorpay')} className='flex items-center p-2 px-3 cursor-pointer border pr-10'>
-                                    <p className={`min-w-3.5 h-3.5 cursor-pointer rounded-full ${color === 'razorpay' ? 'bg-green-500' : 'bg-white/0'}`}></p>
-                                    <p className='text-sm font-medium mx-4 w-[19vh]'>RAZORPAY</p>
-                                </div>
-                                <div onClick={() => setColor('cod')} className='flex items-center p-3 cursor-pointer border pr-10'>
-                                    <p className={`min-w-3.5 h-3.5 cursor-pointer rounded-full ${color === 'cod' ? 'bg-green-500' : 'bg-white/0'}`}></p>
-                                    <p className='text-sm font-medium mx-4 w-[20vh]'>CASH ON DELIVERY</p>
-                                </div>
-                            </div>
-                            <div className='w-full mt-10'>
-                                <button type='submit' className='bg-black px-20 py-3 rounded-lg text-[20px] font-sans'>
-                                    PROCEED
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-
         </>
+    )
+}
 
+function InputField({ label, name, value, onChange, type, placeholder, required = false }) {
+    return (
+        <div className='flex flex-col gap-2'>
+            <label className='text-sm font-semibold text-slate-700'>{label}</label>
+            <input
+                onChange={onChange}
+                name={name}
+                value={value}
+                type={type}
+                placeholder={placeholder}
+                required={required}
+                className='rounded-xl border border-purple-200 bg-white px-4 py-3
+                 text-slate-800 outline-none transition duration-200 focus:border-pink-500 focus:ring-2
+                  focus:ring-pink-500'
+            />
+        </div>
     )
 }
 
