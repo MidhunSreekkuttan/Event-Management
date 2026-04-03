@@ -62,7 +62,17 @@ const BookingPage = () => {
 
     const responseId = response?.find(item => item?.relatedEvents?.some(data => data?.id === bookingId))?._id
 
+    const bookingData = {
+        address: formData,
+        productId: bookedData?._id,
+        items: bookedData,
+        eventDate: date,
+        responseId
+    }
+
     const initPay = (order) => {
+
+        setLoading(true)
 
         const options = {
             key: import.meta.env.VITE_RAZORPAY_TEST_API_KEY,
@@ -72,21 +82,36 @@ const BookingPage = () => {
             description: "Book your event",
             order_id: order.id,
             handler: async function (response) {
-                const verifyRes = await axios.post(backendUrl + '/api/booking/verifyRazorpay', {
-                    bookingId: order.bookingId,
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_signature: response.razorpay_signature
-                }, { withCredentials: true })
-                console.log("verified:", verifyRes.data);
-            },
-            theme: {
-                color: "#3399cc",
+
+                const verifyRes = await axios.post(
+                    backendUrl + '/api/booking/verifyRazorpay',
+                    {
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        productId: bookingData.productId,
+                        address: bookingData.address,
+                        items: bookingData.items,
+                        eventDate: bookingData.eventDate,
+                        responseId: bookingData.responseId
+                    },
+                    { withCredentials: true }
+                )
+
+                console.log("verify result:", verifyRes.data)
+
+                if (verifyRes.data.success) {
+                    toast.success(verifyRes.data.message)
+                    navidate("/")
+                } else {
+                    toast.error(verifyRes.data.message)
+                }
             }
         }
 
         const rzp = new window.Razorpay(options)
         rzp.open()
+
     }
 
     const onSubmitHandler = async (e) => {
@@ -97,14 +122,6 @@ const BookingPage = () => {
 
             if (!bookedData) {
                 toast.error("Event Not Found")
-            }
-
-            const bookingData = {
-                address: formData,
-                productId: bookedData?._id,
-                items: bookedData,
-                eventDate: date,
-                responseId
             }
 
             switch (color) {
@@ -129,7 +146,6 @@ const BookingPage = () => {
                         { withCredentials: true })
 
                     if (data.success) {
-                        toast.success(data.message)
                         initPay(data.order);
                     } else {
                         toast.error(data.message)
@@ -265,7 +281,7 @@ const BookingPage = () => {
                             <div className='flex gap-3 mt-5'>
                                 <div onClick={() => setColor('razorpay')} className='flex items-center p-2 px-3 cursor-pointer border pr-10'>
                                     <p className={`min-w-3.5 h-3.5 cursor-pointer rounded-full ${color === 'razorpay' ? 'bg-green-500' : 'bg-white/0'}`}></p>
-                                    <p className='text-sm font-medium mx-4 w-[19vh]'>STRIP</p>
+                                    <p className='text-sm font-medium mx-4 w-[19vh]'>RAZORPAY</p>
                                 </div>
                                 <div onClick={() => setColor('cod')} className='flex items-center p-3 cursor-pointer border pr-10'>
                                     <p className={`min-w-3.5 h-3.5 cursor-pointer rounded-full ${color === 'cod' ? 'bg-green-500' : 'bg-white/0'}`}></p>
