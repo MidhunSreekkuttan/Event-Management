@@ -29,9 +29,7 @@ export default function WorkerRegistration() {
     queryFn: getRegistrationList
   })
 
-  const finding = userData?.some(item => item?._id === data?.user)
-
-  console.log("finding", finding);
+  const finding = data?.user === userData?._id
 
   const [form, setForm] = useState({
     name: "",

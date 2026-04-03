@@ -193,7 +193,8 @@ export const getAuth = async (req, res) => {
 
 export const getUserData = async (req, res) => {
   try {
-    const user = await workersModel.find(req.userId);
+    const userId = req.user.id
+    const user = await workersModel.findById(userId);
     res.json({ success: true, user });
   } catch (error) {
     console.log(error);

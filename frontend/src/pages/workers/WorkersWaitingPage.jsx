@@ -20,7 +20,7 @@ const Waiting = () => {
 
     useEffect(() => {
 
-        const obgg = userData?.some((item) => item?.isAdminVerified === "approved")
+        const obgg = userData?.isAdminVerified === "approved"
 
         if (obgg) {
             navigate("/workers/home")
