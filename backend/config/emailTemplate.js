@@ -428,13 +428,13 @@ export const otpMail = (name, otp) => {
 export const sendBookingSuccessEmail = ({
   to,
   customerName,
-  bookingId,
   receipt,
   eventName,
   eventDate,
   totalPaid,
-  razorpayOrderId,
-  razorpayPaymentId
+  razorpayPaymentId,
+  eventLocation,
+  companyName
 }) => {
 
   const formattedDate = new Date(eventDate).toLocaleString("en-IN", {
@@ -444,31 +444,171 @@ export const sendBookingSuccessEmail = ({
 
   const html =
     `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-      <h2>Payment Successful</h2>
-      <p>Hello ${customerName || "Customer"},</p>
-      <p>Your booking has been confirmed successfully.</p>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Successful</title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#0b0b14; font-family:Arial, Helvetica, sans-serif;">
+    
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#0b0b14; margin:0; padding:0;">
+      <tr>
+        <td align="center" style="padding:30px 15px;">
+          
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px; background-color:#6d28d9; border-radius:16px; overflow:hidden;">
+            
+            <!-- Header -->
+            <tr>
+              <td style="background-color:#000000; padding:24px 28px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td align="left" style="color:#ffffff; font-size:28px; font-weight:bold;">
+                      LOGO
+                    </td>
+                    <td align="right" style="color:#a855f7; font-size:18px; font-weight:bold;">
+                      Booking Confirmed ✅
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-      <h3>Booking Details</h3>
-      <table cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse;">
-        <tr><td><strong>Booking ID</strong></td><td>${bookingId}</td></tr>
-        <tr><td><strong>Receipt Ref</strong></td><td>${receipt}</td></tr>
-        <tr><td><strong>Event</strong></td><td>${eventName}</td></tr>
-        <tr><td><strong>Event Date</strong></td><td>${formattedDate}</td></tr>
-        <tr><td><strong>Total Paid</strong></td><td>₹${totalPaid}</td></tr>
-        <tr><td><strong>Razorpay Order ID</strong></td><td>${razorpayOrderId}</td></tr>
-        <tr><td><strong>Razorpay Payment ID</strong></td><td>${razorpayPaymentId}</td></tr>
-      </table>
+            <!-- Main content -->
+            <tr>
+              <td style="padding:28px 20px 10px 20px;">
 
-      <p style="margin-top:16px;">
-        Thank you for booking with us.
-      </p>
-    </div>
+                <!-- Success Card -->
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:linear-gradient(180deg, #4c1d95 0%, #3b1680 100%); border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,0.25);">
+                  <tr>
+                    <td style="padding:28px 24px;">
+                      <div style="color:#ffffff; font-size:18px; font-weight:bold; text-align:center; margin-bottom:20px;">
+                        🎉 Payment Successful
+                      </div>
+
+                      <div style="height:1px; background-color:#8b5cf6; opacity:0.45; margin-bottom:24px;"></div>
+
+                      <div style="color:#ffffff; font-size:16px; line-height:1.7;">
+                        <p style="margin:0 0 16px 0;">Hi ${customerName},</p>
+                        <p style="margin:0;">
+                          Your booking has been confirmed successfully.<br />
+                          Thank you for your payment.
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Spacer -->
+                <div style="height:22px;"></div>
+
+                <!-- Booking Details -->
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:linear-gradient(180deg, #12121d 0%, #090910 100%); border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,0.25);">
+                  <tr>
+                    <td style="padding:24px;">
+                      <div style="color:#a855f7; font-size:16px; font-weight:bold; margin-bottom:18px;">
+                        Booking Details
+                      </div>
+
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+                        <tr>
+                          <td style="padding:10px 0; color:#c084fc; font-size:15px; width:38%;">Event:</td>
+                          <td style="padding:10px 0; color:#ffffff; font-size:15px;">${eventName}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="border-bottom:1px solid #3b2a5c;"></td>
+                        </tr>
+
+                        <tr>
+                          <td style="padding:10px 0; color:#c084fc; font-size:15px;">Date:</td>
+                          <td style="padding:10px 0; color:#ffffff; font-size:15px;">${formattedDate}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="border-bottom:1px solid #3b2a5c;"></td>
+                        </tr>
+
+                        <tr>
+                          <td style="padding:10px 0; color:#c084fc; font-size:15px;">Location:</td>
+                          <td style="padding:10px 0; color:#ffffff; font-size:15px;">${eventLocation}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="border-bottom:1px solid #3b2a5c;"></td>
+                        </tr>
+
+                        <tr>
+                          <td colspan="2" style="border-bottom:1px dashed #4b3a70;"></td>
+                        </tr>
+
+                        <tr>
+                          <td style="padding:14px 0 10px 0; color:#c084fc; font-size:15px;">Amount Paid:</td>
+                          <td style="padding:14px 0 10px 0; color:#ffffff; font-size:15px; font-weight:bold;">₹${totalPaid}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="border-bottom:1px solid #3b2a5c;"></td>
+                        </tr>
+
+                        <tr>
+                          <td style="padding:14px 0 0 0; color:#c084fc; font-size:15px;">Payment ID:</td>
+                          <td style="padding:14px 0 0 0; color:#ffffff; font-size:15px;">${razorpayPaymentId}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Spacer -->
+                <div style="height:24px;"></div>
+
+                <!-- Button -->
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td align="center">
+                      <a href="${receipt}" 
+                         style="display:inline-block; background:linear-gradient(180deg, #7c3aed 0%, #5b21b6 100%); color:#ffffff; text-decoration:none; font-size:18px; font-weight:bold; padding:14px 34px; border-radius:10px;">
+                        Download Receipt
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Spacer -->
+                <div style="height:28px;"></div>
+
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="background-color:#05050a; padding:26px 20px; text-align:center;">
+                <p style="margin:0 0 12px 0; color:#e9d5ff; font-size:15px; line-height:1.6;">
+                  If you have any questions, contact support.
+                </p>
+                <p style="margin:0 0 18px 0;">
+                  <a href="mailto:${process.env.NO_REPLAY_EMAIL}" style="color:#c084fc; font-size:15px; font-weight:bold; text-decoration:underline;">
+                    ${process.env.NO_REPLAY_EMAIL}
+                  </a>
+                </p>
+                <div style="height:1px; background-color:#2b1d42; margin:0 auto 18px auto; max-width:500px;"></div>
+                <p style="margin:0; color:#d8b4fe; font-size:14px;">
+                  © 2026 ${companyName}
+                </p>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+  </html>
 
   `
 
   return welcomeMessage.sendMail({
-    from: process.env.NO_REPLAY_EMAIL,
+    from: `"Adhithi" <${process.env.NO_REPLAY_EMAIL}>`,
     to,
     subject: "Booking Confirmed - Payment Successful",
     html

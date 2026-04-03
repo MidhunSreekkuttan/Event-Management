@@ -236,8 +236,9 @@ export const verifyRazorpay = async (req, res) => {
         eventName: product.event_name || product.name,
         eventDate,
         totalPaid: booking.totalPaid,
-        razorpayOrderId: razorpay_order_id,
-        razorpayPaymentId: razorpay_payment_id
+        razorpayPaymentId: razorpay_payment_id,
+        eventLocation: product.location,
+        companyName: product.company_name
       });
 
       await PaymentModel.updateOne(
