@@ -428,7 +428,7 @@ export const otpMail = (name, otp) => {
 export const sendBookingSuccessEmail = ({
   to,
   customerName,
-  receipt,
+  productId,
   eventName,
   eventDate,
   totalPaid,
@@ -565,7 +565,7 @@ export const sendBookingSuccessEmail = ({
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tr>
                     <td align="center">
-                      <a href="${receipt}" 
+                      <a href="http://localhost:5173/receipt/${productId}" 
                          style="display:inline-block; background:linear-gradient(180deg, #7c3aed 0%, #5b21b6 100%); color:#ffffff; text-decoration:none; font-size:18px; font-weight:bold; padding:14px 34px; border-radius:10px;">
                         Download Receipt
                       </a>

@@ -84,7 +84,7 @@ const Product = () => {
                     {/* Main Image */}
                     <div className="w-[400px] h-[500px]">
                         <img
-                            src={image.replace('/upload/',
+                            src={image?.replace('/upload/',
                                 '/upload/w_400,h_300,c_fill,f_auto,q_auto/')}
                             loading="lazy"
                             decoding='async'

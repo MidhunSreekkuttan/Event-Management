@@ -238,7 +238,8 @@ export const verifyRazorpay = async (req, res) => {
         totalPaid: booking.totalPaid,
         razorpayPaymentId: razorpay_payment_id,
         eventLocation: product.location,
-        companyName: product.company_name
+        companyName: product.company_name,
+        productId: product._id
       });
 
       await PaymentModel.updateOne(
@@ -272,9 +273,12 @@ export const getReceipt = async (req, res) => {
   try {
     const userId = req.userId;
 
+    const { productId } = req.params
+
     const booking = await BookingModel.findOne({
       userId,
-      paymentStatus: "paid"
+      paymentStatus: "paid",
+      productId: productId
     })
       .populate("productId")
       .populate("userId");

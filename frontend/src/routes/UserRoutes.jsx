@@ -14,79 +14,31 @@ const AddBookingPage = lazy(() => import('../pages/users/AddBookingPage'))
 const BookingPage = lazy(() => import('../pages/users/BookingPage'))
 const Response = lazy(() => import('../pages/users/Response'))
 const ResponseDetails = lazy(() => import('../pages/users/ResponseDetails'))
+const Receipt = lazy(() => import('../pages/users/Receipt'))
 
 const UserRoutes = () => {
   return (
 
     <>
 
-      <Route element={<UserLayout />}>
+      <Route element={
+        <Suspense fallback={<Loader />}>
+          <UserLayout />
+        </Suspense>
+      }>
 
-        <Route path='/' element={
-          <Suspense fallback={<Loader />}>
-            <Home />
-          </Suspense>
-        } />
-
-        <Route path='/eventList' element={
-          <Suspense fallback={<Loader />}>
-            <EventList />
-          </Suspense>
-        } />
-
-        <Route path="/about" element={
-          <Suspense fallback={<Loader />}>
-            <About />
-          </Suspense>
-        } />
-
-        <Route path="/contactUs" element={
-          <Suspense fallback={<Loader />}>
-            <ContactUs />
-          </Suspense>
-        } />
-
-        <Route path="/product/:productId" element={
-          <Suspense fallback={<Loader />}>
-            <Product />
-          </Suspense>
-        } />
-
-        <Route path="/login" element={
-          <Suspense fallback={<Loader />}>
-            <Login />
-          </Suspense>
-        } />
-
-        <Route path="/otp" element={
-          <Suspense fallback={<Loader />}>
-            <Otp />
-          </Suspense>
-        } />
-
-        <Route path="/adBooking/:bookingId" element={
-          <Suspense fallback={<Loader />}>
-            <AddBookingPage />
-          </Suspense>
-        } />
-
-        <Route path="/booking" element={
-          <Suspense fallback={<Loader />}>
-            <BookingPage />
-          </Suspense>
-        } />
-
-        <Route path="/response" element={
-          <Suspense fallback={<Loader />}>
-            <Response />
-          </Suspense>
-        } />
-
-        <Route path="/response-Details/:enquiryId" element={
-          <Suspense fallback={<Loader />}>
-            <ResponseDetails />
-          </Suspense>
-        } />
+        <Route path='/' element={<Home />} />
+        <Route path='/eventList' element={<EventList />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/product/:productId" element={<Product />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/adBooking/:bookingId" element={<AddBookingPage />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/response" element={<Response />} />
+        <Route path="/response-Details/:enquiryId" element={<ResponseDetails />} />
+        <Route path='/receipt/:productId' element={<Receipt />} />
 
       </Route>
 
