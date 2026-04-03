@@ -141,8 +141,6 @@ export const verifyRazorpay = async (req, res) => {
 
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature, productId, address, items, eventDate, responseId } = req.body;
 
-    console.log("VERIFY BODY:", req.body);
-
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
       await session.abortTransaction();
       session.endSession();
@@ -230,6 +228,26 @@ export const verifyRazorpay = async (req, res) => {
     await session.commitTransaction();
     session.endSession();
 
+    try {
+      await sendBookingSuccessEmail({
+        to: address.email,
+        customerName: `${address.firstName || ""} ${address.lastName || ""}`.trim(),
+        receipt,
+        eventName: product.event_name || product.name,
+        eventDate,
+        totalPaid: booking.totalPaid,
+        razorpayOrderId: razorpay_order_id,
+        razorpayPaymentId: razorpay_payment_id
+      });
+
+      await PaymentModel.updateOne(
+        { _id: payment._id },
+        { $set: { emailSent: true } }
+      );
+    } catch (mailError) {
+      console.log("Mail error:", mailError);
+    }
+
     return res.json({
       success: true,
       message: "Payment verified and booking confirmed",
@@ -250,31 +268,27 @@ export const verifyRazorpay = async (req, res) => {
 };
 
 export const getReceipt = async (req, res) => {
-
   try {
-
-    const { userId } = req.userId
-    const { bookingId } = req.params
+    const userId = req.userId;
 
     const booking = await BookingModel.findOne({
-      _id: bookingId,
-      userId: userId,
+      userId,
       paymentStatus: "paid"
     })
       .populate("productId")
-      .populate("userId")
+      .populate("userId");
 
     if (!booking) {
-      return res.json({ success: false, message: "Paid booking not found" })
+      return res.json({ success: false, message: "Paid booking not found" });
     }
 
     const payment = await PaymentModel.findOne({
       booking: booking._id,
       status: "paid"
-    })
+    });
 
     if (!payment) {
-      return res.json({ success: true, message: "Payment not found" })
+      return res.json({ success: false, message: "Payment not found" });
     }
 
     return res.json({
@@ -282,22 +296,20 @@ export const getReceipt = async (req, res) => {
       receipt: {
         receiptRef: payment.receipt,
         bookingId: booking._id,
-        event: booking.productId.event_name,
-        eventDate: booking.productId.date,
+        event: booking.productId?.event_name || booking.productId?.name,
+        eventDate: booking.eventDate,
         totalPaid: booking.totalPaid,
         currency: payment.currency,
         razorpayOrderId: payment.razorpayOrderId,
         razorpayPaymentId: payment.razorpayPaymentId,
         paidAt: payment.updatedAt
       }
-    })
-
+    });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message })
+    console.log("getReceipt error:", error);
+    res.json({ success: false, message: error.message });
   }
-
-}
+};
 
 //All bookings data for admin panal
 

@@ -437,7 +437,7 @@ export const sendBookingSuccessEmail = ({
   razorpayPaymentId
 }) => {
 
-  const formattedDate = new Date(eventDate).toLocaleDateString("en-IN", {
+  const formattedDate = new Date(eventDate).toLocaleString("en-IN", {
     dateStyle: "medium",
     timeStyle: "short"
   })
