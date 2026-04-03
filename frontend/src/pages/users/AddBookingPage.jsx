@@ -83,28 +83,37 @@ const BookingPage = () => {
             order_id: order.id,
             handler: async function (response) {
 
-                const verifyRes = await axios.post(
-                    backendUrl + '/api/booking/verifyRazorpay',
-                    {
-                        razorpay_order_id: response.razorpay_order_id,
-                        razorpay_payment_id: response.razorpay_payment_id,
-                        razorpay_signature: response.razorpay_signature,
-                        productId: bookingData.productId,
-                        address: bookingData.address,
-                        items: bookingData.items,
-                        eventDate: bookingData.eventDate,
-                        responseId: bookingData.responseId
-                    },
-                    { withCredentials: true }
-                )
+                try {
+                    setLoading(true)
 
-                console.log("verify result:", verifyRes.data)
+                    const verifyRes = await axios.post(
+                        backendUrl + '/api/booking/verifyRazorpay',
+                        {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            productId: bookingData.productId,
+                            address: bookingData.address,
+                            items: bookingData.items,
+                            eventDate: bookingData.eventDate,
+                            responseId: bookingData.responseId
+                        },
+                        { withCredentials: true }
+                    )
 
-                if (verifyRes.data.success) {
-                    toast.success(verifyRes.data.message)
-                    navidate("/")
-                } else {
-                    toast.error(verifyRes.data.message)
+                    if (verifyRes.data.success) {
+                        toast.success(verifyRes.data.message)
+                        navidate("/")
+                    } else {
+                        toast.error(verifyRes.data.message)
+                    }
+
+                } catch (error) {
+                    console.log(error);
+                    toast.error(error.message)
+                }
+                finally {
+                    setLoading(false)
                 }
             }
         }

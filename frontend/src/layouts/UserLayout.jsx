@@ -11,7 +11,7 @@ const UserLayout = () => {
   const hideNavbar =
     pathname === '/login' ||
     pathname === '/otp' ||
-    pathname === '/receipt'
+    pathname.startsWith("/receipt")
 
   const hideFooter =
     pathname === '/login' ||
@@ -22,7 +22,7 @@ const UserLayout = () => {
     pathname.startsWith("/product/") ||
     pathname === '/otp' ||
     pathname.startsWith('/response-Details/') ||
-    pathname === '/receipt'
+    pathname.startsWith("/receipt")
 
   return (
     <>

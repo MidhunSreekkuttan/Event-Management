@@ -271,12 +271,10 @@ export const verifyRazorpay = async (req, res) => {
 
 export const getReceipt = async (req, res) => {
   try {
-    const userId = req.userId;
 
     const { productId } = req.params
 
     const booking = await BookingModel.findOne({
-      userId,
       paymentStatus: "paid",
       productId: productId
     })

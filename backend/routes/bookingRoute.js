@@ -19,7 +19,7 @@ const bookingRouter = express.Router();
 bookingRouter.post("/placingBooking", userAuth, placebooking);
 bookingRouter.post("/placebookingRazorpay", userAuth, placebookingRazorpay);
 bookingRouter.post("/verifyRazorpay", userAuth, verifyRazorpay);
-bookingRouter.get("/getReceipt", userAuth, getReceipt)
+bookingRouter.get("/getReceipt/:productId", getReceipt)
 //For Admin
 bookingRouter.get("/allOrder", adminAuth, allOrder);
 //For event management panel

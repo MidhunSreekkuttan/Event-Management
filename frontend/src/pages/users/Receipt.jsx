@@ -16,7 +16,7 @@ const Receipt = () => {
 
         try {
 
-            const { data } = await axios.get(backendUrl + "/api/booking/getReceipt")
+            const { data } = await axios.get(backendUrl + `/api/booking/getReceipt/${productId}`)
             if (data.success) {
                 return data.receipt
             }
