@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { icon } from '../../../assets/assets'
 import { Search } from 'lucide-react';
@@ -281,7 +282,7 @@ const ListingComponent = () => {
 
                     {/*.............................................Right Side........................................*/}
 
-                    <div className='grid grid-cols-4 gap-6'>
+                    <div className='grid grid-cols-4 gap-6 w-[67rem]'>
                         {filterProducts.map((item) => (
                             <ProductList key={item._id} event_name={item.event_name} image={item.image}
                                 id={item._id} location={item.location} />
@@ -294,4 +295,4 @@ const ListingComponent = () => {
     )
 }
 
-export default ListingComponent
+export default React.memo(ListingComponent)

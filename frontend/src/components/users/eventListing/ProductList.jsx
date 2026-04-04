@@ -43,7 +43,11 @@ const ProductList = ({ id, event_name, image, location, category }) => {
                     </div>
 
                     <div className='w-full h-fit pb-5 px-5 text-center bg-white'>
-                        <p className='pt-3 pb-1 text-2xl'>{event_name}</p>
+                        <p className='pt-3 pb-1 text-2xl'>
+                            {
+                                event_name?.length > 13 ? event_name?.slice(0, 13) + "..." : event_name
+                            }
+                        </p>
                         <p className='text-sm font-medium'>{category}</p>
                         <p className='text-sm font-medium'>{location}</p>
                         <button onClick={handleEnquiry} className='bg-linear-to-r from-pink-500 to-pink-700 text-white mt-3 px-4 py-1 w-full rounded-2xl'>
