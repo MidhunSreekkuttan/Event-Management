@@ -302,30 +302,17 @@ const Add = ({ token }) => {
                   className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      focus:outline-none focus:ring-2 focus:ring-pink-500'>
                   <option className='text-black' value="Select">Select</option>
-                  <option className='text-black' value="Wedding">Wedding</option>
-                  <option className='text-black' value="Engagement Ceremony">Engagement Ceremony</option>
-                  <option className='text-black' value="Birthday Party">Birthday Party</option>
-                  <option className='text-black' value="Baby Shower">Baby Shower</option>
-                  <option className='text-black' value="Housewarming Ceremony">Housewarming Ceremony</option>
-                  <option className='text-black' value="Anniversary Celebration">Anniversary Celebration</option>
-                  <option className='text-black' value="Graduation Party">Graduation Party</option>
-                  <option className='text-black' value="Naming Ceremony">Naming Ceremony</option>
-                  <option className='text-black' value="Family Reunion">Family Reunion</option>
-                  <option className='text-black' value="Cultural Festival">Cultural Festival</option>
-                  <option className='text-black' value="Traditional Feast">Traditional Feast</option>
-                  <option className='text-black' value="Corporate Meeting">Corporate Meeting</option>
-                  <option className='text-black' value="Business Conference">Business Conference</option>
-                  <option className='text-black' value="Seminar">Seminar</option>
-                  <option className='text-black' value="Music Concert">Music Concert</option>
-                  <option className='text-black' value="DJ Night / Music Night">DJ Night / Music Night</option>
-                  <option className='text-black' value="Fashion Show">Fashion Show</option>
-                  <option className='text-black' value="Dance Show">Dance Show</option>
-                  <option className='text-black' value="Film Promotion Event">Film Promotion Event</option>
-                  <option className='text-black' value="College Fest">College Fest</option>
-                  <option className='text-black' value="School Annual Day">School Annual Day</option>
-                  <option className='text-black' value="Exhibitions">Exhibitions</option>
-                  <option className='text-black' value="Food Festival">Food Festival</option>
-                  <option className='text-black' value="Award Ceremony">Award Ceremony</option>
+                  <option className='text-black' value="Personal Events">Personal Events</option>
+                  <option className='text-black' value="Cultural & Religious Events">Cultural & Religious Events</option>
+                  <option className='text-black' value="Corporate Events">Corporate Events</option>
+                  <option className='text-black' value="Entertainment Events">Entertainment Events</option>
+                  <option className='text-black' value="Educational Events">Educational Events</option>
+                  <option className='text-black' value="Social & Community Events">Social & Community Events</option>
+                  <option className='text-black' value="Sports Events">Sports Events</option>
+                  <option className='text-black' value="Exhibition & Trade Events">Exhibition & Trade Events</option>
+                  <option className='text-black' value="Launch & Promotion Events">Launch & Promotion Events</option>
+                  <option className='text-black' value="Health & Wellness Events">Health & Wellness Events</option>
+                  <option className='text-black' value="Technology Events">Technology Events</option>
                 </select>
               </div>
 
