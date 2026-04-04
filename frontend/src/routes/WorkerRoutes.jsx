@@ -16,13 +16,44 @@ const WorkerRoutes = () => {
   return (
     <>
 
+      <Route path='/workers/signup' element={
+        <Suspense fallback={<Loader />}>
+          <Signup />
+        </Suspense>
+      } />
+
+      <Route path='/workers/login' element={
+        <Suspense fallback={<Loader />}>
+          <Login />
+        </Suspense>
+      } />
+
+      <Route path='/workers/otp' element={
+        <Suspense fallback={<Loader />}>
+          <Otp />
+        </Suspense>
+      } />
+
+      <Route path='/workers/index' element={
+        <Suspense fallback={<Loader />}>
+          <Index />
+        </Suspense>
+      } />
+
+      <Route path='/workers/registration' element={
+        <Suspense fallback={<Loader />}>
+          <WorkerRegistration />
+        </Suspense>
+      } />
+
+      <Route path='/workers/waiting' element={
+        <Suspense fallback={<Loader />}>
+          <Waiting />
+        </Suspense>
+      } />
+
       <Route path='/workers' element={<WorkersLayout />}>
 
-        <Route path='index' element={
-          <Suspense fallback={<Loader />}>
-            <Index />
-          </Suspense>
-        } />
         <Route path='home' element={
           <Suspense fallback={<Loader />}>
             <WorkersHome />
@@ -31,31 +62,6 @@ const WorkerRoutes = () => {
         <Route path='dashboard' element={
           <Suspense fallback={<Loader />}>
             <WorkerDashboard />
-          </Suspense>
-        } />
-        <Route path='registration' element={
-          <Suspense fallback={<Loader />}>
-            <WorkerRegistration />
-          </Suspense>
-        } />
-        <Route path='waiting' element={
-          <Suspense fallback={<Loader />}>
-            <Waiting />
-          </Suspense>
-        } />
-        <Route path='login' element={
-          <Suspense fallback={<Loader />}>
-            <Login />
-          </Suspense>
-        } />
-        <Route path='signup' element={
-          <Suspense fallback={<Loader />}>
-            <Signup />
-          </Suspense>
-        } />
-        <Route path='otp' element={
-          <Suspense fallback={<Loader />}>
-            <Otp />
           </Suspense>
         } />
 

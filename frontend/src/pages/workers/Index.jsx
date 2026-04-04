@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/workers/ui/button";
 import { LayoutGrid, ArrowRight } from "lucide-react";
 import { useContext, useEffect } from "react";
 import { workersContext } from "../../context/WorkersContext";
@@ -54,10 +53,10 @@ const Index = () => {
                 className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-fade-in"
               >
                 <Link to="/workers/registration">
-                  <Button size="lg" className="w-full sm:w-auto btn-press group">
+                  <button size="lg" className="w-full sm:w-auto btn-press group">
                     Register Worker Form
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </Button>
+                  </button>
                 </Link>
               </div>
             </div>
