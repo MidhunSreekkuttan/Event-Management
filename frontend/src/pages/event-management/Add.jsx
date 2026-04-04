@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import SideBar from '../../components/event-management/SideBar'
 import { icon } from '../../assets/assets'
@@ -11,6 +12,7 @@ const Add = ({ token }) => {
 
   const { backendUrl } = useContext(BackendContex)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const [image1, setImage1] = useState(false)
   const [image2, setImage2] = useState(false)
@@ -129,22 +131,11 @@ const Add = ({ token }) => {
 
       if (response.data.success) {
         toast.success(response.data.message)
-        setCompany_name('')
-        setEvent_name('')
-        setPrice('')
-        setStarting_price('')
-        setMain_services('')
-        setDescription('')
-        setCategory('Birthday Party')
-        setLocation('Trivandrum')
-        setStartTime('')
-        setEndTime('')
-        setImage1(false)
-        setImage2(false)
-        setImage3(false)
-        setImage4(false)
+        if (id) {
+          navigate("/event-management/events")
+        }
       } else {
-        toast.error(response.data.message)
+        window.location.reload()
       }
 
     } catch (error) {
@@ -310,11 +301,31 @@ const Add = ({ token }) => {
                 <select onChange={e => setCategory(e.target.value)}
                   className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      focus:outline-none focus:ring-2 focus:ring-pink-500'>
-                  <option className='text-black' value="Birthday Party">Birthday Party</option>
+                  <option className='text-black' value="Select">Select</option>
                   <option className='text-black' value="Wedding">Wedding</option>
-                  <option className='text-black' value="Corporate Events">Corporate Events</option>
-                  <option className='text-black' value="Concerts">Concerts</option>
-                  <option className='text-black' value="Cultural Programs">Cultural Programs</option>
+                  <option className='text-black' value="Engagement Ceremony">Engagement Ceremony</option>
+                  <option className='text-black' value="Birthday Party">Birthday Party</option>
+                  <option className='text-black' value="Baby Shower">Baby Shower</option>
+                  <option className='text-black' value="Housewarming Ceremony">Housewarming Ceremony</option>
+                  <option className='text-black' value="Anniversary Celebration">Anniversary Celebration</option>
+                  <option className='text-black' value="Graduation Party">Graduation Party</option>
+                  <option className='text-black' value="Naming Ceremony">Naming Ceremony</option>
+                  <option className='text-black' value="Family Reunion">Family Reunion</option>
+                  <option className='text-black' value="Cultural Festival">Cultural Festival</option>
+                  <option className='text-black' value="Traditional Feast">Traditional Feast</option>
+                  <option className='text-black' value="Corporate Meeting">Corporate Meeting</option>
+                  <option className='text-black' value="Business Conference">Business Conference</option>
+                  <option className='text-black' value="Seminar">Seminar</option>
+                  <option className='text-black' value="Music Concert">Music Concert</option>
+                  <option className='text-black' value="DJ Night / Music Night">DJ Night / Music Night</option>
+                  <option className='text-black' value="Fashion Show">Fashion Show</option>
+                  <option className='text-black' value="Dance Show">Dance Show</option>
+                  <option className='text-black' value="Film Promotion Event">Film Promotion Event</option>
+                  <option className='text-black' value="College Fest">College Fest</option>
+                  <option className='text-black' value="School Annual Day">School Annual Day</option>
+                  <option className='text-black' value="Exhibitions">Exhibitions</option>
+                  <option className='text-black' value="Food Festival">Food Festival</option>
+                  <option className='text-black' value="Award Ceremony">Award Ceremony</option>
                 </select>
               </div>
 
@@ -323,6 +334,7 @@ const Add = ({ token }) => {
                 <select onChange={e => setLocation(e.target.value)}
                   className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      focus:outline-none focus:ring-2 focus:ring-pink-500'>
+                  <option className='text-black' value="Select">Select</option>
                   <option className='text-black' value="Trivandrum">Trivandrum</option>
                   <option className='text-black' value="Kollam">Kollam</option>
                   <option className='text-black' value="Pathanamthitta">Pathanamthitta</option>
