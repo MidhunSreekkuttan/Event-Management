@@ -7,6 +7,7 @@ import axios from 'axios'
 import Loader from '../../components/Loading'
 
 const BookingPage = () => {
+
     const navidate = useNavigate()
     const { bookingId } = useParams()
 
@@ -56,6 +57,31 @@ const BookingPage = () => {
         item?.relatedEvents?.some(data => data?.id === bookingId)
     )?._id
 
+    //razorpay loader function
+    const loadeRazorpay = () => {
+
+        return new Promise((resolve) => {
+
+            const existingScript = document.getElementById("razorpay-sdk")
+
+            if (existingScript) {
+                resolve(true)
+                return
+            }
+
+            const script = document.createElement("script")
+            script.id = "razorpay-sdk"
+            script.src = "https://checkout.razorpay.com/v1/checkout.js"
+            script.async = true
+
+            script.onload = () => resolve(true)
+            script.onerror = () => resolve(false)
+
+            document.body.appendChild(script)
+        })
+    }
+    //...........................................................................
+
     const bookingData = {
         address: formData,
         productId: bookedData?._id,
@@ -65,6 +91,11 @@ const BookingPage = () => {
     }
 
     const initPay = (order) => {
+
+        if (!window.Razorpay) {
+            toast.error("Razorpay is not available")
+        }
+
         setLoading(true)
 
         const options = {
@@ -140,6 +171,13 @@ const BookingPage = () => {
                 }
 
                 case "razorpay": {
+
+                    const loaded = await loadeRazorpay()
+                    if (!loaded) {
+                        toast.error("Razorpay SDK failed to load")
+                        return
+                    }
+
                     const { data } = await axios.post(
                         backendUrl + "/api/booking/placebookingRazorpay",
                         bookingData,
