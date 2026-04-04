@@ -28,12 +28,12 @@ const BookingScheme = new mongoose.Schema(
       default: "pending",
     },
 
-    paymentMethod: { type: String, required: true },
-    baseAmount: { type: Number, required: true },
-    totalPaid: { type: Number, required: true },
-    adminCommissionPercent: { type: Number, required: true },
-    adminCommissionAmount: { type: Number, required: true },
-    eventManagerAmount: { type: String, required: true },
+    paymentMethod: { type: String },
+    baseAmount: { type: Number },
+    totalPaid: { type: Number },
+    adminCommissionPercent: { type: Number },
+    adminCommissionAmount: { type: Number },
+    eventManagerAmount: { type: String },
 
     paymentStatus: {
       type: String,

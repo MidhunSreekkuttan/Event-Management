@@ -14,7 +14,7 @@ import { sendBookingSuccessEmail } from "../config/emailTemplate.js";
 export const placebooking = async (req, res) => {
   try {
 
-    const { userId } = req.userId
+    const userId = req.userId
 
     const { productId, address, items, eventDate, responseId } =
       req.body;
@@ -37,12 +37,11 @@ export const placebooking = async (req, res) => {
 
     const bookingData = {
       owner: product.owner,
-      userId,
+      userId: userId,
       productId,
       address,
       items,
       paymentMethod: "COD",
-      payment: false,
       date: Date.now(),
       eventDate,
     };
