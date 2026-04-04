@@ -1,3 +1,4 @@
+import React from 'react'
 import { motion } from 'framer-motion'
 import bg_video from '../../../assets/projectVideo.mp4'
 
@@ -94,4 +95,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default React.memo(Hero)

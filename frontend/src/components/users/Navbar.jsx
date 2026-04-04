@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext } from 'react'
 import { logo } from '../../assets/assets'
 import { User } from 'lucide-react';
@@ -107,4 +108,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default React.memo(Navbar)

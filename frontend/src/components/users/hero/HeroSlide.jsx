@@ -1,8 +1,8 @@
+import React from "react";
 import { useEffect, useState, Children } from "react";
-import { icon } from "../../../assets/assets";
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-export default function HeroSlide({
+function HeroSlide({
     children,
     autoSlide = false,
     autoSlideTime = 3000,
@@ -62,3 +62,5 @@ export default function HeroSlide({
         </div>
     );
 }
+
+export default React.memo(HeroSlide)

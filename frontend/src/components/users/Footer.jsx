@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -180,4 +181,4 @@ const SocialIcon = ({ icon }) => (
   </div>
 );
 
-export default Footer;
+export default React.memo(Footer);

@@ -1,3 +1,4 @@
+import React from 'react'
 import { icon } from '../../assets/assets'
 import { motion } from 'framer-motion'
 
@@ -105,4 +106,4 @@ const EventCategory = () => {
   )
 }
 
-export default EventCategory
+export default React.memo(EventCategory)

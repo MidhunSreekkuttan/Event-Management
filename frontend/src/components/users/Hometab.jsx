@@ -67,4 +67,4 @@ const Hometab = () => {
     )
 }
 
-export default Hometab
+export default React.memo(Hometab)
