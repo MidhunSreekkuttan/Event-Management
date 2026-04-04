@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { icon, logo } from '../../assets/assets'
+import { logo } from '../../assets/assets'
+import { User } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { BackendContex } from '../../context/ConnectBackendContex'
@@ -94,7 +95,7 @@ const Navbar = () => {
               className='cursor-pointer
              bg-linear-to-br from-indigo-500 to-indigo-600 transition-all px-7 py-1 rounded-2xl hover:opacity-80'>
 
-              <img className='w-7 cursor-pointer' src={icon.userIcon} alt="" />
+              <User size={30} className='text-black' />
 
             </button>
           </div>

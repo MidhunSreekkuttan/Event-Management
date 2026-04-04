@@ -1,4 +1,3 @@
-import React from 'react'
 import { icon } from '../../assets/assets'
 import { motion } from 'framer-motion'
 
@@ -40,7 +39,7 @@ const EventCategory = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 hover:scale-110 justify-center items-center"
+            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
           >
             <div className='grid gap-5 justify-items-center' >
               <img className='w-15' src={icon.wedding_icon} alt="" />
@@ -53,7 +52,7 @@ const EventCategory = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.2 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 hover:scale-110 justify-center items-center"
+            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
           >
             <div className='grid gap-5 items-center justify-items-center' >
               <img className='w-15' src={icon.birthday_party_icon} alt="" />
@@ -66,7 +65,7 @@ const EventCategory = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 hover:scale-110 justify-center items-center"
+            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
           >
             <div className='grid gap-5 items-center justify-items-center text-center' >
               <img className='w-15' src={icon.corporative_events} alt="" />
@@ -79,7 +78,7 @@ const EventCategory = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 hover:scale-110 justify-center items-center"
+            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
           >
             <div className='grid gap-5 items-center justify-items-center' >
               <img className='w-15' src={icon.concern_icon} alt="" />
@@ -92,7 +91,7 @@ const EventCategory = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 hover:scale-110 justify-center items-center"
+            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
           >
             <div className='grid gap-5 items-center justify-items-center text-center' >
               <img className='w-15' src={icon.cultural_programs} alt="" />

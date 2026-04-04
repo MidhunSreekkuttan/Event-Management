@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { icon } from '../../../assets/assets'
+import { Search } from 'lucide-react';
 import ProductList from '../eventListing/ProductList'
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -158,7 +159,7 @@ const ListingComponent = () => {
                         </select>
                     </div>
                     <div className='flex gap-3 rounded-2xl font-semibold text-violet-950 bg-white py-3 px-5'>
-                        <img className='w-5' src={icon.search_icon} alt="" />
+                        <Search className='text-purple-400' />
                         <input onChange={(e) => {
                             const value = e.target.value
                             setSearch(value)

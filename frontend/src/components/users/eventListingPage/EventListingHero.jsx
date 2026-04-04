@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { heroImages } from '../../../assets/assets'
 import { motion } from 'framer-motion'
 import HeroSlide from '../hero/HeroSlide'
