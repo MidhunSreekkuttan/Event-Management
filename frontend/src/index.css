@@ -57,3 +57,11 @@ html {
   display: inline-flex;
   animation: marquee 16s linear infinite;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}

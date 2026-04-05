@@ -44,7 +44,7 @@ const Response = () => {
         <div className="relative mx-auto max-w-7xl px-6 py-10 md:px-10 lg:px-12">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="mb-3 text-sm font-medium uppercase tracking-[0.35em] bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
+              <p className="mb-3 text-sm font-medium uppercase tracking-[0.35em] bg-linear-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
                 Response Management
               </p>
 
@@ -82,7 +82,7 @@ const Response = () => {
                     <div className="border-b border-purple-100 bg-[#FDF9FF] px-6 py-5 md:px-8">
                       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div>
-                          <p className="text-xs uppercase tracking-[0.3em] bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
+                          <p className="text-xs uppercase tracking-[0.3em] bg-linear-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
                             Response ID
                           </p>
 
@@ -98,7 +98,7 @@ const Response = () => {
 
                           <span className="rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-slate-700">
                             Proposal Date:{' '}
-                            <span className="font-semibold bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
+                            <span className="font-semibold bg-linear-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
                               {response.enquiryId?.date?.split("T")[0] || "No Date"}
                             </span>
                           </span>
@@ -106,7 +106,7 @@ const Response = () => {
                           <button
                             onClick={() => handleClick(response._id)}
                             disabled={desable}
-                            className={`ml-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-700 px-4 py-2
+                            className={`ml-2 rounded-xl bg-linear-to-r from-pink-500 to-pink-700 px-4 py-2
                                text-sm font-semibold text-white transition 
                                 ${desable ? "opacity-60 cursor-default" : ""
                               }`}
@@ -128,7 +128,7 @@ const Response = () => {
                           </p>
                         </div>
 
-                        <div className="hidden rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-xs uppercase tracking-[0.25em] bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent md:block">
+                        <div className="hidden rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-xs uppercase tracking-[0.25em] bg-linear-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent md:block">
                           {response.relatedEvents?.length || 0} Options
                         </div>
                       </div>
@@ -142,7 +142,7 @@ const Response = () => {
                             <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                               <div className="space-y-2">
                                 <div className="flex items-center gap-3">
-                                  <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 shadow-md" />
+                                  <span className="h-2.5 w-2.5 rounded-full bg-linear-to-r from-purple-500 to-purple-600 shadow-md" />
                                   <h4 className="text-lg font-medium text-slate-900">
                                     {event.event_name}
                                   </h4>
@@ -155,7 +155,7 @@ const Response = () => {
 
                               <div className="grid gap-2 text-sm md:text-right">
                                 <p className="text-slate-600">
-                                  Price: <span className="font-semibold bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">{event.price}</span>
+                                  Price: <span className="font-semibold bg-linear-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">{event.price}</span>
                                 </p>
                                 <p className="text-slate-600">
                                   Location: <span className="text-slate-800">{event.location}</span>
@@ -165,7 +165,7 @@ const Response = () => {
 
                             <div className='mt-3 flex gap-2 text-sm justify-between'>
                               <p className="text-slate-600">
-                                Status: <span className="font-semibold bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">{event.status}</span>
+                                Status: <span className="font-semibold bg-linear-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">{event.status}</span>
                               </p>
                               <p className="text-slate-600">
                                 Starting Price: <span className="text-slate-800">{event.starting_price}</span>
@@ -196,7 +196,7 @@ const Response = () => {
 
         <button
           onClick={() => navigate('/')}
-          className="rounded-xl bg-gradient-to-r from-pink-500 to-pink-700 px-6 py-3 font-semibold
+          className="rounded-xl bg-linear-to-r from-pink-500 to-pink-700 px-6 py-3 font-semibold
              text-white transition hover:scale-105"
         >
           Go to Home Page
