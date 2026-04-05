@@ -211,7 +211,7 @@ const Home = () => {
                 </div>
 
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                  <BarChart />
+                  <BarChart bookings={data || []} />
                   <EventsByTypePie />
                 </div>
 

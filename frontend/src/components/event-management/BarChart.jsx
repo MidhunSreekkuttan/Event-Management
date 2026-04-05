@@ -12,11 +12,23 @@ import {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
-export default function RevenueBarChart() {
+export default function RevenueBarChart({ bookings = [] }) {
     const labels = useMemo(
         () => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         []
     );
+
+    const monthlyRevenue = useMemo(() => {
+        const totals = new Array(12).fill(0)
+
+        bookings.forEach((item) => {
+            const date = new Date(item.createdAt)
+            const monthIndex = date.getMonth()
+            totals[monthIndex] += Number(item.eventManagerAmount || 0)
+        })
+        return totals
+
+    }, [bookings])
 
     const data = useMemo(() => {
         return {
@@ -24,7 +36,7 @@ export default function RevenueBarChart() {
             datasets: [
                 {
                     label: "Monthly Revenue",
-                    data: [20000, 40000, 60000, 80000, 50000, 70000, 65000, 72000, 80000, 90000, 95000, 100000],
+                    data: monthlyRevenue,
                     borderRadius: 12,
                     borderSkipped: false,
                     barThickness: 28,
@@ -44,7 +56,7 @@ export default function RevenueBarChart() {
                 },
             ],
         };
-    }, [labels]);
+    }, [monthlyRevenue]);
 
     const options = useMemo(() => {
         return {
