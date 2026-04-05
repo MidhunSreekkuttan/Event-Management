@@ -130,10 +130,11 @@ const Add = ({ token }) => {
       }
 
       if (response.data.success) {
+        
         toast.success(response.data.message)
-        if (id) {
-          navigate("/event-management/events")
-        }
+        
+        navigate("/event-management/events")
+        
       } else {
         window.location.reload()
       }
