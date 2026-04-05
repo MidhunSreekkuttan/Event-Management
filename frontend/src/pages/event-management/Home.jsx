@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import SideBar from '../../components/event-management/SideBar'
 import { icon } from '../../assets/assets'
 import BarChart from '../../components/event-management/BarChart'
@@ -8,6 +8,8 @@ import axios from 'axios'
 import EventsByTypePie from '../../components/event-management/PieChart'
 import { EventContext } from '../../context/EventContext'
 import Loader from '../../components/Loading'
+import { useQuery } from '@tanstack/react-query'
+import { IndianRupee } from 'lucide-react';
 
 const Home = () => {
 
@@ -18,7 +20,7 @@ const Home = () => {
   const [item, setItem] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
 
     try {
 
@@ -36,18 +38,46 @@ const Home = () => {
     finally {
       setLoading(false)
     }
-  }
+
+  }, [backendUrl])
+
+  const getBookingData = useCallback(async () => {
+
+    try {
+
+      const { data } = await axios.get(backendUrl + "/api/booking/allOrderEventManagement")
+      if (data.success) {
+        return data.bookings
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+
+  }, [backendUrl])
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["Booking data"],
+    queryFn: getBookingData
+  })
+
+  const totalRevenue = data?.reduce((total, item) => {
+    return total + Number(item?.eventManagerAmount || 0)
+  }, 0)
 
   useEffect(() => {
     getData()
     getClientData()
   }, [])
 
+  if (error) return <div>Error:{error.message}</div>
+
   return (
 
     <>
 
-      {loading && <Loader />}
+      {(loading || isLoading) && <Loader />}
 
       <div className='flex min-h-screen bg-slate-950 text-white'>
 
@@ -84,7 +114,7 @@ const Home = () => {
                     <div className='flex items-center justify-between'>
                       <div className='rounded-2xl bg-white/15 px-2 py-1 backdrop-blur-md border border-white/10 shadow-md
                          cursor-context-menu'>
-                        <img src={icon.plusIcon} alt="icon" className='w-10 object-contain' />
+                        <IndianRupee className='object-contain' />
                       </div>
                       <span className='text-xs font-medium px-3 py-1 rounded-full bg-white/15 text-white/90 border
                          border-white/10 cursor-context-menu'>
@@ -92,8 +122,8 @@ const Home = () => {
                       </span>
                     </div>
                     <div>
-                      <p className='text-4xl font-bold tracking-tight cursor-context-menu'>
-                        --
+                      <p className='flex text-4xl font-bold tracking-tight cursor-context-menu'>
+                        {totalRevenue}<IndianRupee className='relative top-2' />
                       </p>
                       <h2 className='mt-2 text-base md:text-lg font-semibold text-white/90 cursor-context-menu'>
                         Total Revenue
@@ -198,4 +228,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default React.memo(Home)

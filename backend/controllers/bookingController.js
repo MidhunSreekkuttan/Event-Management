@@ -325,7 +325,7 @@ export const allOrderEventManagement = async (req, res) => {
 
     const bookings = await BookingModel.find({ owner: ownerId })
       .populate("userId", "name email") // user details
-      .populate("productId", "name price") // event/product details
+      .populate("productId") // event/product details
       .sort({ date: -1 });
 
     res.json({
