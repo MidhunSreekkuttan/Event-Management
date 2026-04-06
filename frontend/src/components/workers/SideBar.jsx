@@ -1,16 +1,37 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
+import { BackendContex } from '../../context/ConnectBackendContex';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { workersContext } from '../../context/WorkersContext';
 
 const SideBar = () => {
+
+    const { backendUrl } = useContext(BackendContex)
+    const { setIsLoggedIn } = useContext(workersContext)
+
+    const logout = async () => {
+
+        try {
+
+            const { data } = await axios.post(backendUrl + "/api/workers/logout")
+            if (data.success) {
+                setIsLoggedIn(false)
+                toast.info(data.message)
+            } else {
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }
 
     const menuItems = [
         { name: 'Dashboard', path: "/workers/home" },
         { name: 'My Profile', path: "/workers/dashboard" },
-        { name: 'My Bookings', path: "/workers/booking" },
-        { name: 'My Availability', path: "/workers/available" },
-        { name: 'Earnings', path: "/workers/ern" },
-        { name: 'Notifications', path: "/workers/nott" },
-        { name: 'Settings', path: "/workers/sett" },
 
     ];
 
@@ -53,7 +74,8 @@ const SideBar = () => {
                 </div>
             </nav>
 
-            <button className="mt-4 flex items-center gap-3 rounded-[24px] border border-white/10 bg-white/5 px-5 py-4
+            <button onClick={logout}
+                className="mt-4 flex items-center gap-3 rounded-[24px] border border-white/10 bg-white/5 px-5 py-4
                      text-left text-slate-200 backdrop-blur hover:bg-white/10">
                 <span className="text-lg">↩</span>
                 Logout

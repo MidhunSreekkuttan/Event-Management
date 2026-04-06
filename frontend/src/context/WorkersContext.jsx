@@ -11,12 +11,15 @@ const WorkersContextProvider = (props) => {
 
     const [authLoading, setAuthLoading] = useState(true)
     const [userData, setUserData] = useState(null)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const getUserData = useCallback(async () => {
 
         try {
 
-            const { data } = await axios.get(backendUrl + "/api/workers/getUserData")
+            const { data } = await axios.get(backendUrl + "/api/workers/getUserData",
+                { withCredentials: true }
+            )
             if (data.success) {
                 setUserData(data.user)
             } else {
@@ -37,8 +40,11 @@ const WorkersContextProvider = (props) => {
 
         try {
 
-            const { data } = await axios.get(backendUrl + "/api/workers/getAuth")
+            const { data } = await axios.get(backendUrl + "/api/workers/getAuth",
+                { withCredentials: true }
+            )
             if (data.success) {
+                setIsLoggedIn(true)
                 await getUserData()
             }
 
@@ -50,19 +56,20 @@ const WorkersContextProvider = (props) => {
             setAuthLoading(false)
         }
 
-    }, [backendUrl])
+    }, [backendUrl, getUserData])
 
     useEffect(() => {
         getAuth()
-    }, [])
+    }, [getAuth])
 
     const value = useMemo(() => ({
 
         authLoading, setAuthLoading,
         userData, setUserData,
-        getUserData
+        getUserData,
+        isLoggedIn, setIsLoggedIn
 
-    }), [authLoading, setAuthLoading, userData, setUserData, getUserData])
+    }), [authLoading, setAuthLoading, userData, setUserData, getUserData, isLoggedIn, setIsLoggedIn])
 
     return (
 

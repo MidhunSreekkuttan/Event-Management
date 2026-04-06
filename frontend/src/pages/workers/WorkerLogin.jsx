@@ -9,7 +9,7 @@ import { workersContext } from "../../context/WorkersContext";
 const Login = () => {
 
   const { backendUrl } = useContext(BackendContex);
-  const { getUserData, authLoading } = useContext(workersContext)
+  const { getUserData, authLoading, setIsLoggedIn } = useContext(workersContext)
 
   const navigate = useNavigate();
 
@@ -52,6 +52,7 @@ const Login = () => {
         if (!data.isAccountVerified) {
           await setVerifyOtp();
         } else {
+          setIsLoggedIn(true)
           await getUserData()
           toast.success(data.message);
           navigate("/workers/index");

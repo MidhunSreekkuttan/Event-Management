@@ -15,10 +15,7 @@ import { useNavigate } from 'react-router-dom';
 const WorkersHome = () => {
 
   const { backendUrl } = useContext(BackendContex)
-  const { userData } = useContext(workersContext)
-
-  console.log(userData);
-  
+  const { userData, isLoggedIn, authLoading } = useContext(workersContext)
 
   const navigate = useNavigate()
 
@@ -29,7 +26,8 @@ const WorkersHome = () => {
     try {
       setLoading(true)
 
-      const { data } = await axios.get(backendUrl + "/api/workers/listFiles", { withCredentials: true })
+      const { data } = await axios.get(backendUrl + "/api/workers/listFiles",
+        { withCredentials: true })
       if (data.success) {
         return data?.registrations
       }
@@ -77,9 +75,6 @@ const WorkersHome = () => {
     }))
   }
 
-  console.log(formData.availabilityFrom);
-
-
   const submitHandler = async (e) => {
     e.preventDefault()
 
@@ -111,24 +106,27 @@ const WorkersHome = () => {
     }
   }
 
-  const workersData = () => {
-    if (userData?.isAdminVerified === "pending") {
-      navigate("/workers/waiting")
-    }
-
-  }
-
   useEffect(() => {
-    if (userData) {
-      workersData()
+
+    if (authLoading) return
+
+    if (!isLoggedIn) {
+      navigate("/workers/login");
+      return;
     }
-  }, [userData])
+
+    if (userData?.isAdminVerified === "pending") {
+      navigate("/workers/waiting");
+      return;
+    }
+
+  }, [authLoading, userData, isLoggedIn]);
 
   return (
 
     <>
 
-      {loading && <Loader />}
+      {(loading || authLoading) && <Loader />}
 
       <div className="min-h-screen w-full bg-slate-100 text-slate-900">
         <div className="flex min-h-screen">

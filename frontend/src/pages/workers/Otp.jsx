@@ -13,7 +13,7 @@ const Otp = () => {
     const inputrefs = React.useRef([])
 
     const { backendUrl } = useContext(BackendContex)
-    const { getUserData, authLoading } = useContext(workersContext)
+    const { getUserData, authLoading, setIsLoggedIn } = useContext(workersContext)
 
     const handleInput = (e, index) => {
         if (e.target.value.length > 0 && index < inputrefs.current.length - 1) {
@@ -51,6 +51,7 @@ const Otp = () => {
             const { data } = await axios.post(backendUrl + '/api/workers/verifyEmail', { otp })
 
             if (data.success) {
+                setIsLoggedIn(true)
                 await getUserData()
                 navidate('/workers/index')
 
