@@ -21,7 +21,7 @@ bookingRouter.post("/placebookingRazorpay", userAuth, placebookingRazorpay);
 bookingRouter.post("/verifyRazorpay", userAuth, verifyRazorpay);
 bookingRouter.get("/getReceipt/:productId", getReceipt)
 //For Admin
-bookingRouter.get("/allOrder", adminAuth, allOrder);
+bookingRouter.get("/allBookings", allOrder);
 //For event management panel
 bookingRouter.get(
   "/allOrderEventManagement",

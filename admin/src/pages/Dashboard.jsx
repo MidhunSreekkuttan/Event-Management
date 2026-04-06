@@ -1,11 +1,8 @@
 import React from "react";
 import {
     CalendarDays,
-    LayoutDashboard,
     Users,
     Mail,
-    BarChart3,
-    Settings,
     IndianRupee,
 } from "lucide-react";
 import {
@@ -23,31 +20,130 @@ import {
     Cell,
 } from "recharts";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { AdminContext } from "../Context";
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import { useCallback } from "react";
+import Loader from "../components/Loading";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
+
+    const { backendUrl } = useContext(AdminContext)
+
+    const getListProduct = useCallback(async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + "/api/product/listProduct")
+            if (data.success) {
+                return data.product
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }, [backendUrl])
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["eventList"],
+        queryFn: getListProduct
+    })
+
+    const getAllEnquery = useCallback(async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + "/api/user/getAllEnquiry")
+            if (data.success) {
+                return data.response
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }, [backendUrl])
+
+    const { data: listEnquery } = useQuery({
+        queryKey: ["listEnquery"],
+        queryFn: getAllEnquery
+    })
+
+    const getListUsers = useCallback(async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + "/api/user/listUser")
+            if (data.success) {
+                return data.userList
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }, [backendUrl])
+
+    const { data: listUsers } = useQuery({
+        queryKey: ["listUsers"],
+        queryFn: getListUsers
+    })
+
+    const getAllBooking = useCallback(async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + "/api/booking/allBookings")
+            if (data.success) {
+                return data.allBookings
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }, [backendUrl])
+
+    const { data: AllBookings } = useQuery({
+        queryKey: ["AllBookings"],
+        queryFn: getAllBooking
+    })
+
+    console.log("bookinmd", AllBookings);
+
+    const revenue = AllBookings?.reduce((total, item,) => {
+        return total + Number(item?.adminCommissionAmount || 0)
+    }, 0)
 
     const stats = [
         {
             title: "Total Events",
-            value: "128",
+            value: data?.length,
             change: "+12% this month",
             icon: CalendarDays,
         },
         {
             title: "Total Enquiries",
-            value: "342",
+            value: listEnquery?.length,
             change: "+18% this week",
             icon: Mail,
         },
         {
             title: "Total Users",
-            value: "1,284",
+            value: listUsers?.length,
             change: "+9% growth",
             icon: Users,
         },
         {
             title: "Revenue",
-            value: "₹2,48,000",
+            value: revenue,
             change: "+21% this month",
             icon: IndianRupee,
         },
@@ -101,147 +197,70 @@ const Dashboard = () => {
         <h3 className="text-lg font-semibold">{children}</h3>
     );
 
+    if (error) return <div>Error:{error.message}</div>
+
     return (
-        <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.16),
+
+        <>
+
+            {isLoading && <Loader />}
+
+            <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.16),
             _transparent_24%),radial-gradient(circle_at_top_right,_rgba(0,0,0,0.08),
                 _transparent_20%),linear-gradient(135deg,_#ffffff,_#fff1f2,_#fee2e2)] text-black">
 
-            <main className="p-4 lg:p-6 w-[76rem]">
-                <div className="space-y-6">
+                <main className="p-4 lg:p-6 w-[76rem]">
+                    <div className="space-y-6">
 
-                    <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                        {stats.map((stat, index) => {
-                            const Icon = stat.icon;
-                            return (
-                                <motion.div
-                                    key={stat.title}
-                                    initial={{ opacity: 0, y: 18 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.35, delay: index * 0.06 }}
-                                >
-                                    <Card className={`${redGlass}`}>
-                                        <CardContent className="p-5">
-                                            <div className="mb-4 flex items-start justify-between">
-                                                <div>
-                                                    <p className="text-sm text-black/55 cursor-default">{stat.title}</p>
-                                                    <h3 className="mt-2 text-3xl font-bold cursor-default">{stat.value}</h3>
+                        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                            {stats.map((stat, index) => {
+                                const Icon = stat.icon;
+                                return (
+                                    <motion.div
+                                        key={stat.title}
+                                        initial={{ opacity: 0, y: 18 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.35, delay: index * 0.06 }}
+                                    >
+                                        <Card className={`${redGlass}`}>
+                                            <CardContent className="p-5">
+                                                <div className="mb-4 flex items-start justify-between">
+                                                    <div>
+                                                        <p className="text-sm text-black/55 cursor-default">{stat.title}</p>
+                                                        <h3 className="mt-2 text-3xl font-bold cursor-default">{stat.value}</h3>
+                                                    </div>
+                                                    <div className="rounded-2xl border border-red-200/60 bg-white/70 p-3">
+                                                        <Icon className="h-5 w-5" />
+                                                    </div>
                                                 </div>
-                                                <div className="rounded-2xl border border-red-200/60 bg-white/70 p-3">
-                                                    <Icon className="h-5 w-5" />
-                                                </div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
-                            );
-                        })}
-                    </section>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                );
+                            })}
+                        </section>
 
-                    <section className="grid gap-6 xl:grid-cols-[1.6fr_1fr]">
-                        <Card className={`${redGlass}`}>
-                            <CardHeader className="flex flex-row items-center justify-between">
-                                <SectionTitle>Revenue Overview</SectionTitle>
-                                <span className="inline-flex rounded-full border border-red-200 bg-white/70 px-3 py-1 text-xs font-medium text-red-700">
-                                    +21% growth
-                                </span>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="h-80">
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <AreaChart data={revenueData}>
-                                            <defs>
-                                                <linearGradient id="fillRevenue" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="5%" stopColor="#ef4444" stopOpacity={0.45} />
-                                                    <stop offset="95%" stopColor="#ef4444" stopOpacity={0.04} />
-                                                </linearGradient>
-                                            </defs>
-                                            <CartesianGrid stroke="rgba(0,0,0,0.08)" vertical={false} />
-                                            <XAxis dataKey="month" stroke="rgba(0,0,0,0.45)" />
-                                            <YAxis stroke="rgba(0,0,0,0.45)" />
-                                            <Tooltip
-                                                contentStyle={{
-                                                    background: "rgba(255,255,255,0.96)",
-                                                    border: "1px solid rgba(239,68,68,0.18)",
-                                                    borderRadius: "18px",
-                                                    color: "#111111",
-                                                }}
-                                            />
-                                            <Area
-                                                type="monotone"
-                                                dataKey="revenue"
-                                                stroke="#dc2626"
-                                                fill="url(#fillRevenue)"
-                                                strokeWidth={4}
-                                            />
-                                        </AreaChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card className={`${redGlass}`}>
-                            <CardHeader className="flex flex-row items-center justify-between">
-                                <SectionTitle>Booking Insights</SectionTitle>
-                                <span className="inline-flex rounded-full border border-red-200 bg-white/70 px-3 py-1 text-xs font-medium text-black">
-                                    This Week
-                                </span>
-                            </CardHeader>
-                            <CardContent className="space-y-6">
-                                <div className="h-40 rounded-[24px] border border-red-100/80 bg-white/60 p-3">
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <BarChart data={bookingTrend}>
-                                            <CartesianGrid stroke="rgba(0,0,0,0.08)" vertical={false} />
-                                            <XAxis dataKey="day" stroke="rgba(0,0,0,0.45)" />
-                                            <YAxis stroke="rgba(0,0,0,0.45)" />
-                                            <Tooltip
-                                                contentStyle={{
-                                                    background: "rgba(255,255,255,0.96)",
-                                                    border: "1px solid rgba(239,68,68,0.18)",
-                                                    borderRadius: "18px",
-                                                    color: "#111111",
-                                                }}
-                                            />
-                                            <Bar dataKey="count" radius={[10, 10, 0, 0]} fill="#111111" />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-
-                                <div className="grid grid-cols-[1fr_160px] items-center gap-3">
-                                    <div className="space-y-3">
-                                        {categoryData.map((item, index) => (
-                                            <div key={item.name} className="space-y-1">
-                                                <div className="flex items-center justify-between text-sm">
-                                                    <span className="font-medium">{item.name}</span>
-                                                    <span className="text-black/55">{item.total}</span>
-                                                </div>
-                                                <div className="h-2 rounded-full bg-black/5">
-                                                    <div
-                                                        className="h-2 rounded-full"
-                                                        style={{
-                                                            width: `${(item.total / 28) * 100}%`,
-                                                            background: pieColors[index],
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <div className="h-40">
+                        <section className="grid gap-6 xl:grid-cols-[1.6fr_1fr]">
+                            <Card className={`${redGlass}`}>
+                                <CardHeader className="flex flex-row items-center justify-between">
+                                    <SectionTitle>Revenue Overview</SectionTitle>
+                                    <span className="inline-flex rounded-full border border-red-200 bg-white/70 px-3 py-1 text-xs font-medium text-red-700">
+                                        +21% growth
+                                    </span>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="h-80">
                                         <ResponsiveContainer width="100%" height="100%">
-                                            <PieChart>
-                                                <Pie
-                                                    data={categoryData}
-                                                    dataKey="total"
-                                                    nameKey="name"
-                                                    innerRadius={36}
-                                                    outerRadius={60}
-                                                    paddingAngle={4}
-                                                >
-                                                    {categoryData.map((entry, index) => (
-                                                        <Cell key={entry.name} fill={pieColors[index % pieColors.length]} />
-                                                    ))}
-                                                </Pie>
+                                            <AreaChart data={revenueData}>
+                                                <defs>
+                                                    <linearGradient id="fillRevenue" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="5%" stopColor="#ef4444" stopOpacity={0.45} />
+                                                        <stop offset="95%" stopColor="#ef4444" stopOpacity={0.04} />
+                                                    </linearGradient>
+                                                </defs>
+                                                <CartesianGrid stroke="rgba(0,0,0,0.08)" vertical={false} />
+                                                <XAxis dataKey="month" stroke="rgba(0,0,0,0.45)" />
+                                                <YAxis stroke="rgba(0,0,0,0.45)" />
                                                 <Tooltip
                                                     contentStyle={{
                                                         background: "rgba(255,255,255,0.96)",
@@ -250,18 +269,105 @@ const Dashboard = () => {
                                                         color: "#111111",
                                                     }}
                                                 />
-                                            </PieChart>
+                                                <Area
+                                                    type="monotone"
+                                                    dataKey="revenue"
+                                                    stroke="#dc2626"
+                                                    fill="url(#fillRevenue)"
+                                                    strokeWidth={4}
+                                                />
+                                            </AreaChart>
                                         </ResponsiveContainer>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </section>
+                                </CardContent>
+                            </Card>
 
-                </div>
-            </main>
-        </div>
+                            <Card className={`${redGlass}`}>
+                                <CardHeader className="flex flex-row items-center justify-between">
+                                    <SectionTitle>Booking Insights</SectionTitle>
+                                    <span className="inline-flex rounded-full border border-red-200 bg-white/70 px-3 py-1 text-xs font-medium text-black">
+                                        This Week
+                                    </span>
+                                </CardHeader>
+                                <CardContent className="space-y-6">
+                                    <div className="h-40 rounded-[24px] border border-red-100/80 bg-white/60 p-3">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={bookingTrend}>
+                                                <CartesianGrid stroke="rgba(0,0,0,0.08)" vertical={false} />
+                                                <XAxis dataKey="day" stroke="rgba(0,0,0,0.45)" />
+                                                <YAxis stroke="rgba(0,0,0,0.45)" />
+                                                <Tooltip
+                                                    contentStyle={{
+                                                        background: "rgba(255,255,255,0.96)",
+                                                        border: "1px solid rgba(239,68,68,0.18)",
+                                                        borderRadius: "18px",
+                                                        color: "#111111",
+                                                    }}
+                                                />
+                                                <Bar dataKey="count" radius={[10, 10, 0, 0]} fill="#111111" />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+
+                                    <div className="grid grid-cols-[1fr_160px] items-center gap-3">
+                                        <div className="space-y-3">
+                                            {categoryData.map((item, index) => (
+                                                <div key={item.name} className="space-y-1">
+                                                    <div className="flex items-center justify-between text-sm">
+                                                        <span className="font-medium">{item.name}</span>
+                                                        <span className="text-black/55">{item.total}</span>
+                                                    </div>
+                                                    <div className="h-2 rounded-full bg-black/5">
+                                                        <div
+                                                            className="h-2 rounded-full"
+                                                            style={{
+                                                                width: `${(item.total / 28) * 100}%`,
+                                                                background: pieColors[index],
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="h-40">
+                                            <ResponsiveContainer width="100%" height="100%">
+                                                <PieChart>
+                                                    <Pie
+                                                        data={categoryData}
+                                                        dataKey="total"
+                                                        nameKey="name"
+                                                        innerRadius={36}
+                                                        outerRadius={60}
+                                                        paddingAngle={4}
+                                                    >
+                                                        {categoryData.map((entry, index) => (
+                                                            <Cell key={entry.name} fill={pieColors[index % pieColors.length]} />
+                                                        ))}
+                                                    </Pie>
+                                                    <Tooltip
+                                                        contentStyle={{
+                                                            background: "rgba(255,255,255,0.96)",
+                                                            border: "1px solid rgba(239,68,68,0.18)",
+                                                            borderRadius: "18px",
+                                                            color: "#111111",
+                                                        }}
+                                                    />
+                                                </PieChart>
+                                            </ResponsiveContainer>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </section>
+
+                    </div>
+                </main>
+            </div>
+
+        </>
+
     )
 }
 
-export default Dashboard
+export default React.memo(Dashboard)
