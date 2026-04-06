@@ -14,6 +14,7 @@ import {
   listRegistration,
   workersRegistration,
 } from "../../controllers/workers/workersRegistration.js";
+import { listAvailability, updateAvailability } from "../../controllers/workers/updateAvailability.js";
 
 const workersRouter = express.Router();
 
@@ -39,5 +40,9 @@ workersRouter.post(
 );
 
 workersRouter.get("/listFiles", workersAuth, listRegistration);
+
+//update avalilability
+workersRouter.post("/updateAvalilability", workersAuth, updateAvailability)
+workersRouter.get("/listAvailability", workersAuth, listAvailability)
 
 export default workersRouter;
