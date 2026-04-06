@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const adminLogin = async (req, res) => {
+export const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -24,4 +24,15 @@ const adminLogin = async (req, res) => {
   }
 };
 
-export default adminLogin;
+export const isAuth = async (req, res) => {
+
+  try {
+
+    return res.json({ success: true })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
