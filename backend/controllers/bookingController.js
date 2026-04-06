@@ -315,7 +315,19 @@ export const getReceipt = async (req, res) => {
 
 //All bookings data for admin panal
 
-export const allOrder = async (req, res) => { };
+export const allOrder = async (req, res) => {
+
+  try {
+
+    const allBookings = await BookingModel.find({})
+    return res.json({ success: true, allBookings })
+
+  } catch (error) {
+    console.log("getReceipt error:", error);
+    res.json({ success: false, message: error.message });
+  }
+
+};
 
 //All bookings data for event management panel
 
