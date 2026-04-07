@@ -2,6 +2,7 @@ import { Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import Layout from './Layout'
 import Loader from './components/Loading'
+import RegistrationDataDetails from './pages/RegistrationDataDetails'
 
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const EventManagersList = lazy(() => import('./pages/EventManagersList'))
@@ -31,6 +32,7 @@ const Router = () => {
                 <Route path='/usersList' element={<UsersList />} />
                 <Route path='/appointStaff' element={<AppointStaff />} />
                 <Route path='/RegistrationData' element={<RegistrationData />} />
+                <Route path='/RegistrationData/:id' element={<RegistrationDataDetails />} />
 
             </Route>
 

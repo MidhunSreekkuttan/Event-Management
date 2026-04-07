@@ -5,58 +5,13 @@ import { toast } from "react-toastify";
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import Loader from "../components/Loading";
-
-const registrations = [
-    {
-        company: "Midhun",
-        owner: "Srekkuttan",
-        phone: "7907191792",
-        email: "midhunsreekkuttan@gmail.com",
-        subEmail: "aashiquess@mail.com",
-        date: "2026-03-22",
-        time: "15:18:41",
-    },
-    {
-        company: "VSK Traders",
-        owner: "Aashique",
-        phone: "9876523124",
-        email: "aashiquevsk1@mail.com",
-        subEmail: "anjal.events@gmail.com",
-        date: "2026-03-24",
-        time: "10:25:07",
-    },
-    {
-        company: "Event Solutions",
-        owner: "Anjali R",
-        phone: "9845362718",
-        email: "anjali.events@gmail.com",
-        subEmail: "",
-        date: "2026-03-25",
-        time: "09:12:34",
-    },
-    {
-        company: "TechInnovate",
-        owner: "Rahul P B",
-        phone: "8596742356",
-        email: "rahulp.tech@gmail.com",
-        subEmail: "rahulp.tech@gmail.com",
-        date: "2026-03-26",
-        time: "11:30:48",
-    },
-    {
-        company: "Party Planners",
-        owner: "Shalini Nair",
-        phone: "9078654312",
-        email: "shaliniparty@gmail.com",
-        subEmail: "shaliniparty@gmail.com",
-        date: "2026-03-26",
-        time: "14:44:29",
-    },
-];
+import { useNavigate } from 'react-router-dom'
 
 const RegistrationData = () => {
 
     const { backendUrl } = useContext(AdminContext)
+
+    const navigate = useNavigate()
 
     const [registration, setRegistration] = useState("eventmanagers")
 
@@ -83,8 +38,9 @@ const RegistrationData = () => {
         queryFn: getRegistrationlist
     })
 
-    console.log(RegistrationList);
-
+    const handleClick = (id) => {
+        navigate(`/RegistrationData/${id}`)
+    }
 
     const redGlass =
         "border border-red-200/60 bg-gradient-to-br from-white/80 via-red-50/70 to-red-100/60 backdrop-blur-2xl shadow-[0_25px_100px_rgba(220,38,38,0.18)]";
@@ -118,23 +74,9 @@ const RegistrationData = () => {
 
                         {/* filter button*/}
                         <div className="flex gap-3">
-                            <div>
-                                <button onClick={() => setRegistration("eventmanagers")}
-                                    className="bg-gradient-to-br from-red-600 to-black text-white rounded-2xl px-5 py-3
-                                 cursor-pointer transition-all active:scale-95"
-                                >
-                                    Eventmanagers
-                                </button>
-                            </div>
-                            <div>
-                                <button onClick={() => setRegistration("workers")}
-                                    className="bg-gradient-to-br from-red-600 to-black text-white rounded-2xl px-5 py-3
-                                 cursor-pointer transition-all active:scale-95"
-                                >
-                                    Workers
-                                </button>
-                            </div>
+                            <Btn onClick={() => setRegistration("eventmanagers")} text="Eventmanagers" />
 
+                            <Btn onClick={() => setRegistration("workers")} text="Workers" />
                         </div>
 
                         {/* Table Card */}
@@ -195,7 +137,8 @@ const RegistrationData = () => {
                                                     </td>
 
                                                     <td className="px-6 py-4 text-center">
-                                                        <button className="flex gap-1 rounded-2xl border border-red-200/60
+                                                        <button onClick={() => handleClick(item._id)}
+                                                            className="flex gap-1 rounded-2xl border border-red-200/60
                                                      bg-white/70 px-4 py-2 text-sm font-semibold text-red-700 transition
                                                          hover:bg-red-50 cursor-pointer">
                                                             <EyeIcon size={18} className="relative top-0.5" /> View
@@ -210,11 +153,28 @@ const RegistrationData = () => {
 
                     </div>
                 </div>
-            </div>
+            </div >
 
         </>
 
     );
 };
+
+export function Btn({ text, ...props }) {
+
+    return (
+
+        <button
+            {...props}
+            className="bg-gradient-to-br from-red-600 to-black text-white rounded-2xl px-5 py-3
+                                 cursor-pointer transition-all active:scale-95"
+        >
+            {text}
+        </button>
+
+    )
+
+
+}
 
 export default React.memo(RegistrationData);
