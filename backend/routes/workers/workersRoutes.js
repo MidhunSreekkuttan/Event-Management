@@ -12,6 +12,7 @@ import workersAuth from "../../middleware/workers/workersAuth.js";
 import upload from "../../middleware/eventManagement/multer.js";
 import {
   listRegistration,
+  singleList,
   workersRegistration,
 } from "../../controllers/workers/workersRegistration.js";
 import { listAvailability, updateAvailability } from "../../controllers/workers/updateAvailability.js";
@@ -40,6 +41,7 @@ workersRouter.post(
 );
 
 workersRouter.get("/listFiles", listRegistration);
+workersRouter.get("/singleList/:id", singleList)
 
 //update avalilability
 workersRouter.post("/updateAvalilability", workersAuth, updateAvailability)

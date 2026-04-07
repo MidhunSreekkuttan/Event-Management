@@ -11,6 +11,7 @@ import upload from "../../middleware/eventManagement/multer.js";
 import EventManagementAuth from "../../middleware/eventManagement/eventManagementAuth.js";
 import {
   listPdf,
+  singleList,
   uploadPdf,
 } from "../../controllers/eventManagement/companyRegistrationController.js";
 
@@ -34,10 +35,10 @@ ProductRouter.put(
   "/updateProduct/:id",
   EventManagementAuth,
   upload.fields([
-    { name: "image1", maxCount: 1},
-    { name: "image2", maxCount: 1},
-    { name: "image3", maxCount: 1},
-    { name: "image4", maxCount: 1},
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+    { name: "image4", maxCount: 1 },
   ]),
   updateProduct
 );
@@ -63,5 +64,6 @@ ProductRouter.post(
   uploadPdf,
 );
 ProductRouter.get("/listDocument", listPdf);
+ProductRouter.get("/singleList/:id", singleList)
 
 export default ProductRouter;
