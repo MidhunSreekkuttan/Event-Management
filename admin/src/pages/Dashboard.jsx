@@ -149,6 +149,36 @@ const Dashboard = () => {
 
     }, [AllBookings])
 
+    const bookingPerDay = useMemo(() => {
+        if (!AllBookings?.length) return []
+
+        const grouped = AllBookings?.reduce((day, booking) => {
+
+            const perday = new Date(booking?.createdAt)
+            const dayCount = perday.toLocaleString("en-Us", { weekday: "short" })
+
+            if (!day[dayCount]) {
+                day[dayCount] = {
+                    day: dayCount,
+                    count: 0
+                }
+            }
+
+            day[dayCount].count += 1
+
+            return day
+
+        }, {})
+
+        const daycount = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+        return daycount.filter(days => grouped[days]).map(days => grouped[days])
+
+    }, [AllBookings])
+
+    console.log("days", bookingPerDay);
+
+
     const stats = [
         {
             title: "Total Events",
@@ -182,16 +212,6 @@ const Dashboard = () => {
         { name: "Birthday", total: 17 },
         { name: "Music", total: 13 },
         { name: "Other", total: 10 },
-    ];
-
-    const bookingTrend = [
-        { day: "Mon", count: 12 },
-        { day: "Tue", count: 18 },
-        { day: "Wed", count: 15 },
-        { day: "Thu", count: 22 },
-        { day: "Fri", count: 26 },
-        { day: "Sat", count: 31 },
-        { day: "Sun", count: 24 },
     ];
 
     const pieColors = ["#111111", "#dc2626", "#ef4444", "#f87171", "#fecaca"];
@@ -310,7 +330,7 @@ const Dashboard = () => {
                                 <CardContent className="space-y-6">
                                     <div className="h-40 rounded-[24px] border border-red-100/80 bg-white/60 p-3">
                                         <ResponsiveContainer width="100%" height="100%">
-                                            <BarChart data={bookingTrend}>
+                                            <BarChart data={bookingPerDay}>
                                                 <CartesianGrid stroke="rgba(0,0,0,0.08)" vertical={false} />
                                                 <XAxis dataKey="day" stroke="rgba(0,0,0,0.45)" />
                                                 <YAxis stroke="rgba(0,0,0,0.45)" />
