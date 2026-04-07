@@ -39,7 +39,7 @@ workersRouter.post(
   workersRegistration,
 );
 
-workersRouter.get("/listFiles", workersAuth, listRegistration);
+workersRouter.get("/listFiles", listRegistration);
 
 //update avalilability
 workersRouter.post("/updateAvalilability", workersAuth, updateAvailability)

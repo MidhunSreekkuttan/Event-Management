@@ -37,7 +37,7 @@ export const uploadPdf = async (req, res) => {
 export const listPdf = async (req, res) => {
   try {
     const pdf = await CompanyRegistrationModel.find({});
-    res.json({ success: true, data: pdf });
+    res.json({ success: true, registrations: pdf });
   } catch (error) {
     console.log(error);
     res.json({ success: true, message: error.message });

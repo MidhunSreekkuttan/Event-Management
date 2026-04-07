@@ -42,9 +42,10 @@ export const workersRegistration = async (req, res) => {
 //for workers
 export const listRegistration = async (req, res) => {
   try {
-    const registrations = await WorkersRegistrationModel.findOne({
-      user: req.user.id,
-    });
+    const registrations = await WorkersRegistrationModel.find({});
+    if (!registrations) {
+      return res.json({ success: false, message: "item not fount" })
+    }
     res.json({ success: true, registrations: registrations });
   } catch (error) {
     console.log(error);
