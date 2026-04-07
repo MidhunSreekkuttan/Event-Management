@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContext } from 'react'
-import { logo } from '../../assets/assets'
+//import { logo } from '../../assets/assets'
+import logo from '/event-management-4-8-2026.gif'
 import { User } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -41,7 +42,7 @@ const Navbar = () => {
       <div className='max-w-6xl mx-auto flex items-center justify-between h-18 bg-black/50 backdrop-blur-md border border-white/4 rounded-2xl p-3'>
 
         <Link to='/#home'>
-          <img src={logo.adhithiShack} className='w-50' alt="" />
+          <img src={logo} className='w-90' alt="" />
         </Link>
 
         <ul className='flex gap-5 mr-8'>
