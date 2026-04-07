@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import SideBar from '../../components/event-management/SideBar'
 import { icon } from '../../assets/assets'
@@ -11,6 +12,7 @@ const Add = ({ token }) => {
 
   const { backendUrl } = useContext(BackendContex)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const [image1, setImage1] = useState(false)
   const [image2, setImage2] = useState(false)
@@ -128,23 +130,13 @@ const Add = ({ token }) => {
       }
 
       if (response.data.success) {
+        
         toast.success(response.data.message)
-        setCompany_name('')
-        setEvent_name('')
-        setPrice('')
-        setStarting_price('')
-        setMain_services('')
-        setDescription('')
-        setCategory('Birthday Party')
-        setLocation('Trivandrum')
-        setStartTime('')
-        setEndTime('')
-        setImage1(false)
-        setImage2(false)
-        setImage3(false)
-        setImage4(false)
+        
+        navigate("/event-management/events")
+        
       } else {
-        toast.error(response.data.message)
+        window.location.reload()
       }
 
     } catch (error) {
@@ -310,11 +302,17 @@ const Add = ({ token }) => {
                 <select onChange={e => setCategory(e.target.value)}
                   className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      focus:outline-none focus:ring-2 focus:ring-pink-500'>
-                  <option className='text-black' value="Birthday Party">Birthday Party</option>
-                  <option className='text-black' value="Wedding">Wedding</option>
+                  <option className='text-black' value="Personal Events">Personal Events</option>
+                  <option className='text-black' value="Cultural & Religious Events">Cultural & Religious Events</option>
                   <option className='text-black' value="Corporate Events">Corporate Events</option>
-                  <option className='text-black' value="Concerts">Concerts</option>
-                  <option className='text-black' value="Cultural Programs">Cultural Programs</option>
+                  <option className='text-black' value="Entertainment Events">Entertainment Events</option>
+                  <option className='text-black' value="Educational Events">Educational Events</option>
+                  <option className='text-black' value="Social & Community Events">Social & Community Events</option>
+                  <option className='text-black' value="Sports Events">Sports Events</option>
+                  <option className='text-black' value="Exhibition & Trade Events">Exhibition & Trade Events</option>
+                  <option className='text-black' value="Launch & Promotion Events">Launch & Promotion Events</option>
+                  <option className='text-black' value="Health & Wellness Events">Health & Wellness Events</option>
+                  <option className='text-black' value="Technology Events">Technology Events</option>
                 </select>
               </div>
 

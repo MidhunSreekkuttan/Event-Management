@@ -143,6 +143,15 @@ export const updateProduct = async (req, res) => {
 
     const { id } = req.params
 
+    const product = await ProductModel.findById(id)
+
+    if (!product) {
+      return res.json({
+        success:false,
+        message:"Event not found"
+      })
+    }
+
     const {
       company_name,
       event_name,
@@ -156,32 +165,41 @@ export const updateProduct = async (req, res) => {
       endTime
     } = req.body
 
-    const product = await ProductModel.findById(id)
+    let images = [...product.image]
 
-    if (!product) {
-      return res.json({
-        success:false,
-        message:"Event not found"
-      })
+    const imageFiles = [
+      req.files?.image1?.[0],
+      req.files?.image2?.[0],
+      req.files?.image3?.[0],
+      req.files?.image4?.[0]
+    ]
+
+    for (let i = 0; i < imageFiles.length; i++) {
+      if (imageFiles[i]) {
+        const result = await cloudinary.uploader.upload(
+          imageFiles[i].path,
+          { folder: "products" }
+        )
+
+        images[i] = result.secure_url
+      }
     }
-
-    const updatedData = {
-      company_name,
-      event_name,
-      price,
-      starting_price,
-      main_services,
-      description,
-      category,
-      location,
-      startTime,
-      endTime
-    }
-
     const updatedProduct = await ProductModel.findByIdAndUpdate(
       id,
-      updatedData,
-      { new:true }
+      { 
+        company_name,
+        event_name,
+        price,
+        starting_price,
+        main_services,
+        description,
+        category,
+        location,
+        startTime,
+        endTime,
+        image: images
+      },  
+       { new:true }
     )
 
     res.json({

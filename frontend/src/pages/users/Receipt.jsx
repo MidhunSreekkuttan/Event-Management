@@ -26,7 +26,7 @@ const Receipt = () => {
             toast.error(error.message)
         }
 
-    }, [backendUrl])
+    }, [backendUrl, productId])
 
     const { data, isLoading, error } = useQuery({
         queryKey: ["receipt"],
@@ -80,11 +80,11 @@ const Receipt = () => {
 
             {isLoading && <Loader />}
 
-            <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-violet-950 px-4 py-10 text-white">
+            <div className="min-h-screen bg-linear-to-br from-black via-zinc-950 to-violet-950 px-4 py-10 text-white">
                 <div className="mx-auto max-w-5xl">
                     <div className="overflow-hidden rounded-3xl border border-violet-500/20 bg-zinc-950/90 shadow-2xl shadow-violet-900/30">
                         {/* Header */}
-                        <div className="border-b border-violet-500/20 bg-gradient-to-r from-black to-violet-950/60 px-8 py-8">
+                        <div className="border-b border-violet-500/20 bg-linear-to-r from-black to-violet-950/60 px-8 py-8">
                             <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                                 <div>
                                     <p className="text-sm font-medium uppercase tracking-[0.25em] text-violet-300">
@@ -227,7 +227,7 @@ const Receipt = () => {
                             {/* Right */}
                             <div className="space-y-8">
                                 {/* Brand Card */}
-                                <div className="rounded-2xl border border-violet-500/15 bg-gradient-to-br from-violet-900/30 to-black p-6">
+                                <div className="rounded-2xl border border-violet-500/15 bg-linear-to-br from-violet-900/30 to-black p-6">
                                     <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/20 text-2xl">
                                         🎉
                                     </div>

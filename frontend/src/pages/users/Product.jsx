@@ -82,7 +82,7 @@ const Product = () => {
                 <div className="flex gap-20 px-50">
 
                     {/* Main Image */}
-                    <div className="w-[400px] h-[500px]">
+                    <div className="w-100 h-125">
                         <img
                             src={image?.replace('/upload/',
                                 '/upload/w_400,h_300,c_fill,f_auto,q_auto/')}
@@ -131,7 +131,7 @@ const Product = () => {
                     <h1 className='text-center text-4xl font-bold'>
                         Related Images
                     </h1>
-                    <div className='flex gap-6 w-[280px] h-[250px]'>
+                    <div className='flex gap-6 w-70 h-62.5'>
                         {productData.image.map((item, index) => (
                             <img
                                 key={index}
