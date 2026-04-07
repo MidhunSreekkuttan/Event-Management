@@ -8,6 +8,7 @@ const EventManagersList = lazy(() => import('./pages/EventManagersList'))
 const Events = lazy(() => import('./pages/Events'))
 const StaffsList = lazy(() => import('./pages/StaffsList'))
 const UsersList = lazy(() => import('./pages/UsersList'))
+const AppointStaff = lazy(() => import('./pages/AppointStaff'))
 
 const Router = () => {
     return (
@@ -25,6 +26,7 @@ const Router = () => {
                 <Route path='/events' element={<Events />} />
                 <Route path='/staffsList' element={<StaffsList />} />
                 <Route path='/usersList' element={<UsersList />} />
+                <Route path='/uppointStaff' element={<AppointStaff />} />
 
             </Route>
 

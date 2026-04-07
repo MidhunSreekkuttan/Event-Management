@@ -1,16 +1,7 @@
-import { BarChart3, CalendarDays, LayoutDashboard, Mail, Settings, ShieldUserIcon, Users } from 'lucide-react';
+import { BarChart3, CalendarDays, LayoutDashboard, Mail, Settings, ShieldUserIcon, UserPlus, Users } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const SideBar = () => {
-
-    const navItems = [
-        { label: "Dashboard", icon: LayoutDashboard, active: true },
-        { label: "Events", icon: CalendarDays },
-        { label: "Enquiries", icon: Mail },
-        { label: "Users", icon: Users },
-        { label: "Analytics", icon: BarChart3 },
-        { label: "Settings", icon: Settings },
-    ];
 
     const redGlass =
         "border border-red-200/60 bg-gradient-to-br from-white/80 via-red-50/70 to-red-100/60 backdrop-blur-2xl shadow-[0_25px_100px_rgba(220,38,38,0.18)]";
@@ -62,6 +53,13 @@ const SideBar = () => {
 
                         <CalendarDays className="h-5 w-5" />
                         <span className="text-sm font-medium">Staffs List</span>
+
+                    </NavLink>
+                    <NavLink to='/uppointStaff' className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left
+                         transition shadow-lg shadow-red-500/20`}>
+
+                        <UserPlus className="h-5 w-5" />
+                        <span className="text-sm font-medium">Appoin Staff</span>
 
                     </NavLink>
 
