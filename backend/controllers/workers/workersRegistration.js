@@ -52,3 +52,22 @@ export const listRegistration = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const singleList = async (req, res) => {
+
+  try {
+
+    const { id } = req.params
+
+    const singleList = await WorkersRegistrationModel.findById(id)
+    if (!singleList) {
+      return res.json({ success: false, message: "item not fount" })
+    }
+    return res.json({ success: true, singleList })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
