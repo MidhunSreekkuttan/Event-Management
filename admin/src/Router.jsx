@@ -32,7 +32,7 @@ const Router = () => {
                 <Route path='/usersList' element={<UsersList />} />
                 <Route path='/appointStaff' element={<AppointStaff />} />
                 <Route path='/RegistrationData' element={<RegistrationData />} />
-                <Route path='/RegistrationData/:id' element={<RegistrationDataDetails />} />
+                <Route path='/RegistrationData/:type/:id' element={<RegistrationDataDetails />} />
 
             </Route>
 

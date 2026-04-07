@@ -39,7 +39,7 @@ const RegistrationData = () => {
     })
 
     const handleClick = (id) => {
-        navigate(`/RegistrationData/${id}`)
+        navigate(`/RegistrationData/${registration}/${id}`)
     }
 
     const redGlass =
@@ -140,7 +140,7 @@ const RegistrationData = () => {
                                                         <button onClick={() => handleClick(item._id)}
                                                             className="flex gap-1 rounded-2xl border border-red-200/60
                                                      bg-white/70 px-4 py-2 text-sm font-semibold text-red-700 transition
-                                                         hover:bg-red-50 cursor-pointer">
+                                                         hover:bg-red-50 cursor-pointer active:scale-95">
                                                             <EyeIcon size={18} className="relative top-0.5" /> View
                                                         </button>
                                                     </td>

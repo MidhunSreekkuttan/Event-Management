@@ -43,3 +43,23 @@ export const listPdf = async (req, res) => {
     res.json({ success: true, message: error.message });
   }
 };
+
+export const singleList = async (req, res) => {
+
+  try {
+
+    const { id } = req.params
+
+    const singleList = await CompanyRegistrationModel.findById(id)
+    if (!singleList) {
+      return res.json({ success: false, message: "item not fount" })
+    }
+
+    return res.json({ success: true, singleList })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: true, message: error.message });
+  }
+
+}
