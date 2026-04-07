@@ -64,7 +64,7 @@ const ListingComponent = () => {
 
         const categoryMap = {
             personal: "Personal",
-            cultural: "Cultural & Religious",
+            cultural: "Cultural & Religious Events",
             corporate: "Corporate",
             entertainment: "Entertainment",
             educational: "Educational",
@@ -150,7 +150,7 @@ const ListingComponent = () => {
                             onClick={handleSearch}
                             className='rounded-2xl font-semibold text-white
                                        bg-gradient-to-r from-pink-500 to-pink-700
-                                       py-3 px-12 hover:scale-105 transition active:scale-95'
+                                       py-3 px-12 transition active:scale-95'
                         >
                             Search
                         </button>
@@ -186,9 +186,9 @@ const ListingComponent = () => {
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={() => setfilter('Cultural Events')} className={`flex gap-3 rounded-2xl
+                                    <button onClick={() => setfilter('Cultural & Religious Events')} className={`flex gap-3 rounded-2xl
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
-                                          ${filter === 'Cultural Events' ? 'apple' : ''}`}>
+                                          ${filter === 'Cultural & Religious Events' ? 'apple' : ''}`}>
                                         <Theater size={20} />
                                         Cultural
                                     </button>

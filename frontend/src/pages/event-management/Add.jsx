@@ -302,7 +302,6 @@ const Add = ({ token }) => {
                 <select onChange={e => setCategory(e.target.value)}
                   className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      focus:outline-none focus:ring-2 focus:ring-pink-500'>
-                  <option className='text-black' value="Select">Select</option>
                   <option className='text-black' value="Personal Events">Personal Events</option>
                   <option className='text-black' value="Cultural & Religious Events">Cultural & Religious Events</option>
                   <option className='text-black' value="Corporate Events">Corporate Events</option>
@@ -322,7 +321,6 @@ const Add = ({ token }) => {
                 <select onChange={e => setLocation(e.target.value)}
                   className='w-full px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white
                      focus:outline-none focus:ring-2 focus:ring-pink-500'>
-                  <option className='text-black' value="Select">Select</option>
                   <option className='text-black' value="Trivandrum">Trivandrum</option>
                   <option className='text-black' value="Kollam">Kollam</option>
                   <option className='text-black' value="Pathanamthitta">Pathanamthitta</option>
