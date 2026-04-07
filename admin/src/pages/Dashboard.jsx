@@ -180,11 +180,11 @@ const Dashboard = () => {
         if (!eventList?.length) return []
 
         const mainCategories = [
-            "Birthday Party",
-            "Wedding",
+            "Personal Events",
+            "Cultural & Religious Events",
             "Corporate Events",
-            "Concerts",
-            "Cultural Programs",
+            "Entertainment Events",
+            "Educational Events"
         ];
 
         const grouped = eventList?.reduce((item, event) => {
@@ -246,7 +246,7 @@ const Dashboard = () => {
         { name: "Other", total: 10 },
     ];
 
-    const pieColors = ["#111111", "#dc2626", "#ef4444", "#f87171", "#fecaca"];
+    const pieColors = ["#111111", "#dc2626", "#ef4444", "#f87171", "#fecaca", "rgb(235, 127, 13)"];
 
     const redGlass =
         "border border-red-200/60 bg-gradient-to-br from-white/80 via-red-50/70 to-red-100/60 backdrop-blur-2xl shadow-[0_25px_100px_rgba(220,38,38,0.18)]";
