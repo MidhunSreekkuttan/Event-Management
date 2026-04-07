@@ -140,3 +140,24 @@ export const getAllStaffs = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const deleteStaff = async (req, res) => {
+
+  try {
+
+    const { staffId } = req.body
+
+    const removeStaff = await staffsModel.findByIdAndDelete(staffId)
+
+    if (!removeStaff) {
+      return res.json({ success: false, message: "staff not fount" })
+    }
+
+    return res.json({ success: true, message: "staff removed" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
