@@ -1,4 +1,6 @@
-import { BarChart3, CalendarDays, LayoutDashboard, Mail, Settings, ShieldUserIcon, UserPlus, Users } from 'lucide-react';
+import {
+    CalendarDays, FileTextIcon, FileUserIcon, LayoutDashboard, ScrollText, ShieldUserIcon, UserPlus, Users
+} from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const SideBar = () => {
@@ -48,18 +50,32 @@ const SideBar = () => {
                         <span className="text-sm font-medium">Event Managers</span>
 
                     </NavLink>
+                    <NavLink to='/workersList' className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left
+                         transition shadow-lg shadow-red-500/20`}>
+
+                        <FileUserIcon className="h-5 w-5" />
+                        <span className="text-sm font-medium">Workers List</span>
+
+                    </NavLink>
                     <NavLink to='/staffsList' className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left
                          transition shadow-lg shadow-red-500/20`}>
 
-                        <CalendarDays className="h-5 w-5" />
+                        <ScrollText className="h-5 w-5" />
                         <span className="text-sm font-medium">Staffs List</span>
 
                     </NavLink>
-                    <NavLink to='/uppointStaff' className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left
+                    <NavLink to='/appointStaff' className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left
                          transition shadow-lg shadow-red-500/20`}>
 
                         <UserPlus className="h-5 w-5" />
                         <span className="text-sm font-medium">Appoin Staff</span>
+
+                    </NavLink>
+                    <NavLink to='/RegistrationData' className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left
+                         transition shadow-lg shadow-red-500/20`}>
+
+                        <FileTextIcon className="h-5 w-5" />
+                        <span className="text-sm font-medium">RegistrationData</span>
 
                     </NavLink>
 

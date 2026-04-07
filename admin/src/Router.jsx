@@ -5,10 +5,12 @@ import Loader from './components/Loading'
 
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const EventManagersList = lazy(() => import('./pages/EventManagersList'))
+const WorkersList = lazy(() => import('./pages/WorkersList'))
 const Events = lazy(() => import('./pages/Events'))
 const StaffsList = lazy(() => import('./pages/StaffsList'))
 const UsersList = lazy(() => import('./pages/UsersList'))
 const AppointStaff = lazy(() => import('./pages/AppointStaff'))
+const RegistrationData = lazy(() => import('./pages/RegistrationData'))
 
 const Router = () => {
     return (
@@ -23,10 +25,12 @@ const Router = () => {
 
                 <Route path='/' element={<Dashboard />} />
                 <Route path='/eventManagers' element={<EventManagersList />} />
+                <Route path='/workersList' element={<WorkersList />} />
                 <Route path='/events' element={<Events />} />
                 <Route path='/staffsList' element={<StaffsList />} />
                 <Route path='/usersList' element={<UsersList />} />
-                <Route path='/uppointStaff' element={<AppointStaff />} />
+                <Route path='/appointStaff' element={<AppointStaff />} />
+                <Route path='/RegistrationData' element={<RegistrationData />} />
 
             </Route>
 
