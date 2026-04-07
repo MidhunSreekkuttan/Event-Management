@@ -48,7 +48,7 @@ const Dashboard = () => {
 
     }, [backendUrl])
 
-    const { data, isLoading, error } = useQuery({
+    const { data: eventList, isLoading, error } = useQuery({
         queryKey: ["eventList"],
         queryFn: getListProduct
     })
@@ -120,8 +120,6 @@ const Dashboard = () => {
         return total + Number(item?.adminCommissionAmount || 0)
     }, 0)
 
-    console.log(AllBookings);
-
     const monthlyRevenue = useMemo(() => {
         if (!AllBookings?.length) return []
 
@@ -176,13 +174,47 @@ const Dashboard = () => {
 
     }, [AllBookings])
 
-    console.log("days", bookingPerDay);
+    console.log(eventList);
 
+    const totalEventsBycategory = useMemo(() => {
+        if (!eventList?.length) return []
+
+        const mainCategories = [
+            "Birthday Party",
+            "Wedding",
+            "Corporate Events",
+            "Concerts",
+            "Cultural Programs",
+        ];
+
+        const grouped = eventList?.reduce((item, event) => {
+
+            const originalCategory = event?.category?.trim()
+            const finalCategory = mainCategories?.includes(originalCategory) ? originalCategory : "Others"
+
+            if (!item[finalCategory]) {
+                item[finalCategory] = {
+                    name: finalCategory,
+                    total: 0
+                }
+            }
+
+            item[finalCategory].total += 1
+
+            return item
+
+        }, {})
+
+        return Object.values(grouped)
+
+    }, [eventList])
+
+    console.log("event", totalEventsBycategory);
 
     const stats = [
         {
             title: "Total Events",
-            value: data?.length,
+            value: eventList?.length,
             change: "+12% this month",
             icon: CalendarDays,
         },
@@ -349,7 +381,7 @@ const Dashboard = () => {
 
                                     <div className="grid grid-cols-[1fr_160px] items-center gap-3">
                                         <div className="space-y-3">
-                                            {categoryData.map((item, index) => (
+                                            {totalEventsBycategory.map((item, index) => (
                                                 <div key={item.name} className="space-y-1">
                                                     <div className="flex items-center justify-between text-sm">
                                                         <span className="font-medium">{item.name}</span>
@@ -372,14 +404,14 @@ const Dashboard = () => {
                                             <ResponsiveContainer width="100%" height="100%">
                                                 <PieChart>
                                                     <Pie
-                                                        data={categoryData}
+                                                        data={totalEventsBycategory}
                                                         dataKey="total"
                                                         nameKey="name"
                                                         innerRadius={36}
                                                         outerRadius={60}
                                                         paddingAngle={4}
                                                     >
-                                                        {categoryData.map((entry, index) => (
+                                                        {totalEventsBycategory.map((entry, index) => (
                                                             <Cell key={entry.name} fill={pieColors[index % pieColors.length]} />
                                                         ))}
                                                     </Pie>
