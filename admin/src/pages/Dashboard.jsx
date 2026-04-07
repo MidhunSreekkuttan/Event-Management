@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
     CalendarDays,
     Users,
@@ -116,11 +116,38 @@ const Dashboard = () => {
         queryFn: getAllBooking
     })
 
-    console.log("bookinmd", AllBookings);
-
     const revenue = AllBookings?.reduce((total, item,) => {
         return total + Number(item?.adminCommissionAmount || 0)
     }, 0)
+
+    console.log(AllBookings);
+
+    const monthlyRevenue = useMemo(() => {
+        if (!AllBookings?.length) return []
+
+        const grouped = AllBookings?.reduce((item, amount) => {
+
+            const date = new Date(amount?.createdAt)
+            const moneyKey = date.toLocaleString("en-Us", { month: "short" })
+
+            if (!item[moneyKey]) {
+                item[moneyKey] = {
+                    month: moneyKey,
+                    revenue: 0
+                }
+            }
+
+            item[moneyKey].revenue += Number(amount?.adminCommissionAmount || 0)
+
+            return item
+
+        }, {})
+
+        const monthOrder = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+        return monthOrder?.filter(month => grouped[month]).map(month => grouped[month])
+
+    }, [AllBookings])
 
     const stats = [
         {
@@ -147,15 +174,6 @@ const Dashboard = () => {
             change: "+21% this month",
             icon: IndianRupee,
         },
-    ];
-
-    const revenueData = [
-        { month: "Jan", revenue: 22000, bookings: 18 },
-        { month: "Feb", revenue: 26000, bookings: 24 },
-        { month: "Mar", revenue: 31000, bookings: 30 },
-        { month: "Apr", revenue: 28000, bookings: 26 },
-        { month: "May", revenue: 36000, bookings: 33 },
-        { month: "Jun", revenue: 42000, bookings: 39 },
     ];
 
     const categoryData = [
@@ -251,7 +269,7 @@ const Dashboard = () => {
                                 <CardContent>
                                     <div className="h-80">
                                         <ResponsiveContainer width="100%" height="100%">
-                                            <AreaChart data={revenueData}>
+                                            <AreaChart data={monthlyRevenue}>
                                                 <defs>
                                                     <linearGradient id="fillRevenue" x1="0" y1="0" x2="0" y2="1">
                                                         <stop offset="5%" stopColor="#ef4444" stopOpacity={0.45} />

@@ -319,7 +319,7 @@ export const allOrder = async (req, res) => {
 
   try {
 
-    const allBookings = await BookingModel.find({})
+    const allBookings = await PaymentModel.find({})
     return res.json({ success: true, allBookings })
 
   } catch (error) {
