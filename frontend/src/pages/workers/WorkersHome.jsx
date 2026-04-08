@@ -47,6 +47,8 @@ const WorkersHome = () => {
     queryFn: getRegistrationData
   })
 
+  const dataItems = data?.find(item => item?.name)
+
   const [formData, setFormData] = useState({
     selectedDate: "",
     quickSelect: "",
@@ -151,16 +153,16 @@ const WorkersHome = () => {
                           <div className="flex flex-wrap items-center gap-3">
                             <h3 className="text-3xl font-bold">
                               {
-                                data?.name ?
-                                  data?.name?.[0]?.toUpperCase() + data?.name?.slice(1)
+                                dataItems?.name ?
+                                  dataItems?.name?.[0]?.toUpperCase() + dataItems?.name?.slice(1)
                                   : ""
                               }
                             </h3>
                           </div>
                           <p className="flex gap-2 mt-2 text-base text-slate-500">
                             <Mail /> {
-                              data?.email ?
-                                data?.email?.[0]?.toUpperCase() + data?.email?.slice(1)
+                              dataItems?.email ?
+                                dataItems?.email?.[0]?.toUpperCase() + dataItems?.email?.slice(1)
                                 : ""
                             }
                           </p>
@@ -171,8 +173,8 @@ const WorkersHome = () => {
                     <div>
                       <span className="relative left-0 rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-blue-700">
                         {
-                          data?.jobRole ?
-                            data?.jobRole?.[0]?.toUpperCase() + data?.jobRole?.slice(1)
+                          dataItems?.jobRole ?
+                            dataItems?.jobRole?.[0]?.toUpperCase() + dataItems?.jobRole?.slice(1)
                             : ''
                         }
                       </span>

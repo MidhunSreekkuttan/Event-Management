@@ -95,4 +95,4 @@ const Hero = () => {
   )
 }
 
-export default React.memo(Hero)
+export default Hero
