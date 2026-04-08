@@ -15,7 +15,7 @@ const Product = () => {
     const { backendUrl } = useContext(BackendContex)
 
     const navigate = useNavigate()
-    const { products, loading } = useContext(EventContext)
+    const { products, loading, getEventList } = useContext(EventContext)
 
     const [productData, setProductData] = useState(false)
     const [image, setImage] = useState('')
@@ -52,9 +52,9 @@ const Product = () => {
     const fetchproductData = useCallback(() => {
 
         products.map((item) => {
-            if (item._id === productId) {
+            if (item?._id === productId) {
                 setProductData(item)
-                setImage(item.image[0])
+                setImage(item?.image[0])
                 return null
             }
         })
@@ -66,10 +66,12 @@ const Product = () => {
     ) || []
 
     useEffect(() => {
+        getEventList()
+    }, [])
 
+    useEffect(() => {
         fetchproductData()
-
-    }, [fetchproductData])
+    }, [products])
 
     return productData ? (
 
