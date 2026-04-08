@@ -1,4 +1,5 @@
 import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
+import validator from 'validator'
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { eventManagement, otpMail } from "../../config/emailTemplate.js";
@@ -15,12 +16,34 @@ export const Register = async (req, res) => {
         message: "You Alredy Have An Accound",
       });
     }
+
+    if (!validator.isEmail(email, {
+      allow_utf8_local_part: false,
+      domain_specific_validation: true,
+      host_whitelist: ["gmail.com", "outlook.com"]
+    })) {
+      return res.json({ success: false, message: "Invalid email address" })
+    }
+
     if (password.length < 8) {
       return res.json({
         success: false,
-        message: "Plz Enter More Than 8 Digit password",
+        message: "Your password must contain at least 8 charectors",
       });
     }
+    if (!/[A-Z]/.test(password)) {
+      return res.json({ success: false, message: "Your password must contain at least one uppercase" })
+    }
+    if (!/[a-z]/.test(password)) {
+      return res.json({ success: false, message: "Your password must contain at least one lowercase" })
+    }
+    if (!/[0-9]/.test(password) || password.match(/[0-9]/g).length < 3) {
+      return res.json({ success: false, message: "Your password must contain at least three numbers" })
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+      return res.json({ success: false, message: "Your password must contain at least one symbel" })
+    }
+
     const hashPassword = await bcrypt.hash(password, 10);
 
     const newuser = new eventManagementModel({
