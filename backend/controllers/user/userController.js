@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import userModel from "../../dataBase/models/user/userModel.js";
 import welcomeMessage from "../../config/nodemailer.js";
 import { otpMail, welcomeMail } from "../../config/emailTemplate.js";
+import validator from 'validator'
 
 export const register = async (req, res) => {
   try {
@@ -12,12 +13,31 @@ export const register = async (req, res) => {
     if (alredyExist) {
       return res.json({ success: false, message: "User Already exist" });
     }
-    if (password.length < 8) {
-      return res.json({
-        success: false,
-        message: "Plz Enter more than 8 digits",
-      });
+
+    if (!validator.isEmail(email, {
+      allow_utf8_local_part: false,
+      domain_specific_validation: true,
+      host_whitelist: ["gmail.com", "yahoo.com", "outlook.com"]
+    })) {
+      return res.json({ success: false, message: "Invalid email" })
     }
+
+    if (password.length < 8) {
+      return res.json({ success: false, message: "your password must contain at least 8 charectors" })
+    }
+    if (!/[A-Z]/.test(password)) {
+      return res.json({ success: false, message: "your password must contain at least one uppercase letter" })
+    }
+    if (!/[a-z]/.test(password)) {
+      return res.json({ success: false, message: "your password must contain at least one lowercase letter" })
+    }
+    if (!/[0-9]/.test(password) || password.match(/[0-9]/g).length < 3) {
+      return res.json({ success: false, message: "your password must contain at least Three number" })
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+      return res.json({ success: false, message: "your password must contain at least one symbel number" })
+    }
+
     const hashpassword = await bcrypt.hash(password, 10);
 
     const newUser = new userModel({
