@@ -28,6 +28,10 @@ export const createEnquiry = async (req, res) => {
       return res.json({ success: false, message: "Missing Details" });
     }
 
+    if (phoneNumber.length !== 10) {
+      return res.json({ success: false, message: "you Must enter 10 digit number" })
+    }
+
     // Validate MongoDB ObjectId
 
     if (!mongoose.Types.ObjectId.isValid(productId)) {

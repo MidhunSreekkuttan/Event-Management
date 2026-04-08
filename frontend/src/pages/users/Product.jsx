@@ -199,7 +199,7 @@ const Product = () => {
                                 <div className='flex flex-col gap-3'>
                                     <label className='relative right-10 text-[20px]'>Expected Guest Count*</label>
                                     <input type="number" onChange={e => setCount(e.target.value)} value={count}
-                                        placeholder='Enter Cout' required
+                                        placeholder='Enter Count' required
                                         className='bg-gray-300/70 w-80 py-2 px-5 outline-none rounded-full' />
                                 </div>
                             </div>

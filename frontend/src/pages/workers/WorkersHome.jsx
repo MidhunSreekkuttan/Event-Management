@@ -194,8 +194,8 @@ const WorkersHome = () => {
                         <div>
                           <label>
                             <p className="mb-3 block text-lg font-semibold">Select Date</p>
-                            <div className="flex h-16 items-center gap-3 rounded-2xl border
-                           border-slate-200 bg-slate-50 px-4 text-lg font-medium">
+                            <div className={`flex h-16 items-center gap-3 rounded-2xl
+                            bg-slate-50 px-4 text-lg font-medium ${formData.selectedDate ? "border border-blue-500" : "border border-slate-200"}`}>
                               <CalendarDays />
 
                               <input className='w-full outline-hidden'
@@ -221,8 +221,10 @@ const WorkersHome = () => {
                                   ...prev,
                                   quickSelect: item
                                 }))}
-                                className="h-16 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-semibold
-                                 text-slate-700 transition hover:border-blue-400 hover:text-blue-600"
+                                className={`h-16 rounded-2xl bg-white px-4 text-sm font-semibold
+                                 text-slate-700 transition hover:border-blue-400 hover:text-blue-600 
+                                 ${formData.quickSelect === item ? "border border-blue-600" : "border border-slate-200"
+                                  }`}
                               >
                                 {item}
                               </button>
@@ -236,7 +238,9 @@ const WorkersHome = () => {
                         <div>
                           <label>
                             <p className="mb-3 block text-lg font-semibold">Availability From</p>
-                            <div className="flex gap-5 h-16 items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 text-lg font-medium">
+                            <div className={`flex gap-5 h-16 items-center justify-between rounded-2xl
+                                  bg-slate-50 px-4 text-lg font-medium
+                                  ${formData.availabilityFrom ? "border border-blue-600" : "border border-slate-200"}`}>
                               <span className="flex items-center gap-3">
                                 <Clock10 />
                               </span>
@@ -252,7 +256,9 @@ const WorkersHome = () => {
 
                         <div>
                           <label className="mb-3 block text-lg font-semibold">Availability To</label>
-                          <div className="flex gap-5 h-16 items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 text-lg font-medium">
+                          <div className={`flex gap-5 h-16 items-center justify-between rounded-2xl
+                              bg-slate-50 px-4 text-lg font-medium 
+                             ${formData.availabilityTo ? "border border-blue-600" : "border border-slate-200"}`}>
                             <span className="flex items-center gap-3">
                               <Clock5 />
                             </span>
