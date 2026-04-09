@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 import EnquiryModel from "../../dataBase/models/user/enquiryModel.js";
+import userModel from "../../dataBase/models/user/userModel.js";
 
 export const createEnquiry = async (req, res) => {
   try {
     const {
-      name,
-      email,
       phoneNumber,
       eventDate,
       place,
@@ -17,8 +16,6 @@ export const createEnquiry = async (req, res) => {
     const userData = req.user.id;
 
     if (
-      !name ||
-      !email ||
       !eventDate ||
       !place ||
       !count ||
@@ -28,7 +25,7 @@ export const createEnquiry = async (req, res) => {
       return res.json({ success: false, message: "Missing Details" });
     }
 
-    if (phoneNumber.length !== 10) {
+    if (phoneNumber && phoneNumber.length !== 10) {
       return res.json({ success: false, message: "you Must enter 10 digit number" })
     }
 
@@ -37,9 +34,24 @@ export const createEnquiry = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(productId)) {
       return res.json({ success: false, message: "Invalid ProductId" });
     }
+
+    const users = await userModel.findById(userData)
+
+    const selectedDate = new Date(eventDate)
+    const today = new Date()
+
+    const minDate = new Date()
+
+    const maxDate = new Date()
+    maxDate.setFullYear(today.getFullYear() + 1)
+
+    if (selectedDate < minDate || selectedDate > maxDate) {
+      return res.json({ success: false, message: "Event date must be within allowed range" })
+    }
+
     const newEnquiry = await EnquiryModel.create({
-      name,
-      email,
+      name: users.name,
+      email: users.email,
       phoneNumber,
       eventDate,
       place,
