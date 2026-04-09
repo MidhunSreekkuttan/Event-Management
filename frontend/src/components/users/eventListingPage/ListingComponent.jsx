@@ -263,7 +263,7 @@ const ListingComponent = () => {
                                          font-semibold text-violet-950 bg-white py-3 px-5 w-55
                                           ${filter === 'Technology Events' ? 'apple' : ''}`}>
                                         <Laptop size={20} />
-                                        Technology 
+                                        Technology
                                     </button>
                                 </li>
                             </ul>
@@ -310,9 +310,9 @@ const ListingComponent = () => {
                     {/*.............................................Right Side........................................*/}
 
                     <div className='grid grid-cols-4 gap-6 w-[67rem]'>
-                        {filterProducts.map((item) => (
-                            <ProductList key={item._id} event_name={item.event_name} image={item.image}
-                                id={item._id} location={item.location} />
+                        {filterProducts.map((item, index) => (
+                            <ProductList key={index} event_name={item.event_name} image={item.image}
+                                id={item._id} />
                         ))}
                     </div>
 

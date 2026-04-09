@@ -1,10 +1,11 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useCallback, useContext, useEffect, useState } from 'react'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { EventContext } from '../../context/EventContext'
 import axios from 'axios'
 import { BackendContex } from '../../context/ConnectBackendContex'
 import { toast } from 'react-toastify'
 import Loader from '../../components/Loading'
+import { MoveLeft } from 'lucide-react';
 
 axios.defaults.withCredentials = true
 
@@ -79,7 +80,14 @@ const Product = () => {
 
             {loading && <Loader />}
 
-            <div className="grid gap-20 pt-32 bg-[#F6F0FD] text-black">
+            <div className="grid gap-20 bg-[#F6F0FD] text-black">
+
+                <NavLink to='/eventList'>
+                    <button className='flex gap-3 relative left-55 px-3 py-2 w-fit mt-6 rounded-lg
+                         bg-linear-to-r from-pink-500 to-pink-700 text-white'>
+                        <MoveLeft />  Back
+                    </button>
+                </NavLink>
 
                 <div className="flex gap-20 px-50">
 

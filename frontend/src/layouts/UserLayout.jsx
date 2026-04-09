@@ -12,7 +12,8 @@ const UserLayout = () => {
     pathname === '/login' ||
     pathname === '/otp' ||
     pathname.startsWith("/receipt") ||
-    pathname.startsWith('/adBooking/')
+    pathname.startsWith('/adBooking/')||
+    pathname.startsWith("/product/")
 
   const hideFooter =
     pathname === '/login' ||
