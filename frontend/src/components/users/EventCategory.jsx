@@ -4,9 +4,19 @@ import { motion } from 'framer-motion'
 
 const EventCategory = () => {
 
+  const cards = [
+
+    { name: "W E D D I N G", icon: icon.wedding_icon },
+    { name: "BIRTHDAY PARTY", icon: icon.birthday_party_icon },
+    { name: "CORPORATE EVENTS", icon: icon.corporative_events },
+    { name: "C O N C E R T S", icon: icon.concern_icon },
+    { name: "CULTURAL PROGRAMS", icon: icon.cultural_programs }
+
+  ]
+
   return (
-    <section id='category' className='my-50'>
-      <div className="max-w-6xl min-h-screen mx-auto px-4">
+    <section id='category' className='my-15'>
+      <div className="max-w-6xl min-h-auto mx-auto px-4">
 
         <motion.h1 className='text-4xl md:text-5xl font-bold leading-tight mb-10 max-w-2xl flex justify-center'
           initial={{ y: 60, opacity: 0 }}
@@ -34,76 +44,39 @@ const EventCategory = () => {
                 Your next memory starts here.</span></span>
           </p>
         </motion.h1>
-        <div className="flex relative top-20 justify-center gap-6">
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
-          >
-            <div className='grid gap-5 justify-items-center' >
-              <img className='w-15' src={icon.wedding_icon} alt="" />
-              <h1 className='font-bold'>W E D D I N G</h1>
-            </div>
-
-          </motion.div>
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.2 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
-          >
-            <div className='grid gap-5 items-center justify-items-center' >
-              <img className='w-15' src={icon.birthday_party_icon} alt="" />
-              <h1 className='font-bold'>BIRTHDAY PARTY</h1>
-            </div>
-
-          </motion.div>
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
-          >
-            <div className='grid gap-5 items-center justify-items-center text-center' >
-              <img className='w-15' src={icon.corporative_events} alt="" />
-              <h1 className='font-bold'>CORPORATE EVENTS</h1>
-            </div>
-
-          </motion.div>
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
-          >
-            <div className='grid gap-5 items-center justify-items-center' >
-              <img className='w-15' src={icon.concern_icon} alt="" />
-              <h1 className='font-bold'>C O N C E R T S</h1>
-            </div>
-
-          </motion.div>
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
-            className="flex h-40 rounded-2xl w-60 p-6 bg-white/3 transition-all hover:scale-105 justify-center items-center"
-          >
-            <div className='grid gap-5 items-center justify-items-center text-center' >
-              <img className='w-15' src={icon.cultural_programs} alt="" />
-              <h1 className='font-bold'>CULTURAL PROGRAMS</h1>
-            </div>
-
-          </motion.div>
+        <div className="grid grid-cols-5 gap-6 py-30">
+          {cards.map((item, index) => (
+            <Cards key={index} index={index} img={item.icon} text={item.name} />
+          ))}
         </div>
       </div>
     </section>
   )
+}
+
+function Cards({ img, text, index }) {
+
+  return (
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{
+        type: "spring",
+        stiffness: 250,
+        damping: 70,
+        mass: 1,
+        delay: index * 0.30
+      }}
+      className="flex h-40 rounded-2xl w-full p-6 bg-white/3 hover:scale-105 justify-center items-center"
+    >
+      <div className='flex flex-col gap-5 items-center justify-items-center text-center'>
+        <img className='w-14 h-14 object-contain' src={img} alt={text} />
+        <h1 className='font-bold'>{text}</h1>
+      </div>
+    </motion.div>
+  )
+
 }
 
 export default React.memo(EventCategory)

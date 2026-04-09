@@ -7,7 +7,7 @@ const Hero = () => {
   const marquee = [
     'Event Management Team',
     'Wedding',
-    'birthday party',
+    'Birthday party',
     'Casual Parties',
     'Inaugurations'
   ]
@@ -34,8 +34,9 @@ const Hero = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
               >
-                <p className='relative bottom-10 left-90'>Welcome to Our Web Page</p><br />
-                <span className='relative bottom-15 left-90 bg-clip-text text-transparent bg-linear-to-r from-indigo-300 to-indigo-400'>
+                <p className='relative bottom-10 left-90 cursor-default'>Welcome to Our Web Page</p><br />
+                <span className='relative bottom-15 left-90 bg-clip-text text-transparent
+                   bg-linear-to-r from-indigo-300 to-indigo-400 cursor-default'>
                   Your Event Our Responsibility
                 </span>
               </motion.h1>
@@ -81,7 +82,8 @@ const Hero = () => {
               {marquee.concat(marquee).map((logo, i) => (
                 <span
                   key={i}
-                  className="mx-6 text-sm md:text-base font-semibold text-gray-400 hover:text-gray-300 tracking-wide transition-colors"
+                  className="mx-6 text-sm md:text-base font-semibold text-gray-400 hover:text-gray-300 tracking-wide
+                   transition-colors cursor-default"
                 >
                   {logo}
                 </span>
@@ -95,4 +97,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default React.memo(Hero)
