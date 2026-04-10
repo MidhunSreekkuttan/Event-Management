@@ -16,6 +16,13 @@ const Response = lazy(() => import('../pages/users/Response'))
 const ResponseDetails = lazy(() => import('../pages/users/ResponseDetails'))
 const Receipt = lazy(() => import('../pages/users/Receipt'))
 
+//articles
+const Personal = lazy(() => import('../pages/users/article/category/Personal'))
+const Cultural = lazy(() => import('../pages/users/article/category/Cultural'))
+const Coorprates = lazy(() => import('../pages/users/article/category/Coorprates'))
+const Entertainments = lazy(() => import('../pages/users/article/category/Entertainments'))
+const Educational = lazy(() => import('../pages/users/article/category/Educational'))
+
 const UserRoutes = () => {
   return (
 
@@ -39,6 +46,13 @@ const UserRoutes = () => {
         <Route path="/response" element={<Response />} />
         <Route path="/response-Details/:enquiryId" element={<ResponseDetails />} />
         <Route path='/receipt/:productId' element={<Receipt />} />
+
+        {/* Articles */}
+        <Route path='/personal' element={<Personal />} />
+        <Route path='/cultural' element={<Cultural />} />
+        <Route path='/coorprates' element={<Coorprates />} />
+        <Route path='/entertainments' element={<Entertainments />} />
+        <Route path='/educational' element={<Educational />} />
 
       </Route>
 

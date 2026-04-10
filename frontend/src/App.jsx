@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 import LenisScroll from "./components/users/background/Lenis"
 import ScrollToTop from "./components/users/background/ScrollToTop"
 import SoftBackdrop from "./components/users/background/SoftBackdrop"
@@ -9,23 +9,38 @@ import NotFound from "./pages/users/NotFound"
 import { ToastContainer } from "react-toastify"
 
 const App = () => {
+
+  const { pathname } = useLocation()
+
+  const isColor = [
+
+    "/personal",
+    "/cultural",
+    "/coorprates",
+    "/entertainments",
+    "/educational"
+
+  ].includes(pathname)
+
   return (
     <>
 
-      <ScrollToTop />
-      <SoftBackdrop />
-      <LenisScroll />
-      <ToastContainer />
+      <div className={isColor ? "bg-[#F6F0FD] text-black min-h-screen" : ""}>
+        <ScrollToTop />
+        <SoftBackdrop />
+        <LenisScroll />
+        <ToastContainer />
 
-      <Routes>
+        <Routes>
 
-        {UserRoutes()}
-        {WorkerRoutes()}
-        {EventManagementRoutes()}
+          {UserRoutes()}
+          {WorkerRoutes()}
+          {EventManagementRoutes()}
 
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
 
-      </Routes>
+        </Routes>
+      </div>
 
     </>
   )

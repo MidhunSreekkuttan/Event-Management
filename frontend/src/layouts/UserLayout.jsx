@@ -12,8 +12,13 @@ const UserLayout = () => {
     pathname === '/login' ||
     pathname === '/otp' ||
     pathname.startsWith("/receipt") ||
-    pathname.startsWith('/adBooking/')||
-    pathname.startsWith("/product/")
+    pathname.startsWith('/adBooking/') ||
+    pathname.startsWith("/product/") ||
+    pathname === '/personal' ||
+    pathname === '/cultural' ||
+    pathname === '/coorprates' ||
+    pathname === '/entertainments' ||
+    pathname === '/educational'
 
   const hideFooter =
     pathname === '/login' ||
@@ -24,7 +29,12 @@ const UserLayout = () => {
     pathname.startsWith("/product/") ||
     pathname === '/otp' ||
     pathname.startsWith('/response-Details/') ||
-    pathname.startsWith("/receipt")
+    pathname.startsWith("/receipt") ||
+    pathname === '/personal' ||
+    pathname === '/cultural' ||
+    pathname === '/coorprates' ||
+    pathname === '/entertainments' ||
+    pathname === '/educational'
 
   return (
     <>
