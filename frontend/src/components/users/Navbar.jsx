@@ -1,8 +1,6 @@
 import React from 'react';
 import { useContext } from 'react'
-//import { logo } from '../../assets/assets'
 import logo from '/event-management-4-8-2026.gif'
-import { User } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { BackendContex } from '../../context/ConnectBackendContex'
@@ -51,7 +49,7 @@ const Navbar = () => {
             <hr className='w-2/3 border-none h-[2.5px] bg-amber-100 hidden' />
           </NavLink>
           <NavLink to='/eventList' className='flex flex-col items-center gap-1 text-amber-200 hover:text-white transition'>
-            <p>Event list</p>
+            <p>Explore</p>
             <hr className='w-2/3 border-none h-[2.5px] bg-amber-100 hidden' />
           </NavLink>
           <NavLink to='/about' className='flex flex-col items-center gap-1 text-amber-200 hover:text-white transition'>
@@ -97,7 +95,7 @@ const Navbar = () => {
               className='cursor-pointer
              bg-linear-to-br from-indigo-500 to-indigo-600 transition-all px-7 py-1 rounded-2xl hover:opacity-80'>
 
-              <User size={30} className='text-black' />
+              <h1>Login</h1>
 
             </button>
           </div>
