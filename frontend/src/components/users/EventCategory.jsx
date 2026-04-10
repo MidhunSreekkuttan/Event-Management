@@ -6,11 +6,11 @@ const EventCategory = () => {
 
   const cards = [
 
-    { name: "W E D D I N G", icon: icon.wedding_icon },
-    { name: "BIRTHDAY PARTY", icon: icon.birthday_party_icon },
-    { name: "CORPORATE EVENTS", icon: icon.corporative_events },
-    { name: "C O N C E R T S", icon: icon.concern_icon },
-    { name: "CULTURAL PROGRAMS", icon: icon.cultural_programs }
+    { name: "PERSONAL", icon: icon.wedding_icon },
+    { name: "CULTURAL", icon: icon.birthday_party_icon },
+    { name: "CORPORATES", icon: icon.corporative_events },
+    { name: "ENTERTAINMENTS", icon: icon.concern_icon },
+    { name: "EDUCATIONAL", icon: icon.cultural_programs }
 
   ]
 

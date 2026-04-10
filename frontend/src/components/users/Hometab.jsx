@@ -41,7 +41,7 @@ const Hometab = () => {
                     >
                         <div className='grid gap-5' >
                             <img className='w-15' src={icon.create_event_icon} alt="" />
-                            <h1 className='relative left-20 bottom-17 text-3xl font-bold'>Book OR Create</h1>
+                            <h1 className='relative left-15 bottom-17 text-3xl font-bold'>Booking or Enqury</h1>
                             <p className='relative left-15 bottom-14'>Easy Booking OR Event SetUp</p>
                         </div>
 

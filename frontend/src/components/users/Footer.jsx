@@ -175,7 +175,7 @@ const Footer = ({ whiteBg = false }) => {
           <div className="flex gap-4 mt-2 md:mt-0">
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <span>•</span>
-            <a href="#" className="hover:text-white">Terms of Service</a>
+            <a href="#" className="hover:text-white">Terms and Conditions</a>
           </div>
         </div>
       </motion.div>
