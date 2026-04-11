@@ -18,7 +18,9 @@ const UserLayout = () => {
     pathname === '/cultural' ||
     pathname === '/coorprates' ||
     pathname === '/entertainments' ||
-    pathname === '/educational'
+    pathname === '/educational' ||
+    pathname === '/bookigOrEnquery' ||
+    pathname === '/enjoyTheEvent'
 
   const hideFooter =
     pathname === '/login' ||
@@ -34,7 +36,9 @@ const UserLayout = () => {
     pathname === '/cultural' ||
     pathname === '/coorprates' ||
     pathname === '/entertainments' ||
-    pathname === '/educational'
+    pathname === '/educational' ||
+    pathname === '/bookigOrEnquery' ||
+    pathname === '/enjoyTheEvent'
 
   return (
     <>

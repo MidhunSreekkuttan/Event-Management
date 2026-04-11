@@ -1,16 +1,17 @@
 import React from 'react'
 import { icon } from '../../assets/assets'
 import { motion } from 'framer-motion'
+import { NavLink } from 'react-router-dom'
 
 const EventCategory = () => {
 
   const cards = [
 
-    { name: "PERSONAL", icon: icon.wedding_icon },
-    { name: "CULTURAL", icon: icon.birthday_party_icon },
-    { name: "CORPORATES", icon: icon.corporative_events },
-    { name: "ENTERTAINMENTS", icon: icon.concern_icon },
-    { name: "EDUCATIONAL", icon: icon.cultural_programs }
+    { name: "PERSONAL", icon: icon.wedding_icon, path: "/personal" },
+    { name: "CULTURAL", icon: icon.birthday_party_icon, path: "/cultural" },
+    { name: "CORPORATES", icon: icon.corporative_events, path: "/coorprates" },
+    { name: "ENTERTAINMENTS", icon: icon.concern_icon, path: "/entertainments" },
+    { name: "EDUCATIONAL", icon: icon.cultural_programs, path: "/educational" }
 
   ]
 
@@ -46,7 +47,9 @@ const EventCategory = () => {
         </motion.h1>
         <div className="grid grid-cols-5 gap-6 py-30">
           {cards.map((item, index) => (
-            <Cards key={index} index={index} img={item.icon} text={item.name} />
+            <NavLink to={item.path} key={index} >
+              <Cards index={index} img={item.icon} text={item.name} />
+            </NavLink>
           ))}
         </div>
       </div>

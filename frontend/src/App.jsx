@@ -18,7 +18,9 @@ const App = () => {
     "/cultural",
     "/coorprates",
     "/entertainments",
-    "/educational"
+    "/educational",
+    '/bookigOrEnquery',
+    '/enjoyTheEvent'
 
   ].includes(pathname)
 

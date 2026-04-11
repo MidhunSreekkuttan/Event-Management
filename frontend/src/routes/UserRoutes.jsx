@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react'
 import { Route } from 'react-router-dom'
 import UserLayout from '../layouts/UserLayout'
 import Loader from '../components/Loading'
+import BookingORenqury from '../pages/users/article/others/BookingORenqury'
+import EnjoyTheEvent from '../pages/users/article/others/EnjoyTheEvent'
 
 const Home = lazy(() => import('../pages/users/Home'))
 const EventList = lazy(() => import('../pages/users/EventList'))
@@ -53,6 +55,9 @@ const UserRoutes = () => {
         <Route path='/coorprates' element={<Coorprates />} />
         <Route path='/entertainments' element={<Entertainments />} />
         <Route path='/educational' element={<Educational />} />
+
+        <Route path='/bookigOrEnquery' element={<BookingORenqury />} />
+        <Route path='/enjoyTheEvent' element={<EnjoyTheEvent />} />
 
       </Route>
 
