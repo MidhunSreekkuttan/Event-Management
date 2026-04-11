@@ -86,25 +86,6 @@ const Login = () => {
             Enter your credentials to access your dashboard
           </p>
 
-          {/* Google Button */}
-          <button className="mt-6 w-full flex items-center justify-center gap-3 rounded-lg border border-[#1c2b6a] bg-[#0b1437] py-2.5 text-white hover:bg-[#101d4f] transition">
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="Google"
-              className="w-5 h-5"
-            />
-            Continue with Google
-          </button>
-
-          {/* Divider */}
-          <div className="flex items-center my-6">
-            <div className="flex-1 h-px bg-[#2a3b8f]" />
-            <span className="px-3 text-xs text-indigo-300">
-              OR CONTINUE WITH
-            </span>
-            <div className="flex-1 h-px bg-[#2a3b8f]" />
-          </div>
-
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
