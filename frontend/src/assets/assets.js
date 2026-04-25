@@ -44,7 +44,25 @@ import vendor_icon from "./icon/vendor_icon.png";
 import clients_icon from "./icon/clients_icon.png";
 import events_icon from "./icon/events_icon.png";
 import salary_icon from "./icon/salary_icon.png";
-import delete_icon from './icon/delete_icon.png'
+import delete_icon from './icon/delete_icon.png';
+import header_image from "./articles/header_image.png";
+import card1 from "./articles/card1.jpeg";
+import card2 from "./articles/card2.jpeg";
+import card3 from "./articles/card3.jpeg";
+import card4 from "./articles/card4.jpeg";
+import card5 from "./articles/card5.jpeg";
+import education_header from "./articles/education_header.png";
+import entercard1 from "./articles/entercard1.jpeg";
+import entercard2 from "./articles/entercard2.jpeg";
+import entercard3 from "./articles/entercard3.jpeg";
+import entercard4 from "./articles/entercard4.jpeg";
+import entercard5 from "./articles/entercard5.jpeg";
+import entertainment_header from "./articles/entertainment_header.png";
+import culture_header from "./articles/culture_header.png";
+import culturecard1 from "./articles/culturecard1.jpeg";
+import culturecard2 from "./articles/culturecard2.jpeg";
+import culturecard3 from "./articles/culturecard3.jpeg";
+import culturecard4 from "./articles/culturecard4";
 
 export const logo = {
   adhithiBeat,
@@ -100,6 +118,27 @@ export const heroImages = {
   party_light2,
   party1,
   party2,
+};
+
+export const articles = {
+  header_image,
+  card1,
+  card2,
+  card3,
+  card4,
+  card5,
+  education_header,
+  entertainment_header,
+  entercard1,
+  entercard2,
+  entercard3,
+  entercard4,
+  entercard5,
+  culture_header,
+  culturecard1,
+  culturecard2,
+  culturecard3,
+  culturecard4,
 };
 
 export const products = [
