@@ -58,6 +58,11 @@ import entercard3 from "./articles/entercard3.jpeg";
 import entercard4 from "./articles/entercard4.jpeg";
 import entercard5 from "./articles/entercard5.jpeg";
 import entertainment_header from "./articles/entertainment_header.png";
+import culture_header from "./articles/culture_header.png";
+import culturecard1 from "./articles/culturecard1.jpeg";
+import culturecard2 from "./articles/culturecard2.jpeg";
+import culturecard3 from "./articles/culturecard3.jpeg";
+import culturecard4 from "./articles/culturecard4";
 
 export const logo = {
   adhithiBeat,
@@ -129,6 +134,11 @@ export const articles = {
   entercard3,
   entercard4,
   entercard5,
+  culture_header,
+  culturecard1,
+  culturecard2,
+  culturecard3,
+  culturecard4,
 };
 
 export const products = [

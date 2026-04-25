@@ -1,313 +1,216 @@
-import React from "react";
-import { CalendarDays, Clock3, ArrowLeft, Search } from "lucide-react";
-import { articles } from "../../../../assets/assets";
+import React from 'react';
+import { Calendar, ArrowLeft } from 'lucide-react';
+import { articles } from '../../../../assets/assets';
+import { useNavigate } from 'react-router-dom';
 
-const { header_image, card1, card2, card3, card4, card5 } = articles;
+const { cultural_header } = articles;
 
-const Cultural = () => {
-    const tips = [
-        {
-            no: "1",
-            title: "Define Your Event Goals",
-            desc: "Understand the purpose of your event, choose the guest count, decide the theme and create a clear plan for the celebration.",
-            img: card1,
-        },
-        {
-            no: "2",
-            title: "Set a Realistic Budget",
-            desc: "Plan spending for venue, food, decoration, gifts, entertainment and emergency expenses to avoid overspending.",
-            img: card2,
-        },
-        {
-            no: "3",
-            title: "Choose the Right Venue",
-            desc: "Pick a venue that matches your event size, comfort, accessibility and overall atmosphere.",
-            img: card3,
-        },
-        {
-            no: "4",
-            title: "Plan Fun Activities",
-            desc: "Include games, music, dance, entertainment and engaging moments that guests will enjoy.",
-            img: card4,
-        },
-        {
-            no: "5",
-            title: "Capture the Memories",
-            desc: "Hire a photographer or set up a photo booth to preserve your special memories forever.",
-            img: card5,
-        },
-    ];
+const CulturalEvents = () => {
+
+    const navigate = useNavigate();
 
     return (
-        <section className="bg-gray-50 py-14 px-5 md:px-10 lg:px-16">
-            <div className="max-w-7xl mx-auto">
+        <div className="font-sans bg-[#FAF6F0] min-h-screen text-[#4A3C31]">
+            {/* Main Container */}
+            <div className="max-w-300 mx-auto px-6 md:px-12 py-12">
 
-                {/* Back */}
-                <button className="flex items-center gap-2 text-violet-600 font-medium hover:underline mb-6">
-                    <ArrowLeft size={18} />
-                    Back
-                </button>
+                {/* --- HERO SECTION --- */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+                    {/* Left Content */}
+                    <div className="space-y-6">
+                        {/* Top Logo area */}
+                        <button 
+                            onClick={() => navigate("/")}
+                            className='flex items-center gap-2 text--[#7B1D22] font-medium hover:underline mb-6'>
+                            <ArrowLeft size={18} />
+                              Back
+                        </button>
+                        <div className="flex items-center gap-3 text-[#7B1D22] font-bold tracking-widest text-xs uppercase">
+                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L15 8H21L16 12L18 18L12 15L6 18L8 12L3 8H9L12 2Z" />
+                            </svg>
+                            CULTURAL EVENTS
+                        </div>
 
-                {/* Badge */}
-                <div className="mb-4">
-                    <span className="bg-violet-100 text-violet-700  px-4 py-2 rounded-full text-sm font-semibold">
-                        PERSONAL EVENTS
-                    </span>
-                </div>
+                        {/* Main Headline */}
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#5B171A] font-bold leading-[1.1]">
+                            Celebrate<br />
+                            Culture.<br />
+                            Inspire<br />
+                            Connections.
+                        </h1>
 
-                {/* Title */}
-                <h1 className="text-5xl font-bold text-gray-900 mb-5">
-                    How to Plan a Personal Event
-                </h1>
+                        {/* Elegant Divider */}
+                        <div className="flex items-center gap-1 py-2">
+                            <div className="h-px w-12 bg-[#B58A60]"></div>
+                            <div className="w-2 h-2 rotate-45 bg-[#B58A60]"></div>
+                            <div className="h-px w-12 bg-[#B58A60]"></div>
+                        </div>
 
-                {/* Meta */}
-                <div className="flex flex-wrap gap-6 text-gray-500 mb-4 mt-2">
-                    <span>By Admin</span>
-
-                    <div className="flex items-center gap-2">
-                        <CalendarDays size={16} />
-                        <span>April 1, 2026</span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                        <Clock3 size={16} />
-                        <span>8 min read</span>
-                    </div>
-                </div>
-
-                {/* Hero Image */}
-                <img
-                    src={header_image}
-                    alt="Personal Event"
-                    className="w-full h-125 object-cover rounded-2xl mb-12"
-                />
-
-                {/* Paragraph sections */}
-                <div className="space-y-10 mb-16">
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            Why Personal Events are Important
-                        </h2>
-                        <p className="text-gray-600 text-justify text-lg leading-8 mt-8">
-                            Personal events hold a special place in every person’s life because they celebrate emotions, milestones, relationships, and memories. Unlike formal or business gatherings, personal celebrations are deeply connected to feelings and human connection. Events such as birthdays, anniversaries, engagements, weddings, baby showers, housewarmings, graduations, reunions, and family get-togethers allow people to pause their busy lives and enjoy meaningful moments together. These occasions create joy, strengthen emotional bonds, and remind people of the value of family and friendship.
-                            In modern life, many people are busy with work, studies, responsibilities, and stress. Because of this, quality time with loved ones becomes limited. Personal events create the perfect opportunity to reconnect with people who matter most. Families can gather in one place, old friends can meet again, and relatives can celebrate happiness together. These gatherings often become emotional moments filled with laughter, gratitude, and unforgettable memories.
-                            Personal celebrations also help people recognize achievements and life progress. A graduation party celebrates hard work. A birthday celebrates life itself. An engagement celebrates commitment and love. An anniversary honors years of companionship and shared experiences. These milestones deserve appreciation because they reflect growth, dedication, and happiness.
-                            Another important benefit of personal events is memory creation. Years later, people may forget daily routines, but they remember special celebrations, heartfelt speeches, family photos, surprise moments, and emotional laughter. These memories become part of family history and personal stories.
-                            Personal events also allow creativity and self-expression. Hosts can design themes, decorations, music, food, activities, and experiences that reflect personality and style. Whether simple or luxurious, the event becomes a reflection of emotions and values.
-                            Even small personal events have value. A simple dinner with loved ones can be more meaningful than an expensive celebration without warmth. The real purpose of these gatherings is connection, not cost.
-                            Well-planned personal events also improve emotional wellness. Celebrating positive moments helps reduce stress, increases happiness, and builds stronger social support systems. People feel valued when invited, included, and appreciated.
-                            At the heart of every successful personal event is togetherness. These occasions remind people that life is not only about work and routine—it is also about love, gratitude, celebration, and shared happiness.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            Benefits of Professional Planning
-                        </h2>
-                        <p className="text-gray-600 text-justify leading-8 text-lg">
-                            Professional event planning can transform a simple gathering into a smooth, elegant, and memorable experience. Many people assume personal events are easy to organize, but in reality even a small celebration requires careful coordination. Venue booking, guest management, catering, decorations, entertainment, scheduling, budgeting, photography, transportation, and emergency preparation all need attention. Without proper planning, stress increases quickly. This is where professional planning becomes valuable.
-                            One of the biggest advantages of professional planners is experience. They understand how events work from beginning to end. They know realistic timelines, common mistakes, vendor pricing, decoration trends, and backup solutions. Instead of learning through trial and error, hosts benefit from tested methods that save time and avoid confusion.
-                            Another major benefit is stress reduction. Many hosts spend event day worrying about delayed food, missing chairs, decoration issues, guest complaints, parking confusion, or schedule problems. A professional planner handles these responsibilities, allowing the host and family to enjoy the celebration peacefully. Instead of managing problems, they can focus on greeting guests and making memories.
-                            Professional planners also improve budgeting. Many people overspend because they book services without comparison or pay for unnecessary extras. Experienced planners know where to save money and where spending matters most. They can recommend affordable vendors, package deals, realistic guest counts, and practical alternatives without reducing quality.
-                            Time management is another strong benefit. Planning an event alone can take weeks of calls, visits, negotiations, follow-ups, and decision-making. Professionals already have vendor networks and systems, making the process faster and more efficient. They know when to book what, how long setup takes, and how to keep the event on schedule.
-                            Creativity and presentation also improve with professional planning. Event planners understand themes, lighting, table arrangements, floral balance, entry design, stage setup, seating flow, and guest experience. They can turn ordinary spaces into attractive and welcoming environments.
-                            Unexpected problems happen in many events: rain for outdoor functions, late vendors, power cuts, missing items, guest count changes, or technical failures. Professionals are valuable because they stay calm and solve issues quickly with backup plans.
-                            Communication becomes easier too. Instead of the host speaking separately with caterers, decorators, photographers, and venue managers, the planner coordinates everything. This reduces misunderstandings and saves energy.
-                            Even for modest celebrations, professional planning adds structure and confidence. It does not always mean luxury—it means organization, smooth execution, and better results.
-                            A successful event often looks effortless to guests. That effortless feeling usually comes from good planning behind the scenes.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            Common Mistakes to Avoid
-                        </h2>
-                        <p className="text-gray-600 text-justify leading-8 text-lg">
-                            Many personal events fail to meet expectations not because of bad intentions, but because of avoidable planning mistakes. People often focus only on decorations or food while ignoring timing, budgeting, logistics, and guest experience.
-                            Even expensive celebrations can feel disorganized if basic planning is weak. Understanding common mistakes helps hosts prevent stress, wasted money, and disappointment. Avoid these mistake :
-                            <ul className="space-y-3 text-gray-600">
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Don't start planning late
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Set a clear and realistic budget
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Choose venue based on comfort and access
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Focus on guest experience, not only looks
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Communicate clearly with vendors
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Avoid overcrowded schedules
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Keep backup plans ready
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Delegate responsibilities on event day
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Reconfirm bookings and timings
-                                </li>
-                            </ul>
-                            <ul>
-                                <li className="flex gap-3">
-                                    <span className="text-red-500 font-bold">✖</span>
-                                    Stay calm and adaptable
-                                </li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            Tips for Budget-Friendly Events
-                        </h2>
-                        <p className="text-gray-600 text-justify leading-8 text-lg">
-                            A memorable personal event does not need a huge budget. Many people wrongly assume that a successful celebration must be expensive, but in reality thoughtful planning, smart decisions, and creativity matter more than high spending. Guests usually remember the atmosphere, hospitality, fun, and emotional moments not how much money was spent. With proper budgeting, even a simple event can feel elegant, warm, and enjoyable.
-                            The first step in planning a budget-friendly event is setting a clear spending limit. Decide the maximum amount you are comfortable spending before making bookings. Once the budget is fixed, divide it into categories such as venue, food, decoration, entertainment, photography, gifts, and emergency expenses. This prevents overspending in one area and neglecting another.
-                            Choosing the right venue can save a large amount of money. Instead of expensive banquet halls, consider hosting the event at home, in a garden, rooftop, community hall, beachside location, or family property if available. Smaller venues often create a more intimate and welcoming atmosphere while reducing rental costs.
-                            Guest count strongly affects budget. More guests mean higher costs for food, seating, return gifts, and space. Invite people who truly matter rather than inviting everyone out of social pressure. A smaller guest list often creates a more meaningful celebration and better experience.
-                            Food should be practical and sufficient rather than excessive. Instead of a large luxury menu, choose a focused menu with quality dishes guests actually enjoy. Buffet service can sometimes be more cost-effective than plated service. Avoid waste by estimating quantities realistically.
-                            Decorations can be beautiful without being expensive. Use flowers in season, reusable decor items, candles, fairy lights, balloons, fabric drapes, and DIY centerpieces. Lighting often creates more visual impact than costly decorations. A clean theme with coordinated colors looks better than cluttered expensive decor.
-                            Digital invitations are another easy saving method. Beautiful e-invites through WhatsApp or email reduce printing and delivery costs while being fast and convenient. Personalized digital invites can still feel stylish and thoughtful.
-                            Compare vendor prices before booking. Many people choose the first option they see. Take time to get multiple quotations for photography, catering, sound, and decor. Negotiate politely and ask for package deals.
-                            Use friends and family talents when possible. Someone may handle music, photography basics, hosting, makeup, design, or coordination. This adds a personal touch while reducing costs.
-                            Always keep a small emergency reserve in the budget for unexpected expenses. Without backup funds, minor issues become stressful.
-                            The true success of an event comes from warmth, planning, and guest satisfaction—not expensive spending. Smart budgeting creates celebrations that feel rich without costing too much.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            How to Impress Your Guests
-                        </h2>
-                        <p className="text-gray-600 text-justify leading-8 text-lg">
-                            Guests remember how they feel during an event more than expensive decorations. To impress them, focus on comfort, hospitality, and thoughtful details. Welcome guests warmly and ensure seating, lighting, temperature, and cleanliness are properly managed. Provide delicious food with enough variety and consider dietary preferences when possible. Use attractive decorations, pleasant music, and a good event flow to maintain positive energy.
-                            Small gestures such as personalized thank-you notes, return gifts, or photo corners can leave a lasting impression. When guests feel valued and entertained, the event becomes truly memorable.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            Creating Memorable Moments
-                        </h2>
-                        <p className="text-gray-600 text-justify leading-8 text-lg">
-                            The most successful personal events are those filled with meaningful and emotional moments. These memories are created through thoughtful planning and genuine experiences rather than expensive arrangements. Include activities such as speeches, family games, photo sessions, surprise performances, or memory-sharing segments that bring people closer together.
-                            Capture the occasion through professional photography or candid videos so the memories can be cherished later. Personal touches such as favorite songs, custom decorations, or tribute messages make the celebration more special. Memorable moments are built when people laugh, connect, and enjoy the occasion together.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-3">
-                            Final Checklist Before Event Day
-                        </h2>
-                        <p className="text-gray-600 leading-8 text-lg text-justify mb-5">
-                            Review all arrangements before the event begins:
-                            <ul className="space-y-3 text-gray-600">
-                                <li className="flex gap-3">
-                                    <span className="text-green-500 font-bold">✔</span>
-                                    The final day before your event is all about preparation, confirmation, and peace of mind. This is the stage where small checks can prevent major problems. A simple review of all arrangements helps the event run smoothly and allows you to enjoy the celebration without last-minute stress.
-                                </li>
-                            </ul>
-                            <ul className="space-y-3 text-gray-600">
-                                <li className="flex gap-3">
-                                    <span className="text-green-500 font-bold">✔</span>
-                                    Start by confirming all bookings such as venue, catering, decoration, photography, music, and transportation. Make sure every vendor knows the correct date, time, and location. Recheck arrival timings so setup can begin without delay.
-                                </li>
-                            </ul>
-                            <ul className="space-y-3 text-gray-600">
-                                <li className="flex gap-3">
-                                    <span className="text-green-500 font-bold">✔</span>
-                                    Review your guest list and seating plan. Confirm expected attendance, arrange chairs and tables properly, and keep extra seating ready for unexpected guests. If children or elderly people are attending, ensure they will be comfortable.
-                                </li>
-                            </ul>
-                            <ul className="space-y-3 text-gray-600">
-                                <li className="flex gap-3">
-                                    <span className="text-green-500 font-bold">✔</span>
-                                    Check all important event items such as invitation details, stage setup, sound system, lighting, backup power, gifts, cake, flowers, and welcome arrangements. Keep emergency essentials like water bottles, chargers, extension cords, first aid kit, tissues, and umbrellas ready if needed.
-                                </li>
-                            </ul>
-                            <ul className="space-y-3 text-gray-600">
-                                <li className="flex gap-3">
-                                    <span className="text-green-500 font-bold">✔</span>
-                                    Prepare your own outfit and personal items in advance so you are not rushing on the event day. Get enough rest, stay calm, and trust your planning.
-                                </li>
-                            </ul>
-                            <p>
-                                Most importantly, remember that perfection is not required. A successful event is one where people feel happy, welcomed, and connected. Focus on enjoying the moment with your loved ones.
-                            </p>
+                        {/* Subtext */}
+                        <p className="text-lg text-[#6A5F58] max-w-md">
+                            Explore traditions, music, heritage, cuisine and unforgettable community celebrations.
                         </p>
                     </div>
 
-                    {/* Cards Sections */}
-                    <div className="border-t border-gray-300 pt-19">
-                        <div className="w-full h-125 object-cover rounded-2xl mb-12">
-                            <div className="lg:col-span-2 space-y-6">
-                                {tips.map((item, index) => (
-                                    <div key={index} className="bg-white rounded-2xl p-5 shadow-sm grid md:grid-cols-[60px_1fr_180px] gap-5 items-center">
-                                        <div className="w-12 h-12 rounded-full bg-violet-100 text-violet-700 font-bold flex items-center justify-center">
-                                            {item.no}
-                                        </div>
-                                        <div>
-                                            <h3 className="text-2xl font-bold mb-2">
-                                                {item.title}
-                                            </h3>
-                                            <p className="text-gray-600 leading-7">
-                                                {item.desc}
-                                            </p>
-                                        </div>
-                                        <img
-                                            src={item.img}
-                                            alt={item.title}
-                                            className="w-full h-32 object-cover rounded-xl"
-                                        />
-                                    </div>
-                                ))}
-                                <div className="bg-linear-to-r from-violet-700 to-fuchsia-600 text-white rounded-2xl p-8">
-                                    <h3 className="text-3xl font-bold leading-tight">
-                                        Need Help Planning Your Event?
-                                    </h3>
-
-                                    <p className="mt-4 text-violet-100 leading-7">
-                                        Our team helps create beautiful and stress-free celebrations.
-                                    </p>
-
-                                    <button className="mt-6 bg-white text-violet-700 px-6 py-3 rounded-xl font-semibold">
-                                        Contact Us
-                                    </button>
-                                </div>
+                    {/* Right Image */}
+                    <div className="relative w-full flex justify-end">
+                        {/* Arch Container */}
+                        <div className="relative w-[90%] md:w-[80%] aspect-3/4 p-2 border-2 border-[#D4B58A] rounded-t-[180px] rounded-b-2xl">
+                            <div className="w-full h-full overflow-hidden rounded-t-[170px] rounded-b-xl relative">
+                                <img
+                                    src={cultural_header}
+                                    alt="Cultural Dancer"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </section>
+                {/* --- CATEGORY CARDS --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 -mt-10 mb-20 relative z-10">
+                    {[
+                        {
+                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+                            title: "PERFORMANCES",
+                            desc: "Music, dance, theater and more"
+                        },
+                        {
+                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>,
+                            title: "ART & HERITAGE",
+                            desc: "Exhibitions, crafts and traditions"
+                        },
+                        {
+                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>,
+                            title: "COMMUNITY",
+                            desc: "Connect, celebrate and belong"
+                        },
+                        {
+                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>,
+                            title: "CUISINE",
+                            desc: "Traditional flavors and experiences"
+                        }
+                    ].map((cat, idx) => (
+                        <div key={idx} className="bg-[#FFFDF9] rounded-3xl p-8 text-center shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#F0EBE1] hover:-translate-y-1 transition-transform">
+                            <div className="text-[#8B2329] mb-4">{cat.icon}</div>
+                            <h3 className="text-[#8B2329] font-bold text-xs tracking-widest mb-2">{cat.title}</h3>
+                            <p className="text-[#6A5F58] text-sm leading-relaxed">{cat.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                {/* --- FEATURED EVENTS HEADER --- */}
+                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 gap-4">
+                    <div className="flex items-center gap-3 text-[#7B1D22] font-bold tracking-widest text-sm uppercase">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L15 8H21L16 12L18 18L12 15L6 18L8 12L3 8H9L12 2Z" />
+                        </svg>
+                        FEATURED EVENTS
+                    </div>
+                    <button className="flex items-center gap-2 px-6 py-2.5 border border-[#8B2329] text-[#8B2329] rounded-full text-xs font-bold tracking-widest hover:bg-[#8B2329] hover:text-white transition-colors">
+                        VIEW ALL EVENTS &rarr;
+                    </button>
+                </div>
+
+                {/* --- FEATURED EVENTS GRID --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+                    {[
+                        { img: "https://images.unsplash.com/photo-1542358823-3882f07d2f9d?q=80&w=600&auto=format&fit=crop", date: "18", month: "JUN", title: "Folk Dance Festival", loc: "Kala Kendra, New Delhi", desc: "A vibrant evening of traditional folk dances from across India." },
+                        { img: "https://images.unsplash.com/photo-1605369572399-05d8d64a0f6e?q=80&w=600&auto=format&fit=crop", date: "20", month: "JUN", title: "Heritage Craft Exhibition", loc: "India Habitat Centre", desc: "Discover handcrafted treasures and meet skilled artisans." },
+                        { img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop", date: "22", month: "JUN", title: "Classical Music Concert", loc: "Triveni Kala Sangam", desc: "An enchanting night of ragas by renowned classical musicians." },
+                        { img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop", date: "25", month: "JUN", title: "Cultural Food Carnival", loc: "Dilli Haat, INA", desc: "Taste authentic regional flavors and traditional street food." }
+                    ].map((event, idx) => (
+                        <div key={idx} className="bg-[#FFFDF9] rounded-2xl overflow-hidden shadow-sm border border-[#F0EBE1] flex flex-col hover:shadow-md transition-shadow">
+                            <div className="relative h-56">
+                                <img src={event.img} alt={event.title} className="w-full h-full object-cover" />
+                                {/* Date Badge */}
+                                <div className="absolute top-0 left-0 bg-[#691A1E] text-white p-2 w-12 text-center rounded-br-xl">
+                                    <div className="text-lg font-bold leading-none">{event.date}</div>
+                                    <div className="text-[9px] uppercase tracking-wider mt-1">{event.month}</div>
+                                </div>
+                            </div>
+                            <div className="p-6 flex-1 flex flex-col">
+                                <h3 className="font-serif text-lg text-[#2A1F18] font-bold mb-3 leading-tight">{event.title}</h3>
+                                <div className="flex items-center gap-1.5 text-[#6A5F58] text-xs font-medium mb-3">
+                                    <svg className="w-3.5 h-3.5 text-[#8B2329]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                    {event.loc}
+                                </div>
+                                <p className="text-[#6A5F58] text-sm leading-relaxed mb-6 flex-1">{event.desc}</p>
+                                <button className="text-[#8B2329] text-xs font-bold tracking-wider flex items-center gap-1 hover:gap-2 transition-all">
+                                    VIEW DETAILS &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* --- STATS BANNER --- */}
+                <div className="bg-[#5B171A] rounded-4xl text-white py-12 px-8 mb-12">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10">
+                        {[
+                            { num: "50+", label: "Events" },
+                            { num: "100+", label: "Artists" },
+                            { num: "20+", label: "Workshops" },
+                            { num: "15K+", label: "Visitors" }
+                        ].map((stat, idx) => (
+                            <div key={idx} className="text-center px-4">
+                                <div className="flex justify-center mb-3 text-[#D4B58A]">
+                                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                </div>
+                                <div className="text-4xl md:text-5xl font-serif mb-1">{stat.num}</div>
+                                <div className="text-[10px] tracking-widest uppercase text-white/70">{stat.label}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* --- FOOTER / NEWSLETTER --- */}
+                <div className="bg-[#EFE9E0] rounded-4xl p-8 md:p-10 flex flex-col lg:flex-row justify-between items-center gap-8">
+
+                    <div className="flex items-center gap-5 w-full lg:w-auto">
+                        <div className="bg-[#8B2329] text-white p-4 rounded-full shrink-0">
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-[#2A1F18] tracking-widest text-xs mb-1">STAY UPDATED</h4>
+                            <p className="text-sm text-[#6A5F58]">Subscribe for latest cultural event updates.</p>
+                        </div>
+                    </div>
+
+                    <div className="flex w-full lg:w-auto shadow-sm">
+                        <input
+                            type="email"
+                            placeholder="Enter Email"
+                            className="px-6 py-4 rounded-l-xl border border-r-0 border-[#DED7CD] bg-[#FFFDF9] focus:outline-none w-full lg:w-72 text-sm"
+                        />
+                        <button className="bg-[#691A1E] text-white px-8 py-4 rounded-r-xl font-bold text-[11px] tracking-widest hover:bg-[#5B171A] transition-colors">
+                            SUBSCRIBE
+                        </button>
+                    </div>
+
+                    <div className="flex flex-col items-center lg:items-end gap-3 w-full lg:w-auto">
+                        <div className="text-[#8B2329] font-bold text-[10px] tracking-widest">FOLLOW US</div>
+                        <div className="flex gap-3">
+                            {[
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />,
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />,
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                            ].map((path, i) => (
+                                <div key={i} className="w-8 h-8 rounded-full bg-[#8B2329] text-white flex items-center justify-center cursor-pointer hover:bg-[#5B171A] transition-colors">
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        {path}
+                                    </svg>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     );
 };
 
-export default Cultural;
+export default CulturalEvents;

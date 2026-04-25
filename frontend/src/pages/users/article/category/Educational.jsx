@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 const { education_header } = articles;
 
-const Entertainments = () => {
+const Educational = () => {
 
   const navigate = useNavigate();
-  
+
   const steps = [
     {
       icon: <Target size={34} />,
@@ -60,21 +60,33 @@ const Entertainments = () => {
         </button>
 
         {/* Top Section */}
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <span className="bg-violet-100 text-violet-700 px-4 py-2 rounded-full text-sm font-semibold">
-              EDUCATIONAL CATEGORY
+        <div className="grid lg:grid-cols-2 gap-0 items-stretch border-b border-gray-200 pb-8">
+
+          {/* Left Side */}
+          <div className="pr-8 flex flex-col justify-center">
+
+            <span className="w-fit bg-violet-100 text-violet-700 px-3 py-1 rounded-md text-xs font-semibold mb-4">
+              EDUCATIONAL
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-6 leading-tight">
-              The Ultimate Guide about Educational Events
+
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              The Ultimate Guide to
+              <br />
+              Educational Events in
+              <br />
+              Event Management
             </h1>
-            <p className="text-gray-600 leading-8 mt-6 text-lg">
+
+            <p className="text-gray-600 mt-5 leading-8 text-lg max-w-xl">
               Educational events inspire learning, spark ideas, and create
-              meaningful connections. Here’s how to plan events that educate
+              meaningful connections. Here's how to plan events that educate
               and engage effectively.
             </p>
-            <div className="flex flex-wrap gap-5 text-gray-500 text-sm mt-6">
-              <span>By Admin</span>
+
+            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 mt-6">
+              <span className="font-medium text-gray-700">
+                By Admin
+              </span>
 
               <div className="flex items-center gap-2">
                 <CalendarDays size={16} />
@@ -86,14 +98,18 @@ const Entertainments = () => {
                 <span>7 min read</span>
               </div>
             </div>
-          </div>
 
+          </div>
           {/* Hero Image */}
-          <img
-            src={education_header}
-            alt="Educational Event"
-            className="w-full h-95 object-cover rounded-2xl"
-          />
+          <div className="relative h-70 md:h-80 rounded-xl overflow-hidden">
+            <img
+              src={education_header}
+              alt="Educational Event"
+              className="w-full h-95 object-cover rounded-2xl"
+            />
+            {/* Left Fade Overlay */}
+            <div className="absolute inset-y-0 left-0 w-32 md:w-44 bg-linear-to-r from-white via-white/80 to-transparent"></div>
+          </div>
         </div>
 
         {/* Intro */}
@@ -134,6 +150,30 @@ const Entertainments = () => {
           <div className="w-20 h-20 rounded-2xl bg-violet-600 text-white flex items-center justify-center">
             <GraduationCap />
           </div>
+          <div>
+            <h3 className="text-3xl font-bold text-gray-900">
+              Education Today, Impact Tomorrow
+            </h3>
+
+            <p className="text-gray-600 leading-8 text-lg mt-3">
+              Great educational events create lasting impact by empowering minds
+              and building a stronger, more informed community.
+            </p>
+          </div>
+        </div>
+
+        {/* Footer Tags */}
+        <div className="flex flex-wrap gap-3 mt-10">
+          {["Educational Events", "Event Planning", "Learning", "Conference"].map(
+            (tag, i) => (
+              <span
+                key={i}
+                className="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm"
+              >
+                {tag}
+              </span>
+            )
+          )}
         </div>
       </div>
     </section>
@@ -141,4 +181,4 @@ const Entertainments = () => {
 
 };
 
-export default Entertainments;
+export default Educational;
