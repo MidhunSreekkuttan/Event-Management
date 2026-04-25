@@ -50,7 +50,7 @@ const About = () => {
                   events without the usual chaos. From handling registrations to keeping track of attendees,
                   everything is managed in one place.</span>
               </p>
-              <p className='relative top-[60px] text-2xl font-semibold bg-linear-to-r from-pink-600 to-pink-300 bg-clip-text text-transparent'>
+              <p className='relative top-15 text-2xl font-semibold bg-linear-to-r from-pink-600 to-pink-300 bg-clip-text text-transparent'>
                 We take care of the technical side so you can focus on what really matters creating <br />
                 amazing events and unforgettable memories.</p>
             </div>
@@ -134,7 +134,7 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-[400px] p-5 hover:scale-110 transition-all'>
+             justify-center h-60 rounded-2xl w-100 p-5 hover:scale-110 transition-all'>
                 <img className='relative -top-10 w-18 object-contain' src={icon.corporative_events} alt="" />
                 <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
@@ -154,7 +154,7 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-[400px] p-5 hover:scale-110 transition-all'>
+             justify-center h-60 rounded-2xl w-100 p-5 hover:scale-110 transition-all'>
                 <img className='relative -top-13 w-15 object-contain' src={icon.settings_icon} alt="" />
                 <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
@@ -174,7 +174,7 @@ const About = () => {
             >
 
               <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-[400px] p-5 hover:scale-110 transition-all'>
+             justify-center h-60 rounded-2xl w-100 p-5 hover:scale-110 transition-all'>
                 <img className='relative -top-13 w-12 object-contain' src={icon.like_icon} alt="" />
                 <div>
                   <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
