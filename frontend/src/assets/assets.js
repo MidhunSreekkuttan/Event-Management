@@ -62,7 +62,7 @@ import culture_header from "./articles/culture_header.png";
 import culturecard1 from "./articles/culturecard1.jpeg";
 import culturecard2 from "./articles/culturecard2.jpeg";
 import culturecard3 from "./articles/culturecard3.jpeg";
-import culturecard4 from "./articles/culturecard4";
+import culturecard4 from "./articles/culturecard4.jpeg";
 
 export const logo = {
   adhithiBeat,
