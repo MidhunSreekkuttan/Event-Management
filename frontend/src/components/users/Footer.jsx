@@ -173,7 +173,7 @@ const Footer = ({ whiteBg = false }) => {
             ${whiteBg ? 'border-black/10 text-black' : 'border-white/20 text-white/70'}`}>
           <p className="relative left-160">© 2024 Eventify. All rights reserved.</p>
           <div className="flex gap-4 mt-2 md:mt-0">
-            <a href="/PrivacyandPolicy" className="hover:text-white">Privacy Policy</a>
+            <a href="/policyAndPrivacy" className="hover:text-white">Privacy Policy</a>
             <span>•</span>
             <a href="/TermsandConditions" className="hover:text-white">Terms and Conditions</a>
           </div>
