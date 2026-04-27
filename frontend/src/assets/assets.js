@@ -51,7 +51,7 @@ import card2 from "./articles/card2.jpeg";
 import card3 from "./articles/card3.jpeg";
 import card4 from "./articles/card4.jpeg";
 import card5 from "./articles/card5.jpeg";
-import education_header from "./articles/education_header.png";
+import entertainment_header from "./articles/entertainment_header.png";
 import dj1 from "./articles/dj1.jpeg";
 import dj2 from "./articles/dj2.jpeg";
 import dj3 from "./articles/dj3.jpeg";
@@ -64,12 +64,21 @@ import youth1 from "./articles/youth1.jpeg";
 import youth2 from "./articles/youth2.jpeg";
 import youth3 from "./articles/youth3.jpeg";
 import youth4 from "./articles/youth4.jpeg";
-import entertainment_header from "./articles/entertainment_header.png";
 import culture_header from "./articles/culture_header.png";
 import culturecard1 from "./articles/culturecard1.jpeg";
 import culturecard2 from "./articles/culturecard2.jpeg";
 import culturecard3 from "./articles/culturecard3.jpeg";
 import culturecard4 from "./articles/culturecard4.jpeg";
+import education_header from "./articles/education_header.png";
+import Academic1 from "./articles/Academic1.jpeg";
+import Academic2 from "./articles/Academic2.jpeg";
+import Academic3 from "./articles/Academic3.jpeg";
+import career1 from "./articles/career1.jpeg";
+import career2 from "./articles/career2.jpeg";
+import career3 from "./articles/career3.jpeg";
+import Student1 from "./articles/Student1.jpeg";
+import Student2 from "./articles/Student2.jpeg";
+import Student3 from "./articles/Student3.jpeg";
 
 export const logo = {
   adhithiBeat,
@@ -128,23 +137,36 @@ export const heroImages = {
 };
 
 export const articles = {
+  // Personal category
   header_image,
   card1,
   card2,
   card3,
   card4,
   card5,
-  education_header,
-  entertainment_header,
-  dj1,
-  dj2,
-  dj3,
-  dj4,
+  //Cultural category
   culture_header,
   culturecard1,
   culturecard2,
   culturecard3,
   culturecard4,
+  // Education category
+  education_header,
+  Academic1,
+  Academic2,
+  Academic3,
+  career1,
+  career2,
+  career3,
+  Student1,
+  Student2,
+  Student3,
+  // Entertainment category
+  entertainment_header,
+  dj1,
+  dj2,
+  dj3,
+  dj4,
   youth1,
   youth2,
   youth3,
@@ -153,6 +175,7 @@ export const articles = {
   liveshow2,
   liveshow3,
   liveshow4,
+  //Corporate category
 };
 
 export const products = [
