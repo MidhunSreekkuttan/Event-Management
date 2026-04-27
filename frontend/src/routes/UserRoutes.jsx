@@ -2,8 +2,6 @@ import { lazy, Suspense } from 'react'
 import { Route } from 'react-router-dom'
 import UserLayout from '../layouts/UserLayout'
 import Loader from '../components/Loading'
-import BookingORenqury from '../pages/users/article/others/BookingORenqury'
-import EnjoyTheEvent from '../pages/users/article/others/EnjoyTheEvent'
 
 const Home = lazy(() => import('../pages/users/Home'))
 const EventList = lazy(() => import('../pages/users/EventList'))
@@ -24,6 +22,12 @@ const Cultural = lazy(() => import('../pages/users/article/category/Cultural'))
 const Coorprates = lazy(() => import('../pages/users/article/category/Coorprates'))
 const Entertainments = lazy(() => import('../pages/users/article/category/Entertainments'))
 const Educational = lazy(() => import('../pages/users/article/category/Educational'))
+
+const PolicyandPrivacy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
+const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
+const BookingORenqury = lazy(() => import('../pages/users/article/others/BookingORenqury'))
+const EnjoyTheEvent = lazy(() => import('../pages/users/article/others/EnjoyTheEvent'))
+
 
 const UserRoutes = () => {
   return (
@@ -56,8 +60,10 @@ const UserRoutes = () => {
         <Route path='/entertainments' element={<Entertainments />} />
         <Route path='/educational' element={<Educational />} />
 
-        <Route path='/bookigOrEnquery' element={<BookingORenqury />} />
-        <Route path='/enjoyTheEvent' element={<EnjoyTheEvent />} />
+        <Route path='/PrivacyandPolicy' element={<PolicyandPrivacy />} />
+        <Route path='/TermsandConditions' element={<TermsandConditions />} />
+        <Route path='/BookingORenqury' element={<BookingORenqury />} />
+        <Route path='/EnjoyTheEvent' element={<EnjoyTheEvent />} />
 
       </Route>
 

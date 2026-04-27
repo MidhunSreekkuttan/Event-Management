@@ -52,17 +52,24 @@ import card3 from "./articles/card3.jpeg";
 import card4 from "./articles/card4.jpeg";
 import card5 from "./articles/card5.jpeg";
 import education_header from "./articles/education_header.png";
-import entercard1 from "./articles/entercard1.jpeg";
-import entercard2 from "./articles/entercard2.jpeg";
-import entercard3 from "./articles/entercard3.jpeg";
-import entercard4 from "./articles/entercard4.jpeg";
-import entercard5 from "./articles/entercard5.jpeg";
+import dj1 from "./articles/dj1.jpeg";
+import dj2 from "./articles/dj2.jpeg";
+import dj3 from "./articles/dj3.jpeg";
+import dj4 from "./articles/dj4.jpeg";
+import liveshow1 from "./articles/liveshow1.jpeg";
+import liveshow2 from "./articles/liveshow2.jpeg";
+import liveshow3 from "./articles/liveshow3.jpeg";
+import liveshow4 from "./articles/liveshow4.jpeg";
+import youth1 from "./articles/youth1.jpeg";
+import youth2 from "./articles/youth2.jpeg";
+import youth3 from "./articles/youth3.jpeg";
+import youth4 from "./articles/youth4.jpeg";
 import entertainment_header from "./articles/entertainment_header.png";
 import culture_header from "./articles/culture_header.png";
 import culturecard1 from "./articles/culturecard1.jpeg";
 import culturecard2 from "./articles/culturecard2.jpeg";
 import culturecard3 from "./articles/culturecard3.jpeg";
-import culturecard4 from "./articles/culturecard4";
+import culturecard4 from "./articles/culturecard4.jpeg";
 
 export const logo = {
   adhithiBeat,
@@ -129,16 +136,23 @@ export const articles = {
   card5,
   education_header,
   entertainment_header,
-  entercard1,
-  entercard2,
-  entercard3,
-  entercard4,
-  entercard5,
+  dj1,
+  dj2,
+  dj3,
+  dj4,
   culture_header,
   culturecard1,
   culturecard2,
   culturecard3,
   culturecard4,
+  youth1,
+  youth2,
+  youth3,
+  youth4,
+  liveshow1,
+  liveshow2,
+  liveshow3,
+  liveshow4,
 };
 
 export const products = [
