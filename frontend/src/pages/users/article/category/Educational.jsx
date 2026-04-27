@@ -243,7 +243,7 @@ export default function EducationalPage() {
         <div className="relative min-h-[70vh] flex flex-col justify-end p-6 md:p-20 pb-32">
           <div className="absolute inset-0 z-0">
             <img src={selectedArticle.img} alt={selectedArticle.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-white via-white/40 to-transparent"></div>
           </div>
           <div className="relative z-10 max-w-4xl space-y-8 text-left">
             <button onClick={() => setSelectedArticle(null)} className="flex items-center gap-2 text-white font-bold mb-12 hover:text-black transition-colors uppercase text-xs tracking-widest">
@@ -292,12 +292,12 @@ export default function EducationalPage() {
         {/* Hero Section */}
         <section className="bg-[#07142b] text-white overflow-hidden relative">
           <div className="absolute top-10 left-10 z-50">
-            <button onClick={() => navigate("/")} className="text-yellow-400 font-bold flex items-center gap-2 hover:translate-x-[-4px] transition-transform uppercase tracking-widest text-xs">
+            <button onClick={() => navigate("/")} className="text-yellow-400 font-bold flex items-center gap-2 hover:-translate-x-1 transition-transform uppercase tracking-widest text-xs">
               <ArrowLeft size={16} /> Back to Home
             </button>
           </div>
 
-          <div className="relative grid md:grid-cols-[0.8fr_1.2fr] gap-0 min-h-[600px] md:min-h-[700px]">
+          <div className="relative grid md:grid-cols-[0.8fr_1.2fr] gap-0 min-h-150 md:min-h-175">
             <div className="relative z-30 flex flex-col justify-center py-20 px-10 md:pl-20 text-left">
               <div className="flex items-center gap-3 text-yellow-400 mb-8">
                 <div className="p-2 bg-yellow-400/10 rounded-lg border border-yellow-400/20">
@@ -314,9 +314,9 @@ export default function EducationalPage() {
               </p>
             </div>
 
-            <div className="relative h-[450px] md:h-auto overflow-hidden z-10 md:rounded-r-[60px]">
+            <div className="relative h-112.5 md:h-auto overflow-hidden z-10 md:rounded-r-[60px]">
               <img src={education_header} alt="Education" className="w-full h-full object-cover" />
-              <div className="absolute inset-y-0 left-0 w-full md:w-[60%] bg-gradient-to-r from-[#07142b] via-[#07142b]/60 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-y-0 left-0 w-full md:w-[60%] bg-linear-to-r from-[#07142b] via-[#07142b]/60 to-transparent pointer-events-none"></div>
             </div>
           </div>
         </section>
@@ -372,7 +372,7 @@ export default function EducationalPage() {
                         {card.category}
                       </div>
                     </div>
-                    <div className="p-10 space-y-6 flex flex-col flex-grow text-left">
+                    <div className="p-10 space-y-6 flex flex-col grow text-left">
                       <h3 className="text-2xl font-bold text-gray-900 leading-tight group-hover:text-indigo-600 transition-colors">{card.title}</h3>
                       <p className="text-gray-500 leading-relaxed font-light line-clamp-3 text-lg">{card.desc}</p>
                       <div className="mt-auto pt-8">
@@ -391,8 +391,8 @@ export default function EducationalPage() {
           ))}
 
           {/* Bottom CTA */}
-          <div className="bg-gradient-to-r from-purple-700 to-indigo-800 rounded-[50px] p-12 md:p-24 text-white flex flex-col lg:flex-row items-center justify-between gap-16 text-left relative overflow-hidden group shadow-2xl shadow-indigo-900/20">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[100px] group-hover:bg-white/10 transition-all duration-1000"></div>
+          <div className="bg-linear-to-r from-purple-700 to-indigo-800 rounded-[50px] p-12 md:p-24 text-white flex flex-col lg:flex-row items-center justify-between gap-16 text-left relative overflow-hidden group shadow-2xl shadow-indigo-900/20">
+            <div className="absolute top-0 right-0 w-125 h-125 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[100px] group-hover:bg-white/10 transition-all duration-1000"></div>
             <div className="flex items-center gap-12 relative z-10">
               <div className="w-28 h-28 rounded-3xl bg-white/10 backdrop-blur-xl flex items-center justify-center border border-white/20 shadow-2xl">
                 <Lightbulb size={56} className="text-yellow-300" />
