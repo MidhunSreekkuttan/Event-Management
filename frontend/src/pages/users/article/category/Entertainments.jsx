@@ -303,7 +303,7 @@ export default function EntertainmentPage() {
                 <div className="relative min-h-[70vh] flex flex-col justify-end p-6 md:p-20 pb-32">
                     <div className="absolute inset-0 z-0">
                         <img src={selectedArticle.img} alt={selectedArticle.title} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black"></div>
+                        <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/40 to-black"></div>
                     </div>
                     <div className="relative z-10 max-w-4xl space-y-8 text-left">
                         <button onClick={() => setSelectedArticle(null)} className="flex items-center gap-2 text-pink-500 font-medium mb-12 hover:text-white transition-colors uppercase text-xs tracking-widest">
@@ -351,16 +351,16 @@ export default function EntertainmentPage() {
                 <button className="flex items-center gap-2 text-zinc-500 font-medium mb-16 hover:text-pink-500 transition-all group text-sm relative z-50 uppercase tracking-widest" onClick={() => navigate("/")}>
                     <ArrowRight size={16} className="rotate-180" /> Back to Home
                 </button>
-                <div className="relative grid md:grid-cols-[0.8fr_1.2fr] gap-0 mb-32 min-h-[600px]">
+                <div className="relative grid md:grid-cols-[0.8fr_1.2fr] gap-0 mb-32 min-h-150">
                     <div className="absolute inset-0 opacity-15 pointer-events-none z-20" style={{ backgroundImage: 'radial-gradient(circle, #f43f5e 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
                     <div className="relative z-30 flex flex-col justify-center py-10 pr-10 text-left">
                         <p className="text-pink-500 uppercase text-[11px] font-bold tracking-[0.5em] mb-8">Our Articles</p>
-                        <h1 className="text-7xl md:text-8xl font-black leading-none mb-10 tracking-tighter">Entertainment <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ed4290] via-[#c634dd] to-[#5151f1]">Events</span></h1>
+                        <h1 className="text-7xl md:text-8xl font-black leading-none mb-10 tracking-tighter">Entertainment <br /><span className="text-transparent bg-clip-text bg-linear-to-r from-[#ed4290] via-[#c634dd] to-[#5151f1]">Events</span></h1>
                         <p className="text-zinc-400 text-xl leading-relaxed max-w-sm mb-14 font-light italic">Ideas, tips and expert advice to make your entertainment events unforgettable.</p>
                     </div>
-                    <div className="relative h-[450px] md:h-auto overflow-hidden z-10 md:rounded-r-[60px]">
+                    <div className="relative h-112.5 md:h-auto overflow-hidden z-10 md:rounded-r-[60px]">
                         <img src={entertainment_header} alt="Hero" className="w-full h-full object-cover" />
-                        <div className="absolute inset-y-0 left-0 w-full md:w-[60%] bg-gradient-to-r from-black via-black/40 to-transparent pointer-events-none"></div>
+                        <div className="absolute inset-y-0 left-0 w-full md:w-[60%] bg-linear-to-r from-black via-black/40 to-transparent pointer-events-none"></div>
                     </div>
                 </div>
                 {categories.map((section, i) => (
