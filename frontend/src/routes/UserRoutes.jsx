@@ -28,6 +28,12 @@ const EnjoyTheEvent = lazy(() => import('../pages/users/article/others/EnjoyTheE
 const PrivacyandPolicy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
 const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
 
+const PolicyandPrivacy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
+const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
+const BookingORenqury = lazy(() => import('../pages/users/article/others/BookingORenqury'))
+const EnjoyTheEvent = lazy(() => import('../pages/users/article/others/EnjoyTheEvent'))
+
+
 const UserRoutes = () => {
   return (
 
@@ -59,10 +65,10 @@ const UserRoutes = () => {
         <Route path='/entertainments' element={<Entertainments />} />
         <Route path='/educational' element={<Educational />} />
 
-        <Route path='/bookigOrEnquery' element={<BookingORenqury />} />
-        <Route path='/enjoyTheEvent' element={<EnjoyTheEvent />} />
-        <Route path='/policyAndPrivacy' element={<PrivacyandPolicy />} />
+        <Route path='/PrivacyandPolicy' element={<PolicyandPrivacy />} />
         <Route path='/TermsandConditions' element={<TermsandConditions />} />
+        <Route path='/BookingORenqury' element={<BookingORenqury />} />
+        <Route path='/EnjoyTheEvent' element={<EnjoyTheEvent />} />
 
       </Route>
 

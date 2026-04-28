@@ -51,18 +51,46 @@ import card2 from "./articles/card2.jpeg";
 import card3 from "./articles/card3.jpeg";
 import card4 from "./articles/card4.jpeg";
 import card5 from "./articles/card5.jpeg";
-import education_header from "./articles/education_header.png";
-import entercard1 from "./articles/entercard1.jpeg";
-import entercard2 from "./articles/entercard2.jpeg";
-import entercard3 from "./articles/entercard3.jpeg";
-import entercard4 from "./articles/entercard4.jpeg";
-import entercard5 from "./articles/entercard5.jpeg";
 import entertainment_header from "./articles/entertainment_header.png";
+import dj1 from "./articles/dj1.jpeg";
+import dj2 from "./articles/dj2.jpeg";
+import dj3 from "./articles/dj3.jpeg";
+import dj4 from "./articles/dj4.jpeg";
+import liveshow1 from "./articles/liveshow1.jpeg";
+import liveshow2 from "./articles/liveshow2.jpeg";
+import liveshow3 from "./articles/liveshow3.jpeg";
+import liveshow4 from "./articles/liveshow4.jpeg";
+import youth1 from "./articles/youth1.jpeg";
+import youth2 from "./articles/youth2.jpeg";
+import youth3 from "./articles/youth3.jpeg";
+import youth4 from "./articles/youth4.jpeg";
 import culture_header from "./articles/culture_header.png";
-import culturecard1 from "./articles/culturecard1.jpeg";
-import culturecard2 from "./articles/culturecard2.jpeg";
-import culturecard3 from "./articles/culturecard3.jpeg";
-import culturecard4 from "./articles/culturecard4.jpeg";
+import Festival1 from "./articles/Festival1.jpeg";
+import Festival2 from "./articles/Festival2.jpeg";
+import Festival3 from "./articles/Festival3.jpeg";
+import Festival4 from "./articles/Festival4.jpeg";
+import Art1 from "./articles/Art1.jpeg";
+import Art2 from "./articles/Art2.jpeg";
+import Art3 from "./articles/Art3.jpeg";
+import Art4 from "./articles/Art4.jpeg";
+import Dance1 from "./articles/Dance1.jpeg";
+import Dance2 from "./articles/Dance2.jpeg";
+import Dance3 from "./articles/Dance3.jpeg";
+import Dance4 from "./articles/Dance4.jpeg";
+import Public1 from "./articles/Public1.jpeg";
+import Public2 from "./articles/Public2.jpeg";
+import Public3 from "./articles/Public3.jpeg";
+import Public4 from "./articles/Public4.jpeg";
+import education_header from "./articles/education_header.png";
+import Academic1 from "./articles/Academic1.jpeg";
+import Academic2 from "./articles/Academic2.jpeg";
+import Academic3 from "./articles/Academic3.jpeg";
+import career1 from "./articles/career1.jpeg";
+import career2 from "./articles/career2.jpeg";
+import career3 from "./articles/career3.jpeg";
+import Student1 from "./articles/Student1.jpeg";
+import Student2 from "./articles/Student2.jpeg";
+import Student3 from "./articles/Student3.jpeg";
 
 export const logo = {
   adhithiBeat,
@@ -121,24 +149,57 @@ export const heroImages = {
 };
 
 export const articles = {
+  // Personal category
   header_image,
   card1,
   card2,
   card3,
   card4,
   card5,
-  education_header,
-  entertainment_header,
-  entercard1,
-  entercard2,
-  entercard3,
-  entercard4,
-  entercard5,
+  //Cultural category
   culture_header,
-  culturecard1,
-  culturecard2,
-  culturecard3,
-  culturecard4,
+  Festival1,
+  Festival2,
+  Festival3,
+  Festival4,
+  Art1,
+  Art2,
+  Art3,
+  Art4,
+  Dance1,
+  Dance2,
+  Dance3,
+  Dance4,
+  Public1,
+  Public2,
+  Public3,
+  Public4,
+  // Education category
+  education_header,
+  Academic1,
+  Academic2,
+  Academic3,
+  career1,
+  career2,
+  career3,
+  Student1,
+  Student2,
+  Student3,
+  // Entertainment category
+  entertainment_header,
+  dj1,
+  dj2,
+  dj3,
+  dj4,
+  youth1,
+  youth2,
+  youth3,
+  youth4,
+  liveshow1,
+  liveshow2,
+  liveshow3,
+  liveshow4,
+  //Corporate category
 };
 
 export const products = [

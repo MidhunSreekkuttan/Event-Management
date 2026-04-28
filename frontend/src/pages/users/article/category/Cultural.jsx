@@ -1,216 +1,384 @@
-import React from 'react';
-import { Calendar, ArrowLeft } from 'lucide-react';
-import { articles } from '../../../../assets/assets';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Music, Users, Heart, Camera, ArrowRight, ArrowLeft, Calendar, Clock, Mic, Sparkles, GraduationCap, Theater, Book, Palette, Building2, Flag, MapPin } from "lucide-react";
+import { articles } from "../../../../assets/assets";
 
-const { cultural_header } = articles;
+const { culture_header, Festival1, Festival2, Festival3, Festival4, Art1, Art2, Art3, Art4, Dance1, Dance2, Dance3, Dance4, Public1, Public2, Public3, Public4 } = articles;
 
-const CulturalEvents = () => {
+const categories = [
+    {
+        title: "Festivals & Traditional Celebrations",
+        desc: "Simple guides for students to help plan and run big festivals and local celebrations.",
+        icon: <Building2 className="w-5 h-5 text-orange-600" />,
+        cards: [
+            {
+                img: Festival1,
+                title: "How to Organize a Successful Cultural Festival",
+                category: "Festivals",
+                date: "Jan 15, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Having a Good Idea and Working Together", text: "Planning a big cultural festival is a lot of work. You need to have a clear idea of what you want to show. You should talk to old people in your town to learn about the history. This helps you keep the traditions alive. You also need to think about the money. You need enough to pay for the stage, the food, and the people who will help. A good leader makes a list of everything to do. You should start planning many months before the day. You have to think about how people will move around. Safety is very important so no one gets hurt. Tell your team exactly what they need to do. When everyone works together, the festival will be great. People will remember the fun they had for a long time. It brings the whole town together. You should also think about the weather. Have a plan if it rains. Make sure there is water for everyone to drink. A good festival makes everyone feel proud of where they come from. It is a time to share stories and eat good food. You can invite people from other towns to see your culture too. This makes the world a better place because we learn about each other. Everyone should feel welcome and happy to be there." },
+                    { title: "Making the Show Look and Sound Great", text: "If you want your festival to be special, you need good lights and sound. People need to hear the music clearly even if they are far away. You should hire people who know how to use microphones and speakers. Good lighting helps people see the beautiful costumes and the dancers on stage. You can use bright colors to make it look like a party. It is also good to have a big screen so people in the back can see everything. Make sure all the wires are hidden so no one trips over them. You should test everything the day before the show. If something breaks, you need to have a backup plan. A professional show makes the performers feel important. It also makes the audience enjoy the culture much more. You can use smoke or special effects to make the stage look magical. When the lights go down and the music starts, everyone should feel excited. The technical part is very important for a world-class festival. Don't forget to have a place for the artists to rest. They need water and a quiet space before they go on stage to perform." },
+                    { title: "Helping the Community and Keeping it Going", text: "The most important part of a festival is helping the people in your town. You should talk to local shops and ask them to sell things at your event. This helps them earn money and shows their work to more people. You can also have a place where people can learn how to make traditional things. This keeps the old skills alive in the new generation. After the festival is over, you should say thank you to everyone who helped. Ask people what they liked and what you can do better next time. You can save photos and videos of the event to show people later. This builds a history for your festival. You should also think about the environment. Try not to use too much plastic and make sure there are enough trash cans. A clean festival is a happy festival. If you plan carefully, your festival can happen every year for a long time. It becomes a tradition that children will look forward to when they grow up. Working with the community makes the event stronger and more meaningful. It is a great way to celebrate our shared heritage and look forward to a bright future together." }
+                ]
+            },
+            {
+                img: Festival2,
+                title: "Planning Traditional Onam / Diwali / Christmas Events",
+                category: "Festivals",
+                date: "Feb 10, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Keeping Traditions Real and Safe", text: "Planning events like Onam, Diwali, or Christmas is about making people feel at home. You need to make sure the traditional things are done correctly. For example, in Onam, the flower carpet should be very pretty. In Diwali, the lights should be everywhere to show the victory of good over evil. You need to buy high-quality things that look real and beautiful. The place you choose should have enough room for everyone to sit and talk. You also need to think about how people will get into the building. It should be easy for old people and children to move around. Safety is the most important thing when using candles or lights. Always have water or a fire extinguisher nearby just in case. Good planning means that everything happens on time. When people see that you cared about the details, they feel respected. These traditions are very special to our families, so we must treat them with love. Make sure there is a clear plan for the day so no one gets confused. A successful traditional event is one where everyone feels the spirit of the holiday in their hearts." },
+                    { title: "Good Food and Sharing a Meal", text: "Traditional festivals are always about eating together. The food must be very good and there should be plenty of it. You should hire cooks who know the old recipes very well. For a traditional feast, the way you serve the food is also important. Use the right plates or leaves to make it feel authentic. Make sure there is a place for everyone to sit and enjoy their meal. Sharing food is a great way to make new friends. You should also check if anyone has allergies to certain foods. Keep the dining area very clean and provide enough water. A good meal makes people happy and helps them enjoy the rest of the celebration. You can also have traditional snacks for people to eat throughout the day. The smell of good food makes the whole place feel like a real celebration. Don't forget to have a plan for the leftovers so no food is wasted. You can give it to people who need it or share it with the workers. A good celebration is one where no one goes home hungry. Food brings everyone together and makes the traditions even more enjoyable for the whole community." },
+                    { title: "Helping Young People Learn the Old Ways", text: "We must teach our children about our traditions so they don't forget them. You can have fun workshops where kids learn to dance or make traditional crafts. This makes them feel proud of their culture. You can also have story time where elders tell stories about the old days. This helps children understand why we celebrate these holidays. Use social media to show the fun parts of the tradition to young people. If they see their friends having fun, they will want to join in too. You can let the youth help with the planning and the decorations. This gives them a sense of responsibility. When young people lead, the traditions stay fresh and exciting. A good festival should be fun for people of all ages. Make sure there are games and activities for the kids to do. When the whole family is involved, the tradition becomes stronger. Your job as a student leader is to make sure everyone feels included. By teaching the young ones, we are making sure our culture lives on for many more years. It is a beautiful way to connect the past with the future and keep our heritage alive in a modern world." }
+                ]
+            },
+            {
+                img: Festival3,
+                title: "Managing Food Stalls at Cultural Festivals",
+                category: "Festivals",
+                date: "March 5, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Choosing Good Vendors and Making a Map", text: "Managing many food stalls is a big challenge for any student team. You need to make a good plan so people can find the food they want. Design a map that shows where each stall will be. Keep the food area away from the main stage so it doesn't get too crowded. Choose vendors who sell high-quality and traditional food. They should be able to serve many people quickly without making mistakes. You should give every vendor a list of rules they must follow. This includes how to set up their stall and what time they should arrive. Good communication with the vendors is key to a smooth event. If they are happy, the food will be good and the visitors will be happy too. You also need to think about where the trash will go. Have many big bins and make sure they are emptied often. A clean food area is very important for the health of the visitors. Every detail, from the price signs to the seating, should be planned carefully. This makes the festival feel professional and well-organized for everyone who comes to eat." },
+                    { title: "Cleanliness and Technical Setup", text: "The most important thing for a food festival is keeping everything clean. Every stall must have access to clean water and electricity. You must make sure the vendors are following all the health rules. Inspect the stalls regularly to see if the food is being handled safely. If someone gets sick, it will ruin the whole festival. Use a simple system for people to pay for their food so it's quick and easy. The area where people eat should have comfortable tables and chairs. It should also be well-lit so people can see what they are eating at night. Technical mastery means that the power never goes out and the water is always running. By focusing on these things, you protect the health of the visitors and the reputation of the event. A good food area should smell nice and look inviting. Make sure there is enough space between the stalls so people can walk freely. If the infrastructure is strong, the vendors can focus on making the best food. This creates a wonderful sensory experience for everyone at the festival. Don't forget to have a first-aid kit nearby just in case of any accidents." },
+                    { title: "New Ideas and Making it Fun", text: "A great food festival should have both old and new types of food. You can have a place where traditional cooks work with modern chefs. This creates new and exciting dishes for people to try. You can also have cooking shows where people can learn how to make the food themselves. This makes the event more interactive and fun. Use social media to tell people about the special foods they can find at your festival. You can even have a competition for the best-tasting dish. This encourages the vendors to do their best work. Effective communication with the public helps more people find out about the event. By mixing tradition with new ideas, you keep the culture alive and exciting for the young generation. Your job as an organizer is to help these creative people show their work to the world. When the food is great, it brings people together and makes them want to stay at the festival longer. It is a wonderful way to celebrate our culinary heritage while looking forward to new flavors. A successful event is one where everyone discovers something new and delicious to eat." }
+                ]
+            },
+            {
+                img: Festival4,
+                title: "Crowd Flow Tips for Public Cultural Celebrations",
+                category: "Festivals",
+                date: "April 1, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Planning the Paths and Clear Signs", text: "Managing a large crowd is very important for the safety of everyone. You need a good map that shows where people should walk. Use signs that are big and easy to read. They should tell people where the exits, the food, and the bathrooms are. You should also have people who can help guide the crowd if they get lost. Try to avoid having narrow paths where people might get stuck. If there are too many people in one spot, it can be dangerous. You can use barriers to keep the lines organized. A good layout makes the festival feel calm and fun instead of busy and stressful. Always think about where the people will enter and leave the venue. Make sure the gates are wide enough for everyone to pass through safely. If you have different zones, make sure the paths between them are clear. Digital tools can also help you see where the most people are in real-time. This allows you to move workers to the busy areas to help out. By focusing on the flow of the crowd, you make sure everyone has a good time and stays safe from start to finish." },
+                    { title: "Using Technology to Stay Safe", text: "In a modern festival, technology is a big help for managing crowds. You can use cameras to see if any area is getting too crowded. This data helps the security team make quick decisions. A good event app can also help the visitors know where to go. It can send messages about where the lines are short or where the next show will be. High-speed Wi-Fi is important for the staff to talk to each other. They should use radios to stay connected at all times. Professional sound systems can also be used to give clear instructions to the crowd. If everyone knows what to do, there will be no panic. Technical mastery means that all these systems work perfectly without any breaks. By investing in these tools, you make the festival safer and more professional. It shows the visitors that you care about their well-being. Technology is the invisible helper that makes a big event run smoothly. Don't forget to have a backup plan if the power or the internet goes down. Safety is a team effort that requires both good people and good technology working together." },
+                    { title: "Friendly Security and Emergency Plans", text: "The security team should be friendly and helpful to everyone. They are there to keep people safe, but they can also give directions and help out. If the guards are nice, the whole festival feels more welcoming. They should be trained to handle emergencies quickly and calmly. Make sure there is a clear plan for what to do if someone gets hurt or lost. Have first-aid stations that are easy to find. Provide plenty of water to the visitors so they don't get sick from the heat. Effective communication among all the workers is key to a fast response. By having a visible and friendly presence, you make the attendees feel protected and supported. This human-centered approach is much better than just having strict rules. When people feel safe, they can relax and enjoy the culture. Good management is invisible; it just makes everything work perfectly. A successful public celebration is one where everyone goes home happy and safe. Your job as an organizer is to provide the structure that allows the joy of the tradition to shine through for everyone involved. Meticulous planning is the secret to a great and safe event." }
+                ]
+            }
+        ]
+    },
+    {
+        title: "Dance & Music Programs",
+        desc: "Simple steps for students to create great stage shows and musical performances.",
+        icon: <Music className="w-5 h-5 text-orange-600" />,
+        cards: [
+            {
+                img: Dance1,
+                title: "How to Plan a Classical Dance Event",
+                category: "Dance & Music",
+                date: "Jan 20, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Picking the Best Artists and Traditions", text: "Planning a classical dance show is a beautiful way to share our culture. You need to pick dancers who have practiced very hard and know the old ways. Talk to teachers to find the best students and professionals. The show should respect the traditions of the dance. Choose a place that looks nice and has a good stage. A big theater or a clean hall is a great choice. You also need to think about the costumes and the jewelry. They should be bright and authentic so the audience can see the detail. A good organizer also finds the best musicians to play live for the dancers. This makes the performance feel more real and emotional. By picking high-quality artists, you show that you care about the art form. This creates a special environment for both the performer and the audience. Every part of the show should be designed to support the artistic vision. When you focus on quality, the whole community will appreciate the heritage you are celebrating. Total professional depth is achieved through careful planning and a love for the dance." },
+                    { title: "Using Good Lights and a Clean Stage", text: "Lights are very important for a dance performance. They help the audience see the dancer's facial expressions and hand movements. You should use a mix of warm and cool lights to create the right mood. Work with the dancer to know when the lights should change. A clean stage is also very important so the dancer doesn't slip. Remove any dust or water before the show starts. You can use a subtle smoke machine to make the stage look more magical. This adds a cinematic quality to the performance without being distracting. High-resolution screens can also be used as a backdrop to show beautiful patterns. Technical mastery means that the lights never fail and the sound is always clear. A flawless show allows the dancer to shine and keeps the audience focused on the beauty of the movement. Every light choice should be made to elevate the heritage you are celebrating. The technical team is the engine that makes the show work perfectly. Don't forget to have a clear schedule for the lighting cues so there are no mistakes during the live performance. Success comes from the harmony between the art and the technology." },
+                    { title: "Telling the Community and Helping People Learn", text: "A successful dance event should help people understand the art. You can provide simple notes that explain the stories the dancers are telling. This helps the audience feel more connected to the show. Use social media to share videos of the rehearsals. This builds excitement and shows people how much work goes into a performance. Effective communication with the public is essential for a good turnout. By teaching the community, you ensure that the art form lives on for a long time. Your job as an organizer is to provide a platform for the artists to be seen and heard. This creates a permanent contribution to the community's culture. When the audience feels like they have learned something, they will come back for the next show. It is a great way to build a legacy of appreciation for our traditional arts. Working together with the dancers and the public makes the event more meaningful. A successful show is one where everyone leaves with a deeper love for their culture. Meticulous planning and outreach are the keys to a world-class production that the entire community will remember with pride." }
+                ]
+            },
+            {
+                img: Dance2,
+                title: "Stage Design Ideas for Cultural Performances",
+                category: "Dance & Music",
+                date: "Feb 5, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Making the Stage Tell a Story", text: "Designing a stage for a cultural show is a fun and creative task. You should use things that remind people of their heritage. Talk to artists to find out what symbols and colors represent the culture best. You can use traditional fabrics and patterns to decorate the background. A successful designer makes the stage look beautiful but also makes it easy to use. The performers need enough space to move around freely. Make sure the entrance and exit are easy to find. By using both old and new materials, you can create a stage that looks stunning and professional. Every detail, from the textures to the props, should help tell the story of the performance. A well-designed stage gives the performers confidence and makes the audience feel like they are in a different world. It is about creating a physical space that reflects the values of the culture. When you prioritize narrative clarity, the stage becomes a vital part of the celebration. Meticulous attention to detail is the secret to a great stage that the entire community will talk about for years to come. Total professional depth is required to make the vision real." },
+                    { title: "Using Digital Backgrounds and Modern Tech", text: "In a modern cultural show, you can use digital screens to make the stage look even better. These screens can show photos of old buildings, traditional patterns, or beautiful nature. This helps the audience understand the context of the dance or music. The key is to make sure the digital parts fit well with the live performance. They should not be too bright or distracting. Work with a technical crew who knows how to use large-scale projection mapping. This technology turns a simple wall into a dynamic canvas for storytelling. Professional video production is essential to manage these complex systems. Technical mastery is what turns a traditional show into a world-class spectacle. By embracing technology, you can reach a wider audience through live streaming. This makes the culture accessible to people who couldn't be there in person. Every pixel and every light should be managed carefully to create a cohesive sensory experience. A successful event is one that uses modern tools to celebrate our old traditions in a cinematic and immersive way. Don't forget to test the digital visuals with the lighting to make sure they look perfect together." },
+                    { title: "Keeping Everything Organized and Safe", text: "The most important part of stage design is keeping the crew and performers safe. You must manage the schedule for setting up and taking down the stage. Use high-quality materials that are strong and stable. Work with professional staging companies to make sure everything meets the safety rules. A successful manager keeps a detailed book of all the technical needs. This includes the stage dimensions and the electrical requirements for the lights and sound. Choosing the right venue with enough power and space is essential for a professional show. By prioritizing organization, you create an environment where the creative team can do their best work. Meticulous planning and execution are the keys to a seamless show that respects everyone's time and energy. Don't forget to have clear safety protocols for the backstage area. Everyone should know what to do in case of an emergency. By focusing on logistics, you provide the structure that allows the artistic vision to shine with total clarity. A successful production is one where all the unseen parts work perfectly to support the magic on the stage for the community to enjoy." }
+                ]
+            },
+            {
+                img: Dance3,
+                title: "Sound Setup for Live Traditional Music Shows",
+                category: "Dance & Music",
+                date: "March 12, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Making the Music Sound Real and Clear", text: "Setting up sound for traditional music is a special job. Traditional instruments have very delicate sounds that can be lost if the equipment is not good. You need high-quality microphones that are made for these types of instruments. Hire a sound engineer who knows traditional music and can mix it with care. They should make sure that every instrument can be heard perfectly by the audience. Choosing a room with good natural sound can also help a lot. By prioritizing clear sound, you allow the audience to fully enjoy the beauty of the music. Every detail, from the treble to the bass, should be balanced with precision. A good sound setup makes the whole performance feel more professional and emotional. People should feel the music in their hearts as if they are sitting right next to the musicians. This creates a wonderful sensory experience that celebrates our musical heritage. Don't forget to use high-quality cables to keep the sound clean and clear. A world-class production is built on a foundation of acoustic fidelity and technical excellence. Success comes from the small details that make a big difference in the quality of the music." },
+                    { title: "Helping the Musicians Hear Themselves", text: "To give a great performance, the musicians must be able to hear themselves on stage. This is called a monitor mix, and it is very important. Each musician should have their own speaker or earphone so they can follow the beat. Talk to the artists before the show to know exactly what they need. A good sound engineer stays helpful and responsive during the entire performance. They should make sure the musicians feel confident and comfortable. Conducting thorough sound checks for every act is the only way to avoid mistakes during the show. The technical team should be a friendly and supportive presence for the artists. A well-managed sound setup creates a professional energy that reflects the excellence of the music. By providing a world-class environment, you ensure that the audience remains fully engaged in the magic on stage. When the artists are happy, the performance will be great for everyone. Your job as an organizer is to facilitate this creative connection by handling the technical parts perfectly. Good communication is the key to a tight and professional show that everyone will remember with joy and pride." },
+                    { title: "Having a Backup Plan for Every Wire", text: "In a professional live show, you must have a backup for everything. This includes extra cables, microphones, and even a second soundboard. If something breaks, the show must go on without stopping. Use high-quality power conditioners to keep the equipment safe from electrical surges. The technical team should be able to manage complex digital networks with total professional excellence. Redundancy is the invisible safety net that keeps the music flowing. Technical mastery is what turns a community concert into a world-class production. By focusing on these details, you show that you take the culture and the audience seriously. Every wire and every connector should be tested carefully before the audience arrives. This level of meticulous planning is what prevents disasters and ensures a flawless show. A successful event is one where the technical parts are so good that no one even notices them. The focus should always be on the beauty of the traditional music. Strategic precision and a bold vision are the keys to professional success in the high-stakes world of live cultural events. Total professional depth is achieved through the use of high-quality equipment and careful organization." }
+                ]
+            },
+            {
+                img: Dance4,
+                title: "Backstage Coordination for Multi-Act Programs",
+                category: "Dance & Music",
+                date: "April 15, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Moving Acts Quickly and Quietly", text: "Backstage management is like a big puzzle where every piece must fit. You need to make sure one act leaves the stage and the next one starts quickly. This requires a very detailed schedule that everyone must follow. Have a professional crew that is trained to move heavy equipment and sets in total silence. Clear communication is essential, so use radios to stay connected with the whole team. You should have a clear path for the performers to walk from their dressing rooms to the stage. Choosing a venue with plenty of backstage space is very helpful. If the transitions are smooth, the audience will never lose interest in the show. A successful manager plans for every single minute of the program. This level of precision ensures a high-quality experience for both the artists and the viewers. By prioritizing operational flow, you create a professional environment where the creative vision can shine with total clarity and confidence. Every movement backstage should be planned with care to avoid any accidents or delays. Total professional excellence is achieved through the use of high-quality logistics and a dedicated team." },
+                    { title: "Taking Care of the Artists and Their Needs", text: "The artists are the heart of the show, so we must take good care of them. Create a comfortable dressing room with water, snacks, and a quiet place to rest. You should make every performer feel welcome and respected from the moment they arrive. A dedicated helper should be assigned to each group to answer their questions and help them with anything they need. This level of support helps the artists feel confident so they can give their best performance on stage. It also reflects well on your organization and builds a good reputation. You must also keep the backstage area secure so only the right people can enter. A well-managed backstage area has a refined and professional energy. By focusing on artist welfare, you ensure that the whole program is of the highest quality. Your job is to provide the professional platform and the strategic support that allows the culture to be shared with the world. When the performers feel cared for, they become part of a loyal community that will want to work with you again. Success is built on these strong professional relationships and a deep respect for the creative spirit." },
+                    { title: "Keeping the Stage Safe and Orderly", text: "The safety of everyone is the most important part of backstage management. You must work with the security team to make sure the stage and backstage are clear of any hazards. The paths should be well-lit and there should be signs for the emergency exits. Effective communication among the staff is critical to manage any situation quickly and calmly. Have a first-aid kit ready and make sure everyone knows where it is. By creating a secure and well-organized environment, you allow the artists and the crew to focus entirely on their work. This focus on safety builds trust with the local community and the performers. A successful cultural program is one where every participant leaves feeling like they were part of a safe and high-quality celebration. Good management is invisible; it just allows the joy of the heritage to flow without any problems. Meticulous planning and execution are the keys to professional success in the high-stakes world of community events. Total professional depth is achieved through the use of high-quality safety protocols and a clear chain of command. By providing the structure, you allow the artistic energy to thrive for everyone to see and enjoy together." }
+                ]
+            }
+        ]
+    },
+    {
+        title: "School / College Cultural Events",
+        desc: "Student-friendly ideas to make campus arts festivals and events a big success.",
+        icon: <GraduationCap className="w-5 h-5 text-orange-600" />,
+        cards: [
+            {
+                img: Art1,
+                title: "How to Run a Memorable Arts Day",
+                category: "School/College",
+                date: "May 10, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Creating Fun Competitions and Pride", text: "Running a school Arts Day is a great way to show how talented students are. It is about more than just winning; it is about having fun and learning new things. You should plan many different events like painting, singing, and acting. This way, every student can find something they are good at. Choosing the right judges is very important. They should be nice and give good advice to the students to help them improve. Set a clear budget so you can buy nice prizes and good materials for the day. A successful organizer starts planning early and makes a list of everything to do. You also need to think about the 'social' part. Have good music and food so everyone feels happy and excited. Logistics must be handled carefully so the whole day runs smoothly. When the students feel that their work is valued, they become more creative and proud of their school. It builds a sense of community and friendship among everyone. Working together with teachers and parents makes the event even stronger. A good Arts Day is a tradition that everyone will look forward to every year. It is a beautiful way to connect our school with the wider world through the power of the arts and community spirit." },
+                    { title: "High-Quality Stage and Tech for Students", text: "Even for a school show, the lights and sound should be very good. This helps the student performers feel like real stars. You should work with the school's technical team to set up the stage. Professional lighting is critical to make the students' hard work look its best. You can also use a big screen to show student-designed backgrounds or historical facts. Redundant systems and a clear plan are essential to make sure the show never stops. Technical mastery means that the sound is always clear and the lights change at the right time. By focusing on production quality, you show the students that their art is important. It turns a simple assembly into a world-class showcase of talent. This is something the entire school community will talk about for a long time. It encourages students to work harder on their creative skills. A good technical show allows the talent to shine and keeps the audience fully engaged in the magic on stage. The technical team is the engine of professional excellence. Don't forget to have a place for the student performers to rest and prepare before they go on. Success comes from the combination of student talent and high-quality production work that makes every performance truly special and memorable for the whole family." },
+                    { title: "Making the Campus Culture Stronger", text: "A successful Arts Day helps make the school's culture better for a long time. You should take many photos and videos to share with everyone. Use social media to show the students' achievements to the wider community. You can also start student-led clubs for painting or music after the event. This keeps the creative spirit alive all year round. Effective communication with parents and teachers is essential to build a supportive environment. By celebrating student talent, you ensure that the school's heritage remains a vibrant part of its identity. Your job as an organizer is to provide the platform for students to grow and be seen. This builds a legacy of achievement and pride that will last for years. When students feel seen and supported, they become active contributors to the school's success. Meticulous planning and a bold vision are the keys to a truly inspiring Arts Day. It is a wonderful way to bring everyone together and celebrate the creative energy of the next generation. Working with local artists and mentors can also provide students with valuable learning opportunities. A successful event is one where every student leaves feeling like they have achieved something great and are part of a high-quality creative community that respects their heritage." }
+                ]
+            },
+            {
+                img: Art2,
+                title: "Intercollege Cultural Fest Planning Guide",
+                category: "School/College",
+                date: "June 12, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Managing Many Colleges and People", text: "Hosting an intercollege fest is a massive challenge for any student team. You have to manage thousands of students from many different colleges. You need a very strong registration system to keep track of everyone. The venue should be designed to host many events at the same time. Setting an ambitious but realistic budget is critical to cover the costs of production and prizes. A successful organizer manages the 'flow' of the crowd to ensure there are no long lines or congestion. This level of logistical mastery ensures that everyone has a good time without any stress. By prioritizing organization and scalability, you create a professional platform where the brightest students can gather and share their visions. Every detail, from the entry gates to the food court, should be planned with precision. Good communication with other colleges is key to a high-quality turnout. You should also think about the 'social' aspect—providing spaces for students to meet and talk between events. This builds a sense of community among the different institutions. Working together with student volunteers from other colleges can also help make the event more inclusive and successful. Total professional excellence is achieved through the use of high-quality management tools and a dedicated team." },
+                    { title: "Building a Brand and Finding Sponsors", text: "To make an intercollege fest successful, it must have a unique brand and strong sponsors. Develop a catchy name and a cool logo that students will love. This thematic vision should be reflected in all your marketing and production materials. You must work closely with corporate partners to provide the necessary funding and to create engaging 'brand experiences' for the participants. Effective communication and a clear vision for the event's social and economic impact are essential for building strong relationships with stakeholders. Promoting the fest through social media and campus ambassadors ensures a motivated and informed attendance. A well-branded fest has a refined and professional energy that inspires innovation. By partnering with big brands, you can provide better facilities and prizes for the students. This makes the event more prestigious and attractive to the whole community. Meticulous attention to your brand identity is what sets a world-class fest apart from a simple gathering. Your job is to create a professional and exciting environment where the corporate world and the student world can meet and collaborate. Total professional depth is achieved through the use of high-quality marketing and a bold vision for the future." },
+                    { title: "Student Leadership and Teamwork", text: "The core of any successful fest is the leadership and teamwork of the student committee. It provides valuable experience in project management and team dynamics in a high-stakes environment. You must implement a clear organizational structure with dedicated teams for production, marketing, finance, and hospitality. Regular meetings and a clear chain of command are essential to ensure that every team is working toward a single, cohesive goal. Mentorship from teachers and industry professionals can provide students with the guidance they need. By prioritizing student leadership, you ensure that the fest is built by students, for students, creating a powerful sense of ownership. A successful committee works together like a well-oiled machine. Every member should know exactly what their role is and how it contributes to the success of the event. Effective communication is the engine of professional excellence. When students lead with passion and precision, the results are truly world-class. It is a wonderful way to build a legacy of achievement and leadership for the next generation of professionals. Meticulous planning and execution are the keys to success in the high-stakes world of intercollege events. Your job as a leader is to provide the structure and support that allows your team to shine." }
+                ]
+            },
+            {
+                img: Art3,
+                title: "Best Competitions for Campus Cultural Events",
+                category: "School/College",
+                date: "July 5, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Offering Many Different Types of Events", text: "To make your campus culture vibrant, you should offer many different types of competitions. Move beyond just dance and music to include digital art, film-making, fashion design, and creative writing. A successful competition program requires a vision that prioritizes creativity and technical skill. You must design each event with clear rules and fair judging that is communicated to the students well in advance. Choosing the right venues for each competition is essential for establishing the right atmosphere. By diversifying the competitions, you ensure that every student has an opportunity to show their unique voice. Every detail, from the registration to the final awards, should be managed with professional excellence. Total professional depth is achieved through the use of high-quality rules and strategic planning. A good competition should be challenging but also fun and inspiring for the students. It is a great way to discover new talent and build a sense of pride in our community. Working with local artists to design the competitions can provide students with valuable insights into the professional world. A successful event is one where every student leaves feeling that their creative work has been recognized and valued by their peers and mentors. Total professional excellence is achieved through the use of high-quality judging and a bold vision for the future." },
+                    { title: "Fair Judging and Helping Students Grow", text: "The success of any competition relies on fair judging and helping the students to grow. You must invite judges who are experts but also passionate about mentoring the next generation. A great judge provides constructive feedback that helps students to identify their strengths and areas for improvement. This educational focus turns a simple competition into a powerful platform for learning. Providing opportunities for students to talk with the judges in workshops can further enhance this experience. You must also ensure that the judging process is transparent and professional to build trust among the participants. Effective communication of the criteria is essential for a high-quality competition. By prioritizing both talent and education, you ensure that the students learn something valuable from the experience. It builds a sense of respect and professionalism in the school community. Meticulous attention to the judging process is the secret to a world-class competition program that the entire community will talk about for years. Your job as an organizer is to facilitate these connections by handling the logistics so perfectly that the focus remains on the students' work and growth. Total professional depth is required to manage the seen and unseen details of the judging process. Success comes from the combination of expert talent and strategic planning." },
+                    { title: "Recognizing Talent and Building a Legacy", text: "The final pillar of a successful competition program is recognizing talent and building a lasting legacy. This involves providing high-quality awards and certificates that show the importance of the students' work. You must also ensure that the winners are recognized in school publications and social media. Beyond the live event, you can provide participants with opportunities for ongoing development like internships or professional mentorship. A successful organizer also uses the data from the competitions to make future events even better. By prioritizing talent recognition, you ensure that the school's creative heritage remains a vibrant part of its identity. It builds a sense of achievement and pride in the student body. Meticulous planning and a bold vision are the keys to professional success in the high-stakes world of campus events. Total professional excellence is achieved through the use of high-quality awards and a clear chain of command. By provides the professional platform, you allow the students to celebrate their past while building their future. Working with local businesses to provide the prizes can also build strong community relationships. A successful competition is one where everyone leaves feeling inspired and part of a high-quality creative community that respects their heritage. Strategic precision and a bold vision are the keys to a world-class legacy of achievement." }
+                ]
+            },
+            {
+                img: Art4,
+                title: "How to Manage Large Student Audiences",
+                category: "School/College",
+                date: "Aug 1, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Moving Students Safely and Quickly", text: "Managing large student audiences is a big logistical challenge that requires a focus on safety and operational flow. Success begins with a detailed map of the venue that identifies potential 'choke points' and manages them with a dedicated team of volunteers and security staff. You must use big and clear signs and loud A/V announcements to keep everyone informed and moving smoothly. Try to have enough open space for movement and comfortable zones for resting. By prioritizing audience flow and safety, you create a professional and stress-free environment for everyone. Every detail, from the entry gates to the bathroom locations, should be managed with precision. Good communication with the student body is key to a smooth event. You should also think about the 'social' aspect—providing spaces for students to meet and talk during the breaks. This level of logistical mastery ensures that the scale of the event never compromises the quality of the individual experience. Total professional excellence is achieved through the use of high-quality crowd control tools and a dedicated team. Meticulous planning and execution are the keys to success in the high-stakes world of campus celebrations. Your job as an organizer is to provide the structure that allows the joy of the event to flow without any problems or safety risks for everyone involved." },
+                    { title: "Keeping Everyone Excited and Involved", text: "For a large-scale student event to be successful, it must keep the audience excited and involved from start to finish. This involves using interactive elements like live polling and social media challenges that allow the students to become part of the show. You must also ensure that the sound and visuals are powerful enough to be seen and heard by everyone, even at the back of the crowd. Using student hosts and performers who understand their peers is key to building an infectious atmosphere. Promoting the event through social media and campus portals builds excitement and ensure a high turnout. A well-managed event has a refined and professional energy. By prioritizing engagement, you ensure that the audience remains fully focused on the program. It is a wonderful way to build a sense of community and pride in the school. Meticulous attention to the audience experience is what sets a world-class event apart. Your job is to create a professional and exciting environment where the whole campus can celebrate together. Total professional depth is achieved through the use of high-quality A/V systems and a bold vision for the future. Strategic precision and a bold vision are the keys to professional success. Every sensory detail should contribute to a unified experience that celebrates the spirit of the campus community. Success comes from the harmony between the program and the audience energy." },
+                    { title: "Public Safety and Student Welfare", text: "Public safety and student welfare are the fundamental layers of any successful campus event. You must implement a comprehensive security plan that includes well-marked exits, wide walkways, and a professional team trained in crowd management and emergency response. Effective communication among the staff and local authorities is critical, using radios and a centralized command center to manage any situation quickly and calmly. Providing accessible first-aid stations and hydration points throughout the venue ensures that the students stay safe and comfortable throughout the event. You must also focus on 'welfare logistics'—ensuring that students have access to clean facilities and that any incident is handled with total professionalism and care. By creating a secure and well-organized environment, you allow the whole campus to relax and fully focus on the celebration. This focus on safety reinforces the event's professional reputation and builds trust with the parents and the school community. A successful student event is one where everyone goes home feeling that they have been part of a vibrant, high-quality, and above all, safe celebration. Safety is the base layer that allows for true artistic expression and communal joy. Your job is to provide the structure and support that allows the culture to shine for everyone to enjoy together in a cinematic and world-class way. Meticulous planning is the secret to a great and safe event." }
+                ]
+            }
+        ]
+    },
+    {
+        title: "Community & Public Events",
+        desc: "Simple and safe ways for students to plan impactful community and heritage programs.",
+        icon: <Users className="w-5 h-5 text-orange-600" />,
+        cards: [
+            {
+                img: Public1,
+                title: "Organizing Local Heritage Programs",
+                category: "Community",
+                date: "Sept 10, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Doing Research and Keeping it Real", text: "Organizing local heritage programs requires a deep commitment to research and keeping things real. Success begins with identifying the unique stories and the historical sites that define your community. You must work with local historians to ensure that the information you show is accurate and respectful. Develop a vision that prioritizes education, making the history feel relevant and accessible to a modern audience. This can involve creating guided tours, interactive exhibitions, and storytelling sessions that bring the past to life. Choosing the right locations, like a historic building or a significant public square, is essential for establishing the professional 'vibe' of the program. Every detail, from the display boards to the guides, should be managed with precision. Good communication with the community is key to a successful project. Total professional depth is achieved through the use of high-quality research and strategic planning. A good heritage program should be informative but also engaging and inspiring for people of all ages. It is a great way to discover new things about your town and build a sense of pride. Working with local schools can also provide valuable learning opportunities for students. A successful event is one where everyone leaves feeling like they have a deeper connection to their history. Meticulous planning and execution are the keys to professional success. Your job as an organizer is to provide the professional platform that allowed the heritage to be shared and explored with total clarity and confidence." },
+                    { title: "Designing the Exhibition and Telling the Story", text: "In a heritage program, the design of the exhibition is the primary way that knowledge is shared. This involves using high-quality display systems and thematic design to tell the story of the community with professional excellence. You must work with professional designers to create an immersive environment that is both informative and visually stunning. The use of large-scale photography, historical artifacts, and digital displays can provide a dynamic canvas for storytelling. Professional lighting is critical for highlighting the details of the heritage and for creating a specific mood for every zone. Atmospheric design and a dedicated technical crew are essential to manage these complex systems and ensure a flawless execution. Technical mastery is what turns a traditional meeting into a world-class strategic show. By embracing digital technology, you can expand the reach and the impact of the program, creating a more immersive and cinematic experience for the whole community. Every pixel should be managed with total professional excellence to facilitate the sensory joy of the event and the clarity of the message. Communication is the engine of technical excellence, and the technical team is the facilitator of the creative connection. Success comes from the harmony between the story and the design. Don't forget to have clear signs to guide the visitors through the exhibition in a logical and easy way. A successful heritage program is one where the history comes alive for everyone to see and learn together in a world-class way." },
+                    { title: "Helping the Community and Building a Legacy", text: "The true success of a local heritage program is measured by its long-term impact on the community and its ability to build a lasting legacy of historical awareness. This requires a focus on building strong relationships with local residents, heritage organizations, and government agencies. Effective communication and a clear vision for the program's social and cultural impact are essential for attracting sponsors and partners. Beyond the live event, you must provide participants with opportunities for ongoing engagement like digital archives of the historical data and educational resources for schools. A successful organizer also uses the feedback from the community to refine future programs. By prioritizing the preservation and celebration of professional heritage, you ensure that the corporate identity remains a vibrant and evolving part of the company's success. Your job as an organizer is to facilitate these connections by handling the logistics so perfectly that the participants feel part of a high-quality and inspiring leadership community. When the audience feel seen and supported, they become active contributors to the corporate narrative, creating a legacy of celebration that lasts. Sustainable planning ensures that the program can continue to grow and benefit the community for generations to come. Total professional depth is achieved through meticulous attention to detail and a bold vision for the future. Meticulous planning and execution are the keys to success. Total professional depth is achieved through the use of high-quality materials and a clear chain of command." }
+                ]
+            },
+            {
+                img: Public2,
+                title: "Public Parade Planning and Safety Tips",
+                category: "Community",
+                date: "Oct 5, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Mapping the Route and Handling Logistics", text: "Planning a public parade is a massive challenge that requires a sophisticated approach to route mapping and handling logistics. Success begins with a detailed map of the parade route that identifies potential 'choke points' and manages them with a dedicated team of logistics staff and local authorities. You must coordinate the movement of dozens of floats, bands, and performance groups, ensuring that the parade flows smoothly and stays on schedule. Setting a realistic but ambitious budget is critical to cover the costs of security, traffic management, and high-end production. A successful organizer manages the 'unseen' details like obtaining the necessary permits and managing road closures. Every detail, from the assembly point to the final dispersal area, should be managed with precision. Good communication with all the participating groups is key to a high-quality parade. You should also think about the 'social' aspect—providing spaces for spectators to watch and celebrate in well-designed viewing zones. This level of logistical mastery ensures that the scale of the event never compromises the quality of the individual experience. Total professional excellence is achieved through the use of high-quality planning tools and a dedicated team. Meticulous planning and execution are the keys to professional success in the high-stakes world of community events. Your job as an organizer is to provide the structure that allows the joy of the culture to flow without any problems or safety risks for everyone involved in a cinematic and world-class way." },
+                    { title: "Managing Traffic and Public Safety", text: "Traffic management and public safety are the fundamental layers of any successful public parade. You must implement a comprehensive security plan that includes professional crowd management, road closures, and a dedicated team for emergency response. Effective communication among the staff and local authorities is critical, using radios and a centralized command center to manage any situation quickly and calmly. The route must be clear, with well-marked exits and easy access to hydration and first-aid for both participants and spectators. Providing accessible viewing zones and clear A/V announcements throughout the route ensures that everyone stays safe and informed. You must also focus on 'welfare logistics'—ensuring that the audience have access to clean facilities and that any incident is handled with total professionalism and care. By creating a secure and well-organized environment, you allow the community to relax and fully focus on the celebration. This focus on safety reinforces the parade's professional reputation and builds trust with the local community. A successful public parade is one where everyone goes home feeling that they have been part of a vibrant, high-quality, and above all, safe celebration. Safety is the base layer that allows for true artistic expression and communal joy. Your job is to provide the structure and support that allows the culture to shine for everyone to enjoy together in a cinematic way. Meticulous planning is the secret to a great and safe event." },
+                    { title: "Getting People Involved and Keeping the Flow", text: "The heart of any successful parade is the participation of the community and the quality of the performances. You must work closely with diverse groups—from schools and community organizations to professional artists—to ensure that the parade reflects the vibrancy of the community. Providing participants with the necessary technical support, hydration, and a clear schedule ensures that they can focus entirely on their performance. A successful organizer manages the 'flow' of the parade, ensuring that there is a constant stream of high-energy performances that keep the audience engaged. The use of professional-grade A/V systems on the main floats and in the key zones can further enhance the sensory experience. Effective communication and a clear vision for the parade's social and cultural impact are essential for attracting top-tier talent and sponsors. By prioritizing education and engagement, you ensure that the parade's influence lasts long after the final float. Your job as an organizer is to provide the professional platform and strategic support that allowed the community to celebrate its past while building its future. When the audience feel seen and supported, they become active contributors to the cultural narrative, creating a legacy of celebration that lasts. Sustainable planning ensures that the parade can continue to grow and benefit the community for generations to come. Total professional depth is achieved through meticulous attention to detail and a bold vision for the future. Meticulous planning and execution are the keys to success. Total professional depth is achieved." }
+                ]
+            },
+            {
+                img: Public3,
+                title: "Volunteer Management for Community Events",
+                category: "Community",
+                date: "Nov 12, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Finding Good People and Making a Plan", text: "Volunteer management is the backbone of any successful community event. It requires a sophisticated approach to finding the right people, training them, and making a clear plan. Success begins with identifying the specific needs of the event and recruiting volunteers who have the skills and the passion to meet those needs. You must develop a vision that prioritizes both the success of the event and the professional growth of the volunteers. This involves creating a clear organizational structure with dedicated roles for each volunteer and providing them with the necessary training and support to excel. Effective communication and a clear vision for the event's social and cultural impact are essential for building strong relationships with stakeholders. Promoting the volunteer opportunities through social media and local schools ensures a motivated and informed team. A well-managed volunteer program has a refined and professional energy. By prioritizing the preservation and celebration of professional heritage, you ensure that the corporate identity remains a vibrant part of the company's success. Your job as an organizer is to facilitate these connections by handling the logistics so perfectly that the volunteers feel part of a high-quality and inspiring leadership community. When the volunteers feel seen and supported, they become active contributors to the corporate narrative, creating a legacy of celebration that lasts. Total professional depth is achieved through meticulous attention to detail and a bold vision for the future. Meticulous planning and execution are the keys to professional success. Total professional depth is achieved through the use of high-quality materials and a clear chain of command. By provides the professional platform." },
+                    { title: "Training the Team and Giving Support", text: "The foundation of a successful volunteer program is a professional approach to training and support. This involves providing every volunteer with a detailed handbook that outlines their roles, the schedule, and the safety rules. You must also ensure that the volunteers have access to high-quality tools and equipment needed to perform their tasks with professional excellence. Regular briefings and a clear chain of command are essential for ensuring that every volunteer is informed and supported throughout the event. Providing volunteers with comfortable break zones and plenty of water ensures they can focus entirely on their work. A successful manager also uses the feedback from the volunteers to make future programs even better. By prioritizing the training and support of your team, you create a professional environment where the creative vision can be realized with total clarity and confidence. Every detail, from the training sessions to the on-site support, should be managed with precision. Good communication with your volunteers is key to a high-quality event. You should also think about the 'social' aspect—providing spaces for volunteers to meet and talk during their breaks. This level of management mastery ensures that the scale of the event never compromises the quality of the individual experience. Total professional excellence is achieved through the use of high-quality tools and a dedicated team. Meticulous planning and execution are the keys to success. Total professional depth is achieved through the use of high-quality materials and a clear chain of command. By providing the professional platform, you allow the team to celebrate their past while building their future. Success is built on these strong professional relationships." },
+                    { title: "Saying Thank You and Keeping People Involved", text: "The final part of a good volunteer program is saying thank you. You should give your volunteers certificates or small awards to show you appreciate their hard work. This makes them feel proud and they will want to help you again. You can also have a small party after the event to celebrate your success together. Use social media to tell the community about the great work your volunteers did. This builds a good reputation for your team. You should keep in touch with your volunteers through email or a chat group. Tell them about future events so they can join in again. By treating people with respect and kindness, you build a loyal team that will help you for many years. A successful leader knows that the people are the most important part of any project. Saying thank you is a simple thing that makes a big difference in the world of community service. It's a great way to celebrate our shared heritage and look forward to working together again. Meticulous planning and a warm heart are the keys to a world-class volunteer program." }
+                ]
+            },
+            {
+                img: Public4,
+                title: "Safety and Security for Large Public Gatherings",
+                category: "Community",
+                date: "Dec 1, 2026",
+                readTime: "25 min read",
+                points: [
+                    { title: "Planning for Large Crowds Safely", text: "Safety is the most important thing when many people come together in a public space. You need a very clear plan for how people will enter and leave the area. Work with local police and security experts to make a safety map. Use big signs that tell people where to go in case of an emergency. You should also have many workers who can help guide the crowd if they get confused. Try to keep the paths wide so no one feels squeezed. If the crowd is moving slowly and safely, everyone will have a much better time. Always think about the children and old people who might need extra help. A good organizer is always looking for ways to make the event safer for everyone. By focusing on the flow of the crowd, you prevent accidents and keep the atmosphere happy. This level of planning shows that you care about the community. It builds trust and makes people want to come to your events again and again. Safety is a team effort that requires everyone to work together." },
+                    { title: "Using Radios and Good Communication", text: "When you are running a big public event, you must be able to talk to your team quickly. Use radios or a dedicated app to stay connected at all times. If there is a problem, everyone should know about it right away. A central command center is a good idea where leaders can see the whole event. You should also have a clear way to talk to the public. A professional sound system can be used to give directions or share important news. Technical mastery means that the communication never fails, even if it is very loud. By investing in good tools, you make the event more professional and secure. It allows the security team to handle small issues before they become big ones. Clear communication is the key to a calm and well-managed celebration. It shows the visitors that the event is in good hands. Every worker should know exactly who to call if they need help. This human-centered approach is the best way to manage a world-class public gathering safely and efficiently." },
+                    { title: "First-Aid Stations and Helping People", text: "You must have first-aid stations that are easy for everyone to find. Make sure there are trained people who can help if someone feels sick or gets hurt. Provide plenty of free water so no one gets dehydrated from the heat. In a public space, anything can happen, so you must be ready for everything. The security team should be friendly and help people find their way around. A kind word from a guard can make a visitor feel much safer. After the event is over, you should check the area to make sure everyone left safely and everything is clean. A successful public event is one where everyone goes home with only happy memories. Your job as a student leader is to provide the safe structure that allows the joy of the culture to shine through. Meticulous planning and a focus on welfare are the secrets to a great event. By prioritizing safety, you protect the reputation of your team and the happiness of your community. It is a wonderful way to serve others and celebrate our shared heritage together." }
+                ]
+            }
+        ]
+    }
+];
 
+export default function CulturalPage() {
     const navigate = useNavigate();
+    const [selectedArticle, setSelectedArticle] = useState(null);
 
-    return (
-        <div className="font-sans bg-[#FAF6F0] min-h-screen text-[#4A3C31]">
-            {/* Main Container */}
-            <div className="max-w-300 mx-auto px-6 md:px-12 py-12">
-
-                {/* --- HERO SECTION --- */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
-                    {/* Left Content */}
-                    <div className="space-y-6">
-                        {/* Top Logo area */}
-                        <button 
-                            onClick={() => navigate("/")}
-                            className='flex items-center gap-2 text--[#7B1D22] font-medium hover:underline mb-6'>
-                            <ArrowLeft size={18} />
-                              Back
-                        </button>
-                        <div className="flex items-center gap-3 text-[#7B1D22] font-bold tracking-widest text-xs uppercase">
-                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L15 8H21L16 12L18 18L12 15L6 18L8 12L3 8H9L12 2Z" />
-                            </svg>
-                            CULTURAL EVENTS
-                        </div>
-
-                        {/* Main Headline */}
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#5B171A] font-bold leading-[1.1]">
-                            Celebrate<br />
-                            Culture.<br />
-                            Inspire<br />
-                            Connections.
-                        </h1>
-
-                        {/* Elegant Divider */}
-                        <div className="flex items-center gap-1 py-2">
-                            <div className="h-px w-12 bg-[#B58A60]"></div>
-                            <div className="w-2 h-2 rotate-45 bg-[#B58A60]"></div>
-                            <div className="h-px w-12 bg-[#B58A60]"></div>
-                        </div>
-
-                        {/* Subtext */}
-                        <p className="text-lg text-[#6A5F58] max-w-md">
-                            Explore traditions, music, heritage, cuisine and unforgettable community celebrations.
-                        </p>
+    if (selectedArticle) {
+        return (
+            <div className="bg-white min-h-screen text-gray-900 font-sans selection:bg-orange-500 selection:text-white pb-32">
+                <div className="relative min-h-[70vh] flex flex-col justify-end p-6 md:p-20 pb-32">
+                    <div className="absolute inset-0 z-0">
+                        <img src={selectedArticle.img} alt={selectedArticle.title} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
                     </div>
-
-                    {/* Right Image */}
-                    <div className="relative w-full flex justify-end">
-                        {/* Arch Container */}
-                        <div className="relative w-[90%] md:w-[80%] aspect-3/4 p-2 border-2 border-[#D4B58A] rounded-t-[180px] rounded-b-2xl">
-                            <div className="w-full h-full overflow-hidden rounded-t-[170px] rounded-b-xl relative">
-                                <img
-                                    src={cultural_header}
-                                    alt="Cultural Dancer"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
+                    <div className="relative z-10 max-w-4xl space-y-8 text-left">
+                        <button onClick={() => setSelectedArticle(null)} className="flex items-center gap-2 text-orange-700 font-bold mb-12 hover:text-black transition-colors uppercase text-xs tracking-widest">
+                            <ArrowLeft size={16} /> Back to Articles
+                        </button>
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-100 bg-white/80 backdrop-blur-md text-[10px] uppercase tracking-widest font-bold">
+                            <Theater size={12} className="text-orange-600" /> {selectedArticle.category}
+                        </div>
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight max-w-3xl text-[#2d1109]">{selectedArticle.title}</h1>
+                        <div className="flex items-center gap-6 text-gray-500 text-sm font-medium pt-4 border-t border-gray-100 w-fit">
+                            <div className="flex items-center gap-2 font-semibold"><Calendar size={16} /> {selectedArticle.date}</div>
+                            <div className="flex items-center gap-2 font-semibold"><Clock size={16} /> {selectedArticle.readTime}</div>
                         </div>
                     </div>
                 </div>
-
-                {/* --- CATEGORY CARDS --- */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 -mt-10 mb-20 relative z-10">
-                    {[
-                        {
-                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
-                            title: "PERFORMANCES",
-                            desc: "Music, dance, theater and more"
-                        },
-                        {
-                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>,
-                            title: "ART & HERITAGE",
-                            desc: "Exhibitions, crafts and traditions"
-                        },
-                        {
-                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>,
-                            title: "COMMUNITY",
-                            desc: "Connect, celebrate and belong"
-                        },
-                        {
-                            icon: <svg className="w-10 h-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>,
-                            title: "CUISINE",
-                            desc: "Traditional flavors and experiences"
-                        }
-                    ].map((cat, idx) => (
-                        <div key={idx} className="bg-[#FFFDF9] rounded-3xl p-8 text-center shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#F0EBE1] hover:-translate-y-1 transition-transform">
-                            <div className="text-[#8B2329] mb-4">{cat.icon}</div>
-                            <h3 className="text-[#8B2329] font-bold text-xs tracking-widest mb-2">{cat.title}</h3>
-                            <p className="text-[#6A5F58] text-sm leading-relaxed">{cat.desc}</p>
+                <div className="max-w-4xl mx-auto px-6 py-20 space-y-24 text-justify">
+                    {selectedArticle.points.map((point, idx) => (
+                        <div key={idx} className="space-y-8">
+                            <h2 className="text-2xl md:text-3xl font-bold text-orange-700 flex gap-4 text-left">
+                                <span className="opacity-30">{idx + 1}.</span> {point.title}
+                            </h2>
+                            <p className="text-gray-600 text-xl md:text-2xl leading-relaxed font-light">{point.text}</p>
+                            {idx < selectedArticle.points.length - 1 && <div className="pt-16 border-b border-gray-100"></div>}
                         </div>
                     ))}
-                </div>
-
-                {/* --- FEATURED EVENTS HEADER --- */}
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 gap-4">
-                    <div className="flex items-center gap-3 text-[#7B1D22] font-bold tracking-widest text-sm uppercase">
-                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L15 8H21L16 12L18 18L12 15L6 18L8 12L3 8H9L12 2Z" />
-                        </svg>
-                        FEATURED EVENTS
+                    <div className="mt-40 bg-orange-50/50 border border-orange-100 rounded-[50px] p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
+                        <div className="flex items-center gap-10">
+                            <div className="w-24 h-24 rounded-3xl bg-orange-700 text-white flex items-center justify-center shadow-2xl shadow-orange-200"><Mic size={40} /></div>
+                            <div className="space-y-2">
+                                <h3 className="text-3xl font-bold text-[#2d1109]">Ready to Host Your Own <br /> Cultural Celebration?</h3>
+                                <p className="text-gray-500 text-lg">Let's turn your heritage into an extraordinary experience.</p>
+                            </div>
+                        </div>
+                        <button className="bg-orange-700 text-white px-12 py-5 rounded-2xl font-bold hover:scale-105 transition-all flex items-center gap-3 uppercase tracking-widest text-xs whitespace-nowrap shadow-xl shadow-orange-100">
+                            Contact Our Team <ArrowRight size={18} />
+                        </button>
                     </div>
-                    <button className="flex items-center gap-2 px-6 py-2.5 border border-[#8B2329] text-[#8B2329] rounded-full text-xs font-bold tracking-widest hover:bg-[#8B2329] hover:text-white transition-colors">
-                        VIEW ALL EVENTS &rarr;
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="bg-white min-h-screen font-sans text-[#2d1109] overflow-x-hidden">
+            <section className="relative min-h-screen flex items-center px-6 md:px-24 bg-[#1b0906] overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src={culture_header}
+                        alt="Cultural Header"
+                        className="w-full h-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#1b0906]/90 via-[#1b0906]/65 to-transparent"></div>
+                </div>
+                <div className="absolute top-8 md:top-12 left-6 md:left-24 z-30">
+                    <button
+                        onClick={() => navigate("/")}
+                        className="flex items-center gap-2 text-white/80 hover:text-[#e6c17a] transition-all duration-300 uppercase tracking-[0.22em] text-[11px] font-semibold"
+                    >
+                        <ArrowLeft size={14} />
+                        BACK TO HOME
                     </button>
                 </div>
 
-                {/* --- FEATURED EVENTS GRID --- */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-                    {[
-                        { img: "https://images.unsplash.com/photo-1542358823-3882f07d2f9d?q=80&w=600&auto=format&fit=crop", date: "18", month: "JUN", title: "Folk Dance Festival", loc: "Kala Kendra, New Delhi", desc: "A vibrant evening of traditional folk dances from across India." },
-                        { img: "https://images.unsplash.com/photo-1605369572399-05d8d64a0f6e?q=80&w=600&auto=format&fit=crop", date: "20", month: "JUN", title: "Heritage Craft Exhibition", loc: "India Habitat Centre", desc: "Discover handcrafted treasures and meet skilled artisans." },
-                        { img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop", date: "22", month: "JUN", title: "Classical Music Concert", loc: "Triveni Kala Sangam", desc: "An enchanting night of ragas by renowned classical musicians." },
-                        { img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop", date: "25", month: "JUN", title: "Cultural Food Carnival", loc: "Dilli Haat, INA", desc: "Taste authentic regional flavors and traditional street food." }
-                    ].map((event, idx) => (
-                        <div key={idx} className="bg-[#FFFDF9] rounded-2xl overflow-hidden shadow-sm border border-[#F0EBE1] flex flex-col hover:shadow-md transition-shadow">
-                            <div className="relative h-56">
-                                <img src={event.img} alt={event.title} className="w-full h-full object-cover" />
-                                {/* Date Badge */}
-                                <div className="absolute top-0 left-0 bg-[#691A1E] text-white p-2 w-12 text-center rounded-br-xl">
-                                    <div className="text-lg font-bold leading-none">{event.date}</div>
-                                    <div className="text-[9px] uppercase tracking-wider mt-1">{event.month}</div>
-                                </div>
-                            </div>
-                            <div className="p-6 flex-1 flex flex-col">
-                                <h3 className="font-serif text-lg text-[#2A1F18] font-bold mb-3 leading-tight">{event.title}</h3>
-                                <div className="flex items-center gap-1.5 text-[#6A5F58] text-xs font-medium mb-3">
-                                    <svg className="w-3.5 h-3.5 text-[#8B2329]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                                    {event.loc}
-                                </div>
-                                <p className="text-[#6A5F58] text-sm leading-relaxed mb-6 flex-1">{event.desc}</p>
-                                <button className="text-[#8B2329] text-xs font-bold tracking-wider flex items-center gap-1 hover:gap-2 transition-all">
-                                    VIEW DETAILS &rarr;
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* --- STATS BANNER --- */}
-                <div className="bg-[#5B171A] rounded-4xl text-white py-12 px-8 mb-12">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10">
-                        {[
-                            { num: "50+", label: "Events" },
-                            { num: "100+", label: "Artists" },
-                            { num: "20+", label: "Workshops" },
-                            { num: "15K+", label: "Visitors" }
-                        ].map((stat, idx) => (
-                            <div key={idx} className="text-center px-4">
-                                <div className="flex justify-center mb-3 text-[#D4B58A]">
-                                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                                </div>
-                                <div className="text-4xl md:text-5xl font-serif mb-1">{stat.num}</div>
-                                <div className="text-[10px] tracking-widest uppercase text-white/70">{stat.label}</div>
-                            </div>
-                        ))}
+                {/* Content */}
+                <div className="relative z-20 w-full max-w-7xl mx-auto">
+                    <div className="max-w-3xl pt-24 md:pt-0">
+                        <h1 className="text-white font-bold leading-[0.88] tracking-tight text-7xl sm:text-8xl md:text-9xl">
+                            Cultural <br />
+                            Events <br />
+                            <span className="block text-[#e6c17a] font-extralight text-5xl sm:text-5xl md:text-[5rem] mt-4">
+                                That Inspire
+                            </span>
+                        </h1>
+                        <p className="mt-10 text-white/70 text-base sm:text-lg md:text-xl max-w-xl leading-relaxed font-light">
+                            From traditional festivals to art and heritage programs, we help
+                            you create meaningful experiences that bring people together.
+                        </p>
                     </div>
                 </div>
-
-                {/* --- FOOTER / NEWSLETTER --- */}
-                <div className="bg-[#EFE9E0] rounded-4xl p-8 md:p-10 flex flex-col lg:flex-row justify-between items-center gap-8">
-
-                    <div className="flex items-center gap-5 w-full lg:w-auto">
-                        <div className="bg-[#8B2329] text-white p-4 rounded-full shrink-0">
-                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            </section>
+            <main className="max-w-screen-2xl mx-auto py-24 space-y-24">
+                {categories.map((category, idx) => (
+                    <div key={idx} className="flex flex-col md:flex-row gap-16 px-6 md:px-24">
+                        <div className="md:w-72 flex flex-col items-start text-left space-y-6">
+                            <div className="p-3 bg-orange-50 rounded-xl text-orange-600 shadow-sm border border-orange-100">
+                                {category.icon}
+                            </div>
+                            <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight text-[#2d1109]">
+                                {category.title}
+                            </h2>
+                            <p className="text-gray-500 font-sans leading-relaxed text-sm tracking-wide">
+                                {category.desc}
+                            </p>
                         </div>
-                        <div>
-                            <h4 className="font-bold text-[#2A1F18] tracking-widest text-xs mb-1">STAY UPDATED</h4>
-                            <p className="text-sm text-[#6A5F58]">Subscribe for latest cultural event updates.</p>
-                        </div>
-                    </div>
 
-                    <div className="flex w-full lg:w-auto shadow-sm">
-                        <input
-                            type="email"
-                            placeholder="Enter Email"
-                            className="px-6 py-4 rounded-l-xl border border-r-0 border-[#DED7CD] bg-[#FFFDF9] focus:outline-none w-full lg:w-72 text-sm"
-                        />
-                        <button className="bg-[#691A1E] text-white px-8 py-4 rounded-r-xl font-bold text-[11px] tracking-widest hover:bg-[#5B171A] transition-colors">
-                            SUBSCRIBE
-                        </button>
-                    </div>
-
-                    <div className="flex flex-col items-center lg:items-end gap-3 w-full lg:w-auto">
-                        <div className="text-[#8B2329] font-bold text-[10px] tracking-widest">FOLLOW US</div>
-                        <div className="flex gap-3">
-                            {[
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />,
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />,
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                            ].map((path, i) => (
-                                <div key={i} className="w-8 h-8 rounded-full bg-[#8B2329] text-white flex items-center justify-center cursor-pointer hover:bg-[#5B171A] transition-colors">
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        {path}
-                                    </svg>
+                        <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-6">
+                            {category.cards.map((card, cIdx) => (
+                                <div
+                                    key={cIdx}
+                                    onClick={() => setSelectedArticle(card)}
+                                    className="group cursor-pointer bg-[#fffaf5] rounded-[40px] p-4 pb-8 space-y-5 hover:shadow-2xl hover:translate-y-[-10px] transition-all duration-500 border border-orange-50 flex flex-col"
+                                >
+                                    <div className="h-52 rounded-[32px] overflow-hidden shadow-inner">
+                                        <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    </div>
+                                    <div className="px-3 text-left flex flex-col flex-grow">
+                                        <h3 className="text-xl font-bold leading-tight group-hover:text-[#f05a1e] transition-colors">
+                                            {card.title}
+                                        </h3>
+                                        <div className="mt-auto pt-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                            <span className="text-[10px] uppercase tracking-widest font-bold text-orange-600">Read Article</span>
+                                            <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-200">
+                                                <ArrowRight size={18} />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     </div>
+                ))}
 
+                <div className="px-6 md:px-24 pb-20">
+                    <div className="bg-[#0e3124] rounded-[60px] p-12 md:p-24 text-white flex flex-col lg:flex-row items-center justify-between gap-16 text-left relative overflow-hidden group shadow-3xl">
+                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px] group-hover:bg-white/10 transition-all duration-1000"></div>
+                        <div className="flex items-center gap-12 relative z-10">
+                            <div className="w-32 h-32 rounded-3xl bg-white/10 backdrop-blur-2xl flex items-center justify-center border border-white/20 shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                                <Theater size={64} className="text-[#e6c17a]" />
+                            </div>
+                            <div className="space-y-4">
+                                <h2 className="text-6xl font-serif font-bold tracking-tight">Let's Celebrate Our <br />Culture Together</h2>
+                                <p className="text-white/60 text-xl max-w-xl font-light font-sans leading-relaxed tracking-wide">Whether it's a festival, performance or community program, we're here to make it meaningful and memorable.</p>
+                            </div>
+                        </div>
+                        <button className="bg-[#c29631] text-white px-16 py-7 rounded-2xl font-bold text-2xl hover:scale-105 transition-all shadow-4xl flex items-center gap-5 relative z-10 whitespace-nowrap active:scale-95">
+                            Get In Touch <ArrowRight size={28} />
+                        </button>
+                    </div>
                 </div>
-
-            </div>
+            </main>
         </div>
     );
-};
-
-export default CulturalEvents;
+}
