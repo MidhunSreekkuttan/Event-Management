@@ -65,10 +65,22 @@ import youth2 from "./articles/youth2.jpeg";
 import youth3 from "./articles/youth3.jpeg";
 import youth4 from "./articles/youth4.jpeg";
 import culture_header from "./articles/culture_header.png";
-import culturecard1 from "./articles/culturecard1.jpeg";
-import culturecard2 from "./articles/culturecard2.jpeg";
-import culturecard3 from "./articles/culturecard3.jpeg";
-import culturecard4 from "./articles/culturecard4.jpeg";
+import Festival1 from "./articles/Festival1.jpeg";
+import Festival2 from "./articles/Festival2.jpeg";
+import Festival3 from "./articles/Festival3.jpeg";
+import Festival4 from "./articles/Festival4.jpeg";
+import Art1 from "./articles/Art1.jpeg";
+import Art2 from "./articles/Art2.jpeg";
+import Art3 from "./articles/Art3.jpeg";
+import Art4 from "./articles/Art4.jpeg";
+import Dance1 from "./articles/Dance1.jpeg";
+import Dance2 from "./articles/Dance2.jpeg";
+import Dance3 from "./articles/Dance3.jpeg";
+import Dance4 from "./articles/Dance4.jpeg";
+import Public1 from "./articles/Public1.jpeg";
+import Public2 from "./articles/Public2.jpeg";
+import Public3 from "./articles/Public3.jpeg";
+import Public4 from "./articles/Public4.jpeg";
 import education_header from "./articles/education_header.png";
 import Academic1 from "./articles/Academic1.jpeg";
 import Academic2 from "./articles/Academic2.jpeg";
@@ -146,10 +158,22 @@ export const articles = {
   card5,
   //Cultural category
   culture_header,
-  culturecard1,
-  culturecard2,
-  culturecard3,
-  culturecard4,
+  Festival1,
+  Festival2,
+  Festival3,
+  Festival4,
+  Art1,
+  Art2,
+  Art3,
+  Art4,
+  Dance1,
+  Dance2,
+  Dance3,
+  Dance4,
+  Public1,
+  Public2,
+  Public3,
+  Public4,
   // Education category
   education_header,
   Academic1,

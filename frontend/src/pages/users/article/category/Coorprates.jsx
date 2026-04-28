@@ -41,7 +41,7 @@ const Coorprates = () => {
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-6 space-y-24 pb-32">
-                
+
                 {/* Introduction Section: Words Left, Photo Right */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
@@ -89,7 +89,7 @@ const Coorprates = () => {
                             "A good plan is the first step to success. Let us help you plan your next big company event today."
                         </p>
                     </div>
-                    <button 
+                    <button
                         onClick={() => navigate("/contactUs")}
                         className="bg-[#4f46e5] text-white px-12 py-4 rounded-2xl font-bold hover:bg-white hover:text-[#0f172a] transition-all text-sm uppercase tracking-widest whitespace-nowrap">
                         Message Us Now
