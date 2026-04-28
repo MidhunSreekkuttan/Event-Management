@@ -22,6 +22,11 @@ const Cultural = lazy(() => import('../pages/users/article/category/Cultural'))
 const Coorprates = lazy(() => import('../pages/users/article/category/Coorprates'))
 const Entertainments = lazy(() => import('../pages/users/article/category/Entertainments'))
 const Educational = lazy(() => import('../pages/users/article/category/Educational'))
+const BookingORenqury = lazy(() => import('../pages/users/article/others/BookingORenqury'))
+const EnjoyTheEvent = lazy(() => import('../pages/users/article/others/EnjoyTheEvent'))
+
+const PrivacyandPolicy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
+const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
 
 const PolicyandPrivacy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
 const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
