@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarDays, Clock3, Target, Users, Mic, Calendar, MapPin, MegaPhone, BarChart3, GraduationCap } from "lucide-react";
+import { CalendarDays, Clock3, Target, Users, Mic, Calendar, MapPin, Megaphone, BarChart3, GraduationCap, User, ArrowLeft } from "lucide-react";
 import { articles } from "../../../../assets/assets";
 import { useNavigate } from "react-router-dom";
 
