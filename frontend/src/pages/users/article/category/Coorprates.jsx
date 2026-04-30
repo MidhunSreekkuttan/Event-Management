@@ -1,10 +1,14 @@
 import React from "react";
 import { CalendarDays, Clock3, ArrowLeft, Search } from "lucide-react";
 import { articles } from "../../../../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 const { header_image, card1, card2, card3, card4, card5 } = articles;
 
 const Coorprates = () => {
+
+    const navigation = useNavigate()
+
     const tips = [
         {
             no: "1",
@@ -43,7 +47,7 @@ const Coorprates = () => {
             <div className="max-w-7xl mx-auto">
 
                 {/* Back */}
-                <button className="flex items-center gap-2 text-violet-600 font-medium hover:underline mb-6">
+                <button onClick={() => navigation("/")} className="flex items-center gap-2 text-violet-600 font-medium hover:underline mb-6">
                     <ArrowLeft size={18} />
                     Back
                 </button>
@@ -265,7 +269,7 @@ const Coorprates = () => {
 
                     {/* Cards Sections */}
                     <div className="border-t border-gray-300 pt-19">
-                        <div className="w-full h-125 object-cover rounded-2xl mb-12">
+                        <div className="w-full h-fit object-cover rounded-2xl mb-12">
                             <div className="lg:col-span-2 space-y-6">
                                 {tips.map((item, index) => (
                                     <div key={index} className="bg-white rounded-2xl p-5 shadow-sm grid md:grid-cols-[60px_1fr_180px] gap-5 items-center">
