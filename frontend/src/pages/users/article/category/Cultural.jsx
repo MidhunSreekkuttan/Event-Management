@@ -59,7 +59,7 @@ const CulturalEvents = () => {
                         <div className="relative w-[90%] md:w-[80%] aspect-3/4 p-2 border-2 border-[#D4B58A] rounded-t-[180px] rounded-b-2xl">
                             <div className="w-full h-full overflow-hidden rounded-t-[170px] rounded-b-xl relative">
                                 <img
-                                    src={cultural_header}
+                                    src={articles.culture_header}
                                     alt="Cultural Dancer"
                                     className="w-full h-full object-cover"
                                 />
