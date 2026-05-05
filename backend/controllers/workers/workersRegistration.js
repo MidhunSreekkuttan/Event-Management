@@ -24,10 +24,10 @@ export const workersRegistration = async (req, res) => {
       mobileNumber,
       email,
       jobRole,
-      uploadIdProof: `uploads/${uploadIdProof.filename}`,
-      uploadWorkPermit: `uploads/${uploadWorkPermit.filename}`,
-      uploadAddressProof: `uploads/${uploadAddressProof.filename}`,
-      uploadResume: `uploads/${uploadResume.filename}`,
+      uploadIdProof: `/uploads/${uploadIdProof.filename}`,
+      uploadWorkPermit: `/uploads/${uploadWorkPermit.filename}`,
+      uploadAddressProof: `/uploads/${uploadAddressProof.filename}`,
+      uploadResume: `/uploads/${uploadResume.filename}`,
       date: Date.now(),
     });
     await registration.save();

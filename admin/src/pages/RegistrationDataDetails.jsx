@@ -100,9 +100,9 @@ const RegistrationDataDetails = () => {
           </div>
 
           {file && (
-            <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-red-600 md:text-lg">
+            <button onClick={() => window.open(backendUrl + file, "_blank")} className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-red-600 md:text-lg">
               <Download className="h-4 w-4 md:h-5 md:w-5" />
-              Download
+              View
             </button>
           )}
         </div>
