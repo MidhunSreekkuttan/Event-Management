@@ -1,6 +1,6 @@
 import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
 
-const getEventManagementData = async (req, res) => {
+export const getEventManagementData = async (req, res) => {
   try {
     const userId = req.user.id;
     const user = await eventManagementModel.findById(userId);
@@ -21,8 +21,28 @@ const getEventManagementData = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     return res.json({ success: false, message: error.message });
   }
 };
 
-export default getEventManagementData;
+export const getEventManagementDataAdmin = async (req, res) => {
+
+  try {
+
+    const eventmanager = await eventManagementModel.find({})
+    if (!eventmanager) {
+      return res.json({ success: false, message: "eventmanagerId not found" })
+    }
+
+    res.json({
+      success: true,
+      eventManagerData: eventmanager
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, message: error.message });
+  }
+
+}
