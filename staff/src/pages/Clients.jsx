@@ -42,27 +42,22 @@ const Clients = () => {
             <div className="overflow-x-auto">
               <table className="min-w-full">
                 <thead>
-                  <tr className="text-left text-sm font-semibold text-slate-600">
-                    <th className="px-6 py-4">Client Name</th>
-                    <th className="px-6 py-4">Email</th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4">Actions</th>
+                  <tr className="text-left text-sm font-semibold text-slate-600 justify-between">
+                    <th className="px-6 py-4  relative left-15">Client Name</th>
+                    <th className="px-6 py-4  relative left-60">Email</th>
+                    <th className="px-6 py-4 relative left-40">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 bg-white">
                   {listUser.map((client) => (
                     <tr key={client._id}>
-                      <td className="px-6 py-4 text-sm font-semibold text-slate-900">{client.name}</td>
-                      <td className="px-6 py-4 text-sm text-slate-600">{client.email}</td>
+                      <td className="px-6 py-4 text-sm font-semibold  relative left-20 text-slate-900">{client.name}</td>
+                      <td className="px-6 py-4  relative left-40 text-sm text-slate-600">{client.email}</td>
                       <td className="relative right-4 px-6 py-4">
-                        <span className={`inline-flex min-w-24 justify-center rounded-xl px-4 py-2 text-sm font-semibold ${getStatusClass(client?.isAccountVerified)}`}>
+                        <span className={`inline-flex min-w-24 justify-center rounded-xl px-4 py-2 relative left-40
+                             text-sm font-semibold ${getStatusClass(client?.isAccountVerified)}`}>
                           {client?.isAccountVerified ? "Verified" : "Not Verified"}
                         </span>
-                        <button onClick={() => handleClick(client._id)}
-                          className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold
-                             text-slate-700 transition hover:bg-slate-100 relative left-70">
-                          👁 View
-                        </button>
                       </td>
                     </tr>
                   ))}
