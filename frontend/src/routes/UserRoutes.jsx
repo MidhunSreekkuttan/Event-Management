@@ -25,14 +25,8 @@ const Educational = lazy(() => import('../pages/users/article/category/Education
 const BookingORenqury = lazy(() => import('../pages/users/article/others/BookingORenqury'))
 const EnjoyTheEvent = lazy(() => import('../pages/users/article/others/EnjoyTheEvent'))
 
-const PrivacyandPolicy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
-const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
-
 const PolicyandPrivacy = lazy(() => import('../pages/users/article/others/PolicyandPrivacy'))
 const TermsandConditions = lazy(() => import('../pages/users/article/others/TermsandConditions'))
-const BookingORenqury = lazy(() => import('../pages/users/article/others/BookingORenqury'))
-const EnjoyTheEvent = lazy(() => import('../pages/users/article/others/EnjoyTheEvent'))
-
 
 const UserRoutes = () => {
   return (
