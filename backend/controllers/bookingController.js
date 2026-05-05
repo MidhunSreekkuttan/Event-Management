@@ -352,8 +352,31 @@ export const allOrderEventManagement = async (req, res) => {
     });
   }
 };
-//user booking data for frontend
 
+//single booking data
+export const singleBookingData = async (req, res) => {
+
+  try {
+
+    const { bookingid } = req.params
+    if (!bookingid) {
+      return res.json({ success: false, message: "bookingid is missing" })
+    }
+
+    const getBookingData = await BookingModel.findById(bookingid)
+      .populate("userId", "name email") // user details
+      .populate("productId") // event/product details
+
+    return res.json({ success: true, getBookingData })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message })
+  }
+
+}
+
+//user booking data for frontend
 export const userBooking = async (req, res) => {
   try {
     const userId = req.user.id;
