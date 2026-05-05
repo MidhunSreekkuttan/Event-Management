@@ -230,18 +230,12 @@ const RegistrationDataDetails = () => {
             _transparent_24%),radial-gradient(circle_at_top_right,_rgba(0,0,0,0.08),
                 _transparent_20%),linear-gradient(135deg,_#ffffff,_#fff1f2,_#fee2e2)] text-black"
       >
-        <main className="px-4 py-5 sm:px-6 lg:px-10 lg:py-8">
+        <main className="">
           <div className="mx-auto max-w-6xl">
 
-            <div className={`rounded-[32px] p-6 sm:p-8 ${redGlass}`}>
+            <div>
 
-              <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <h1 className="text-3xl font-extrabold tracking-tight text-black md:text-5xl">
-                  Company Registration Details
-                </h1>
-              </div>
-
-              <section className="rounded-[28px] border border-red-200/60 bg-white/60 backdrop-blur-xl p-4 sm:p-6 md:p-8">
+              <section className="mt-5 mb-15">
 
                 <div className="overflow-hidden rounded-[22px] border border-red-200/60">
 
