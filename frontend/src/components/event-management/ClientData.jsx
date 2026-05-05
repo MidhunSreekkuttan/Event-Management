@@ -3,11 +3,14 @@ import { useContext, useMemo } from "react"
 import { toast } from "react-toastify"
 import { BackendContex } from "../../context/ConnectBackendContex"
 import { EventContext } from "../../context/EventContext"
+import { useNavigate } from "react-router-dom"
 
 const ClientData = ({ id, image, name, place, event_name, status }) => {
 
     const { backendUrl } = useContext(BackendContex)
     const { getClientData } = useContext(EventContext)
+
+    const navigate = useNavigate()
 
     const optimizedImage = useMemo(() => {
         if (!image?.[0]) return '/fallback-image.jpg'
@@ -37,6 +40,10 @@ const ClientData = ({ id, image, name, place, event_name, status }) => {
             console.log(error);
             toast.error(error.message)
         }
+    }
+
+    const onClicked = (id) => {
+        navigate(`/event-management/bookingDetails/${id}`)
     }
 
     return (
@@ -91,7 +98,7 @@ const ClientData = ({ id, image, name, place, event_name, status }) => {
 
                 {/* Action */}
                 <div className="flex items-center md:justify-center">
-                    <button className="rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:scale-105 transition">
+                    <button onClick={() => onClicked(id)} className="rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:scale-105 transition">
                         View
                     </button>
                 </div>

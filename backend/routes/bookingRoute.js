@@ -5,6 +5,7 @@ import {
   getReceipt,
   placebooking,
   placebookingRazorpay,
+  singleBookingData,
   updateBooking,
   userBooking,
   verifyRazorpay,
@@ -28,6 +29,8 @@ bookingRouter.get(
   EventManagementAuth,
   allOrderEventManagement,
 );
+//single booking data
+bookingRouter.get("/singleBookingData/:bookingid", singleBookingData)
 //For user
 bookingRouter.get("/userBooking", userAuth, userBooking);
 //update status for event managemnet panel

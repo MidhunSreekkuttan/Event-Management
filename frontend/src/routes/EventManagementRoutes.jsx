@@ -3,6 +3,7 @@ import { lazy, Suspense, useContext } from 'react'
 import Loader from '../components/Loading'
 import { Navigate, Outlet, Route } from 'react-router-dom'
 import EventManagementLayout from '../layouts/EventManagementLayout'
+import BookingDetails from '../pages/event-management/BookingDetails'
 
 const Login = lazy(() => import('../pages/event-management/login/Login'))
 const Otp = lazy(() => import('../pages/event-management/login/Otp'))
@@ -92,6 +93,11 @@ const EventManagementRoutes = () => {
           <Route path='booking' element={
             <Suspense fallback={<Loader />}>
               <Booking />
+            </Suspense>
+          } />
+          <Route path='bookingDetails/:bookingid' element={
+            <Suspense fallback={<Loader />}>
+              <BookingDetails />
             </Suspense>
           } />
           <Route path='events' element={
