@@ -2,12 +2,47 @@ import React from 'react';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { articles, heroImages } from '../../../../assets/assets';
 import { useNavigate } from 'react-router-dom';
+import { CalendarDays, Clock3, ArrowLeft, Search } from "lucide-react";
 
 const { card1, card2 } = articles;
 const { party1 } = heroImages;
 
 const Coorprates = () => {
-    const navigate = useNavigate();
+
+    const navigation = useNavigate()
+
+    const tips = [
+        {
+            no: "1",
+            title: "Define Your Event Goals",
+            desc: "Understand the purpose of your event, choose the guest count, decide the theme and create a clear plan for the celebration.",
+            img: card1,
+        },
+        {
+            no: "2",
+            title: "Set a Realistic Budget",
+            desc: "Plan spending for venue, food, decoration, gifts, entertainment and emergency expenses to avoid overspending.",
+            img: card2,
+        },
+        {
+            no: "3",
+            title: "Choose the Right Venue",
+            desc: "Pick a venue that matches your event size, comfort, accessibility and overall atmosphere.",
+            img: card3,
+        },
+        {
+            no: "4",
+            title: "Plan Fun Activities",
+            desc: "Include games, music, dance, entertainment and engaging moments that guests will enjoy.",
+            img: card4,
+        },
+        {
+            no: "5",
+            title: "Capture the Memories",
+            desc: "Hire a photographer or set up a photo booth to preserve your special memories forever.",
+            img: card5,
+        },
+    ];
 
     return (
         <article className="bg-[#f8fafc] min-h-screen font-sans text-[#1e293b]">
@@ -88,6 +123,7 @@ const Coorprates = () => {
                         <p className="text-slate-400 max-w-md">
                             "A good plan is the first step to success. Let us help you plan your next big company event today."
                         </p>
+
                     </div>
                     <button
                         onClick={() => navigate("/contactUs")}

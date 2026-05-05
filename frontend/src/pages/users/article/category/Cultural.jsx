@@ -253,6 +253,7 @@ export default function CulturalPage() {
                             <div className="flex items-center gap-2 font-semibold"><Clock size={16} /> {selectedArticle.readTime}</div>
                         </div>
                     </div>
+
                 </div>
                 <div className="max-w-4xl mx-auto px-6 py-20 space-y-24 text-justify">
                     {selectedArticle.points.map((point, idx) => (
@@ -270,6 +271,7 @@ export default function CulturalPage() {
                             <div className="space-y-2">
                                 <h3 className="text-3xl font-bold text-[#2d1109]">Ready to Host Your Own <br /> Cultural Celebration?</h3>
                                 <p className="text-gray-500 text-lg">Let's turn your heritage into an extraordinary experience.</p>
+
                             </div>
                         </div>
                         <button className="bg-orange-700 text-white px-12 py-5 rounded-2xl font-bold hover:scale-105 transition-all flex items-center gap-3 uppercase tracking-widest text-xs whitespace-nowrap shadow-xl shadow-orange-100">
