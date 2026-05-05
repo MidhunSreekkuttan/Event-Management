@@ -78,30 +78,6 @@ const SideBar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink
-                    to='/report'
-                    className='py-3 rounded-xl transition duration-200'
-                >
-                    <div className='flex gap-3 items-center ml-3'>
-                        <img className='w-7 opacity-90' src={staff_icons.reports_icon} alt="" />
-                        <h1 className='text-lg font-medium'>
-                            Report
-                        </h1>
-                    </div>
-                </NavLink>
-
-                <NavLink
-                    to='/settings'
-                    className='py-3 rounded-xl transition duration-200'
-                >
-                    <div className='flex gap-3 items-center ml-3'>
-                        <img className='w-7 opacity-90' src={staff_icons.settings_icon} alt="" />
-                        <h1 className='text-lg font-medium'>
-                            Settings
-                        </h1>
-                    </div>
-                </NavLink>
-
                 {/*Logout Button*/}
 
                 <div className='pt-4 border-t border-slate-700'>
