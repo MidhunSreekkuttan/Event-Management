@@ -7,7 +7,7 @@ const Hometab = () => {
 
     const cards = [
         { name: "Browse Events", subText: "Find the Perfect Event", icon: icon.search_icon, path: "/eventList" },
-        { name: "Booking or Enqury", subText: "Easy Booking OR put your enquery", icon: icon.create_event_icon, path: "/bookigOrEnquery" },
+        { name: "Booking or Enqury", subText: "Easy Booking OR put your enquery", icon: icon.create_event_icon, path: "/BookingORenqury" },
         { name: "Enjoy The EVENT!", subText: "Have An Amazing Time", icon: icon.party_event, path: "/enjoyTheEvent" }
     ]
 
@@ -53,9 +53,9 @@ function Card({ img, text, subText, index }) {
                 mass: 1,
                 delay: index * 0.30
             }}
-            className="flex h-40 rounded-2xl w-100 p-6 bg-white/3 hover:scale-102"
+            className="flex h-40 rounded-2xl w-90 p-6 bg-white/3 hover:scale-102"
         >
-            <div className='grid gap-5'>
+            <div className='flex flex-col gap-5'>
                 <img className='w-14 h-14 object-contain' src={img} alt={text} />
                 <h1 className='relative left-17 bottom-17 text-3xl font-bold'>{text}</h1>
                 <p className='relative left-20 bottom-14'>{subText}</p>
