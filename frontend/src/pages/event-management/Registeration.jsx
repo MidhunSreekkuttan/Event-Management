@@ -21,7 +21,7 @@ const Registration = () => {
 
             const { data } = await axios.get(backendUrl + '/api/product/listDocument')
             if (data.success) {
-                return data.data
+                return data.registrations || []
             } else {
                 return []
             }
@@ -40,7 +40,6 @@ const Registration = () => {
     })
 
     const existUser = userData?.userId ? data?.some(item => item.owner?.toString() === userData?.userId?.toString()) : false
-    console.log(existUser);
 
     const navigate = useNavigate()
 
@@ -104,8 +103,6 @@ const Registration = () => {
         }
     };
 
-    if (error) return <div>Error:{error.message}</div>
-
     useEffect(() => {
 
         if (existUser) {
@@ -113,6 +110,8 @@ const Registration = () => {
         }
 
     }, [existUser, navigate])
+
+    if (error) return <div>Error:{error.message}</div>
 
     return (
 
