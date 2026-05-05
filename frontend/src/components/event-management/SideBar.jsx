@@ -27,11 +27,6 @@ const SideBar = () => {
                     <p>Bookings</p>
                 </NavLink>
 
-                <NavLink
-                    className={({ isActive }) => `${linkBase} ${isActive ? 'color' : ''}`} to='/event-management/reports'>
-                    <img className='w-7 ml-5' src={icon.settings_icon} alt="" />
-                    <p>Reports</p>
-                </NavLink>
             </div>
         </div>
     )

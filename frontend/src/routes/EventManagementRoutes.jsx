@@ -10,7 +10,6 @@ const Home = lazy(() => import('../pages/event-management/Home'))
 const Add = lazy(() => import('../pages/event-management/Add'))
 const Booking = lazy(() => import('../pages/event-management/Booking'))
 const Events = lazy(() => import('../pages/event-management/Events'))
-const Reports = lazy(() => import('../pages/event-management/Reports'))
 const StayingPage = lazy(() => import('../pages/event-management/StayingPage'))
 const Registeration = lazy(() => import('../pages/event-management/Registeration'))
 const Waiting = lazy(() => import('../pages/event-management/Waiting'))
@@ -98,11 +97,6 @@ const EventManagementRoutes = () => {
           <Route path='events' element={
             <Suspense fallback={<Loader />}>
               <Events />
-            </Suspense>
-          } />
-          <Route path='reports' element={
-            <Suspense fallback={<Loader />}>
-              <Reports />
             </Suspense>
           } />
 
