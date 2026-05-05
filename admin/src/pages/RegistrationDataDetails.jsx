@@ -68,7 +68,32 @@ const RegistrationDataDetails = () => {
 
   const findEventManager = Array.isArray(eventManagementData) && eventManagementData?.find(item => item._id === data?.owner)
 
-  console.log("eventFinder", findEventManager);
+  const getWorkersId = useCallback(async () => {
+
+    try {
+
+      const { data } = await axios.get(backendUrl + "/api/workers/getWorkersList")
+      if (data.success) {
+        return data.workers || []
+      } else {
+        return []
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+
+  }, [backendUrl])
+
+  const { data: workersId, isLoading: workersLoading, error: workersError } = useQuery({
+    queryKey: ["workersId"],
+    queryFn: getWorkersId
+  })
+
+  const findWorker = Array.isArray(workersId) && workersId?.find(item => data?.user === item._id)
+
+  console.log("worker", findWorker);
 
   const [status, setStatus] = useState("")
   const [Loading, setIsLoading] = useState(false)
@@ -77,16 +102,18 @@ const RegistrationDataDetails = () => {
 
   const changeStatus = useCallback(async () => {
     try {
-      if (!findEventManager?._id) {
-        return toast.error("Event manager not found");
-      }
 
       setIsLoading(true);
 
+      const endPoint = type === "workers" ? "/api/admin/changeWorkersStatus" : "/api/admin/changeStatus"
+
+      const eventManagerId = findEventManager?._id
+      const workersId = findWorker?._id
+
       const res = await axios.post(
-        backendUrl + "/api/admin/changeStatus",
+        backendUrl + endPoint,
         {
-          eventManagerId: findEventManager._id,
+          userId: type === "workers" ? workersId : eventManagerId,
           status
         }
       );
@@ -95,7 +122,8 @@ const RegistrationDataDetails = () => {
         toast.success(res.data.message);
 
         // refresh UI
-        queryClient.invalidateQueries(["eventManagementId"]);
+        type === "eventmanagers" ? queryClient.invalidateQueries(["eventManagementId"]) :
+          queryClient.invalidateQueries(["workersId"])
       } else {
         toast.error(res.data.message);
       }
@@ -106,7 +134,7 @@ const RegistrationDataDetails = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [backendUrl, findEventManager, status, queryClient]);
+  }, [backendUrl, findEventManager, status, queryClient, type]);
 
   const details = [
     { label: type === "eventmanagers" ? "Company Name" : "Name", value: type === "eventmanagers" ? data?.companyName : data?.name },
@@ -263,7 +291,7 @@ const RegistrationDataDetails = () => {
                         <div className="flex flex-col justify-between px-6 gap-4 sm:flex-row sm:items-center">
 
                           <select
-                            value={status || findEventManager?.isAdminVerified || "pending"}
+                            value={status || findEventManager?.isAdminVerified || findWorker?.isAdminVerified || "pending"}
                             onChange={(e) => setStatus(e.target.value)}
                             disabled={Loading}
                             className="rounded-xl border border-red-200 bg-white px-4 py-3 text-black outline-none
@@ -293,8 +321,11 @@ const RegistrationDataDetails = () => {
                         <p className="mt-3 text-sm text-black/60">
                           Current Status:{" "}
                           <span className="font-semibold text-red-600">
-                            {findEventManager ? findEventManager?.isAdminVerified?.[0]?.toUpperCase() +
-                              findEventManager?.isAdminVerified?.slice(1) : ""}
+                            {type === "eventmanagers" ? findEventManager ? findEventManager?.isAdminVerified?.[0]?.toUpperCase() +
+                              findEventManager?.isAdminVerified?.slice(1) : "" :
+                              findWorker ? findWorker?.isAdminVerified?.[0]?.toUpperCase() + findWorker?.isAdminVerified?.slice(1)
+                                : ""
+                            }
                           </span>
                         </p>
                       </div>
