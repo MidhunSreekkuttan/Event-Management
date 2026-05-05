@@ -1,11 +1,8 @@
 import React from 'react';
-import { ArrowLeft, ShieldCheck } from 'lucide-react';
-import { articles, heroImages } from '../../../../assets/assets';
+import { ArrowLeft, ShieldCheck, CalendarDays, Clock3, Search } from 'lucide-react';
+import { articles } from '../../../../assets/assets';
+const { heroImages, card1, card2, card3, card4, card5, party1 } = articles
 import { useNavigate } from 'react-router-dom';
-import { CalendarDays, Clock3, ArrowLeft, Search } from "lucide-react";
-
-const { card1, card2 } = articles;
-const { party1 } = heroImages;
 
 const Coorprates = () => {
 
@@ -49,7 +46,7 @@ const Coorprates = () => {
             {/* Navigation */}
             <div className="max-w-7xl mx-auto px-6 py-10">
                 <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigation("/")}
                     className='group flex items-center gap-2 text-[#4f46e5] font-bold hover:opacity-70 transition-all uppercase tracking-tighter text-xs'>
                     <ArrowLeft size={16} />
                     Back to Home
@@ -99,7 +96,7 @@ const Coorprates = () => {
                         </p>
                     </div>
                     <div className="rounded-[40px] overflow-hidden shadow-lg h-80 border border-slate-100">
-                        <img src={card1} alt="Work" className="w-full h-full object-cover" />
+                        <img src={articles.card1} alt="Work" className="w-full h-full object-cover" />
                     </div>
                 </div>
 

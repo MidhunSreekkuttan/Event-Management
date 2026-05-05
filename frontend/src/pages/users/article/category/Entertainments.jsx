@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { CalendarDays, Clock3, Target, Users, Mic, Calendar, MapPin, Megaphone, BarChart3, GraduationCap, User, ArrowLeft } from "lucide-react";
+import {
+    CalendarDays, Clock3, Target, Users, Mic, Calendar, MapPin, Megaphone, BarChart3, GraduationCap, User,
+    ArrowLeft, Music, Headphones, ArrowRight, Clock
+} from "lucide-react";
 import { articles } from "../../../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { Music, Mic, Headphones, ArrowRight, Calendar, Clock, ArrowLeft } from "lucide-react";
-import { articles } from "../../../../assets/assets";
 
 const { entertainment_header, liveshow1, liveshow2, liveshow3, liveshow4, dj1, dj2, dj3, dj4, youth1, youth2, youth3, youth4 } = articles;
 
