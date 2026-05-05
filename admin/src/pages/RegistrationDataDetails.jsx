@@ -269,9 +269,9 @@ const RegistrationDataDetails = () => {
                             className="rounded-xl border border-red-200 bg-white px-4 py-3 text-black outline-none
                              focus:border-red-500"
                           >
-                            <option value="pending">pending</option>
-                            <option value="approved">approved</option>
-                            <option value="rejected">rejected</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
                           </select>
 
                           <button

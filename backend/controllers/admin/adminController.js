@@ -44,13 +44,18 @@ export const changeStatus = async (req, res) => {
 
     const { eventManagerId, status } = req.body
 
-    if (!eventManagerId || !status) {
+    if (!eventManagerId) {
       return res.json({ success: false, message: "missing details" })
+    }
+
+    const changeStatusCaps = String(status).toLowerCase().trim()
+    if (!changeStatusCaps) {
+      return res.json({ success: false, message: "missing status" })
     }
 
     const getDocument = await eventManagementModel.findByIdAndUpdate(
       eventManagerId,
-      { isAdminVerified: status }
+      { isAdminVerified: changeStatusCaps }
     )
     if (!getDocument) {
       return res.json({ success: false, message: "document not found" })
