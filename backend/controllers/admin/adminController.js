@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
 
 export const adminLogin = async (req, res) => {
   try {
@@ -29,6 +30,33 @@ export const isAuth = async (req, res) => {
   try {
 
     return res.json({ success: true })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
+
+export const changeStatus = async (req, res) => {
+
+  try {
+
+    const { eventManagerId, status } = req.body
+
+    if (!eventManagerId || !status) {
+      return res.json({ success: false, message: "missing details" })
+    }
+
+    const getDocument = await eventManagementModel.findByIdAndUpdate(
+      eventManagerId,
+      { isAdminVerified: status }
+    )
+    if (!getDocument) {
+      return res.json({ success: false, message: "document not found" })
+    }
+
+    res.json({ success: true, message: "Status changed succfully" })
 
   } catch (error) {
     console.log(error);
