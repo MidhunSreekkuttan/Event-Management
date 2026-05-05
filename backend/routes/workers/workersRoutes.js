@@ -2,6 +2,7 @@ import express from "express";
 import {
   getAuth,
   getUserData,
+  getWorkersList,
   login,
   logout,
   register,
@@ -26,6 +27,8 @@ workersRouter.post("/sendVerifyOtp", workersAuth, sendVerifyOtp);
 workersRouter.post("/verifyEmail", workersAuth, verifyEmail);
 workersRouter.get("/getAuth", workersAuth, getAuth);
 workersRouter.get("/getUserData", workersAuth, getUserData);
+
+workersRouter.get("/getWorkersList", getWorkersList)
 
 //upload registration
 workersRouter.post(

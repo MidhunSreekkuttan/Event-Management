@@ -201,3 +201,21 @@ export const getUserData = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const getWorkersList = async (req, res) => {
+
+  try {
+
+    const getWorkers = await workersModel.find({})
+    if (!getWorkers) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    res.json({ success: true, workers: getWorkers })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
