@@ -10,7 +10,7 @@ import {
   verifyEmail,
 } from "../../controllers/eventManagement/eventManagementController.js";
 import EventManagementAuth from "../../middleware/eventManagement/eventManagementAuth.js";
-import getEventManagementData from "../../controllers/eventManagement/eventManagementAuth.js";
+import { getEventManagementData, getEventManagementDataAdmin } from '../../controllers/eventManagement/eventManagementAuth.js'
 
 const eventManagementRouter = express.Router();
 
@@ -29,6 +29,9 @@ eventManagementRouter.get(
   EventManagementAuth,
   getEventManagementData,
 );
+//for admin get data
+eventManagementRouter.get("/getUserDataAdmin", getEventManagementDataAdmin)
+
 eventManagementRouter.get("/userList", listEventManagementUser);
 eventManagementRouter.post("/deleteuser", deleteEventManagementUser);
 
