@@ -2,7 +2,6 @@ import { Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import Layout from './Layout'
 import Loader from './components/Loading'
-import RegistrationDataDetails from './pages/RegistrationDataDetails'
 
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const EventManagersList = lazy(() => import('./pages/EventManagersList'))
@@ -12,6 +11,7 @@ const StaffsList = lazy(() => import('./pages/StaffsList'))
 const UsersList = lazy(() => import('./pages/UsersList'))
 const AppointStaff = lazy(() => import('./pages/AppointStaff'))
 const RegistrationData = lazy(() => import('./pages/RegistrationData'))
+const RegistrationDataDetails = lazy(() => import('./pages/RegistrationDataDetails'))
 
 const Router = () => {
     return (

@@ -74,9 +74,13 @@ const RegistrationData = () => {
 
                         {/* filter button*/}
                         <div className="flex gap-3">
-                            <Btn onClick={() => setRegistration("eventmanagers")} text="Eventmanagers" />
+                            <Btn onClick={() => setRegistration("eventmanagers")}
+                                registration={registration === "eventmanagers"}
+                                text="Eventmanagers" />
 
-                            <Btn onClick={() => setRegistration("workers")} text="Workers" />
+                            <Btn onClick={() => setRegistration("workers")}
+                                registration={registration === "workers"}
+                                text="Workers" />
                         </div>
 
                         {/* Table Card */}
@@ -160,14 +164,16 @@ const RegistrationData = () => {
     );
 };
 
-export function Btn({ text, ...props }) {
+export function Btn({ text, registration, ...props }) {
 
     return (
 
         <button
             {...props}
-            className="bg-gradient-to-br from-red-600 to-black text-white rounded-2xl px-5 py-3
-                                 cursor-pointer transition-all active:scale-95"
+            className={`text-white rounded-2xl px-5 py-3
+                         cursor-pointer transition-all active:scale-95 
+                         ${registration ? "bg-gradient-to-br from-red-600 to-black" : "bg-red-600"}
+                         `}
         >
             {text}
         </button>
