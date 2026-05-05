@@ -59,7 +59,7 @@ const UserRoutes = () => {
         <Route path='/entertainments' element={<Entertainments />} />
         <Route path='/educational' element={<Educational />} />
 
-        <Route path='/PrivacyandPolicy' element={<PolicyandPrivacy />} />
+        <Route path='/policyAndPrivacy' element={<PolicyandPrivacy />} />
         <Route path='/TermsandConditions' element={<TermsandConditions />} />
         <Route path='/BookingORenqury' element={<BookingORenqury />} />
         <Route path='/EnjoyTheEvent' element={<EnjoyTheEvent />} />
