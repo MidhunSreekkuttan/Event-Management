@@ -194,8 +194,10 @@ const RegistrationDataDetails = () => {
           </div>
 
           {file && (
-            <button onClick={() => window.open(backendUrl + file, "_blank")} className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-red-600 md:text-lg">
-              <Download className="h-4 w-4 md:h-5 md:w-5" />
+            <button onClick={() => window.open(backendUrl + file, "_blank")} className="group inline-flex items-center 
+              justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 text-sm font-semibold text-white shadow-lg 
+                transition hover:bg-red-600 md:text-lg cursor-pointer">
+              <Download className="h-4 w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:scale-120" />
               View
             </button>
           )}
@@ -299,15 +301,15 @@ const RegistrationDataDetails = () => {
                           <button
                             onClick={changeStatus}
                             disabled={Loading}
-                            className="rounded-xl bg-red-500 px-6 py-3 font-semibold text-white shadow-md transition
-                             hover:bg-red-600 active:scale-95"
+                            className="group rounded-xl bg-red-500 px-6 py-3 font-semibold text-white shadow-md transition
+                             hover:bg-red-600 active:scale-95 cursor-pointer"
                           >
                             {Loading ? (
                               <>
                                 <LoaderPinwheel className="relative animate-spin justify-center items-center h-5 w-5" />
                               </>
                             ) : (
-                              "Update Status"
+                              <h2 className="transition-transform duration-500 group-hover:scale-110">Update Status</h2>
                             )}
                           </button>
                         </div>
@@ -331,10 +333,10 @@ const RegistrationDataDetails = () => {
                 </div>
 
                 <div className="mt-6 flex justify-end">
-                  <button onClick={() => navigate("/RegistrationData")} className="inline-flex items-center gap-2 rounded-2xl
+                  <button onClick={() => navigate("/RegistrationData")} className="group inline-flex items-center gap-2 rounded-2xl
                    bg-red-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-red-600
-                     active:scale-95">
-                    <ArrowLeft className="h-5 w-5" />
+                     active:scale-95 cursor-pointer">
+                    <ArrowLeft className="h-5 w-5 transition-all duration-400 group-hover:-translate-x-3" />
                     Back
                   </button>
                 </div>
