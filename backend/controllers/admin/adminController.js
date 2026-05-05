@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
+import workersModel from "../../dataBase/models/workers/workersModel.js";
 
 export const adminLogin = async (req, res) => {
   try {
@@ -42,9 +43,9 @@ export const changeStatus = async (req, res) => {
 
   try {
 
-    const { eventManagerId, status } = req.body
+    const { userId, status } = req.body
 
-    if (!eventManagerId) {
+    if (!userId) {
       return res.json({ success: false, message: "missing details" })
     }
 
@@ -54,7 +55,39 @@ export const changeStatus = async (req, res) => {
     }
 
     const getDocument = await eventManagementModel.findByIdAndUpdate(
-      eventManagerId,
+      userId,
+      { isAdminVerified: changeStatusCaps }
+    )
+    if (!getDocument) {
+      return res.json({ success: false, message: "document not found" })
+    }
+
+    res.json({ success: true, message: "Status changed succfully" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
+
+export const changeWorkersStatus = async (req, res) => {
+
+  try {
+
+    const { userId, status } = req.body
+
+    if (!userId) {
+      return res.json({ success: false, message: "missing details" })
+    }
+
+    const changeStatusCaps = String(status).toLowerCase().trim()
+    if (!changeStatusCaps) {
+      return res.json({ success: false, message: "missing status" })
+    }
+
+    const getDocument = await workersModel.findByIdAndUpdate(
+      userId,
       { isAdminVerified: changeStatusCaps }
     )
     if (!getDocument) {
