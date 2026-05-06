@@ -72,18 +72,12 @@ const Footer = ({ whiteBg = false }) => {
           transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
         >
           <div className={`${whiteBg ? 'border-r border-black/20' : 'border-r border-white/20'}`}>
-            <h3 className="text-2xl font-bold mb-4">Eventify</h3>
+            <h3 className="text-2xl font-bold mb-4">Event Management</h3>
             <p className={`leading-relaxed mb-6 ${whiteBg ? 'text-black' : 'text-white/80'}`}>
               Your all-in-one solution for planning and booking unforgettable
               weddings, parties, concerts, and corporate events.
             </p>
 
-            <div className="flex gap-4">
-              <SocialIcon icon={<FaFacebookF />} />
-              <SocialIcon icon={<FaTwitter />} />
-              <SocialIcon icon={<FaInstagram />} />
-              <SocialIcon icon={<FaYoutube />} />
-            </div>
           </div>
         </motion.div>
 
@@ -136,10 +130,10 @@ const Footer = ({ whiteBg = false }) => {
             <h4 className="text-xl font-semibold mb-4">Contact Us</h4>
             <div className={`space-y-3 ${whiteBg ? "text-black" : 'text-white/80'}`}>
               <p className="flex items-center gap-3">
-                <FaEnvelope /> info@example.com
+                <FaEnvelope /> eventmanagement@example.com
               </p>
               <p className="flex items-center gap-3">
-                <FaPhoneAlt /> +1 123 456 7890
+                <FaPhoneAlt /> 0471-226937
               </p>
             </div>
 
@@ -171,7 +165,7 @@ const Footer = ({ whiteBg = false }) => {
         {/* Bottom Bar */}
         <div className={`border-t py-6 px-6 flex flex-col md:flex-row items-center justify-between text-sm
             ${whiteBg ? 'border-black/10 text-black' : 'border-white/20 text-white/70'}`}>
-          <p className="relative left-160">© 2024 Eventify. All rights reserved.</p>
+          <p className="relative left-160">© 2026 Event Management. All rights reserved.</p>
           <div className="flex gap-4 mt-2 md:mt-0">
             <a href="/policyAndPrivacy" className="hover:text-white">Privacy Policy</a>
             <span>•</span>
