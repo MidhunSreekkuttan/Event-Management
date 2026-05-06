@@ -83,7 +83,9 @@ const BookingPage = () => {
                         <div className='mt-4 grid gap-2 text-sm text-slate-600 md:grid-cols-2'>
                           <p>
                             <span className='font-semibold text-slate-800'>Name:</span>{' '}
-                            {order.address?.firstName}
+                            {
+                              order.address?.name ? order.address?.name?.[0].toUpperCase() + order.address?.name.slice(1) : order.address?.name
+                            }
                           </p>
                           <p>
                             <span className='font-semibold text-slate-800'>Email:</span>{' '}

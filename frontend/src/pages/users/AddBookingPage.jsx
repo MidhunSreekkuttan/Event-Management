@@ -11,7 +11,7 @@ const BookingPage = () => {
     const navidate = useNavigate()
     const { bookingId } = useParams()
 
-    const { backendUrl } = useContext(BackendContex)
+    const { backendUrl, userData } = useContext(BackendContex)
     const { listEnquiry, getEventList, products } = useContext(EventContext)
 
     const bookedData = products.find(item => item._id === bookingId)
@@ -22,14 +22,17 @@ const BookingPage = () => {
     const [response, setResponse] = useState([])
 
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
         street: '',
         city: '',
         place: '',
         phoneNumber: ''
     })
+
+    const finalFormData = {
+        ...formData,
+        name: userData?.name,
+        email: userData?.email
+    }
 
     const onChangeHandler = (event) => {
         const name = event.target.name
@@ -83,7 +86,7 @@ const BookingPage = () => {
     //...........................................................................
 
     const bookingData = {
-        address: formData,
+        address: finalFormData,
         productId: bookedData?._id,
         items: bookedData,
         eventDate: date,
@@ -232,35 +235,30 @@ const BookingPage = () => {
                                     </p>
                                 </div>
 
-                                <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
+                                <div className='grid grid-cols-2 gap-5 md:grid-cols-2'>
                                     <InputField
-                                        label="First Name*"
+                                        disabled={userData}
+                                        label="Name"
                                         name="firstName"
                                         value={formData.firstName}
                                         onChange={onChangeHandler}
                                         type="text"
-                                        placeholder="Enter Your First name"
+                                        placeholder={userData?.name}
                                         required
                                     />
+
                                     <InputField
-                                        label="Last Name"
-                                        name="lastName"
-                                        value={formData.lastName}
+                                        disabled={userData}
+                                        label="Email*"
+                                        name="email"
+                                        value={formData.email}
                                         onChange={onChangeHandler}
                                         type="text"
-                                        placeholder="Enter Your Last name"
+                                        placeholder={userData?.email}
+                                        required
                                     />
-                                </div>
 
-                                <InputField
-                                    label="Email*"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={onChangeHandler}
-                                    type="text"
-                                    placeholder="Enter Your Email"
-                                    required
-                                />
+                                </div>
 
                                 <InputField
                                     label="Street*"
@@ -395,11 +393,12 @@ const BookingPage = () => {
     )
 }
 
-function InputField({ label, name, value, onChange, type, placeholder, required = false }) {
+function InputField({ label, name, value, onChange, type, placeholder, required = false, ...prop }) {
     return (
         <div className='flex flex-col gap-2'>
             <label className='text-sm font-semibold text-slate-700'>{label}</label>
             <input
+                {...prop}
                 onChange={onChange}
                 name={name}
                 value={value}

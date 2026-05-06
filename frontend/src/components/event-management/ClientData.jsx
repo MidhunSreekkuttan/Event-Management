@@ -65,7 +65,10 @@ const ClientData = ({ id, image, name, place, event_name, status }) => {
                 {/* Name */}
                 <div className="flex items-center">
                     <p className="text-base md:text-lg font-semibold tracking-tight text-white">
-                        {name.length > 14 ? name.slice(0, 14) + '...' : name}
+                        {
+                            name?.length > 14 ? name?.slice(0, 14) + '...' : name ?
+                                name?.[0].toUpperCase() + name.slice(1) : ""
+                        }
                     </p>
                 </div>
 

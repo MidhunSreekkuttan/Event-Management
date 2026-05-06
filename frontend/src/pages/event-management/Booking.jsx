@@ -214,7 +214,7 @@ const Booking = () => {
                             key={`${index}-${Itemindex}`}
                             id={data._id}
                             image={item.image}
-                            name={data.address?.firstName}
+                            name={data?.address?.name}
                             event_name={item.event_name}
                             place={data.address?.place}
                             status={data.status}
