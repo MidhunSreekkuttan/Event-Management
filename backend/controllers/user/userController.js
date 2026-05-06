@@ -265,3 +265,38 @@ export const resetPassword = async (req, res) => {
   }
 
 }
+
+export const verifyResentOtp = async (req, res) => {
+
+  try {
+
+    const userId = req.userId
+    const { newOtp, newPassword } = req.body
+
+    const user = await userModel.findByIdAndUpdate(userId)
+    if (!user) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    if (!newOtp) {
+      return res.json({ success: false, message: "otp is requerd" })
+    }
+    if (user.verifyOtp === "" || user.verifyOtp !== newOtp) {
+      return res.json({ success: false, message: "somthing went wrong" })
+    }
+
+    const hashpassword = await bcrypt.hash(newPassword, 10)
+
+    user.password = hashpassword
+    user.verifyOtp = ""
+    user.verifyOtpExpire = 0
+    await user.save()
+
+    return res.json({ success: true, message: "Password chamge successfuly" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}

@@ -9,6 +9,7 @@ import {
   listUser,
   deleteUser,
   resetPassword,
+  verifyResentOtp,
 } from "../../controllers/user/userController.js";
 import userAuth from "../../middleware/user/userAuth.js";
 import {
@@ -37,5 +38,6 @@ userRouter.post("/deleteUser", deleteUser);
 
 //reset otp
 userRouter.post("/resetOtp", userAuth, resetPassword)
+userRouter.post("/verifyResentOtp", userAuth, verifyResentOtp)
 
 export default userRouter;
