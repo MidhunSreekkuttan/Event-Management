@@ -34,11 +34,16 @@ const Hero = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
               >
-                <p className='relative bottom-10 left-90 cursor-default'>Welcome to Our Web Page</p><br />
-                <span className='relative bottom-15 left-90 bg-clip-text text-transparent
-                   bg-linear-to-r from-indigo-300 to-indigo-400 cursor-default'>
-                  Your Event Our Responsibility
-                </span>
+                <p className='relative bottom-10 left-100 cursor-default text-6xl'>We Create {" "}
+                  <span className='bg-clip-text text-transparent
+                   bg-linear-to-r from-indigo-300 to-indigo-400 cursor-default '>
+                    You Celebrate
+                  </span>
+                </p>
+
+                <p className='text-lg relative left-100 font-medium'>Planning events, Proposal, or Event in our busy city is not so easy,
+                  and it takes skills (and time) to make it all look easy-going</p>
+
               </motion.h1>
 
               <motion.div
@@ -47,7 +52,7 @@ const Hero = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.4 }}
               >
-                <div className='relative top-15 left-120 text-2xl font-bold flex gap-10'>
+                <div className='relative top-15 left-135 text-2xl font-bold flex gap-10'>
                   <a href='#category'>
                     <button
                       className='cursor-pointer bg-linear-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-xl'>
