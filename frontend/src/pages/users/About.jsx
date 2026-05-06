@@ -47,8 +47,8 @@ const About = () => {
                   a centralized platform built to handle
                   the complete lifecycle of an event. <br /> Planning an event shouldn't be stressful and that's
                   exactly why we built this platform.Our Event Management System helps you plan, <br /> organize, and manage
-                  events without the usual chaos. From handling registrations to keeping track of attendees,
-                  everything is managed in one place.</span>
+                  events without the usual choose.
+                  Everything is managed in one place.</span>
               </p>
               <p className='relative top-15 text-2xl font-semibold bg-linear-to-r from-pink-600 to-pink-300 bg-clip-text text-transparent'>
                 We take care of the technical side so you can focus on what really matters creating <br />
@@ -70,16 +70,15 @@ const About = () => {
           <div className='grid gap-5'>
 
             <h1 className='font-bold text-3xl'>Who we are:</h1>
-            <h1 className='font-semibold text-2xl'>Empowering Your Celebrations</h1>
 
-            <div>
-              <p className='text-[20px]'>At Eventify, we believe every special moment deserve to be <br />
-                unforgettable. We're a passionate team dedicated to pro- <br />
-                viding an all-in-one event management platform that makes <br />
-                it easy to book and manage events of any size, from intimate <br />
-                weddings and birthday parties to grand concerts and corpo- <br />
-                rate functions. Our mission is to simpify the event planning <br />
-                process so you can focus on what really matters - creating <br />
+            <div className='max-w-xl'>
+              <p className='text-[20px] leading-relaxed text-gray-700 text-justify'>We believe every special moment deserve to be
+                unforgettable. We're a passionate team dedicated to pro-
+                viding an all-in-one event management platform that makes
+                it easy to book and manage events of any size, from intimate
+                weddings and birthday parties to grand concerts and corpo-
+                rate functions. Our mission is to simpify the event planning
+                process so you can focus on what really matters - creating
                 memories that will last a lifetime..</p>
             </div>
             <div>
@@ -108,91 +107,6 @@ const About = () => {
 
       <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40
        bg-[#F6F0FD] text-black'>
-        <div className='grid gap-30'>
-
-          <motion.div
-            initial={{ y: -100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
-          >
-
-            <div className='grid gap-5 relative left-115'>
-              <h1 className='font-bold text-5xl'>Why Choose Us</h1>
-              <h1 className='relative top-5 font-semibold text-2xl'>The Adhithi Advantages</h1>
-            </div>
-
-          </motion.div>
-
-          <div className='flex gap-10'>
-
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.1 }}
-            >
-
-              <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-100 p-5 hover:scale-110 transition-all'>
-                <img className='relative -top-10 w-18 object-contain' src={icon.corporative_events} alt="" />
-                <div>
-                  <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
-                  <h1 className='relative top-20 right-15'>We're over 10 years of experience and <br />
-                    gio ovents in panage were that ore tust <br />
-                    potlies in-the scee in a mindfal world.</h1>
-                </div>
-              </div>
-
-            </motion.div>
-
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.3 }}
-            >
-
-              <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-100 p-5 hover:scale-110 transition-all'>
-                <img className='relative -top-13 w-15 object-contain' src={icon.settings_icon} alt="" />
-                <div>
-                  <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
-                  <h1 className='relative top-20 right-15'>We're over 10 years of experience and <br />
-                    gio ovents in panage were that ore tust <br />
-                    potlies in-the scee in a mindfal world.</h1>
-                </div>
-              </div>
-
-            </motion.div>
-
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1, delay: 0.5 }}
-            >
-
-              <div className='flex gap-3 shadow-xl bg-linear-to-r from-white via-violet-200 to-violet-300
-             justify-center h-60 rounded-2xl w-100 p-5 hover:scale-110 transition-all'>
-                <img className='relative -top-13 w-12 object-contain' src={icon.like_icon} alt="" />
-                <div>
-                  <h1 className='relative top-5 font-semibold text-2xl'>Year of Experiance</h1>
-                  <h1 className='relative top-20 right-15'>We're over 10 years of experience and <br />
-                    gio ovents in panage were that ore tust <br />
-                    potlies in-the scee in a mindfal world.</h1>
-                </div>
-              </div>
-
-            </motion.div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <section className='relative max-w-screen min-h-screen flex justify-center items-center gap-40
-       bg-[#F6F0FD] text-black'>
         <div className='grid gap-50'>
 
           <motion.div
@@ -217,8 +131,8 @@ const About = () => {
 
               <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
-                  <img loading='lazy' decoding='async' className='relative left-5 w-screen h-full object-cover object-[10%_-20%] scale-130'
-                    src={`/IMG_20260113_212004.avif`.replace('/upload/',
+                  <img loading='lazy' decoding='async' className='relative left-5 w-screen h-full object-cover object-[10%_20%] scale-130'
+                    src={`/midhun.jpg.jpeg`.replace('/upload/',
                       '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
@@ -249,7 +163,7 @@ const About = () => {
               <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='w-screen h-full object-cover object-[10%_15%]'
-                    src={`/IMG_20260228_152809.avif`.replace('/upload/',
+                    src={`/me.jpg.jpeg`.replace('/upload/',
                       '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
@@ -280,7 +194,7 @@ const About = () => {
               <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative right-4 w-screen h-full object-cover scale-125 object-[10%_40%]'
-                    src={`/IMG_20241204_124644.avif`.replace('/upload/',
+                    src={`/Screenshot_2-5-2026_233746_www.instagram.com.jpeg`.replace('/upload/',
                       '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
@@ -311,8 +225,8 @@ const About = () => {
               <div className=''>
                 <div className='w-60 h-40 overflow-hidden rounded-t-2xl'>
                   <img loading='lazy' decoding='async' className='relative left-15 w-full h-full object-cover 
-                      object-[10%_15%] scale-150'
-                    src={`/IMG_20241207_113701_1.avif`.replace('/upload/',
+                      object-[10%_10%] scale-150'
+                    src={`/Screenshot_2-5-2026_234324_www.instagram.com.jpeg`.replace('/upload/',
                       '/upload/w_400,h_300,c_fill,f_auto,q_auto/')} alt="" />
                 </div>
                 <div className='w-60 shadow-2xl rounded-b-2xl'>
