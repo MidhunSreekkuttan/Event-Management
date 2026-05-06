@@ -290,6 +290,18 @@ export const verifyResetOtp = async (req, res) => {
     if (!newPassword) {
       return res.json({ success: false, message: "passwordis requered" })
     }
+    if (!/[A-Z]/.test(newPassword)) {
+      return res.json({ success: false, message: "Password must have atleast a uppercase charecter" })
+    }
+    if (!/[a-z]/.test(newPassword)) {
+      return res.json({ success: false, message: "Password must have atleast a lowercase charecter" })
+    }
+    if (!/[0-9]/.test(newPassword) || newPassword.match(/[0-9]/g).length < 3) {
+      return res.json({ success: false, message: "Password must have atleast three number" })
+    }
+    if (!/[!@#$%^&*]/.test(newPassword)) {
+      return res.json({ success: false, message: "Password must have atleast a symbol" })
+    }
 
     const hashPassword = await bcrypt.hash(newPassword, 10)
     user.password = hashPassword
