@@ -124,8 +124,17 @@ const Login = () => {
             </div>
             <div>
               {state === 'login' ? (
-                <p onClick={() => setState('signUp')}>You don't have an account
-                  <span className='cursor-pointer text-blue-400 underline'>Sign Up Here</span></p>
+                <>
+
+                  <p onClick={() => navigate("/event-management/resetPassword")} className='text-sm text-blue-500 underline
+                     relative left-44 mb-2 cursor-pointer'>
+                    Forget Password
+                  </p>
+
+                  <p onClick={() => setState('signUp')}>You don't have an account
+                    <span className='cursor-pointer text-blue-400 underline'>Sign Up Here</span></p>
+
+                </>
               ) : (
                 <p onClick={() => setState('login')}>You Already have an account
                   <span className='cursor-pointer text-blue-400 underline'>Login Here</span></p>

@@ -4,6 +4,7 @@ import Loader from '../components/Loading'
 import { Navigate, Outlet, Route } from 'react-router-dom'
 import EventManagementLayout from '../layouts/EventManagementLayout'
 import BookingDetails from '../pages/event-management/BookingDetails'
+import ResetPassword from '../pages/event-management/login/ResetPassword'
 
 const Login = lazy(() => import('../pages/event-management/login/Login'))
 const Otp = lazy(() => import('../pages/event-management/login/Otp'))
@@ -47,6 +48,11 @@ const EventManagementRoutes = () => {
       <Route path='/event-management/otp' element={
         <Suspense fallback={<Loader />}>
           <Otp />
+        </Suspense>
+      } />
+      <Route path='/event-management/resetPassword' element={
+        <Suspense fallback={<Loader />}>
+          <ResetPassword />
         </Suspense>
       } />
 
