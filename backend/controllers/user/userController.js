@@ -231,13 +231,12 @@ export const resetPassword = async (req, res) => {
 
   try {
 
-    const userId = req.userId
-    if (!userId) {
-      return res.json({ success: false, message: "userId not found" })
+    const { email } = req.body
+    if (!email) {
+      return res.json({ success: false, message: "email not found" })
     }
-    // const { newPassword, otp } = req.body
 
-    const userData = await userModel.findByIdAndUpdate(userId)
+    const userData = await userModel.findOne({ email })
     if (!userData) {
       return res.json({ success: false, message: "user not found" })
     }
@@ -270,10 +269,9 @@ export const verifyResentOtp = async (req, res) => {
 
   try {
 
-    const userId = req.userId
-    const { newOtp, newPassword } = req.body
+    const { newOtp, newPassword, email } = req.body
 
-    const user = await userModel.findByIdAndUpdate(userId)
+    const user = await userModel.findOneAndUpdate({ email })
     if (!user) {
       return res.json({ success: false, message: "user not found" })
     }

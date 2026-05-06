@@ -23,7 +23,8 @@ const UserLayout = () => {
     pathname === '/enjoyTheEvent' ||
     pathname === "/TermsandConditions" ||
     pathname === "/policyAndPrivacy" ||
-    pathname === "/BookingORenqury"
+    pathname === "/BookingORenqury" ||
+    pathname === "/resetPassword"
 
   const hideFooter =
     pathname === '/login' ||
@@ -44,7 +45,8 @@ const UserLayout = () => {
     pathname === '/enjoyTheEvent' ||
     pathname === "/TermsandConditions" ||
     pathname === "/policyAndPrivacy" ||
-    pathname === "/BookingORenqury"
+    pathname === "/BookingORenqury" ||
+    pathname === "/resetPassword"
 
   return (
     <>

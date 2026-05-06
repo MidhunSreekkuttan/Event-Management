@@ -37,7 +37,7 @@ userRouter.get("/listUser", listUser);
 userRouter.post("/deleteUser", deleteUser);
 
 //reset otp
-userRouter.post("/resetOtp", userAuth, resetPassword)
-userRouter.post("/verifyResentOtp", userAuth, verifyResentOtp)
+userRouter.post("/resetOtp", resetPassword)
+userRouter.post("/verifyResentOtp", verifyResentOtp)
 
 export default userRouter;

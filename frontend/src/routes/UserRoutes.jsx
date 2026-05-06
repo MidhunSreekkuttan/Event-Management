@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Route } from 'react-router-dom'
 import UserLayout from '../layouts/UserLayout'
 import Loader from '../components/Loading'
+import ResetPassword from '../pages/users/login/ResetPassword'
 
 const Home = lazy(() => import('../pages/users/Home'))
 const EventList = lazy(() => import('../pages/users/EventList'))
@@ -51,6 +52,8 @@ const UserRoutes = () => {
         <Route path="/response" element={<Response />} />
         <Route path="/response-Details/:enquiryId" element={<ResponseDetails />} />
         <Route path='/receipt/:productId' element={<Receipt />} />
+
+        <Route path='/resetPassword' element={<ResetPassword />} />
 
         {/* Articles */}
         <Route path='/personal' element={<Personal />} />

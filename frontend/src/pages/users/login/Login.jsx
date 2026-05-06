@@ -87,6 +87,10 @@ const Login = () => {
 
   }
 
+  const sendMail = (email) => {
+    navigate(`/resetPassword`)
+  }
+
   return (
 
     <>
@@ -126,6 +130,11 @@ const Login = () => {
               </span>
             </div>
 
+            <div className='m-b4'>
+              <p onClick={sendMail} className='relative left-22 text-center
+                 text-xs cursor-pointer underline text-blue-400'>Forget Password</p>
+            </div>
+
             <button disabled={loading}
               className={`w-full mt-8 py-2.5 rounded-full ${loading ? 'bg-purple-400 cursor-not-allowed' :
                 'bg-linear-to-r from-purple-500 to-purple-600 font-medium'
@@ -141,9 +150,11 @@ const Login = () => {
             <span onClick={() => setState('login')} className='text-blue-400 cursor-pointer underline'>Login Here</span>
           </p>
           ) : (
-            <p className='text-center text-xs mt-5'>Don't have an Account?{' '}
-              <span onClick={() => setState('sign up')} className='text-blue-400 cursor-pointer underline'>Sign Up Here</span>
-            </p>
+            <>
+              <p className='text-center text-xs mt-5'>Don't have an Account?{' '}
+                <span onClick={() => setState('sign up')} className='text-blue-400 cursor-pointer underline'>Sign Up Here</span>
+              </p>
+            </>
           )}
 
         </div>
