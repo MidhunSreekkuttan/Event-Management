@@ -101,14 +101,19 @@ const EventDetailPage = () => {
 
                             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                                 <div className="flex items-center gap-4 border-b border-slate-200 px-6 py-5">
-                                    <img
-                                        src='/IMG_20260113_212004.avif'
-                                        alt="photo"
-                                        className="h-14 w-14 rounded-full object-cover border"
-                                    />
                                     <div>
-                                        <h3 className="text-3xl font-semibold text-slate-900">{enquiryData.name}</h3>
-                                        <p className="text-lg text-slate-500">{enquiryData.email}</p>
+                                        <h3 className="text-3xl font-semibold text-slate-900">
+                                            {
+                                                enquiryData?.name ? enquiryData?.name?.[0].toUpperCase() +
+                                                    enquiryData?.name?.slice(1) : enquiryData?.name
+                                            }
+                                        </h3>
+                                        <p className="text-lg text-slate-500">
+                                            {
+                                                enquiryData?.email ? enquiryData?.email?.[0].toUpperCase() +
+                                                    enquiryData?.email?.slice(1) : enquiryData?.email
+                                            }
+                                        </p>
                                     </div>
                                 </div>
 
@@ -148,10 +153,6 @@ const EventDetailPage = () => {
                             </div>
 
                             <div className="mt-5 flex flex-col gap-4 sm:flex-row">
-                                <button className="flex-1 rounded-2xl bg-amber-400 px-6 py-4 text-lg font-semibold
-                                     text-slate-900 shadow-lg shadow-amber-100 transition hover:bg-amber-500">
-                                    Mark as Completed
-                                </button>
                                 <button onClick={sendResponse} className="flex-1 rounded-2xl bg-indigo-600 px-6 py-4 text-lg font-semibold text-white
                                      shadow-lg shadow-indigo-200 transition hover:bg-indigo-700">
                                     Send Response
@@ -179,7 +180,11 @@ const EventDetailPage = () => {
                                         className="h-40 w-full object-cover"
                                     />
                                     <div className="p-5 flex flex-col gap-3">
-                                        <h4 className="text-2xl font-semibold text-slate-900">{event.event_name}</h4>
+                                        <h4 className="text-2xl font-semibold text-slate-900">
+                                            {
+                                                event.event_name ? event.event_name?.slice(0, 17) + "..." : event.event_name
+                                            }
+                                        </h4>
                                         <div className="mt-2 flex items-center justify-between gap-3">
                                             <p className="text-lg text-slate-600">{event.date?.split("T")[0]}</p>
                                             <p className="text-lg text-slate-600">${event.price}</p>
