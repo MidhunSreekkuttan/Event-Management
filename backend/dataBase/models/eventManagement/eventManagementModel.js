@@ -10,7 +10,7 @@ const eventManagementSchema = new mongoose.Schema(
     isAccountVerified: { type: Boolean, default: false },
     isAdminVerified: { type: String, default: "pending" },
   },
-  { minimize: false },
+  { minimize: false, timestamps: true },
 );
 
 const eventManagementModel =

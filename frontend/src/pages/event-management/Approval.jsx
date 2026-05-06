@@ -1,8 +1,36 @@
+import { useCallback, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { BackendContex } from '../../context/ConnectBackendContex'
+import axios from 'axios'
+import { useQuery } from "@tanstack/react-query"
 
 const Approval = () => {
 
     const navigate = useNavigate()
+
+    const { backendUrl } = useContext(BackendContex)
+
+    const getEventManagers = useCallback(async () => {
+
+        try {
+
+            const { data } = await axios.get(backendUrl + "/api/eventManagement/singleEventManager")
+            if (data.success) {
+                return data?.eventManager || []
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+
+    }, [backendUrl])
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["eventmanagementId"],
+        queryFn: getEventManagers
+    })
 
     const handleClick = () => {
         navigate('/event-management/home')
@@ -65,7 +93,7 @@ const Approval = () => {
                                 </svg>
                             }
                             title="Email Address"
-                            value="user@example.com"
+                            value={data?.email}
                         />
 
                         <InfoRow
@@ -80,7 +108,7 @@ const Approval = () => {
                                 </svg>
                             }
                             title="Request Date"
-                            value="February 22, 2026"
+                            value={data?.createdAt.split("T")[0]}
                         />
                     </div>
 
@@ -90,21 +118,8 @@ const Approval = () => {
                             Access Your DashBoard
                         </button>
 
-                        <button className="w-full rounded-xl bg-[#d9d9d9] py-4 text-[20px] font-extrabold text-black transition hover:bg-[#d1d1d1] active:scale-[0.99]">
-                            View Welcome Guide
-                        </button>
                     </div>
 
-                    {/* Footer */}
-                    <p className="mt-10 text-[14px] text-black/80 font-medium">
-                        Need help? Email us at{' '}
-                        <a
-                            href="mailto:support@example.com"
-                            className="font-semibold text-[#3558ff] underline underline-offset-2"
-                        >
-                            support@example.com
-                        </a>
-                    </p>
                 </div>
             </div>
         </div>
