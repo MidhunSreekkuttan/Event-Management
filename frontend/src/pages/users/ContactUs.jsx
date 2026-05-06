@@ -74,7 +74,7 @@ const ContactUs = () => {
               <img className='relative left-[100px] w-[120px]' src={icon.call_us} alt="Call our support team" />
               <h1 className='relative -left-5 font-bold text-center text-2xl'>Call Us</h1>
               <p>Call us to get quick answers and expert guidance. <br /> Our team is ready to assist you anytime.</p>
-              <p className='relative left-12 text-orange-500 font-bold text-2xl'>0471-2256895</p>
+              <p className='relative left-12 text-orange-500 font-bold text-2xl'>0471-226937</p>
             </div>
 
           </motion.div>
@@ -92,7 +92,7 @@ const ContactUs = () => {
               <img className='relative left-[125px] w-[120px]' src={icon.contact_us} alt="Contact Us" />
               <h1 className='font-bold text-center text-2xl'>Contact Us</h1>
               <p>Send us your details and event requirements via email. <br /> We'll get back to you soon as possible.</p>
-              <p className='relative left-12 text-orange-500 font-bold text-2xl'>nonreply@domain.com</p>
+              <p className='relative left-12 text-orange-500 font-bold text-2xl'>eventmanagement@example.com</p>
             </div>
 
           </motion.div>
