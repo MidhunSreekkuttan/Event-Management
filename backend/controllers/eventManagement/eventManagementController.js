@@ -232,3 +232,78 @@ export const deleteEventManagementUser = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+//resent verify otp
+export const resendVerifyOtp = async (req, res) => {
+
+  try {
+
+    const { email } = req.body
+
+    const user = await eventManagementModel.findOne({ email })
+    if (!user) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+
+    user.verifyOtp = otp;
+    user.verifyOtpExpire = Date.now() + 2 * 60 * 60 * 1000;
+
+    await user.save();
+
+    const mailOption = {
+      from: `"EventManagement"<${process.env.NO_REPLAY_EMAIL}>`,
+      to: user.email,
+      subject: "Reset password using this OTP",
+      html: otpMail(user.name, otp),
+    };
+
+    await welcomeMessage.sendMail(mailOption);
+
+    return res.json({ success: true, message: "Reset OTP send Successful" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
+
+export const verifyResetOtp = async (req, res) => {
+
+  try {
+
+    const { email, otp, newPassword } = req.body
+
+    const user = await eventManagementModel.findOneAndUpdate({ email })
+    if (!user) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    if (!otp) {
+      return res.json({ success: false, message: "Otp is requered" })
+    }
+    if (user.verifyOtp === "" || user.verifyOtp !== otp) {
+      return res.json({ success: false, message: "something went wrong" })
+    }
+    if (!newPassword) {
+      return res.json({ success: false, message: "passwordis requered" })
+    }
+
+    const hashPassword = await bcrypt.hash(newPassword, 10)
+    user.password = hashPassword
+
+    user.verifyOtp = ""
+    user.verifyOtpExpire = 0
+
+    await user.save()
+
+    res.json({ success: true, message: "new password update Successful" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}

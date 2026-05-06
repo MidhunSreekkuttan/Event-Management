@@ -6,8 +6,10 @@ import {
   Login,
   Logout,
   Register,
+  resendVerifyOtp,
   sendVerifyOtp,
   verifyEmail,
+  verifyResetOtp,
 } from "../../controllers/eventManagement/eventManagementController.js";
 import EventManagementAuth from "../../middleware/eventManagement/eventManagementAuth.js";
 import { getEventManagementData, getEventManagementDataAdmin } from '../../controllers/eventManagement/eventManagementAuth.js'
@@ -22,6 +24,10 @@ eventManagementRouter.post(
   EventManagementAuth,
   sendVerifyOtp,
 );
+//resent verify otp
+eventManagementRouter.post("/resendVerifyOtp", resendVerifyOtp)
+eventManagementRouter.post("/verifyResetOtp", verifyResetOtp)
+
 eventManagementRouter.post("/verifyEmail", EventManagementAuth, verifyEmail);
 eventManagementRouter.get("/isAuth", EventManagementAuth, isAuthendicated);
 eventManagementRouter.get(
