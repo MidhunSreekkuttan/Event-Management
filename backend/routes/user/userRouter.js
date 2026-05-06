@@ -8,6 +8,7 @@ import {
   isAuthendicated,
   listUser,
   deleteUser,
+  resetPassword,
 } from "../../controllers/user/userController.js";
 import userAuth from "../../middleware/user/userAuth.js";
 import {
@@ -33,5 +34,8 @@ userRouter.post("/updateStatus", updateStatus);
 //............................
 userRouter.get("/listUser", listUser);
 userRouter.post("/deleteUser", deleteUser);
+
+//reset otp
+userRouter.post("/resetOtp", userAuth, resetPassword)
 
 export default userRouter;

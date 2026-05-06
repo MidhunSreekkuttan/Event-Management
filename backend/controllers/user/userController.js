@@ -226,3 +226,42 @@ export const deleteUser = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const resetPassword = async (req, res) => {
+
+  try {
+
+    const userId = req.userId
+    if (!userId) {
+      return res.json({ success: false, message: "userId not found" })
+    }
+    // const { newPassword, otp } = req.body
+
+    const userData = await userModel.findByIdAndUpdate(userId)
+    if (!userData) {
+      return res.json({ success: false, message: "user not found" })
+    }
+    const newOtp = String(Math.floor(100000 + Math.random() * 900000));
+
+    userData.verifyOtp = newOtp;
+    userData.verifyOtpExpire = Date.now() + 2 * 60 * 60 * 1000;
+
+    await userData.save();
+
+    const mailOption = {
+      from: `"Adhithi" <${process.env.NO_REPLAY_EMAIL}>`,
+      to: userData.email,
+      subject: "Your Reset Verify OTP",
+      html: otpMail(userData.name, newOtp),
+    };
+
+    await welcomeMessage.sendMail(mailOption);
+
+    res.json({ success: true, message: "new otp sent successfuly" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
