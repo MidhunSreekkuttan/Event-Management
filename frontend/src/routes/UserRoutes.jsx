@@ -20,7 +20,7 @@ const Receipt = lazy(() => import('../pages/users/Receipt'))
 //articles
 const Personal = lazy(() => import('../pages/users/article/category/Personal'))
 const Cultural = lazy(() => import('../pages/users/article/category/Cultural'))
-const Coorprates = lazy(() => import('../pages/users/article/category/Coorprates'))
+const Corporate = lazy(() => import('../pages/users/article/category/Corporate'))
 const Entertainments = lazy(() => import('../pages/users/article/category/Entertainments'))
 const Educational = lazy(() => import('../pages/users/article/category/Educational'))
 const BookingORenqury = lazy(() => import('../pages/users/article/others/BookingORenqury'))
@@ -58,7 +58,7 @@ const UserRoutes = () => {
         {/* Articles */}
         <Route path='/personal' element={<Personal />} />
         <Route path='/cultural' element={<Cultural />} />
-        <Route path='/coorprates' element={<Coorprates />} />
+        <Route path='/corporate' element={<Corporate />} />
         <Route path='/entertainments' element={<Entertainments />} />
         <Route path='/educational' element={<Educational />} />
 

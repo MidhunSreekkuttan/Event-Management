@@ -16,7 +16,7 @@ const UserLayout = () => {
     pathname.startsWith("/product/") ||
     pathname === '/personal' ||
     pathname === '/cultural' ||
-    pathname === '/coorprates' ||
+    pathname === '/corporate' ||
     pathname === '/entertainments' ||
     pathname === '/educational' ||
     pathname === '/bookigOrEnquery' ||
@@ -38,7 +38,7 @@ const UserLayout = () => {
     pathname.startsWith("/receipt") ||
     pathname === '/personal' ||
     pathname === '/cultural' ||
-    pathname === '/coorprates' ||
+    pathname === '/corporate' ||
     pathname === '/entertainments' ||
     pathname === '/educational' ||
     pathname === '/bookigOrEnquery' ||

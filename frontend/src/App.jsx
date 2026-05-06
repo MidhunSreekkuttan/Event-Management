@@ -16,7 +16,7 @@ const App = () => {
 
     "/personal",
     "/cultural",
-    "/coorprates",
+    "/corporate",
     "/entertainments",
     "/educational",
     '/bookigOrEnquery',

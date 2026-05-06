@@ -91,6 +91,13 @@ import career3 from "./articles/career3.jpeg";
 import Student1 from "./articles/Student1.jpeg";
 import Student2 from "./articles/Student2.jpeg";
 import Student3 from "./articles/Student3.jpeg";
+import corporate_header from "./articles/corporate_header.png";
+import corporate1 from "./articles/corporate1.jpeg";
+import corporate2 from "./articles/corporate2.jpeg";
+import corporate3 from "./articles/corporate3.jpeg";
+import corporate4 from "./articles/corporate4.jpeg";
+import corporate5 from "./articles/corporate5.jpeg";
+import enjoyevent_header from "./articles/enjoyevent_header.png";
 
 export const logo = {
   adhithiBeat,
@@ -200,6 +207,14 @@ export const articles = {
   liveshow3,
   liveshow4,
   //Corporate category
+  corporate_header,
+  corporate1,
+  corporate2,
+  corporate3,
+  corporate4,
+  corporate5,
+  // Others
+  enjoyevent_header,
 };
 
 export const products = [
