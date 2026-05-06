@@ -1,6 +1,9 @@
-import { useContext, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 import { EventManagementContext } from '../../context/EventManagementContext'
 import { useNavigate } from 'react-router-dom'
+import { BackendContex } from '../../context/ConnectBackendContex'
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
 
 const Waiting = () => {
 
@@ -8,9 +11,35 @@ const Waiting = () => {
 
   const navigate = useNavigate()
 
+  const { backendUrl } = useContext(BackendContex)
+
+  const getEventManagers = useCallback(async () => {
+
+    try {
+
+      const { data } = await axios.get(backendUrl + "/api/eventManagement/singleEventManager")
+      if (data.success) {
+        return data?.eventManager || []
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+
+  }, [backendUrl])
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["eventmanagementId"],
+    queryFn: getEventManagers
+  })
+
+  console.log(data);
+
+
   useEffect(() => {
-    const interval = setInterval( () => {
-     getUserData()
+    const interval = setInterval(() => {
+      getUserData()
     }, 3000)
 
     return () => clearInterval(interval)
@@ -58,7 +87,7 @@ const Waiting = () => {
             </div>
             <div>
               <p className="text-[14px] font-semibold text-[#202020]">Email Address</p>
-              <p className="text-[13px] text-[#8b8b8b]">user@example.com</p>
+              <p className="text-[13px] text-[#8b8b8b]">{data?.email}</p>
             </div>
           </div>
 
@@ -82,7 +111,7 @@ const Waiting = () => {
             </div>
             <div>
               <p className="text-[14px] font-semibold text-[#202020]">Request Date</p>
-              <p className="text-[13px] text-[#8b8b8b]">February 22, 2026</p>
+              <p className="text-[13px] text-[#8b8b8b]">{data?.createdAt.split("T")[0]}</p>
             </div>
           </div>
         </div>
@@ -115,22 +144,6 @@ const Waiting = () => {
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="mt-8 space-y-3">
-          <button className="w-full rounded-xl bg-[#2948e3] px-5 py-4 text-[18px] font-semibold text-white shadow-sm transition hover:opacity-95">
-            Check Email Inbox
-          </button>
-          <button className="w-full rounded-xl bg-[#dfe7f1] px-5 py-4 text-[18px] font-semibold text-[#161616] transition hover:bg-[#d7e0eb]">
-            Contact Support
-          </button>
-        </div>
-
-        <p className="mt-7 text-center text-[13px] text-[#303030]">
-          Need help? Email us at{' '}
-          <a href="mailto:support@example.com" className="font-semibold text-[#2948e3] underline underline-offset-2">
-            support@example.com
-          </a>
-        </p>
       </div>
     </div>
   )
