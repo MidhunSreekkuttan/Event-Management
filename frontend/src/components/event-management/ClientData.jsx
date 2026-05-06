@@ -87,16 +87,32 @@ const ClientData = ({ id, image, name, place, event_name, status }) => {
                 </div>
 
                 {/* Status Select */}
+                {/* Status Select */}
                 <div className="flex items-center md:justify-center">
-                    <select
-                        value={status || "pending"}
-                        onChange={(event) => statusHandler(event, id)}
-                        className="bg-slate-900 border border-white/10 text-sm rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
-                    >
-                        <option value="pending">pending</option>
-                        <option value="approved">approved</option>
-                        <option value="rejected">rejected</option>
-                    </select>
+
+                    {status === "approved" ? (
+                        <span className="px-3 py-2 text-sm font-semibold text-green-400 bg-green-500/10 border 
+                              border-green-400/20 rounded-lg cursor-default">
+                            Approved
+                        </span>
+                    ) : status === "rejected" ? (
+                        <span className="px-3 py-2 text-sm font-semibold text-red-400 bg-red-500/10 border 
+                            border-red-400/20 rounded-lg cursor-default">
+                            Rejected
+                        </span>
+                    ) : (
+                        <select
+                            value={status || "pending"}
+                            onChange={(event) => statusHandler(event, id)}
+                            className="bg-slate-900 border border-white/10 text-sm rounded-lg px-3 py-2
+                               text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        >
+                            <option value="pending">pending</option>
+                            <option value="approved">approved</option>
+                            <option value="rejected">rejected</option>
+                        </select>
+                    )}
+
                 </div>
 
                 {/* Action */}
