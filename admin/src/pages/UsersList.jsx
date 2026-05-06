@@ -2,13 +2,17 @@ import { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../Context";
 import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Loader from "../components/Loading";
+import { Trash2 } from 'lucide-react';
+import { toast } from "react-toastify";
 
 const UsersList = () => {
   const navigate = useNavigate();
 
   const { backendUrl } = useContext(AdminContext)
+
+  const queryClient = useQueryClient()
 
   const getUserList = useCallback(async () => {
 
@@ -31,9 +35,24 @@ const UsersList = () => {
     return "bg-rose-100/80 text-rose-700 ring-1 ring-rose-200";
   };
 
-  const handleClick = (id) => {
-    navigate(`/clientDetails/${id}`);
-  };
+  const handleClick = useCallback(async (id) => {
+
+    try {
+
+      const { data } = await axios.delete(backendUrl + "/api/user/deleteUser", { data: { id } })
+      if (data.success) {
+        toast.info(data.message)
+        queryClient.invalidateQueries(["userList"])
+      } else {
+        return toast.error(data.message)
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+
+  }, [backendUrl, queryClient])
 
   const redGlass =
     "border border-red-200/60 bg-gradient-to-br from-white/80 via-red-50/70 to-red-100/60 backdrop-blur-2xl shadow-[0_25px_100px_rgba(220,38,38,0.18)]";
@@ -103,9 +122,10 @@ const UsersList = () => {
                       <td className="px-6 py-4">
                         <button
                           onClick={() => handleClick(client._id)}
-                          className="rounded-2xl border border-red-200/60 bg-white/70 px-4 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-50"
+                          className="rounded-2xl border border-red-200/60 bg-white/70 px-4 py-2 text-sm font-semibold
+                             text-red-700 transition hover:bg-red-50 cursor-pointer"
                         >
-                          👁 View
+                          <Trash2 color="red" />
                         </button>
                       </td>
                     </tr>

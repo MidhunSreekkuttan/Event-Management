@@ -219,7 +219,8 @@ export const listUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    await userModel.findByIdAndDelete(req.body.id);
+    const { id } = req.body
+    await userModel.findByIdAndDelete(id);
     res.json({ success: true, message: "User Deleted" });
   } catch (error) {
     console.log(error);

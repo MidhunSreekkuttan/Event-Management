@@ -34,7 +34,7 @@ userRouter.get("/getAllEnquiry", listAllEnquiry);
 userRouter.post("/updateStatus", updateStatus);
 //............................
 userRouter.get("/listUser", listUser);
-userRouter.post("/deleteUser", deleteUser);
+userRouter.delete("/deleteUser", deleteUser);
 
 //reset otp
 userRouter.post("/resetOtp", resetPassword)
