@@ -219,3 +219,75 @@ export const getWorkersList = async (req, res) => {
   }
 
 }
+
+// resent password
+export const resentOtp = async (req, res) => {
+
+  try {
+
+    const { email } = req.body
+
+    const user = await workersModel.findOne({ email })
+    if (!user) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+
+    user.verifyOtp = otp;
+    user.verifyOtpExpire = Date.now() + 2 * 60 * 60 * 1000;
+
+    await user.save();
+
+    const mailOption = {
+      from: `"EventManagement" <${process.env.NO_REPLAY_EMAIL}>`,
+      to: user.email,
+      subject: "Your OTP for new password",
+      html: otpMail(user.name, otp),
+    };
+    await welcomeMessage.sendMail(mailOption);
+
+    return res.json({ success: true, message: "Resent Otp send Successfully" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
+
+export const verifyResentOtp = async (req, res) => {
+
+  try {
+
+    const { email, otp, newPassword } = req.body
+
+    const user = await workersModel.findOneAndUpdate({ email })
+    if (!user) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    if (!otp || user.verifyOtp === "" || user.verifyOtp !== otp) {
+      return res.json({ success: false, message: "somethong went wrong" })
+    }
+
+    if (!newPassword) {
+      return res.json({ success: false, message: "New password is requered" })
+    }
+    const hashpassword = await bcrypt.hash(newPassword, 10)
+
+    user.password = hashpassword
+
+    user.verifyOtp = ""
+    user.verifyOtpExpire = 0
+
+    await user.save()
+
+    return res.json({ success: true, message: "password change Successfully" })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}

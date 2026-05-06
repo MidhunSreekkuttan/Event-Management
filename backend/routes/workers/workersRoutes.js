@@ -6,8 +6,10 @@ import {
   login,
   logout,
   register,
+  resentOtp,
   sendVerifyOtp,
   verifyEmail,
+  verifyResentOtp,
 } from "../../controllers/workers/workersController.js";
 import workersAuth from "../../middleware/workers/workersAuth.js";
 import upload from "../../middleware/eventManagement/multer.js";
@@ -27,6 +29,10 @@ workersRouter.post("/sendVerifyOtp", workersAuth, sendVerifyOtp);
 workersRouter.post("/verifyEmail", workersAuth, verifyEmail);
 workersRouter.get("/getAuth", workersAuth, getAuth);
 workersRouter.get("/getUserData", workersAuth, getUserData);
+
+//// resent password
+workersRouter.post("/resentOtp", resentOtp)
+workersRouter.put("/verifyResentOtp", verifyResentOtp)
 
 workersRouter.get("/getWorkersList", getWorkersList)
 
