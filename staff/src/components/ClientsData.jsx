@@ -58,14 +58,22 @@ const ClientData = ({ id, name, category, date, starting_price, status }) => {
             </div>
 
             <div>
-                <select
-                    value={status || "pending"}
-                    onChange={(event) => statusHandler(event, id)}
-                    className="cursor-pointer appearance-none rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 outline-none transition duration-200 hover:border-violet-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
-                >
-                    <option value="pending">pending</option>
-                    <option value="completed">completed</option>
-                </select>
+                {status === "completed" ? (
+                    <span className="px-3 py-2 text-sm font-semibold text-green-400 bg-green-500/10 border 
+                              border-green-400/20 rounded-lg cursor-default">
+                        Completed
+                    </span>
+                ) : (
+                    <select
+                        value={status || "pending"}
+                        onChange={(event) => statusHandler(event, id)}
+                        className="cursor-pointer appearance-none rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 outline-none transition duration-200 hover:border-violet-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+                    >
+                        <option value="pending">pending</option>
+                        <option value="completed">completed</option>
+                    </select>
+                )}
+
             </div>
 
             <div>
