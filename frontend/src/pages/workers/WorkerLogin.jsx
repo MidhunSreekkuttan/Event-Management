@@ -112,6 +112,11 @@ const Login = () => {
               />
             </div>
 
+            <p onClick={() => navigate("/workers/resetPassword")} className="text-sm text-blue-500 underline relative left-68
+               cursor-pointer">
+              Forget Password
+            </p>
+
             <button
               type="submit"
               className="w-full flex items-center justify-center gap-2 rounded-lg bg-blue-500 py-2.5 text-white font-medium hover:bg-blue-600 transition"

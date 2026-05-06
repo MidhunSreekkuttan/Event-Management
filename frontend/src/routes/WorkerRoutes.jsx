@@ -4,6 +4,7 @@ import WorkersLayout from '../layouts/WorkersLayout'
 import Loader from '../components/Loading'
 import WorkersHome from '../pages/workers/WorkersHome'
 import Waiting from '../pages/workers/WorkersWaitingPage'
+import ResetPassword from '../pages/workers/resetPassword'
 
 const Index = lazy(() => import('../pages/workers/Index'))
 const WorkerDashboard = lazy(() => import('../pages/workers/WorkersDashboard'))
@@ -31,6 +32,12 @@ const WorkerRoutes = () => {
       <Route path='/workers/otp' element={
         <Suspense fallback={<Loader />}>
           <Otp />
+        </Suspense>
+      } />
+
+      <Route path='/workers/resetPassword' element={
+        <Suspense fallback={<Loader />}>
+          <ResetPassword />
         </Suspense>
       } />
 
