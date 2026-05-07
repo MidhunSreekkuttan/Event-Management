@@ -9,6 +9,7 @@ import {
   resendVerifyOtp,
   sendVerifyOtp,
   singleEventManager,
+  singleEventManagerList,
   verifyEmail,
   verifyResetOtp,
 } from "../../controllers/eventManagement/eventManagementController.js";
@@ -31,6 +32,8 @@ eventManagementRouter.post("/verifyResetOtp", verifyResetOtp)
 
 //single listEventManagementUser
 eventManagementRouter.get("/singleEventManager", EventManagementAuth, singleEventManager)
+
+eventManagementRouter.get("/singleEventManagerList", singleEventManagerList)
 
 eventManagementRouter.post("/verifyEmail", EventManagementAuth, verifyEmail);
 eventManagementRouter.get("/isAuth", EventManagementAuth, isAuthendicated);
