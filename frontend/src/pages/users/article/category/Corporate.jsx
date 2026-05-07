@@ -3,7 +3,7 @@ import { ArrowLeft, Users, Megaphone, Briefcase, Handshake, Trophy, FileText, Li
 import { articles } from "../../../../assets/assets";
 import { useNavigate } from "react-router-dom";
 
-const { corperate_header: corporate_header, corperate1: corporate1, corperate2: corporate2, corperate3: corporate3, corperate4: corporate4, corperate5: corporate5 } = articles;
+const { corporate_header, corporate1, corporate2, corporate3, corporate4, corporate5 } = articles;
 
 const Corporate = () => {
     const [selectedTopic, setSelectedTopic] = useState(null);
@@ -87,22 +87,22 @@ const Corporate = () => {
         "Planning a Professional Seminar Step by Step": "A professional seminar is typically a more intimate, heavily educational event focused on teaching specific skills or deep-diving into niche industry topics. Unlike a massive conference, a seminar requires meticulous attention to the curriculum, ensuring that the presenter's materials are highly actionable and that the audience has ample opportunity for direct Q&A.",
         "Speaker Management Tips for Corporate Events": "Speaker management involves the end-to-end coordination of guest lecturers, keynote presenters, and panel experts. This critical aspect of event planning ensures that speakers are fully briefed, their technical requirements are met, and they are aligned with the event's core messaging, guaranteeing a seamless presentation for the audience.",
         "Conference Stage Setup and Branding": "Stage setup and branding encompass the visual and physical architecture of the presentation area. It is the focal point of any conference. Effective stage design goes beyond aesthetics; it requires strategic branding placement, optimal lighting for photography, and acoustic engineering to ensure the speaker's message resonates powerfully throughout the auditorium.",
-        
+
         "How to Plan a Product Launch Event": "A product launch event is a high-stakes, highly publicized marketing initiative designed to introduce a brand-new offering to the market, media, and key stakeholders. The core definition of a successful launch lies in its ability to generate immediate media buzz, create an emotional connection with the product, and drive early adoption.",
         "Creating Impactful Launch Presentations": "An impactful launch presentation is the narrative vehicle used to unveil a new product. It is a carefully choreographed blend of storytelling, visual media, and live demonstration. The goal is to articulate the problem your product solves in a way that captivates the audience and leaves a lasting, memorable impression.",
         "Lighting and Stage Design for Brand Reveal": "Brand reveal lighting and stage design are specialized theatrical elements used to build anticipation and focus audience attention. By using dynamic lighting cues, projection mapping, and dramatic stage reveals, event planners can elevate a simple product announcement into a visceral, unforgettable experience that perfectly reflects the brand's identity.",
         "Media and Press Handling Tips": "Media and press handling refers to the strategic management of journalists, influencers, and PR professionals during a corporate event. This involves creating press kits, scheduling exclusive interviews, managing the press pit, and ensuring that the media has everything they need to craft a compelling, positive narrative about your brand.",
-    
+
         "How to Conduct Effective Team Workshops": "Team workshops are interactive, internal corporate events designed to foster collaboration, brainstorm solutions, and develop specific employee competencies. Effective workshops move away from passive listening and instead rely heavily on participatory exercises, guided facilitation, and actionable takeaways that can be immediately applied in the workplace.",
         "Planning Annual Business Meetings": "The annual business meeting is a critical corporate milestone where leadership reviews the past year's performance and outlines the strategic vision for the upcoming year. Planning this event requires balancing the dissemination of dense financial data with motivational messaging to ensure stakeholders and employees leave feeling informed and inspired.",
         "Training Program Setup Guide": "Training program setup is the logistical and pedagogical structuring of employee education sessions. It requires a clear definition of learning objectives, the selection of appropriate instructional methods (e.g., hands-on practice, digital modules), and the creation of an environment that minimizes distractions and maximizes knowledge retention.",
         "Employee Engagement Activities": "Employee engagement activities are morale-boosting events designed to strengthen workplace culture and interpersonal relationships. Whether it's a team-building retreat or an in-office challenge, these activities break down departmental silos, reduce employee burnout, and foster a more cohesive, motivated workforce.",
-    
+
         "How to Organize a Networking Event": "A networking event is an unstructured or semi-structured gathering explicitly designed to help professionals expand their business contacts. Organizing a successful one requires choosing the right venue layout (standing tables over seated dining), managing the guest list to ensure industry synergy, and removing friction from the introduction process.",
         "Icebreaker Ideas for Professionals": "Professional icebreakers are strategic activities or prompts designed to alleviate the natural awkwardness of meeting strangers in a business setting. When executed correctly, they bypass superficial small talk, encourage authentic interactions, and rapidly accelerate the process of building meaningful professional relationships.",
         "Creating Meaningful Business Connections": "Creating meaningful business connections goes beyond simply exchanging business cards; it involves facilitating environments where professionals can discover shared values, complementary business needs, and mutual goals. This requires curating the right mix of attendees and providing spaces conducive to deep, one-on-one conversations.",
         "Event Flow for Maximum Interaction": "Event flow refers to the spatial and temporal design of a gathering to subtly guide attendee behavior. For maximum interaction, planners must strategically position food stations, seating areas, and focal points to prevent bottlenecks and naturally encourage movement, mingling, and spontaneous conversations throughout the venue.",
-    
+
         "How to Plan a Corporate Gala Night": "A corporate gala is a formal, often black-tie celebration that serves as the pinnacle of a company's social calendar. Planning a gala requires an uncompromising commitment to luxury and elegance, from selecting premium catering and world-class entertainment to executing a flawless, highly choreographed evening program.",
         "Award Ceremony Planning Guide": "An award ceremony is a specialized event focused on recognizing excellence and honoring individual or team achievements. The definition of a successful ceremony lies in its pacing—balancing the prestige of the awards with engaging entertainment, ensuring winners feel properly celebrated without the event dragging on for the audience.",
         "Office Party Ideas with Professional Touch": "An office party with a professional touch balances relaxed, celebratory fun with appropriate corporate boundaries. It requires selecting inclusive activities, providing high-quality food and beverage options, and maintaining an atmosphere where employees can unwind without compromising the professional standards of the organization.",
@@ -143,9 +143,9 @@ const Corporate = () => {
 
     const getArticleContent = (topic) => {
         const exactDefinition = topicDefinitions[topic] || `${topic} is a specialized facet of corporate event management that focuses on achieving specific organizational objectives through structured interaction, strategic planning, and flawless execution.`;
-        
+
         const hash = topic.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        
+
         const pIntro = planningIntros[hash % 5];
         const pLogistics = logisticsBodies[(hash + 1) % 5];
         const pMarketing = marketingBodies[(hash + 2) % 5];
@@ -273,7 +273,7 @@ const Corporate = () => {
                                     {sec.items.map((item, idx) => (
                                         <li key={idx} className="flex items-start gap-3 group">
                                             <FileText className="text-blue-300 shrink-0 mt-0.5 group-hover:text-blue-500 transition-colors" size={18} />
-                                            <span 
+                                            <span
                                                 onClick={() => setSelectedTopic(item)}
                                                 className="text-gray-800 font-medium text-[15px] cursor-pointer hover:text-blue-600 hover:underline transition-all"
                                             >

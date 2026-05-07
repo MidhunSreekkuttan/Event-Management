@@ -9,7 +9,7 @@ const EventCategory = () => {
 
     { name: "PERSONAL", icon: icon.wedding_icon, path: "/personal" },
     { name: "CULTURAL", icon: icon.birthday_party_icon, path: "/cultural" },
-    { name: "CORPORATES", icon: icon.corporative_events, path: "/coorprates" },
+    { name: "CORPORATES", icon: icon.corporative_events, path: "/corporate" },
     { name: "ENTERTAINMENTS", icon: icon.concern_icon, path: "/entertainments" },
     { name: "EDUCATIONAL", icon: icon.cultural_programs, path: "/educational" }
 
