@@ -105,7 +105,11 @@ const WorkersDetailsPage = ({ workersId, onClose }) => {
                     </div>
                     <div className="flex items-center gap-2 text-gray-500">
                       <Phone size={14} className="text-gray-300" />
-                      <span className="text-xs font-medium">{data?.registration?.mobileNumber || "N/A"}</span>
+                      <span className="text-xs font-medium">{data.registration?.mobileNumber || "N/A"}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-500">
+                      <MapPin size={14} className="text-gray-300" />
+                      <span className="text-xs font-medium">{data.registration?.location || "India"}</span>
                     </div>
                   </div>
                 </div>
@@ -141,7 +145,9 @@ const WorkersDetailsPage = ({ workersId, onClose }) => {
                       <span className="text-gray-500 font-semibold text-[11px]">Account Verified</span>
                       <div className="flex items-center gap-1.5 text-[#10B981] font-black text-[11px]">
                         <CheckCircle2 size={14} fill="currentColor" className="text-white bg-[#10B981] rounded-full" />
+                        
                         <span>{data?.worker?.isAdminVerified}</span>
+                        
                       </div>
                     </div>
 
