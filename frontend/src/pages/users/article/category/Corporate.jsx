@@ -144,7 +144,6 @@ const Corporate = () => {
     const getArticleContent = (topic) => {
         const exactDefinition = topicDefinitions[topic] || `${topic} is a specialized facet of corporate event management that focuses on achieving specific organizational objectives through structured interaction, strategic planning, and flawless execution.`;
         
-        // Generate a stable hash based on the topic string to pick pseudo-random but consistent paragraphs
         const hash = topic.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
         
         const pIntro = planningIntros[hash % 5];
