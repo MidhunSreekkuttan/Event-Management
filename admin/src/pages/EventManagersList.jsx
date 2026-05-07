@@ -94,33 +94,6 @@ const ManagerDetailsModal = ({ manager, onClose }) => {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <h3 className="text-[#D32F2F] font-bold text-sm border-b border-gray-100 pb-1 uppercase tracking-wider">Verification Documents</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { label: "Business Reg", file: registrationData?.businessRegistrationFile },
-                    { label: "GST Certificate", file: registrationData?.GSTVerificationFile }
-                  ].map((doc, idx) => (
-                    <div key={idx} className="bg-red-50/50 p-3 rounded-2xl border border-red-100 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FileText size={16} className="text-red-500" />
-                        <span className="text-[10px] font-bold text-gray-700">{doc.label}</span>
-                      </div>
-                      {doc.file ? (
-                        <button 
-                          onClick={() => window.open(backendUrl + doc.file, "_blank")}
-                          className="text-red-500 hover:text-red-700 transition"
-                        >
-                          <Download size={16} />
-                        </button>
-                      ) : (
-                        <span className="text-[10px] text-gray-400 italic">Not Uploaded</span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <div className="flex justify-end pt-2">
                 <button 
                   onClick={onClose}
