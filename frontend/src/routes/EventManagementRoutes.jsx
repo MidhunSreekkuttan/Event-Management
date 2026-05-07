@@ -16,6 +16,7 @@ const StayingPage = lazy(() => import('../pages/event-management/StayingPage'))
 const Registeration = lazy(() => import('../pages/event-management/Registeration'))
 const Waiting = lazy(() => import('../pages/event-management/Waiting'))
 const Approval = lazy(() => import('../pages/event-management/Approval'))
+const NeedWorker = lazy(() => import('../pages/event-management/NeedWorker'))
 
 const EventManagementRoutes = () => {
 
@@ -106,6 +107,13 @@ const EventManagementRoutes = () => {
               <BookingDetails />
             </Suspense>
           } />
+
+          <Route path='needWorker/:workerId' element={
+            <Suspense fallback={<Loader />}>
+              <NeedWorker />
+            </Suspense>
+          } />
+
           <Route path='events' element={
             <Suspense fallback={<Loader />}>
               <Events />
