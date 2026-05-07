@@ -1,7 +1,7 @@
 import express from "express";
 import { deleteStaff, getAllStaffs } from "../../controllers/staffs/staffsController.js";
 import adminAuth from "../../middleware/admin/adminAuth.js";
-import { adminLogin, changeStatus, changeWorkersStatus, isAuth } from "../../controllers/admin/adminController.js";
+import { adminLogin, changeStatus, changeWorkersStatus, getWorkerDetails, isAuth } from "../../controllers/admin/adminController.js";
 
 const adminRouter = express.Router();
 
@@ -13,5 +13,6 @@ adminRouter.post("/removeStaff", deleteStaff)
 //change status
 adminRouter.post("/changeStatus", changeStatus)
 adminRouter.post("/changeWorkersStatus", changeWorkersStatus)
+adminRouter.get("/getWorkerDetails/:userId", getWorkerDetails)
 
 export default adminRouter;

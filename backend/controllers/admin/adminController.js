@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import eventManagementModel from "../../dataBase/models/eventManagement/eventManagementModel.js";
 import workersModel from "../../dataBase/models/workers/workersModel.js";
+import WorkersRegistrationModel from "../../dataBase/models/workers/WorkersRegistrationModel.js";
 
 export const adminLogin = async (req, res) => {
   try {
@@ -70,6 +71,21 @@ export const changeStatus = async (req, res) => {
   }
 
 }
+
+export const getWorkerDetails = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const worker = await workersModel.findById(userId).select("-password");
+    if (!worker) {
+      return res.json({ success: false, message: "Worker not found" });
+    }
+    const registration = await WorkersRegistrationModel.findOne({ user: userId });
+    res.json({ success: true, worker, registration });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export const changeWorkersStatus = async (req, res) => {
 
