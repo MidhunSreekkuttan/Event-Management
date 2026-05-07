@@ -3,7 +3,7 @@ import { CalendarDays, Clock3, ArrowLeft, Heart, Users, Sparkles, Gift, Camera, 
 import { articles } from "../../../../assets/assets";
 import { useNavigate } from "react-router-dom";
 
-const { header_image, card1, card2, card3, card4, card5 } = articles;
+const { header_image, card1, card2, card3, card4 } = articles;
 
 const Personal = () => {
     const navigate = useNavigate();
