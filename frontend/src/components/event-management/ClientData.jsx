@@ -46,9 +46,13 @@ const ClientData = ({ id, image, name, place, event_name, status }) => {
         navigate(`/event-management/bookingDetails/${id}`)
     }
 
+    const changePage = (id) => {
+        navigate(`/event-management/needWorker/${id}`)
+    }
+
     return (
         <section>
-            <div className="grid grid-cols-[0.7fr_1fr_1.2fr_1fr_1fr_1fr] items-center gap-4 
+            <div className="grid grid-cols-[0.7fr_1fr_1.2fr_1fr_1fr_1fr_1fr] items-center gap-4 
                 px-6 py-4 rounded-2xl border border-white/10 bg-white/[0.04] text-white  shadow-sm transition-all
                     duration-300 hover:border-purple-400/20 hover:bg-white/[0.06] hover:shadow-lg">
 
@@ -119,6 +123,12 @@ const ClientData = ({ id, image, name, place, event_name, status }) => {
                 <div className="flex items-center md:justify-center">
                     <button onClick={() => onClicked(id)} className="rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:scale-105 transition">
                         View
+                    </button>
+                </div>
+
+                <div>
+                    <button onClick={() => changePage(id)} className="rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:scale-105 transition">
+                        Need
                     </button>
                 </div>
 
