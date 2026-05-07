@@ -2,7 +2,9 @@ import React from 'react'
 
 const EventManagersList = () => {
   return (
-    <div>EventManagersList</div>
+    <div>
+
+    </div>
   )
 }
 
