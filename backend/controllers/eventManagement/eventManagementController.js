@@ -244,6 +244,26 @@ export const singleEventManager = async (req, res) => {
 
 }
 
+//singleEventManagerList
+export const singleEventManagerList = async (req, res) => {
+
+  try {
+
+    const eventManager = await eventManagementModel.find({})
+    if (!eventManager) {
+      return res.json({ success: false, message: "user not found" })
+    }
+
+    return res.json({ success: true, eventManager })
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+
+}
+
+
 export const deleteEventManagementUser = async (req, res) => {
   try {
     await eventManagementModel.findByIdAndDelete(req.body.id);

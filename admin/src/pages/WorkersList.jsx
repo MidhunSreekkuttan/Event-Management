@@ -8,8 +8,11 @@ import Loader from "../components/Loading";
 import { ScanEye } from 'lucide-react';
 import { toast } from "react-toastify";
 
+import WorkersDetailsPage from "./WorkersDetailsPage";
+
 const WorkersList = () => {
 
+  const [selectedWorkerId, setSelectedWorkerId] = React.useState(null);
   const navigate = useNavigate();
 
   const { backendUrl } = useContext(AdminContext)
@@ -44,7 +47,7 @@ const WorkersList = () => {
   };
 
   const handleClick = (id)=>{
-    navigate(`/workersDetails/${id}`)
+    setSelectedWorkerId(id);
   }
 
   const redGlass =
@@ -77,46 +80,47 @@ const WorkersList = () => {
           <div className="mt-6 overflow-hidden rounded-[24px] border border-red-200/60 bg-white/60 backdrop-blur-xl">
             <div className="overflow-x-auto">
               <table className="min-w-full">
-                <thead className="bg-white/50">
-                  <tr className="text-left text-sm font-semibold text-black/70">
-                    <th className="px-6 py-4">Client Name</th>
-                    <th className="px-6 py-4">Email</th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4">Actions</th>
+                <thead className="bg-red-50/50">
+                  <tr className="text-left text-xs font-bold text-red-900/50 uppercase tracking-widest">
+                    <th className="px-8 py-5">Worker Name</th>
+                    <th className="px-8 py-5">Email Address</th>
+                    <th className="px-8 py-5 text-center">Verification Status</th>
+                    <th className="px-8 py-5 text-right">Actions</th>
                   </tr>
                 </thead>
 
                 <tbody className="divide-y divide-red-100/70 bg-transparent">
-                  {data?.map((client) => (
+                  {data?.map((worker) => (
                     <tr
-                      key={client._id}
-                      className="transition hover:bg-white/40"
+                      key={worker._id}
+                      className="transition hover:bg-red-50/30 group"
                     >
-                      <td className="px-6 py-4 text-sm font-semibold text-black">
-                        {client.name}
+                      <td className="px-8 py-5 text-sm font-bold text-black">
+                        {worker.name}
                       </td>
 
-                      <td className="px-6 py-4 text-sm text-black/60">
-                        {client.email}
+                      <td className="px-8 py-5 text-sm text-black/60 font-medium">
+                        {worker.email}
                       </td>
 
-                      <td className="px-6 py-4">
+                      <td className="px-8 py-5 text-center">
                         <span
-                          className={`inline-flex min-w-28 justify-center rounded-xl px-4 py-2 text-sm font-semibold ${getStatusClass(
-                            client?.isAdminVerified
+                          className={`inline-flex min-w-32 justify-center rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-tighter ${getStatusClass(
+                            worker?.isAdminVerified
                           )}`}
                         >
-                          {client?.isAdminVerified}
+                          {worker?.isAdminVerified}
                         </span>
                       </td>
 
-                      <td className="px-6 py-4">
+                      <td className="px-8 py-5 text-right">
                         <button
-                          onClick={() => handleClick(client._id)}
-                          className="rounded-2xl border border-red-200/60 bg-white/70 px-4 py-2 text-sm font-semibold
-                             text-red-700 transition hover:bg-red-50 cursor-pointer"
+                          onClick={() => handleClick(worker._id)}
+                          className="inline-flex items-center gap-2 rounded-2xl border border-red-200/60 bg-white shadow-sm px-5 py-2.5 text-sm font-bold
+                             text-red-600 transition hover:bg-red-600 hover:text-white hover:border-red-600 cursor-pointer active:scale-95"
                         >
-                          <ScanEye color="red" />
+                          <ScanEye size={18} />
+                          <span>View Details</span>
                         </button>
                       </td>
                     </tr>
@@ -127,6 +131,13 @@ const WorkersList = () => {
           </div>
         </div>
       </div>
+
+      {selectedWorkerId && (
+        <WorkersDetailsPage 
+          workersId={selectedWorkerId} 
+          onClose={() => setSelectedWorkerId(null)} 
+        />
+      )}
     </>
   )
 }
