@@ -191,7 +191,7 @@ const Booking = () => {
                 </div>
 
                 {/* Table Header */}
-                <div className='hidden md:grid grid-cols-[0.7fr_1fr_1.2fr_1fr_1fr_1fr] 
+                <div className='hidden md:grid grid-cols-[0.7fr_1fr_1.2fr_1fr_1fr_1fr_1fr] 
                   gap-4 px-6 py-4 text-sm font-semibold
                   text-slate-300 border-b border-white/10 bg-white/[0.03]'>
 
@@ -201,6 +201,7 @@ const Booking = () => {
                   <b className='text-center'>Place</b>
                   <b className='text-center relative right-5'>Status</b>
                   <b className='text-center relative right-5'>Action</b>
+                  <b className='text-center relative right-5'>Need Workers</b>
 
                 </div>
 
