@@ -81,7 +81,7 @@ const WorkersDetailsPage = ({ workersId, onClose }) => {
                     </div>
                     <div className="flex items-center gap-2 text-gray-500">
                       <MapPin size={14} className="text-gray-300" />
-                      <span className="text-xs font-medium">Kochi, Kerala, India</span>
+                      <span className="text-xs font-medium">{data.registration?.location || "India"}</span>
                     </div>
                   </div>
                 </div>
@@ -95,9 +95,9 @@ const WorkersDetailsPage = ({ workersId, onClose }) => {
                     ["Full Name", data.registration?.name || data.worker.name],
                     ["Email", data.worker.email],
                     ["Phone Number", data.registration?.mobileNumber || "N/A"],
-                    ["Location", "Kochi, Kerala, India"],
+                    ["Location", data.registration?.location || "N/A"],
                     ["Role / Position", data.registration?.jobRole || "N/A"],
-                    ["Experience", "3 Years"],
+                    ["Experience", data.registration?.experience || "Not Specified"],
                     ["Joined Date", data.registration?.date ? new Date(data.registration.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : "N/A"],
                   ].map(([label, value]) => (
                     <div key={label} className="flex items-start">
@@ -112,9 +112,9 @@ const WorkersDetailsPage = ({ workersId, onClose }) => {
               <div className="grid grid-cols-2 gap-8">
                 {/* Skills */}
                 <div className="space-y-3">
-                  <h3 className="text-[#D32F2F] font-bold text-sm border-b border-gray-100 pb-1 uppercase tracking-wider">Skills</h3>
+                  <h3 className="text-[#D32F2F] font-bold text-sm border-b border-gray-100 pb-1 uppercase tracking-wider">Expertise</h3>
                   <div className="flex flex-wrap gap-1.5">
-                    {["Event Planning", "Vendor Management", "Decoration", "Client Handling", "Logistics"].map((skill) => (
+                    {(data.registration?.skills || [data.registration?.jobRole, "Verified Worker"]).map((skill) => (
                       <span key={skill} className="bg-[#FFF1F1] text-[#D32F2F] px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">
                         {skill}
                       </span>
@@ -134,10 +134,10 @@ const WorkersDetailsPage = ({ workersId, onClose }) => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-500 font-semibold text-[11px]">Phone Verified</span>
-                      <div className="flex items-center gap-1.5 text-[#10B981] font-black text-[11px]">
-                        <CheckCircle2 size={14} fill="currentColor" className="text-white bg-[#10B981] rounded-full" />
-                        <span>Yes</span>
+                      <span className="text-gray-500 font-semibold text-[11px]">Admin Verified</span>
+                      <div className={`flex items-center gap-1.5 font-black text-[11px] ${data.worker.isAdminVerified === 'approved' ? 'text-[#10B981]' : 'text-amber-500'}`}>
+                        <CheckCircle2 size={14} fill="currentColor" className={`text-white rounded-full ${data.worker.isAdminVerified === 'approved' ? 'bg-[#10B981]' : 'bg-amber-500'}`} />
+                        <span className="capitalize">{data.worker.isAdminVerified}</span>
                       </div>
                     </div>
                   </div>
