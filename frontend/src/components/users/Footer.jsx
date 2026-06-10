@@ -137,21 +137,6 @@ const Footer = ({ whiteBg = false }) => {
               </p>
             </div>
 
-            <div className="flex">
-              <div className="mt-6">
-                <p className="font-semibold mb-3">Create Workers Account</p>
-                <button onClick={() => navigate('/workers/login')} className={`bg-purple-600 hover:bg-purple-700 
-                transition px-6 py-2 rounded-full shadow-md ${whiteBg ? 'text-white' : ''}`}>
-                  Create Account
-                </button>
-              </div>
-              <div className="mt-15">
-                <button onClick={() => navigate('/event-management/login')} className={`bg-purple-600 hover:bg-purple-700 
-                transition px-6 py-2 rounded-full shadow-md ${whiteBg ? ' hidden' : ''}`}>
-                  Join us
-                </button>
-              </div>
-            </div>
           </div>
         </motion.div>
       </div>
