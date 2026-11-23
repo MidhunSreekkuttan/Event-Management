@@ -8,7 +8,7 @@ export default defineConfig({
   server: { port: 5174 },
   base: "/admin/",
   build: {
-    outDir: "dist/admin",
+    outDir: "dist",
     emptyOutDir: true,
   }
 });

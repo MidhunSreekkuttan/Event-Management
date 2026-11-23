@@ -84,6 +84,9 @@ try {
 }
 
 if (process.env.NODE_ENV === "production" && !process.env.VERCEL) {
+
+  app.get("/", (_, res) => res.redirect("/app"))
+
   app.use("/app", express.static(path.join(__dirname, "../frontend/dist")));
   app.get("/app/{*splat}", (_, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
@@ -98,6 +101,7 @@ if (process.env.NODE_ENV === "production" && !process.env.VERCEL) {
   app.get("/staff/{*splat}", (_, res) => {
     res.sendFile(path.join(__dirname, "../staff/dist/index.html"));
   });
+
 }
 
 if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {

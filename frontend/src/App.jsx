@@ -38,7 +38,7 @@ const App = () => {
           {UserRoutes()}
           {EventManagementRoutes()}
 
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
 
         </Routes>
       </div>

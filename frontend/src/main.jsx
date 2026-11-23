@@ -11,13 +11,13 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
 
-  <BrowserRouter>
+  <BrowserRouter basename='/app'>
     <BackendContexProvider>
       <EventContextProvider>
         <EventManagementContextProvider>
-            <QueryClientProvider client={queryClient}>
-              <App />
-            </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
         </EventManagementContextProvider>
       </EventContextProvider>
     </BackendContexProvider>
