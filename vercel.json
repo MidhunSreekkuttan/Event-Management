@@ -20,19 +20,37 @@
     },
     "rewrites": [
         {
-            "source": "/admin/(.*)",
-            "destination": {
-                "service": "admin"
-            }
-        },
-        {
             "source": "/api/(.*)",
             "destination": {
                 "service": "backend"
             }
         },
         {
+            "source": "/admin/(.*)",
+            "destination": {
+                "service": "admin"
+            }
+        },
+        {
+            "source": "/staff/(.*)",
+            "destination": {
+                "service": "staff"
+            }
+        },
+        {
+            "source": "/app",
+            "destination": {
+                "service": "frontend"
+            }
+        },
+        {
             "source": "/app/(.*)",
+            "destination": {
+                "service": "frontend"
+            }
+        },
+        {
+            "source": "/",
             "destination": {
                 "service": "frontend"
             }
