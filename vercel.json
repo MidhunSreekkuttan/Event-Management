@@ -23,64 +23,72 @@
     {
       "source": "/api/(.*)",
       "destination": {
-        "service": "backend",
-        "path": "/api/$1"
+        "service": "backend"
       }
     },
     {
       "source": "/uploads/(.*)",
       "destination": {
-        "service": "backend",
-        "path": "/uploads/$1"
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/admin/assets/(.*)",
+      "destination": {
+        "service": "admin"
       }
     },
     {
       "source": "/admin",
       "destination": {
         "service": "admin",
-        "path": "/"
+        "path": "/admin/index.html"
       }
     },
     {
       "source": "/admin/(.*)",
       "destination": {
         "service": "admin",
-        "path": "/$1"
+        "path": "/admin/index.html"
+      }
+    },
+    {
+      "source": "/staff/assets/(.*)",
+      "destination": {
+        "service": "staff"
+      }
+    },
+    {
+      "source": "/staff/(.*\\.(?:gif|avif|png|jpg|jpeg|svg|ico|webp))",
+      "destination": {
+        "service": "staff"
       }
     },
     {
       "source": "/staff",
       "destination": {
         "service": "staff",
-        "path": "/"
+        "path": "/staff/index.html"
       }
     },
     {
       "source": "/staff/(.*)",
       "destination": {
         "service": "staff",
-        "path": "/$1"
+        "path": "/staff/index.html"
       }
     },
     {
-      "source": "/app",
+      "source": "/assets/(.*)",
       "destination": {
-        "service": "frontend",
-        "path": "/"
-      }
-    },
-    {
-      "source": "/app/(.*)",
-      "destination": {
-        "service": "frontend",
-        "path": "/$1"
+        "service": "frontend"
       }
     },
     {
       "source": "/(.*)",
       "destination": {
         "service": "frontend",
-        "path": "/$1"
+        "path": "/index.html"
       }
     }
   ]

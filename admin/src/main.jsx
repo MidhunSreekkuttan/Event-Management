@@ -4,6 +4,9 @@ import './index.css'
 import App from './App.jsx'
 import AdminContextProvider from './Context.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 const queryClient = new QueryClient()
 
