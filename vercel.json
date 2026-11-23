@@ -6,19 +6,68 @@
       "framework": "express",
       "entrypoint": "server.js"
     },
+    "frontend": {
+      "root": "frontend",
+      "framework": "vite",
+      "rewrites": [
+        {
+          "source": "/app",
+          "destination": "/"
+        },
+        {
+          "source": "/app/(.*)",
+          "destination": "/$1"
+        },
+        {
+          "source": "/(.*)",
+          "destination": "/index.html"
+        }
+      ]
+    },
     "admin": {
       "root": "admin",
-      "framework": "vite"
+      "framework": "vite",
+      "rewrites": [
+        {
+          "source": "/admin",
+          "destination": "/"
+        },
+        {
+          "source": "/admin/(.*)",
+          "destination": "/$1"
+        },
+        {
+          "source": "/(.*)",
+          "destination": "/index.html"
+        }
+      ]
     },
     "staff": {
       "root": "staff",
-      "framework": "vite"
-    },
-    "frontend": {
-      "root": "frontend",
-      "framework": "vite"
+      "framework": "vite",
+      "rewrites": [
+        {
+          "source": "/staff",
+          "destination": "/"
+        },
+        {
+          "source": "/staff/(.*)",
+          "destination": "/$1"
+        },
+        {
+          "source": "/(.*)",
+          "destination": "/index.html"
+        }
+      ]
     }
   },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/app/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -33,62 +82,45 @@
       }
     },
     {
-      "source": "/admin/assets/(.*)",
+      "source": "/app",
       "destination": {
-        "service": "admin"
+        "service": "frontend",
+        "path": "/"
+      }
+    },
+    {
+      "source": "/app/(.*)",
+      "destination": {
+        "service": "frontend",
+        "path": "/$1"
       }
     },
     {
       "source": "/admin",
       "destination": {
         "service": "admin",
-        "path": "/admin/index.html"
+        "path": "/"
       }
     },
     {
       "source": "/admin/(.*)",
       "destination": {
         "service": "admin",
-        "path": "/admin/index.html"
-      }
-    },
-    {
-      "source": "/staff/assets/(.*)",
-      "destination": {
-        "service": "staff"
-      }
-    },
-    {
-      "source": "/staff/(.*\\.(?:gif|avif|png|jpg|jpeg|svg|ico|webp))",
-      "destination": {
-        "service": "staff"
+        "path": "/$1"
       }
     },
     {
       "source": "/staff",
       "destination": {
         "service": "staff",
-        "path": "/staff/index.html"
+        "path": "/"
       }
     },
     {
       "source": "/staff/(.*)",
       "destination": {
         "service": "staff",
-        "path": "/staff/index.html"
-      }
-    },
-    {
-      "source": "/assets/(.*)",
-      "destination": {
-        "service": "frontend"
-      }
-    },
-    {
-      "source": "/(.*)",
-      "destination": {
-        "service": "frontend",
-        "path": "/index.html"
+        "path": "/$1"
       }
     }
   ]
