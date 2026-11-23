@@ -13,12 +13,15 @@ import dns from "dns";
 import adminRouter from "./routes/admin/adminRoutes.js";
 import bookingRouter from "./routes/bookingRoute.js";
 import staffsRouter from "./routes/staffs/staffsRoutes.js";
+import path from "path";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const app = express();
 
 dotenv.config();
+
+const __dirname = path.resolve()
 
 const PORT = process.env.PORT || 4000;
 
@@ -56,6 +59,23 @@ app.use("/api/staffs", staffsRouter);
 await connectDB();
 
 await connectCloudinary();
+
+if (process.env.NODE_ENV === "production") {
+  app.use("/app", express.static(path.join(__dirname, "../frontend/dist")));
+  app.get("/app/{*splat}", (_, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"))
+  })
+
+  app.use("/admin", express.static(path.join(__dirname, "../admin/dist")));
+  app.get("/admin/{*splat}", (_, res) => {
+    res.sendFile(path.join(__dirname, "../admin/dist/index.html"))
+  })
+
+  app.use("/staff", express.static(path.join(__dirname, "../staff/dist")));
+  app.get("/staff/{*splat}", (_, res) => {
+    res.sendFile(path.join(__dirname, "../staff/dist/index.html"))
+  })
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

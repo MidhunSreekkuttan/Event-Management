@@ -9,7 +9,7 @@ export const StaffContext = createContext()
 
 const StaffContextProvider = (props) => {
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_BACKEND_URL : ""
 
     const [isLoggedIn, setIsloggedIn] = useState(false)
     const [staffData, setStaffData] = useState(null)
