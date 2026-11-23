@@ -17,6 +17,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run dev --prefix backend",
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend && npm run build --prefix admin && npm run build --prefix staff"
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm install --prefix admin && npm install --prefix staff && npm run build --prefix frontend && npm run build --prefix admin && npm run build --prefix staff"
   }
 }

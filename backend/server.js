@@ -15,13 +15,17 @@ import bookingRouter from "./routes/bookingRoute.js";
 import staffsRouter from "./routes/staffs/staffsRoutes.js";
 import path from "path";
 
-dns.setServers(["1.1.1.1", "8.8.8.8"]);
+try {
+  dns.setServers(["1.1.1.1", "8.8.8.8"]);
+} catch (e) {
+  // Ignore DNS override errors in restricted container environments
+}
 
 const app = express();
 
 dotenv.config();
 
-const __dirname = path.resolve()
+const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 4000;
 
@@ -37,7 +41,18 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: allowOrigins,
+    origin: (origin, callback) => {
+      // allow requests with no origin (like mobile apps, curl, or same-origin)
+      if (!origin) return callback(null, true);
+      if (
+        allowOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app") ||
+        process.env.NODE_ENV !== "production"
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
   }),
 );
@@ -56,27 +71,39 @@ app.use("/api/admin", adminRouter);
 app.use("/api/booking", bookingRouter);
 app.use("/api/staffs", staffsRouter);
 
-await connectDB();
+try {
+  await connectDB();
+} catch (err) {
+  console.error("Database connection error:", err);
+}
 
-await connectCloudinary();
+try {
+  await connectCloudinary();
+} catch (err) {
+  console.error("Cloudinary connection error:", err);
+}
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production" && !process.env.VERCEL) {
   app.use("/app", express.static(path.join(__dirname, "../frontend/dist")));
   app.get("/app/{*splat}", (_, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"))
-  })
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  });
 
   app.use("/admin", express.static(path.join(__dirname, "../admin/dist")));
   app.get("/admin/{*splat}", (_, res) => {
-    res.sendFile(path.join(__dirname, "../admin/dist/index.html"))
-  })
+    res.sendFile(path.join(__dirname, "../admin/dist/index.html"));
+  });
 
   app.use("/staff", express.static(path.join(__dirname, "../staff/dist")));
   app.get("/staff/{*splat}", (_, res) => {
-    res.sendFile(path.join(__dirname, "../staff/dist/index.html"))
-  })
+    res.sendFile(path.join(__dirname, "../staff/dist/index.html"));
+  });
 }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

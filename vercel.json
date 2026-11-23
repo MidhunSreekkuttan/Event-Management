@@ -1,59 +1,87 @@
 {
-    "$schema": "https://openapi.vercel.sh/vercel.json",
-    "services": {
-        "admin": {
-            "root": "admin",
-            "framework": "vite"
-        },
-        "backend": {
-            "root": "backend",
-            "framework": "express"
-        },
-        "frontend": {
-            "root": "frontend",
-            "framework": "vite"
-        },
-        "staff": {
-            "root": "staff",
-            "framework": "vite"
-        }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "backend": {
+      "root": "backend",
+      "framework": "express",
+      "entrypoint": "server.js"
     },
-    "rewrites": [
-        {
-            "source": "/api/(.*)",
-            "destination": {
-                "service": "backend"
-            }
-        },
-        {
-            "source": "/admin/(.*)",
-            "destination": {
-                "service": "admin"
-            }
-        },
-        {
-            "source": "/staff/(.*)",
-            "destination": {
-                "service": "staff"
-            }
-        },
-        {
-            "source": "/app",
-            "destination": {
-                "service": "frontend"
-            }
-        },
-        {
-            "source": "/app/(.*)",
-            "destination": {
-                "service": "frontend"
-            }
-        },
-        {
-            "source": "/",
-            "destination": {
-                "service": "frontend"
-            }
-        }
-    ]
+    "admin": {
+      "root": "admin",
+      "framework": "vite"
+    },
+    "staff": {
+      "root": "staff",
+      "framework": "vite"
+    },
+    "frontend": {
+      "root": "frontend",
+      "framework": "vite"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "backend",
+        "path": "/api/$1"
+      }
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": {
+        "service": "backend",
+        "path": "/uploads/$1"
+      }
+    },
+    {
+      "source": "/admin",
+      "destination": {
+        "service": "admin",
+        "path": "/"
+      }
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": {
+        "service": "admin",
+        "path": "/$1"
+      }
+    },
+    {
+      "source": "/staff",
+      "destination": {
+        "service": "staff",
+        "path": "/"
+      }
+    },
+    {
+      "source": "/staff/(.*)",
+      "destination": {
+        "service": "staff",
+        "path": "/$1"
+      }
+    },
+    {
+      "source": "/app",
+      "destination": {
+        "service": "frontend",
+        "path": "/"
+      }
+    },
+    {
+      "source": "/app/(.*)",
+      "destination": {
+        "service": "frontend",
+        "path": "/$1"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend",
+        "path": "/$1"
+      }
+    }
+  ]
 }
